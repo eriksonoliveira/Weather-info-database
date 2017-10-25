@@ -19,6 +19,163 @@
         ?>
       </select>
     </div>
+
+    <div>
+      <h4 style="color: #005588; text-align: center">Imagem Sinótica</h4>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td>
+              <h5>00Z</h5>
+              <div class="form-group">
+                <label for="add_foto">Inserir Imagem</label>
+                <label for="send-fotos" class="btn btn-success">Adicionar Fotos</label>
+                <input id="send-fotos" type="file" name="fotos[]" multiple/>
+              </div>
+            </td>
+            <td>
+              <h5>06Z</h5>
+              <div class="form-group">
+                <label for="add_foto">Inserir Imagem</label>
+                <label for="send-fotos" class="btn btn-success">Adicionar Fotos</label>
+                <input id="send-fotos" type="file" name="fotos[]" multiple/>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>12Z</h5>
+              <div class="form-group">
+                <label for="add_foto">Inserir Imagem</label>
+                <label for="send-fotos" class="btn btn-success">Adicionar Fotos</label>
+                <input id="send-fotos" type="file" name="fotos[]" multiple/>
+              </div>
+            </td>
+            <td>
+              <h5>18Z</h5>
+              <div class="form-group">
+                <label for="add_foto">Inserir Imagem</label>
+                <label for="send-fotos" class="btn btn-success">Adicionar Fotos</label>
+                <input id="send-fotos" type="file" name="fotos[]" multiple/>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div>
+      <h4 style="color: #005588; text-align: center">Imagem Satélite</h4>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td>
+              <h5>00Z</h5>
+              <div class="form-group">
+                <label for="add_foto">Inserir Imagem</label>
+                <label for="send-fotos" class="btn btn-success">Adicionar Fotos</label>
+                <input id="send-fotos" type="file" name="fotos[]" multiple/>
+              </div>
+            </td>
+            <td>
+              <h5>06Z</h5>
+              <div class="form-group">
+                <label for="add_foto">Inserir Imagem</label>
+                <label for="send-fotos" class="btn btn-success">Adicionar Fotos</label>
+                <input id="send-fotos" type="file" name="fotos[]" multiple/>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>12Z</h5>
+              <div class="form-group">
+                <label for="add_foto">Inserir Imagem</label>
+                <label for="send-fotos" class="btn btn-success">Adicionar Fotos</label>
+                <input id="send-fotos" type="file" name="fotos[]" multiple/>
+              </div>
+            </td>
+            <td>
+              <h5>18Z</h5>
+              <div class="form-group">
+                <label for="add_foto">Inserir Imagem</label>
+                <label for="send-fotos" class="btn btn-success">Adicionar Fotos</label>
+                <input id="send-fotos" type="file" name="fotos[]" multiple/>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h4 style="color: #005588; text-align: center">Descrição</h4>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td>
+              <h5>00Z</h5>
+              <div class="form-group">
+                <label for="descricao">Meteorologista:</label>
+                <input type="text" name="meteoro" id="meteoro-nome" class="form-control"/><br>
+                <label for="descricao">Superfície:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea><br>
+                <label for="descricao">Níveis médios e altos:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea><br>
+                <label for="descricao">Condição de tempo:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea>
+              </div>
+            </td>
+            <td>
+              <h5>06Z</h5>
+              <div class="form-group">
+                <label for="descricao">Meteorologista:</label>
+                <input type="text" name="meteoro" id="meteoro-nome" class="form-control"/><br>
+                <label for="descricao">Superfície:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea><br>
+                <label for="descricao">Níveis médios e altos:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea><br>
+                <label for="descricao">Condição de tempo:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>12Z</h5>
+              <div class="form-group">
+                <label for="descricao">Meteorologista:</label>
+                <input type="text" name="meteoro" id="meteoro-nome" class="form-control"/><br>
+                <label for="descricao">Superfície:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea><br>
+                <label for="descricao">Níveis médios e altos:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea><br>
+                <label for="descricao">Condição de tempo:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea>
+              </div>
+            </td>
+            <td>
+              <h5>18Z</h5>
+              <div class="form-group">
+                <label for="descricao">Meteorologista:</label>
+                <input type="text" name="meteoro" id="meteoro-nome" class="form-control"/><br>
+                <label for="descricao">Superfície:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea><br>
+                <label for="descricao">Níveis médios e altos:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea><br>
+                <label for="descricao">Condição de tempo:</label>
+                <textarea name="descricao" id="descricao" class="form-control"></textarea>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--  Falta Inserir sondagem, médios e altos níveis e eventos significativos -->
+
+
     <div class="form-group">
       <label for="titulo">Título:</label>
       <input type="text" name="titulo" id="titulo" class="form-control"/>
