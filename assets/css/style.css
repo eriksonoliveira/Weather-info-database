@@ -9,9 +9,17 @@ table.table-bordered > tbody > tr > td{
     border:1px solid blue;
 }
 
+table.table-bordered > tbody > tr {
+    border:1px solid blue;
+}
 
-#send-fotos {
+
+#send-imagem {
   display: none;
+}
+
+.send-imagem {
+  display: none ;
 }
 
 .foto_item {

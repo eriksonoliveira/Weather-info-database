@@ -12,5 +12,17 @@ class Categorias extends model {
 
     return $array;
   }
+
+    public function getListaDesc() {
+
+    $array = array();
+
+    $sql = $this->db->query("SELECT * FROM cat_descricao");
+    if($sql->rowCount() > 0) {
+      $array = $sql->fetchAll();
+    }
+
+    return $array;
+  }
 }
 ?>
