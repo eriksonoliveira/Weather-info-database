@@ -284,7 +284,7 @@
             <h5>00Z</h5>
             <div class="form-group">
               <label for="categoria">Técnico:</label>
-              <select name="categoria" class="form-control">
+              <select name="descricao_tec_nome00[]" class="form-control">
                 <?PHP
                   foreach($tecs as $tec):
                 ?>
@@ -305,7 +305,7 @@
               <h5>06Z</h5>
               <div class="form-group">
                 <label for="categoria">Técnico:</label>
-                <select name="categoria" class="form-control">
+                <select name="descricao_tec_nome06[]" class="form-control">
                   <?PHP
                     foreach($tecs as $tec):
                   ?>
@@ -326,7 +326,7 @@
             <h5>12Z</h5>
             <div class="form-group">
               <label for="categoria">Técnico:</label>
-              <select name="categoria" class="form-control">
+              <select name="descricao_tec_nome12[]" class="form-control">
                 <?PHP
                   foreach($tecs as $tec):
                 ?>
@@ -347,7 +347,7 @@
             <h5>18Z</h5>
             <div class="form-group">
               <label for="categoria">Técnico:</label>
-              <select name="categoria" class="form-control">
+              <select name="descricao_tec_nome18[]" class="form-control">
                 <?PHP
                   foreach($tecs as $tec):
                 ?>

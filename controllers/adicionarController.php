@@ -77,6 +77,8 @@ class adicionarController extends controller{
             if(isset($_POST["{$cat_name}_tec_{$cn['nome']}{$h}"]) &&
                !empty($_POST["{$cat_name}_tec_{$cn['nome']}{$h}"])) {
               $descricao[$cat_name]['tec'][$h.'Z'][$cn['nome']] =  $_POST["{$cat_name}_tec_{$cn['nome']}{$h}"];
+
+              $descricao[$cat_name]['tec'][$h.'Z']['nome'] = $_POST["{$cat_name}_tec_nome{$h}"];
             }
           }
         }
