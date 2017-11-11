@@ -2,6 +2,7 @@
 
 <div class="container">
   <h1>Adicionar Monitoramento do dia</h1>
+  <h3><?PHP echo $dia;?></h3>
 
   <form method="POST" enctype="multipart/form-data">
 

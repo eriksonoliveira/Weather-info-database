@@ -166,23 +166,23 @@ class Registros extends model {
     }
   }
   
-  public function addAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos) {
+  public function addRegistro($descricao, $imagens, $day) {
     
+    //Verifica se a mesma
+    $sql = $this->db->prepare("SELECT id FROM diario WHERE data = :data");
+    $sql->bindValue(":data", $day);
+    $sql->execute();
     
-    $sql = $this->db->prepare("INSERT INTO anuncios SET titulo = :titulo, id_categoria = :id_categoria, id_usuario = :id_usuario, descricao = :descricao, valor = :valor, estado = :estado");
+    if($sql->rowCount() == 0) {
     
-    $sql->bindValue(":titulo", $titulo);
-    $sql->bindValue(":id_categoria", $categoria);
-    $sql->bindValue(":id_usuario", $_SESSION['cLogin']);
-    $sql->bindValue(":descricao", $descricao);
-    $sql->bindValue(":valor", $valor);
-    $sql->bindValue(":estado", $estado);
-    
-    $sql->execute();   
-    
-    $lastId = $this->db->lastInsertId();
-    
-    $this->addFotos($fotos, $lastId);
+      $sql = $this->db->prepare("INSERT INTO diario SET data = :data");
+      $sql->bindValue(":data", $day);
+      $sql->execute();
+
+      /*$lastId = $this->db->lastInsertId();
+
+      $this->addFotos($imagens, $lastId);*/
+    }
     
   }
   public function editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id) {

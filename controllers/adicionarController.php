@@ -32,6 +32,13 @@ class adicionarController extends controller{
       } else {
         $fotos = array();
       }*/
+
+    //Pegar Data do dia
+    $date = time();
+    $d_form_BR = date("d/m/Y", $date);
+    $d_form_Int = date("Y/m/d", $date);
+    $data['dia'] = $d_form_BR;
+
     //Pegar categorias
     $c = new Categorias();
     $cats = $c->getLista();
@@ -91,11 +98,11 @@ class adicionarController extends controller{
         print_r($fotos['name']);
       } else {
         $fotos = array();
-      }
+      }*/
 
-      /*$r->addAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos);
+      $r->addRegistro($descricao, $imagens, $d_form_Int);
 
-      $data['success'] = "<div class='alert alert-success'>Produto adicionado com sucesso!</div>";*/
+      /*$data['success'] = "<div class='alert alert-success'>Produto adicionado com sucesso!</div>";*/
     }
     
 
