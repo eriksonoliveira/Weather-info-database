@@ -58,6 +58,12 @@ class adicionarController extends controller{
 
     $data['tecs'] = $tecs;
 
+    //Pegar horarios
+    $h = new Horarios();
+    $hs = $h->getHorarios();
+
+    $data['horario'] = $hs;
+
 
     $r = new Registros();
 

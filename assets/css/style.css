@@ -13,13 +13,12 @@ table.table-bordered > tbody > tr {
     border:1px solid blue;
 }
 
-
-#send-imagem {
+.hora, .categoria {
   display: none;
 }
 
-.send-imagem {
-  display: none ;
+[id^="im"] {
+  visibility: hidden;
 }
 
 .foto_item {

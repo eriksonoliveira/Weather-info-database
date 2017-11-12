@@ -124,15 +124,15 @@ class Registros extends model {
     return $array;
   }
   
-  private function addFotos($fotos, $id) {
+  private function addImagem($imagem, $id) {
     
     
-    if(count($fotos) > 0) {
-      for($q=0;$q<count($fotos['tmp_name']);$q++) {
-        $tipo = $fotos['type'][$q];
+    if(count($imagem) > 0) {
+      for($q=0;$q<count($imagem['tmp_name']);$q++) {
+        $tipo = $imagem['type'][$q];
         if(in_array($tipo, array('image/jpeg', 'image/png'))) {
           $tmpname = md5(time().rand(0, 9999)).'jpg';
-          move_uploaded_file($fotos['tmp_name'][$q], 'assets/images/anuncios/'.$tmpname);
+          move_uploaded_file($imagem['tmp_name'][$q], 'assets/images/anuncios/'.$tmpname);
           
           list($width_orig, $height_orig) = getimagesize('assets/images/anuncios/'.$tmpname);
           $ratio = $width_orig/$height_orig;
@@ -168,7 +168,7 @@ class Registros extends model {
   
   public function addRegistro($descricao, $imagens, $day) {
     
-    //Verifica se a mesma
+    //Verifica se a mesma data já não foi inserida
     $sql = $this->db->prepare("SELECT id FROM diario WHERE data = :data");
     $sql->bindValue(":data", $day);
     $sql->execute();

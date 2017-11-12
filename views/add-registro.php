@@ -4,29 +4,32 @@
   <h1>Adicionar Monitoramento do dia</h1>
   <h3><?PHP echo $dia;?></h3>
 
-  <form method="POST" enctype="multipart/form-data">
-
     <div>
-      <h4 style="color: #005588; text-align: center">Imagem Sinótica</h4>
+      <h4 style="color: #005588; text-align: center"><?PHP echo $cats[0]['nome'];?></h4>
       <table class="table table-bordered">
         <tbody>
           <tr>
+            <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <h5>00Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Imagem</label>
-                <input class="send-imagem" type="file" name="im_sinotica00[]"/>
-              </div>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <select class="hora">
+                    <option value="<?PHP echo $horario[$i]['hora'];?>"></option>
+                  </select>
+                  <select class="categoria">
+                    <option value="<?PHP echo $cats[0]['nome'];?>"></option>
+                  </select>
+                  <label for="add_imagem">Inserir Imagem</label>
+                  <label for="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
+                  <p id="num-fotos"></p>
+                  <input id="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[0]['nome'];?>"/>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <img class="img-preview" src=""/>
             </td>
-            <td>
-              <h5>06Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="im_sinotica06[]"/>
-              </div>
-            </td>
+            <?PHP endfor;?>
           </tr>
           <tr>
             <td>
@@ -403,6 +406,5 @@
       </div>
     </div>
     <input type="submit" value="Adicionar" name="adicionar" class="btn btn-default"/>
-    
-  </form>
+
 </div>
