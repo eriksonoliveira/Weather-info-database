@@ -14,20 +14,16 @@
               <h5><?PHP echo $horario[$i]['hora'];?></h5>
               <form class="reg-form" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                  <select class="hora">
-                    <option value="<?PHP echo $horario[$i]['hora'];?>"></option>
-                  </select>
-                  <select class="categoria">
-                    <option value="<?PHP echo $cats[0]['nome'];?>"></option>
-                  </select>
                   <label for="add_imagem">Inserir Imagem</label>
                   <label for="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
                   <p id="num-fotos"></p>
-                  <input id="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[0]['nome'];?>"/>
+                  <input id="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[0]['nome'];?>" data-categoria="<?PHP echo $cats[0]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                  <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
               <img class="img-preview" src=""/>
+              <p class="sucesso-msg"></p>
             </td>
             <?PHP endfor;?>
           </tr>

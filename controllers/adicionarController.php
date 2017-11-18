@@ -41,10 +41,10 @@ class adicionarController extends controller{
 
     //Pegar categorias
     $c = new Categorias();
-    $cats = $c->getLista();
-    $cats_desc = $c->getListaDesc();
+    $categs = $c->getLista();
+    $categs_desc = $c->getListaDesc();
 
-    $data['cats'] = $cats;
+    $data['cats'] = $categs;
 
     //Nomes Meteorologistas
     $m = new Meteoros();
@@ -70,14 +70,14 @@ class adicionarController extends controller{
     if(isset($_POST['adicionar'])) {
 
       //Get images uploaded and save them in $imagens array
-      foreach($cats as $key) {
+      foreach($categs as $key) {
         $cat_name = $key['nome'];
         foreach($horarios as $h) {
           if(isset($_FILES["{$cat_name}{$h}"]) &&
              !empty($_FILES["{$cat_name}{$h}"])) {
             $imagens[$cat_name][$h.'Z'] =  $_FILES["{$cat_name}{$h}"];
           }
-          foreach($cats_desc as $cn) {
+          foreach($categs_desc as $cn) {
             if(isset($_POST["{$cat_name}_meteoro_{$cn['nome']}{$h}"]) &&
                !empty($_POST["{$cat_name}_meteoro_{$cn['nome']}{$h}"])) {
 
@@ -86,7 +86,7 @@ class adicionarController extends controller{
               $descricao[$cat_name]['meteoro'][$h.'Z']['nome'] = $_POST["{$cat_name}_meteoro_nome{$h}"];
             }
           }
-          foreach($cats_desc as $cn) {
+          foreach($categs_desc as $cn) {
             if(isset($_POST["{$cat_name}_tec_{$cn['nome']}{$h}"]) &&
                !empty($_POST["{$cat_name}_tec_{$cn['nome']}{$h}"])) {
               $descricao[$cat_name]['tec'][$h.'Z'][$cn['nome']] =  $_POST["{$cat_name}_tec_{$cn['nome']}{$h}"];
