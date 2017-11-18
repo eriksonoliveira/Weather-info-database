@@ -96,7 +96,35 @@ class Registros extends model {
     return $array;
   }
   
-  public function getAnuncio($id) {
+/*  public function getAnuncio($id) {
+
+    $array = array();
+
+    $sql = $this->db->prepare("SELECT
+    *,
+    (select categorias.nome from categorias where categorias.id = anuncios.id_categoria) as categoria,
+    (select usuarios.telefone from usuarios where usuarios.id = anuncios.id_usuario) as telefone
+    FROM anuncios WHERE id = :id");
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    if($sql->rowCount() > 0) {
+      $array = $sql->fetch();
+      $array['fotos'] = array();
+
+      $sql= $this->db->prepare('SELECT id,url FROM anuncios_imagens WHERE id_anuncio = :id_anuncio');
+      $sql->bindValue(":id_anuncio", $id);
+      $sql->execute();
+
+      if($sql->rowCount() > 0) {
+        $array['fotos'] = $sql->fetchAll();
+      }
+    }
+
+    return $array;
+  } */
+
+  public function getRegistro($date) {
     
     $array = array();
     
@@ -124,21 +152,24 @@ class Registros extends model {
     return $array;
   }
   
-  private function addFotos($fotos, $id) {
+  public function addImagem($imagem, $horario, $categoria, $date) {
     
     
-    if(count($fotos) > 0) {
-      for($q=0;$q<count($fotos['tmp_name']);$q++) {
-        $tipo = $fotos['type'][$q];
+    if(count($imagem) > 0) {
+
+      /*não usa FOR pois o upload é limitado a apenas uma imagem*/
+      /*for($q=0;$q<count($imagem['tmp_name']);$q++) { */
+        $tipo = $imagem['type'];
+
         if(in_array($tipo, array('image/jpeg', 'image/png'))) {
-          $tmpname = md5(time().rand(0, 9999)).'jpg';
-          move_uploaded_file($fotos['tmp_name'][$q], 'assets/images/anuncios/'.$tmpname);
+          $tmpname = md5(time().rand(0, 9999)).'.jpg';
+          move_uploaded_file($imagem['tmp_name'], 'assets/images/'.$categoria.'/'.$tmpname);
           
-          list($width_orig, $height_orig) = getimagesize('assets/images/anuncios/'.$tmpname);
+          list($width_orig, $height_orig) = getimagesize('assets/images/'.$categoria.'/'.$tmpname);
           $ratio = $width_orig/$height_orig;
           
-          $width = 500;
-          $height = 500;
+          $width = 600;
+          $height = 600;
           
           if($width/$height > $ratio) {
             $width = $height * $ratio;
@@ -148,41 +179,43 @@ class Registros extends model {
           
           $img = imagecreatetruecolor($width, $height);
           if($tipo == 'image/jpeg') {
-            $origi = imagecreatefromjpeg('assets/images/anuncios/'.$tmpname);
+            $origi = imagecreatefromjpeg('assets/images/'.$categoria.'/'.$tmpname);
           } elseif($tipo == 'image/png') {
-            $origi = imagecreatefrompng('assets/images/anuncios/'.$tmpname);
+            $origi = imagecreatefrompng('assets/images/'.$categoria.'/'.$tmpname);
           }
           
           imagecopyresampled($img, $origi, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
           
-          imagejpeg($img, 'assets/images/anuncios/'.$tmpname, 80);
+          imagejpeg($img, 'assets/images/'.$categoria.'/'.$tmpname, 80);
           
-          $sql = $this->db->prepare("INSERT INTO anuncios_imagens SET id_anuncio = :id_anuncio, url = :url");
-          $sql->bindValue(":id_anuncio", $id);
+          $sql = $this->db->prepare("INSERT INTO imagens SET url = :url, categoria = :categoria, horario = :horario, date = :date");
           $sql->bindValue(":url", $tmpname);
+          $sql->bindValue(":categoria", $categoria);
+          $sql->bindValue(":horario", $horario);
+          $sql->bindValue(":date", $date);
           $sql->execute();
         }
-      }
+      //}
     }
   }
   
-  public function addAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos) {
+  public function addRegistro($descricao, $imagens, $day) {
     
+    //Verifica se a mesma data já não foi inserida
+    $sql = $this->db->prepare("SELECT id FROM diario WHERE data = :data");
+    $sql->bindValue(":data", $day);
+    $sql->execute();
     
-    $sql = $this->db->prepare("INSERT INTO anuncios SET titulo = :titulo, id_categoria = :id_categoria, id_usuario = :id_usuario, descricao = :descricao, valor = :valor, estado = :estado");
+    if($sql->rowCount() == 0) {
     
-    $sql->bindValue(":titulo", $titulo);
-    $sql->bindValue(":id_categoria", $categoria);
-    $sql->bindValue(":id_usuario", $_SESSION['cLogin']);
-    $sql->bindValue(":descricao", $descricao);
-    $sql->bindValue(":valor", $valor);
-    $sql->bindValue(":estado", $estado);
-    
-    $sql->execute();   
-    
-    $lastId = $this->db->lastInsertId();
-    
-    $this->addFotos($fotos, $lastId);
+      $sql = $this->db->prepare("INSERT INTO diario SET data = :data");
+      $sql->bindValue(":data", $day);
+      $sql->execute();
+
+      /*$lastId = $this->db->lastInsertId();
+
+      $this->addFotos($imagens, $lastId);*/
+    }
     
   }
   public function editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id) {
