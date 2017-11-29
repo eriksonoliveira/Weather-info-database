@@ -17,8 +17,9 @@ table.table-bordered > tbody > tr {
   display: none;
 }
 
-[id^="im"] {
+[id$="Z"] {
   visibility: hidden;
+  position: absolute;
 }
 
 .foto_item {

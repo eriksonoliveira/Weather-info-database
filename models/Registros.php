@@ -124,31 +124,33 @@ class Registros extends model {
     return $array;
   } */
 
-  public function getRegistro($date) {
+  public function getRegistro($date, $horarios) {
     
-    $array = array();
+    $array = array(
+      "met" => array(),
+      "tec" => array()
+    );
     
-    $sql = $this->db->prepare("SELECT 
-    *,
-    (select categorias.nome from categorias where categorias.id = anuncios.id_categoria) as categoria,
-    (select usuarios.telefone from usuarios where usuarios.id = anuncios.id_usuario) as telefone
-    FROM anuncios WHERE id = :id");
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-    
-    if($sql->rowCount() > 0) {
-      $array = $sql->fetch();
-      $array['fotos'] = array();
+    foreach($horarios as $key => $value) {
       
-      $sql= $this->db->prepare('SELECT id,url FROM anuncios_imagens WHERE id_anuncio = :id_anuncio');
-      $sql->bindValue(":id_anuncio", $id);
+      $sql = $this->db->prepare("SELECT texto, id_meteoro, cat_descricao FROM descricao_meteoro WHERE date = :date AND horario = :horario");
+      $sql->bindValue(":date", $date);
+      $sql->bindValue(":horario", $value['hora']);
       $sql->execute();
-      
+
       if($sql->rowCount() > 0) {
-        $array['fotos'] = $sql->fetchAll();
+        $array["met"][$value["hora"]] = $sql->fetchAll();
+ /*       $array['fotos'] = array();
+
+        $sql= $this->db->prepare('SELECT id,url FROM anuncios_imagens WHERE id_anuncio = :id_anuncio');
+        $sql->bindValue(":id_anuncio", $id);
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
+          $array['fotos'] = $sql->fetchAll();
+        }*/
       }
     }
-    
     return $array;
   }
   
@@ -199,25 +201,27 @@ class Registros extends model {
     }
   }
   
-  public function addRegistro($descricao, $imagens, $day) {
+  public function addTexto($texto, $horario, $categoria, $date, $id_nome, $cargo) {
     
-    //Verifica se a mesma data já não foi inserida
-    $sql = $this->db->prepare("SELECT id FROM diario WHERE data = :data");
-    $sql->bindValue(":data", $day);
+    $sql = '';
+    
+    if($cargo == "meteoro") {
+      $sql = $this->db->prepare("INSERT INTO descricao_meteoro SET texto = :texto, horario = :horario, cat_descricao = :categoria, date = :date, id_meteoro = :id_nome");
+    } else if($cargo == "tec") {
+      $sql = $this->db->prepare("INSERT INTO descricao_tec SET texto = :texto, horario = :horario, cat_descricao = :categoria, date = :date, id_tec = :id_nome");
+
+      echo $cargo;
+    }
+
+    $sql->bindValue(":texto", $texto);
+    $sql->bindValue(":horario", $horario);
+    $sql->bindValue(":categoria", $categoria);
+    $sql->bindValue(":date", $date);
+    $sql->bindValue(":id_nome", $id_nome);
     $sql->execute();
     
-    if($sql->rowCount() == 0) {
-    
-      $sql = $this->db->prepare("INSERT INTO diario SET data = :data");
-      $sql->bindValue(":data", $day);
-      $sql->execute();
-
-      /*$lastId = $this->db->lastInsertId();
-
-      $this->addFotos($imagens, $lastId);*/
-    }
-    
   }
+
   public function editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id) {
     
     

@@ -12,7 +12,7 @@
             <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
               <h5><?PHP echo $horario[$i]['hora'];?></h5>
-              <form class="reg-form" method="POST" enctype="multipart/form-data">
+              <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="add_imagem">Inserir Imagem</label>
                   <label for="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
@@ -28,22 +28,23 @@
             <?PHP endfor;?>
           </tr>
           <tr>
+            <?PHP for($i = 2; $i <= 3; $i++):?>
             <td>
-              <h5>12Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="im_sinotica12[]"/>
-              </div>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="add_imagem">Inserir Imagem</label>
+                  <label for="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
+                  <p id="num-fotos"></p>
+                  <input id="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[0]['nome'];?>" data-categoria="<?PHP echo $cats[0]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                  <p class="num-fotos"></p>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <img class="img-preview" src=""/>
+              <p class="sucesso-msg"></p>
             </td>
-            <td>
-              <h5>18Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="im_sinotica18[]"/>
-              </div>
-            </td>
+            <?PHP endfor;?>
           </tr>
         </tbody>
       </table>
@@ -51,70 +52,73 @@
 
 
     <div>
-      <h4 style="color: #005588; text-align: center">Imagem Satélite</h4>
+      <h4 style="color: #005588; text-align: center"><?PHP echo $cats[6]['nome'];?></h4>
       <table class="table table-bordered">
         <tbody>
           <tr>
+            <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <h5>00Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="im_satelite00[]"/>
-              </div>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="add_imagem">Inserir Imagem</label>
+                  <label for="<?PHP echo $cats[6]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
+                  <p id="num-fotos"></p>
+                  <input id="<?PHP echo $cats[6]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[6]['nome'];?>" data-categoria="<?PHP echo $cats[6]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                  <p class="num-fotos"></p>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <img class="img-preview" src=""/>
+              <p class="sucesso-msg"></p>
             </td>
-            <td>
-              <h5>06Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="im_satelite06[]"/>
-              </div>
-            </td>
+            <?PHP endfor;?>
           </tr>
           <tr>
+            <?PHP for($i = 2; $i <= 3; $i++):?>
             <td>
-              <h5>12Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="im_satelite12[]"/>
-              </div>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="add_imagem">Inserir Imagem</label>
+                  <label for="<?PHP echo $cats[6]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
+                  <p id="num-fotos"></p>
+                  <input id="<?PHP echo $cats[6]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[6]['nome'];?>" data-categoria="<?PHP echo $cats[6]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                  <p class="num-fotos"></p>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <img class="img-preview" src=""/>
+              <p class="sucesso-msg"></p>
             </td>
-            <td>
-              <h5>18Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="im_satelite18[]"/>
-              </div>
-            </td>
+            <?PHP endfor;?>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div>
-      <h4 style="color: #005588; text-align: center">Sondagem Florianópolis</h4>
+      <h4 style="color: #005588; text-align: center"><?PHP echo $cats[5]['nome'];?> Florianópolis</h4>
       <table class="table table-bordered">
         <tbody>
           <tr>
+            <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <h5>00Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="sondagem00[]"/>
-              </div>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="add_imagem">Inserir Imagem</label>
+                  <label for="<?PHP echo $cats[5]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
+                  <p id="num-fotos"></p>
+                  <input id="<?PHP echo $cats[5]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[5]['nome'];?>" data-categoria="<?PHP echo $cats[5]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                  <p class="num-fotos"></p>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <img class="img-preview" src=""/>
+              <p class="sucesso-msg"></p>
             </td>
-            <td>
-              <h5>12Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="sondagem12[]"/>
-              </div>
-            </td>
+            <?PHP endfor;?>
           </tr>
         </tbody>
       </table>
@@ -125,22 +129,23 @@
       <table class="table table-bordered">
         <tbody>
           <tr>
+            <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <h5>00Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="altos_niveis00[]"/>
-              </div>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="add_imagem">Inserir Imagem</label>
+                  <label for="<?PHP echo $cats[1]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
+                  <p id="num-fotos"></p>
+                  <input id="<?PHP echo $cats[1]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[1]['nome'];?>" data-categoria="<?PHP echo $cats[1]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                  <p class="num-fotos"></p>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <img class="img-preview" src=""/>
+              <p class="sucesso-msg"></p>
             </td>
-            <td>
-              <h5>12Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="altos_niveis12[]"/>
-              </div>
-            </td>
+            <?PHP endfor;?>
           </tr>
         </tbody>
       </table>
@@ -151,22 +156,23 @@
       <table class="table table-bordered">
         <tbody>
           <tr>
+            <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <h5>00Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="medios_niveis00[]"/>
-              </div>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="add_imagem">Inserir Imagem</label>
+                  <label for="<?PHP echo $cats[2]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info">Adicionar Imagem</label>
+                  <p id="num-fotos"></p>
+                  <input id="<?PHP echo $cats[2]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[2]['nome'];?>" data-categoria="<?PHP echo $cats[2]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                  <p class="num-fotos"></p>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <img class="img-preview" src=""/>
+              <p class="sucesso-msg"></p>
             </td>
-            <td>
-              <h5>12Z</h5>
-              <div class="form-group">
-                <label for="add_imagem">Inserir Imagem</label>
-                <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-                <input class="send-imagem" type="file" name="medios_niveis12[]" style="display: none"/>
-              </div>
-            </td>
+            <?PHP endfor;?>
           </tr>
         </tbody>
       </table>
@@ -177,100 +183,90 @@
       <table class="table table-bordered">
         <tbody>
           <tr>
+            <?PHP for($i = 0; $i <=1; $i++):?>
             <td>
-              <h5>00Z</h5>
-              <div class="form-group">
-                <label for="categoria">Meteorologista:</label>
-                <select name="descricao_meteoro_nome00[]" class="form-control">
-                  <?PHP
-                    foreach($mets as $met):
-                  ?>
-                  <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
-                  </option>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+                <div class="form-group">
+                  <label for="categoria">Meteorologista:</label>
+                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="meteoro">
+                    <?PHP
+                      foreach($mets as $met):
+                    ?>
+                    <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
+                    </option>
+
+                    <?PHP
+                      endforeach;
+                    ?>
+                  </select>
+                  <label>Superfície:</label>
+                  <textarea name="descricao_superficie<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="superficie"><?PHP
+
+                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][0]['texto']) : '';
+
+                    ?></textarea><br>
+                  <label>Níveis médios e altos:</label>
+                  <textarea name="descricao_medios_altos<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="medios_altos"><?PHP
+
+                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][1]['texto']) : '';
+
+                    ?></textarea><br>
+                  <label>Condição de tempo:</label>
+                  <textarea name="descricao_condicao_tempo<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="condicao_tempo"><?PHP
+
+                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][2]['texto']) : '';
+
+                    ?></textarea>
 
                   <?PHP
-                    endforeach;
+                    if(isset($currDayReg['met'][$horario[$i]['hora']])){
                   ?>
-                </select>
-                <label for="descricao">Superfície:</label>
-                <textarea name="descricao_meteoro_superficie00[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Níveis médios e altos:</label>
-                <textarea name="descricao_meteoro_medios_altos00[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Condição de tempo:</label>
-                <textarea name="descricao_meteoro_condicao_tempo00[]" id="descricao" class="form-control"></textarea>
-              </div>
-            </td>
-            <td>
-              <h5>06Z</h5>
-              <div class="form-group">
-                <label for="categoria">Meteorologista:</label>
-                <select name="descricao_meteoro_nome06[]" class="form-control">
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
                   <?PHP
-                    foreach($mets as $met):
+                    } else {
                   ?>
-                  <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
-                  </option>
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                  <?PHP
+                    }
+                  ?>
 
-                  <?PHP
-                    endforeach;
-                  ?>
-                </select>
-                <label for="descricao">Superfície:</label>
-                <textarea name="descricao_meteoro_superfice06[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Níveis médios e altos:</label>
-                <textarea name="descricao_meteoro_medios_altos06[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Condição de tempo:</label>
-                <textarea name="descricao_meteoro_condicao_tempo06[]" id="descricao" class="form-control"></textarea>
-              </div>
+                </div>
+              </form>
+              <p class="sucesso-msg"></p>
             </td>
+            <?PHP endfor;?>
           </tr>
           <tr>
+            <?PHP for($i = 2; $i <=3; $i++):?>
             <td>
-              <h5>12Z</h5>
-              <div class="form-group">
-                <label for="categoria">Meteorologista:</label>
-                <select name="descricao_meteoro_nome12[]" class="form-control">
-                  <?PHP
-                    foreach($mets as $met):
-                  ?>
-                  <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
-                  </option>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+                <div class="form-group">
+                  <label for="categoria">Meteorologista:</label>
+                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="meteoro">
+                    <?PHP
+                      foreach($mets as $met):
+                    ?>
+                    <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
+                    </option>
 
-                  <?PHP
-                    endforeach;
-                  ?>
-                </select>
-                <label for="descricao">Superfície:</label>
-                <textarea name="descricao_meteoro_superfice12[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Níveis médios e altos:</label>
-                <textarea name="descricao_meteoro_medios_altos12[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Condição de tempo:</label>
-                <textarea name="descricao_meteoro_condicao_tempo12[]" id="descricao" class="form-control"></textarea>
-              </div>
+                    <?PHP
+                      endforeach;
+                    ?>
+                  </select>
+                  <label>Superfície:</label>
+                  <textarea name="descricao_superficie<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="superficie"></textarea><br>
+                  <label>Níveis médios e altos:</label>
+                  <textarea name="descricao_medios_altos<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="medios_altos"></textarea><br>
+                  <label>Condição de tempo:</label>
+                  <textarea name="descricao_condicao_tempo<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="condicao_tempo"></textarea>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <p class="sucesso-msg"></p>
             </td>
-            <td>
-              <h5>18Z</h5>
-              <div class="form-group">
-                <label for="categoria">Meteorologista:</label>
-                <select name="descricao_meteoro_nome18[]" class="form-control">
-                  <?PHP
-                    foreach($mets as $met):
-                  ?>
-                  <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
-                  </option>
-
-                  <?PHP
-                    endforeach;
-                  ?>
-                </select>
-                <label for="descricao">Superfície:</label>
-                <textarea name="descricao_meteoro_superfice18[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Níveis médios e altos:</label>
-                <textarea name="descricao_meteoro_medios_altos18[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Condição de tempo:</label>
-                <textarea name="descricao_meteoro_condicao_tempo18[]" id="descricao" class="form-control"></textarea>
-              </div>
-            </td>
+            <?PHP endfor;?>
           </tr>
         </tbody>
       </table>
@@ -280,127 +276,38 @@
       <h4 style="color: #005588; text-align: center">Registros Significativos</h4>
       <table class="table table-bordered">
         <tbody>
+            <?PHP for($i = 0; $i <=3; $i++):?>
           <tr>
-            <h5>00Z</h5>
-            <div class="form-group">
-              <label for="categoria">Técnico:</label>
-              <select name="descricao_tec_nome00[]" class="form-control">
-                <?PHP
-                  foreach($tecs as $tec):
-                ?>
-                <option value="<?PHP echo $tec['id'];?>"><?PHP echo $tec['nome'];?>
-                </option>
+            <td>
+              <h5><?PHP echo $horario[$i]['hora'];?></h5>
+              <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+                <div class="form-group">
+                  <label>Tecnico:</label>
+                  <select name="tec_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="tec">
+                    <?PHP
+                      foreach($tecs as $tec):
+                    ?>
+                    <option value="<?PHP echo $tec['id'];?>"><?PHP echo $tec['nome'];?>
+                    </option>
 
-                <?PHP
-                  endforeach;
-                ?>
-              </select>
-              <label for="descricao">METAR:</label>
-              <textarea name="descricao_tec_metar00[]" id="descricao" class="form-control"></textarea><br>
-              <label for="descricao">Ocorrências</label>
-              <textarea name="descricao_tec_ocorrencias00[]" id="descricao" class="form-control"></textarea><br>
-            </div>
+                    <?PHP
+                      endforeach;
+                    ?>
+                  </select>
+                  <label>METAR:</label>
+                  <textarea name="metar<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="metar"></textarea><br>
+                  <label>Ocorrências:</label>
+                  <textarea name="ocorrencias<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="ocorrencias"></textarea><br>
+                  <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+              </form>
+              <p class="sucesso-msg"></p>
+            </td>
           </tr>
-          <tr>
-              <h5>06Z</h5>
-              <div class="form-group">
-                <label for="categoria">Técnico:</label>
-                <select name="descricao_tec_nome06[]" class="form-control">
-                  <?PHP
-                    foreach($tecs as $tec):
-                  ?>
-                  <option value="<?PHP echo $tec['id'];?>"><?PHP echo $tec['nome'];?>
-                  </option>
+            <?PHP endfor;?>
 
-                  <?PHP
-                    endforeach;
-                  ?>
-                </select>
-                <label for="descricao">METAR:</label>
-                <textarea name="descricao_tec_metar06[]" id="descricao" class="form-control"></textarea><br>
-                <label for="descricao">Ocorrências</label>
-                <textarea name="descricao_tec_ocorrencias06[]" id="descricao" class="form-control"></textarea><br>
-              </div>
-          </tr>
-          <tr>
-            <h5>12Z</h5>
-            <div class="form-group">
-              <label for="categoria">Técnico:</label>
-              <select name="descricao_tec_nome12[]" class="form-control">
-                <?PHP
-                  foreach($tecs as $tec):
-                ?>
-                <option value="<?PHP echo $tec['id'];?>"><?PHP echo $tec['nome'];?>
-                </option>
-
-                <?PHP
-                  endforeach;
-                ?>
-              </select>
-              <label for="descricao">METAR:</label>
-              <textarea name="descricao_tec_metar12[]" id="descricao" class="form-control"></textarea><br>
-              <label for="descricao">Ocorrências</label>
-              <textarea name="descricao_tec_ocorrencias12[]" id="descricao" class="form-control"></textarea><br>
-            </div>
-          </tr>
-          <tr>
-            <h5>18Z</h5>
-            <div class="form-group">
-              <label for="categoria">Técnico:</label>
-              <select name="descricao_tec_nome18[]" class="form-control">
-                <?PHP
-                  foreach($tecs as $tec):
-                ?>
-                <option value="<?PHP echo $tec['id'];?>"><?PHP echo $tec['nome'];?>
-                </option>
-
-                <?PHP
-                  endforeach;
-                ?>
-              </select>
-              <label for="descricao">METAR:</label>
-              <textarea name="descricao_tec_metar18[]" id="descricao" class="form-control"></textarea><br>
-              <label for="descricao">Ocorrências</label>
-              <textarea name="descricao_tec_ocorrencias18[]" id="descricao" class="form-control"></textarea><br>
-            </div>
-          </tr>
         </tbody>
       </table>
     </div>
-
-
-
-    <div class="form-group">
-      <label for="titulo">Título:</label>
-      <input type="text" name="titulo" id="titulo" class="form-control"/>
-    </div>    
-    <div class="form-group">
-      <label for="valor">Valor:</label>
-      <input type="text" name="valor" id="valor" class="form-control"/>
-    </div>
-    <div class="form-group">
-      <label for="descricao">Descrição:</label>
-      <textarea name="descricao" id="descricao" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="estado">Estado:</label>
-      <select name="estado" id="estado" class="form-control">
-        <option value="1">Muito Bom</option>
-        <option value="2">Bom</option>
-        <option value="3">Aceitável</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="add_imagem">Fotos do Anúncio:</label>
-      <label for="send-imagem" class="btn btn-success">Adicionar Fotos</label>
-      <input class="send-imagem" type="file" name="fotos[]" multiple/>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">Fotos do Anúncio</div>
-      <div class="panel-body">
-        
-      </div>
-    </div>
-    <input type="submit" value="Adicionar" name="adicionar" class="btn btn-default"/>
 
 </div>
