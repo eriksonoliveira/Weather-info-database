@@ -95,44 +95,20 @@ class Registros extends model {
     
     return $array;
   }
-  
-/*  public function getAnuncio($id) {
 
-    $array = array();
 
-    $sql = $this->db->prepare("SELECT
-    *,
-    (select categorias.nome from categorias where categorias.id = anuncios.id_categoria) as categoria,
-    (select usuarios.telefone from usuarios where usuarios.id = anuncios.id_usuario) as telefone
-    FROM anuncios WHERE id = :id");
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-
-    if($sql->rowCount() > 0) {
-      $array = $sql->fetch();
-      $array['fotos'] = array();
-
-      $sql= $this->db->prepare('SELECT id,url FROM anuncios_imagens WHERE id_anuncio = :id_anuncio');
-      $sql->bindValue(":id_anuncio", $id);
-      $sql->execute();
-
-      if($sql->rowCount() > 0) {
-        $array['fotos'] = $sql->fetchAll();
-      }
-    }
-
-    return $array;
-  } */
-
+  //Retorna registros de texto e imagem para o dia solicitado
   public function getRegistro($date, $horarios) {
     
     $array = array(
       "met" => array(),
-      "tec" => array()
+      "tec" => array(),
+      "img" => array()
     );
     
     foreach($horarios as $key => $value) {
       
+      //Descrição sinótica - Meteorologista
       $sql = $this->db->prepare("SELECT texto, id_meteoro, cat_descricao FROM descricao_meteoro WHERE date = :date AND horario = :horario");
       $sql->bindValue(":date", $date);
       $sql->bindValue(":horario", $value['hora']);
@@ -140,15 +116,34 @@ class Registros extends model {
 
       if($sql->rowCount() > 0) {
         $array["met"][$value["hora"]] = $sql->fetchAll();
- /*       $array['fotos'] = array();
 
-        $sql= $this->db->prepare('SELECT id,url FROM anuncios_imagens WHERE id_anuncio = :id_anuncio');
-        $sql->bindValue(":id_anuncio", $id);
-        $sql->execute();
+      }
 
-        if($sql->rowCount() > 0) {
-          $array['fotos'] = $sql->fetchAll();
-        }*/
+      //Registros Significativos - Tecnico
+      $sql = $this->db->prepare("SELECT texto, id_tec, cat_descricao FROM descricao_tec WHERE date = :date AND horario = :horario");
+      $sql->bindValue(":date", $date);
+      $sql->bindValue(":horario", $value['hora']);
+      $sql->execute();
+
+      if($sql->rowCount() > 0) {
+        $array["tec"][$value["hora"]] = $sql->fetchAll();
+      }
+
+      //Imagens
+      $sql = $this->db->prepare("SELECT url, categoria FROM imagens WHERE date = :date AND horario = :horario ");
+      $sql->bindValue(":date", $date);
+      $sql->bindValue(":horario", $value['hora']);
+      $sql->execute();
+
+      if($sql->rowCount() > 0) {
+
+        $resp = $sql->fetchAll();
+
+        foreach($resp as $respKey => $respVal) {
+          $imgCat = $respVal['categoria'];
+
+          $array['img'][$value['hora']][$imgCat] = $respVal['url'];
+        }
       }
     }
     return $array;

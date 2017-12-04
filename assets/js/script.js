@@ -70,7 +70,7 @@ $(document).ready(function() {
 
     console.log(cargo);
 
-    $("textarea").each(function() {
+    $(this).find("textarea").each(function() {
 
       var categoria = $(this).attr("data-categoria"),
           texto = $(this).val(),

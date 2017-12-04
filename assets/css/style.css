@@ -1,8 +1,16 @@
+.navbar{
+  border-radius: 0;
+}
+
 .table-bordered{
-    border:1px solid blue;
-    margin-top:20px;
+    margin-top:40px;
   }
-table.table-bordered > thead > tr > th{
+
+th{
+  text-align: center;
+  background-color: #F5F5F5;
+}
+/*table.table-bordered > thead > tr > th{
     border:1px solid blue;
 }
 table.table-bordered > tbody > tr > td{
@@ -11,7 +19,7 @@ table.table-bordered > tbody > tr > td{
 
 table.table-bordered > tbody > tr {
     border:1px solid blue;
-}
+}*/
 
 .hora, .categoria {
   display: none;
