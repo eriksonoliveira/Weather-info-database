@@ -1,5 +1,44 @@
 $(document).ready(function() {
   
+  //GET CURRENT DAY DATA ON PAGE LOAD
+  var getData = function () {
+    var data = new FormData();
+
+    var d = new Date();
+    var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
+
+    data.append("date", date);
+
+    $.ajax({
+      type: "POST",
+      url: "http://localhost/projetoy/Monitoramento/ajax",
+      data: data,
+      dataType: 'json',
+      contentType: false,
+      processData: false,
+      success: function(json) {
+        console.log(json.currDayReg);
+
+        var i;
+        for (i in json.currDayReg.img) {
+          var hora = i;
+          for (j in json.currDayReg.img[i]) {
+            var categoria = j;
+
+            var imgURL = json.currDayReg.img[i][j].fileName,
+                imgID = json.currDayReg.img[i][j].id;
+
+            $(".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]").html("TESTE");
+
+          }
+        }
+
+      }
+    })
+  }
+
+  getData();
+
   //CRIA PREVIEW DA IMAGEM SELECIONADA PARA UPLOAD
   var previewPhotos = function () {
     $("input[type=file]").change(function(e) {
@@ -12,7 +51,7 @@ $(document).ready(function() {
 
       var imPreview = $(this).parent().parent().next(".img-wrap").children(".img-preview");
 
-      console.log(imPreview);
+      //console.log(imPreview);
 
       $(imPreview)
         .attr('src', URL.createObjectURL(e.target.files[0]))

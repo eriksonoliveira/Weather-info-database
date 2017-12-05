@@ -24,27 +24,27 @@
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
-              <div class="img-wrap">
-                <span class="img-del" title="Deletar imagem" data-id="<?PHP
+              <div class="img-wrap" data-categoria="<?PHP echo $cats[0]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <!--  <span class="img-del" title="Deletar imagem" data-id="<?PHP
 
-                  if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['id'])) {
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['id'])) {
 
                     $imgId = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['id'];
                     echo $imgId;
-                  }
+                  }*/
 
                 ?>">&times;</span>
                 <img class="img-preview img-width" src="<?PHP
 
 
-                  if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'])) {
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'])) {
 
                     $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'];
                     $imgPath = BASE_URL.'assets/images/'.$cats[0]['nome'].'/'.$imgName;
                     echo $imgPath;
-                  }
+                  }*/
 
-                ?>"/>
+                ?>"/>-->
               </div>
               <p class="sucesso-msg"></p>
             </td>

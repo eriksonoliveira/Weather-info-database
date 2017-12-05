@@ -52,12 +52,10 @@ class adicionarController extends controller{
     $data['horario'] = $hs;
     
     //Pegar registros do dia atual que já foram feitos
-    $r = new Registros;
-    $currDayReg = $r->getRegistro($d_form_Int, $hs);
+/*    $r = new Registros;
+    $data['currDayReg'] = $r->getRegistro($d_form_Int, $hs);
 
-    $data['currDayReg'] = $currDayReg;
-
-    print_r($data['currDayReg']);
+    print_r($data['currDayReg']);*/
 
     $this->loadTemplate('add-registro', $data);
     
