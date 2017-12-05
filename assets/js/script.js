@@ -10,11 +10,13 @@ $(document).ready(function() {
         $(this).next(".num-fotos").html(files+" arquivo selecionado")
       }
 
-      var imPreview = $(this).parent().parent().next(".img-preview").first();
+      var imPreview = $(this).parent().parent().next(".img-wrap").children(".img-preview");
+
+      console.log(imPreview);
 
       $(imPreview)
         .attr('src', URL.createObjectURL(e.target.files[0]))
-        .attr('width', '200px')
+        .attr('class', 'img-width')
         .attr('class', 'img-thumbnail');
     })
   }
@@ -56,6 +58,11 @@ $(document).ready(function() {
         }
       });
     }
+  });
+
+  //DELETAR IMAGEM
+  $(".img-del").on("click", function() {
+
   });
 
   //ENVIAR TEXTO AJAX

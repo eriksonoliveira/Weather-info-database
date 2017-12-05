@@ -24,17 +24,28 @@
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
-              <img class="img-preview" src="<?PHP
+              <div class="img-wrap">
+                <span class="img-del" title="Deletar imagem" data-id="<?PHP
+
+                  if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['id'])) {
+
+                    $imgId = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['id'];
+                    echo $imgId;
+                  }
+
+                ?>">&times;</span>
+                <img class="img-preview img-width" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']])) {
+                  if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']];
-                  $imgPath = BASE_URL.'assets/images/'.$cats[0]['nome'].'/'.$imgName;
-                  echo $imgPath;
-                }
+                    $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'];
+                    $imgPath = BASE_URL.'assets/images/'.$cats[0]['nome'].'/'.$imgName;
+                    echo $imgPath;
+                  }
 
-              ?>"/>
+                ?>"/>
+              </div>
               <p class="sucesso-msg"></p>
             </td>
             <?PHP endfor;?>
@@ -56,9 +67,9 @@
               <img class="img-preview" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']])) {
+                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']];
+                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'];
                   $imgPath = BASE_URL.'assets/images/'.$cats[0]['nome'].'/'.$imgName;
                   echo $imgPath;
                 }
@@ -96,9 +107,9 @@
               <img class="img-preview" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']])) {
+                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']];
+                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'];
                   $imgPath = BASE_URL.'assets/images/'.$cats[6]['nome'].'/'.$imgName;
                   echo $imgPath;
                 }
@@ -125,9 +136,9 @@
               <img class="img-preview" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']])) {
+                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']];
+                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'];
                   $imgPath = BASE_URL.'assets/images/'.$cats[6]['nome'].'/'.$imgName;
                   echo $imgPath;
                 }
@@ -164,9 +175,9 @@
               <img class="img-preview" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']])) {
+                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']];
+                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']]['fileName'];
                   $imgPath = BASE_URL.'assets/images/'.$cats[5]['nome'].'/'.$imgName;
                   echo $imgPath;
                 }
@@ -203,10 +214,10 @@
               <img class="img-preview" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']])) {
+                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[1]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']];
-                  $imgPath = BASE_URL.'assets/images/'.$cats[5]['nome'].'/'.$imgName;
+                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[1]['nome']]['fileName'];
+                  $imgPath = BASE_URL.'assets/images/'.$cats[1]['nome'].'/'.$imgName;
                   echo $imgPath;
                 }
 
@@ -242,9 +253,9 @@
               <img class="img-preview" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']])) {
+                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']];
+                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']]['fileName'];
                   $imgPath = BASE_URL.'assets/images/'.$cats[2]['nome'].'/'.$imgName;
                   echo $imgPath;
                 }

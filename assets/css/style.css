@@ -1,12 +1,12 @@
-.navbar{
+.navbar {
   border-radius: 0;
 }
 
-.table-bordered{
+.table-bordered {
     margin-top:40px;
   }
 
-th{
+th {
   text-align: center;
   background-color: #F5F5F5;
 }
@@ -30,16 +30,26 @@ table.table-bordered > tbody > tr {
   position: absolute;
 }
 
-.foto_item {
-  width: 150px;
-  height: 200px;
-  float: left;
-  text-align: center;
-  margin-right: 10px;
+.img-wrap {
+  width: 250px;
+  height: 300px;
+  position: relative;
 }
 
-.foto_item img {
-  width: 150px;
+.img-width {
+  width: 250px;
+}
+
+.img-del {
+  position: absolute;
+  top: 1px; right: 3px;
+  z-index: 2;
+  color: #DDD;
+  font-size: 18px;
+}
+
+.img-del:hover {
+  cursor: pointer;
 }
 
 .cancel-upload {

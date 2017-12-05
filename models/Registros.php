@@ -130,7 +130,7 @@ class Registros extends model {
       }
 
       //Imagens
-      $sql = $this->db->prepare("SELECT url, categoria FROM imagens WHERE date = :date AND horario = :horario ");
+      $sql = $this->db->prepare("SELECT id, url, categoria FROM imagens WHERE date = :date AND horario = :horario ");
       $sql->bindValue(":date", $date);
       $sql->bindValue(":horario", $value['hora']);
       $sql->execute();
@@ -142,7 +142,8 @@ class Registros extends model {
         foreach($resp as $respKey => $respVal) {
           $imgCat = $respVal['categoria'];
 
-          $array['img'][$value['hora']][$imgCat] = $respVal['url'];
+          $array['img'][$value['hora']][$imgCat]['fileName'] = $respVal['url'];
+          $array['img'][$value['hora']][$imgCat]['id'] = $respVal['id'];
         }
       }
     }
