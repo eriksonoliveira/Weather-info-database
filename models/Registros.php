@@ -115,7 +115,15 @@ class Registros extends model {
       $sql->execute();
 
       if($sql->rowCount() > 0) {
-        $array["met"][$value["hora"]] = $sql->fetchAll();
+        $resp = $sql->fetchAll();
+
+        foreach($resp as $respKey => $respVal) {
+        $descrCat = $respVal['cat_descricao'];
+
+        $array["met"][$value["hora"]][$descrCat]['text'] = $respVal['texto'];
+        $array["met"][$value["hora"]][$descrCat]['id_met'] = $respVal['id_meteoro'];
+
+        }
 
       }
 
@@ -126,7 +134,16 @@ class Registros extends model {
       $sql->execute();
 
       if($sql->rowCount() > 0) {
-        $array["tec"][$value["hora"]] = $sql->fetchAll();
+        $resp = $sql->fetchAll();
+
+        foreach($resp as $respKey => $respVal) {
+        $descrCat = $respVal['cat_descricao'];
+
+        $array["tec"][$value["hora"]][$descrCat]['text'] = $respVal['texto'];
+        $array["tec"][$value["hora"]][$descrCat]['id_tec'] = $respVal['id_tec'];
+
+        }
+
       }
 
       //Imagens

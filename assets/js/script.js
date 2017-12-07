@@ -1,66 +1,38 @@
 $(document).ready(function() {
   
-  //GET CURRENT DAY DATA ON PAGE LOAD
-  var getData = function () {
-    var data = new FormData();
+//GET CURRENT DAY DATA ON PAGE LOAD
+  var data = new FormData();
 
-    var d = new Date();
-    var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
+  var d = new Date();
+  var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
 
-    data.append("date", date);
+  data.append("date", date);
 
-    $.ajax({
-      type: "POST",
-      url: "http://localhost/projetoy/Monitoramento/ajax",
-      data: data,
-      dataType: 'json',
-      contentType: false,
-      processData: false,
-      success: function(json) {
-        console.log(json.currDayReg);
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/projetoy/Monitoramento/ajax",
+    data: data,
+    dataType: 'json',
+    contentType: false,
+    processData: false,
+    success: function(json) {
 
-        var i;
-        for (i in json.currDayReg.img) {
-          var hora = i;
-          for (j in json.currDayReg.img[i]) {
-            var categoria = j;
+      var jsonImg = json.currDayReg.img;
+      var jsonMet = json.currDayReg.met;
+      var jsonTec = json.currDayReg.tec;
 
-            var imgURL = json.currDayReg.img[i][j].fileName,
-                imgID = json.currDayReg.img[i][j].id;
+      console.log(json);
 
-            $(".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]").html("TESTE");
+      receiveDayImages(jsonImg);
+      receiveDayText(jsonMet, "meteoro");
+      receiveDayText(jsonTec, "tec");
 
-          }
-        }
+    }
 
-      }
-    })
-  }
-
-  getData();
-
-  //CRIA PREVIEW DA IMAGEM SELECIONADA PARA UPLOAD
-  var previewPhotos = function () {
-    $("input[type=file]").change(function(e) {
-    var files = e.target.files.length;
-      if (files > 1){
-        $(this).next(".num-fotos").html(files+" arquivos selecionados")
-      } else {
-        $(this).next(".num-fotos").html(files+" arquivo selecionado")
-      }
-
-      var imPreview = $(this).parent().parent().next(".img-wrap").children(".img-preview");
-
-      //console.log(imPreview);
-
-      $(imPreview)
-        .attr('src', URL.createObjectURL(e.target.files[0]))
-        .attr('class', 'img-width')
-        .attr('class', 'img-thumbnail');
-    })
-  }
+  })
 
   previewPhotos();
+
   
   //ENVIAR IMAGENS VIA AJAX
   $(".form-img").on('submit', function(e) {
@@ -114,8 +86,6 @@ $(document).ready(function() {
         nome = $(this).find("select").val(),
         cargo = $(this).find("select").attr("data-cargo");
 
-    console.log(cargo);
-
     $(this).find("textarea").each(function() {
 
       var categoria = $(this).attr("data-categoria"),
@@ -140,7 +110,6 @@ $(document).ready(function() {
           success: function(json) {
 
             if(json.success = "yes") {
-              console.log(json.success);
               $(successMsg).html("Imagem enviada com sucesso!");
             }
           }
@@ -150,8 +119,77 @@ $(document).ready(function() {
   });
 
   
-})
+});
 
+
+/*Gets the data from the current day and populates the fields,
+if no data has been added to that time and category yet, the
+field will remais blank */
+var receiveDayImages = function(json) {
+  var h;
+
+  for (h in json) {
+    var hora = h;
+    for (c in json[h]) {
+      var categoria = c;
+
+      var imgURL = "http://localhost/projetoy/Monitoramento/assets/images/" + categoria + "/" + json[h][c].fileName,
+          imgID = json[h][c].id;
+
+      $(".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]")
+        .append(
+          $('<img/>')
+          .attr("src", imgURL)
+          .attr("id", "img-"+imgID)
+          .attr("class", "img-width"));
+
+    }
+  }
+}
+
+var receiveDayText = function(json, cargo) {
+  var h;
+
+  for (h in json) {
+    var hora = h;
+    for (c in json[h]) {
+      var categoria = c;
+
+      var text =  json[h][c].text,
+          id = json[h][c].id_met;
+
+      //POPULATE TEXTAREA
+      $("textarea[data-categoria="+categoria+"][data-hora="+hora+"]").html(text);
+      console.log(text);
+
+      //POPULATE SELECT
+      $("select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]")
+        .prop('selected', true);
+
+    }
+  }
+}
+
+//CRIA PREVIEW DA IMAGEM SELECIONADA PARA UPLOAD
+var previewPhotos = function () {
+  $("input[type=file]").change(function(e) {
+  var files = e.target.files.length;
+    if (files > 1){
+      $(this).next(".num-fotos").html(files+" arquivos selecionados")
+    } else {
+      $(this).next(".num-fotos").html(files+" arquivo selecionado")
+    }
+
+    var imPreview = $(this).parent().parent().next(".img-wrap").children(".img-preview");
+
+    //console.log(imPreview);
+
+    $(imPreview)
+      .attr('src', URL.createObjectURL(e.target.files[0]))
+      .attr('class', 'img-width')
+      .attr('class', 'img-thumbnail');
+  })
+}
 
 
 

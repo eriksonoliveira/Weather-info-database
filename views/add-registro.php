@@ -64,17 +64,28 @@
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
-              <img class="img-preview" src="<?PHP
+              <div class="img-wrap" data-categoria="<?PHP echo $cats[0]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <!--  <span class="img-del" title="Deletar imagem" data-id="<?PHP
+
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['id'])) {
+
+                    $imgId = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['id'];
+                    echo $imgId;
+                  }*/
+
+                ?>">&times;</span>
+                <img class="img-preview img-width" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'])) {
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'];
-                  $imgPath = BASE_URL.'assets/images/'.$cats[0]['nome'].'/'.$imgName;
-                  echo $imgPath;
-                }
+                    $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[0]['nome']]['fileName'];
+                    $imgPath = BASE_URL.'assets/images/'.$cats[0]['nome'].'/'.$imgName;
+                    echo $imgPath;
+                  }*/
 
-              ?>"/>
+                ?>"/>-->
+              </div>
               <p class="sucesso-msg"></p>
             </td>
             <?PHP endfor;?>
@@ -104,17 +115,28 @@
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
-              <img class="img-preview" src="<?PHP
+              <div class="img-wrap" data-categoria="<?PHP echo $cats[6]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <!--  <span class="img-del" title="Deletar imagem" data-id="<?PHP
+
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['id'])) {
+
+                    $imgId = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['id'];
+                    echo $imgId;
+                  }*/
+
+                ?>">&times;</span>
+                <img class="img-preview img-width" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'])) {
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'];
-                  $imgPath = BASE_URL.'assets/images/'.$cats[6]['nome'].'/'.$imgName;
-                  echo $imgPath;
-                }
+                    $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'];
+                    $imgPath = BASE_URL.'assets/images/'.$cats[6]['nome'].'/'.$imgName;
+                    echo $imgPath;
+                  }*/
 
-              ?>"/>
+                ?>"/>-->
+              </div>
               <p class="sucesso-msg"></p>
             </td>
             <?PHP endfor;?>
@@ -133,17 +155,28 @@
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
-              <img class="img-preview" src="<?PHP
+              <div class="img-wrap" data-categoria="<?PHP echo $cats[6]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <!--  <span class="img-del" title="Deletar imagem" data-id="<?PHP
+
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['id'])) {
+
+                    $imgId = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['id'];
+                    echo $imgId;
+                  }*/
+
+                ?>">&times;</span>
+                <img class="img-preview img-width" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'])) {
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'];
-                  $imgPath = BASE_URL.'assets/images/'.$cats[6]['nome'].'/'.$imgName;
-                  echo $imgPath;
-                }
+                    $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[6]['nome']]['fileName'];
+                    $imgPath = BASE_URL.'assets/images/'.$cats[6]['nome'].'/'.$imgName;
+                    echo $imgPath;
+                  }*/
 
-              ?>"/>
+                ?>"/>-->
+              </div>
               <p class="sucesso-msg"></p>
             </td>
             <?PHP endfor;?>
@@ -172,17 +205,28 @@
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
-              <img class="img-preview" src="<?PHP
+              <div class="img-wrap" data-categoria="<?PHP echo $cats[5]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <!--  <span class="img-del" title="Deletar imagem" data-id="<?PHP
+
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']]['id'])) {
+
+                    $imgId = $currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']]['id'];
+                    echo $imgId;
+                  }*/
+
+                ?>">&times;</span>
+                <img class="img-preview img-width" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']]['fileName'])) {
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']]['fileName'];
-                  $imgPath = BASE_URL.'assets/images/'.$cats[5]['nome'].'/'.$imgName;
-                  echo $imgPath;
-                }
+                    $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[5]['nome']]['fileName'];
+                    $imgPath = BASE_URL.'assets/images/'.$cats[5]['nome'].'/'.$imgName;
+                    echo $imgPath;
+                  }*/
 
-              ?>"/>
+                ?>"/>-->
+              </div>
               <p class="sucesso-msg"></p>
             </td>
             <?PHP endfor;?>
@@ -211,17 +255,28 @@
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
-              <img class="img-preview" src="<?PHP
+              <div class="img-wrap" data-categoria="<?PHP echo $cats[1]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <!--  <span class="img-del" title="Deletar imagem" data-id="<?PHP
+
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[1]['nome']]['id'])) {
+
+                    $imgId = $currDayReg['img'][$horario[$i]['hora']][$cats[1]['nome']]['id'];
+                    echo $imgId;
+                  }*/
+
+                ?>">&times;</span>
+                <img class="img-preview img-width" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[1]['nome']]['fileName'])) {
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[1]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[1]['nome']]['fileName'];
-                  $imgPath = BASE_URL.'assets/images/'.$cats[1]['nome'].'/'.$imgName;
-                  echo $imgPath;
-                }
+                    $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[1]['nome']]['fileName'];
+                    $imgPath = BASE_URL.'assets/images/'.$cats[1]['nome'].'/'.$imgName;
+                    echo $imgPath;
+                  }*/
 
-              ?>"/>
+                ?>"/>-->
+              </div>
               <p class="sucesso-msg"></p>
             </td>
             <?PHP endfor;?>
@@ -250,17 +305,28 @@
                   <button type="submit" class="btn btn-success">Enviar</button>
                 </div>
               </form>
-              <img class="img-preview" src="<?PHP
+              <div class="img-wrap" data-categoria="<?PHP echo $cats[2]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <!--  <span class="img-del" title="Deletar imagem" data-id="<?PHP
+
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']]['id'])) {
+
+                    $imgId = $currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']]['id'];
+                    echo $imgId;
+                  }*/
+
+                ?>">&times;</span>
+                <img class="img-preview img-width" src="<?PHP
 
 
-                if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']]['fileName'])) {
+                 /* if(isset($currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']]['fileName'])) {
 
-                  $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']]['fileName'];
-                  $imgPath = BASE_URL.'assets/images/'.$cats[2]['nome'].'/'.$imgName;
-                  echo $imgPath;
-                }
+                    $imgName = $currDayReg['img'][$horario[$i]['hora']][$cats[2]['nome']]['fileName'];
+                    $imgPath = BASE_URL.'assets/images/'.$cats[2]['nome'].'/'.$imgName;
+                    echo $imgPath;
+                  }*/
 
-              ?>"/>
+                ?>"/>-->
+              </div>
               <p class="sucesso-msg"></p>
             </td>
             <?PHP endfor;?>
@@ -282,7 +348,7 @@
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label for="categoria">Meteorologista:</label>
-                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="meteoro">
+                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                     <?PHP
                       foreach($mets as $met):
                     ?>
@@ -294,21 +360,21 @@
                     ?>
                   </select>
                   <label>Superfície:</label>
-                  <textarea name="descricao_superficie<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="superficie"><?PHP
+                  <textarea class="form-control" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"><?PHP
 
-                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][0]['texto']) : '';
+                    /*echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][0]['texto']) : '';*/
 
                     ?></textarea><br>
                   <label>Níveis médios e altos:</label>
-                  <textarea name="descricao_medios_altos<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="medios_altos"><?PHP
+                  <textarea class="form-control" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"><?PHP
 
-                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][1]['texto']) : '';
+                    /*echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][1]['texto']) : '';*/
 
                     ?></textarea><br>
                   <label>Condição de tempo:</label>
-                  <textarea name="descricao_condicao_tempo<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="condicao_tempo"><?PHP
+                  <textarea class="form-control" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"><?PHP
 
-                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][2]['texto']) : '';
+                    /*echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][2]['texto']) : '';*/
 
                     ?></textarea>
 
@@ -337,7 +403,7 @@
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label for="categoria">Meteorologista:</label>
-                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="meteoro">
+                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                     <?PHP
                       foreach($mets as $met):
                     ?>
@@ -349,23 +415,25 @@
                     ?>
                   </select>
                   <label>Superfície:</label>
-                  <textarea name="descricao_superficie<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="superficie"><?PHP
+                  <textarea class="form-control" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"><?PHP
 
-                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][0]['texto']) : '';
+                    /*echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][0]['texto']) : '';*/
 
-                    ?></textarea><br>
+                  ?></textarea><br>
+
                   <label>Níveis médios e altos:</label>
-                  <textarea name="descricao_medios_altos<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="medios_altos"><?PHP
+                  <textarea class="form-control" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"><?PHP
 
-                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][1]['texto']) : '';
+                    /*echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][1]['texto']) : '';*/
 
-                    ?></textarea><br>
+                  ?></textarea><br>
+
                   <label>Condição de tempo:</label>
-                  <textarea name="descricao_condicao_tempo<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="condicao_tempo"><?PHP
+                  <textarea class="form-control" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"><?PHP
 
-                    echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][2]['texto']) : '';
+                    /*echo (isset($currDayReg['met'][$horario[$i]['hora']]))? trim($currDayReg['met'][$horario[$i]['hora']][2]['texto']) : '';*/
 
-                    ?></textarea>
+                  ?></textarea>
 
                   <?PHP
                     if(isset($currDayReg['met'][$horario[$i]['hora']])){
@@ -402,7 +470,7 @@
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label>Tecnico:</label>
-                  <select name="tec_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="tec">
+                  <select name="tec_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="tec" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                     <?PHP
                       foreach($tecs as $tec):
                     ?>
@@ -415,16 +483,16 @@
                   </select>
 
                   <label>METAR:</label>
-                  <textarea name="metar<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="metar"><?PHP
+                  <textarea class="form-control" data-categoria="metar" data-hora="<?PHP echo $horario[$i]['hora'];?>"><?PHP
 
-                    echo (isset($currDayReg['tec'][$horario[$i]['hora']]))? trim($currDayReg['tec'][$horario[$i]['hora']][0]['texto']) : '';
+                    /*echo (isset($currDayReg['tec'][$horario[$i]['hora']]))? trim($currDayReg['tec'][$horario[$i]['hora']][0]['texto']) : '';*/
 
                   ?></textarea><br>
 
                   <label>Ocorrências:</label>
-                  <textarea name="ocorrencias<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-categoria="ocorrencias"><?PHP
+                  <textarea class="form-control" data-categoria="ocorrencias" data-hora="<?PHP echo $horario[$i]['hora'];?>"><?PHP
 
-                    echo (isset($currDayReg['tec'][$horario[$i]['hora']]))? trim($currDayReg['tec'][$horario[$i]['hora']][1]['texto']) : '';
+                    /*echo (isset($currDayReg['tec'][$horario[$i]['hora']]))? trim($currDayReg['tec'][$horario[$i]['hora']][1]['texto']) : '';*/
 
                   ?></textarea><br>
 
