@@ -12,7 +12,20 @@ class ajaxController extends controller {
     $d_form_Int = date("Y/m/d", $date);
     $data['date'] = $d_form_Int;
 
-    //IMAGEM
+    //HORARIOS
+    $h = new Horarios();
+    $hs = $h->getHorarios();
+
+    //RECEBE DADOS DO DIA ATUAL
+    if(isset($_POST['date']) && !empty($_POST['date'])) {
+
+      $r = new Registros;
+      $data['currDayReg'] = $r->getRegistro($d_form_Int, $hs);
+
+      $data['success'] = "yes";
+    }
+
+    //ADICIONA IMAGEM
     if(isset($_FILES['imagem'])) {
       $imagem = $_FILES['imagem'];
 
@@ -28,7 +41,7 @@ class ajaxController extends controller {
 
     }
 
-    //TEXTO
+    //ADICIONA TEXTO
     if(isset($_POST['texto']) && !empty($_POST['texto'])) {
       $data['texto'] = addslashes($_POST['texto']);
 
