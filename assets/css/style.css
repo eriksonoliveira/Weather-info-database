@@ -21,6 +21,22 @@ table.table-bordered > tbody > tr {
     border:1px solid blue;
 }*/
 
+.reg-form {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.input-btn-wrap label {
+  display: block;
+}
+
+.input-btn-wrap .inputBtn {
+  width: 140px;
+  margin:auto;
+  border-radius: 0;
+}
+
 .hora, .categoria {
   display: none;
 }
@@ -30,10 +46,19 @@ table.table-bordered > tbody > tr {
   position: absolute;
 }
 
+.hide {
+  display: none;
+}
+
+.img-cancel, button[type=submit] {
+  display: none;
+}
+
 .img-wrap {
   width: 250px;
-  height: 300px;
+  max-height: 300px;
   position: relative;
+  margin: auto;
 }
 
 .img-width {
@@ -41,15 +66,20 @@ table.table-bordered > tbody > tr {
 }
 
 .img-del {
+  display: none;
   position: absolute;
-  top: 1px; right: 3px;
+  bottom: 5px; right: 50%;
   z-index: 2;
-  color: #DDD;
-  font-size: 18px;
+  color: #AAA;
 }
 
 .img-del:hover {
   cursor: pointer;
+  color: #DDD;
+}
+
+.img-del webicon {
+  height: 20px;
 }
 
 .cancel-upload {

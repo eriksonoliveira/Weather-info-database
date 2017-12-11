@@ -28,6 +28,7 @@
     <script src="<?PHP echo BASE_URL;?>assets/js/jquery-3.2.1.min.js"></script>
     <script src="<?PHP echo BASE_URL;?>assets/js/bootstrap.min.js"></script>
     <script src="<?PHP echo BASE_URL;?>assets/js/script.js"></script>
+    <script type="text/javascript" src="//cdn.rawgit.com/icons8/bower-webicon/v0.10.7/jquery-webicon.min.js"></script>
     
   </body>
 </html>

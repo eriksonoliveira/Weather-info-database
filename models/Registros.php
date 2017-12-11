@@ -167,8 +167,10 @@ class Registros extends model {
     return $array;
   }
   
+  //Inserir nova imagem de registro
   public function addImagem($imagem, $horario, $categoria, $date) {
     
+    $imgID = '';
     
     if(count($imagem) > 0) {
 
@@ -209,11 +211,25 @@ class Registros extends model {
           $sql->bindValue(":horario", $horario);
           $sql->bindValue(":date", $date);
           $sql->execute();
+
+          $imgID = $this->db->lastInsertId();
+
         }
       //}
     }
+    return $imgID;
+  }
+
+  //Deletar imagem de registro
+  public function delImagem($id) {
+
+    $sql = $this->db->prepare("DELETE FROM imagens WHERE id = :id");
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
   }
   
+  //Inserir novo texto de registro
   public function addTexto($texto, $horario, $categoria, $date, $id_nome, $cargo) {
     
     $sql = '';

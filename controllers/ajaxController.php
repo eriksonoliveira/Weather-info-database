@@ -34,11 +34,23 @@ class ajaxController extends controller {
 
       //Envia para o bando de dados
       $r = new Registros();
-      $r->addImagem($imagem, $data['horario'], $data['categoria'], $data['date']);
+      $imgID = $r->addImagem($imagem, $data['horario'], $data['categoria'], $data['date']);
 
       //SUCCESS
       $data['success'] = "yes";
+      $data['imgId'] = $imgID;
 
+    }
+
+    //DELETA IMAGEM
+    if(isset($_POST['imgID']) && !empty($_POST['imgID'])) {
+
+      $id = substr($_POST['imgID'], 4);
+
+      $r = new Registros();
+      $r->delImagem($id);
+
+      $data['success'] = "yes";
     }
 
     //ADICIONA TEXTO
