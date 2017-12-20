@@ -239,7 +239,27 @@ class Registros extends model {
     } else if($cargo == "tec") {
       $sql = $this->db->prepare("INSERT INTO descricao_tec SET texto = :texto, horario = :horario, cat_descricao = :categoria, date = :date, id_tec = :id_nome");
 
-      echo $cargo;
+    }
+
+    $sql->bindValue(":texto", $texto);
+    $sql->bindValue(":horario", $horario);
+    $sql->bindValue(":categoria", $categoria);
+    $sql->bindValue(":date", $date);
+    $sql->bindValue(":id_nome", $id_nome);
+    $sql->execute();
+
+  }
+
+  //Atualizar texto de registro
+  public function updateTexto($texto, $horario, $categoria, $date, $id_nome, $cargo) {
+
+    $sql = '';
+
+    if($cargo == "meteoro") {
+      $sql = $this->db->prepare("UPDATE descricao_meteoro SET texto = :texto, id_meteoro = :id_nome WHERE horario = :horario AND date = :date AND cat_descricao = :categoria");
+    } else if($cargo == "tec") {
+      $sql = $this->db->prepare("UPDATE descricao_tec SET texto = :texto, id_tec = :id_nome WHERE horario = :horario AND date = :date AND cat_descricao = :categoria");
+
     }
 
     $sql->bindValue(":texto", $texto);

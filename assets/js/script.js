@@ -34,70 +34,142 @@ $(document).ready(function() {
   
   //ENVIAR IMAGENS VIA AJAX
   $(".form-img").on("submit", function(e) {
-    e.preventDefault();
-
-    var data = new FormData();
-
-    var horario = $(this).find("input[type=file]").attr("data-hora"),
-        categoria = $(this).find("input[type=file]").attr("data-categoria"),
-        imagem = $(this).find("input[type=file]")[0].files,
-        successMsg = $(this).nextAll(".sucesso-msg").first();
-
-    var sendBtn = $(this).find("button[type=submit]"),
-        cancelBtn = $(this).find(".img-cancel"),
-        inputBtn = $(this).find("label"),
-        numImg = $(this).find(".num-fotos"),
-        imgWrap = $(this).next(".img-wrap"),
-        imgTag = $(imgWrap).find("img");
-        imgDelBtn = $(imgWrap).find(".img-del");
-
-    if(imagem.length > 0) {
-
-      data.append("horario", horario);
-      data.append("categoria", categoria);
-      data.append("imagem", imagem[0]);
-
-      $.ajax({
-        type: 'POST',
-        url: 'http://localhost/projetoy/Monitoramento/ajax',
-        data: data,
-        dataType: 'json',
-        contentType: false,
-        processData: false,
-        success: function(json) {
-
-          if(json.success = "yes") {
-            $(successMsg).html("Imagem enviada com sucesso!");
-
-            $(imgTag).attr("id", "img-"+json.imgId);
-
-            $([sendBtn, cancelBtn, numImg, imgDelBtn]).each(function() {
-              $(this).toggle();
-            });
-          }
-        }
-      });
-    }
+    var form = $(this);
+    sendImage(e, form);
   });
 
 
   //ENVIAR TEXTO AJAX
   $(".form-txt").on("submit", function(e) {
-    e.preventDefault();
+    var form = $(this);
+    sendText(e, form);
+  });
 
-    var data = new FormData();
+  $("input[type=file]").change(function(e) {
+    var inputFile = $(this);
+    previewPhotos(e, inputFile);
+  });
 
-    var horario = $(this).attr("data-hora"),
-        nome = $(this).find("select").val(),
-        cargo = $(this).find("select").attr("data-cargo");
+  $(".img-del").on("click", function() {
+    var del = $(this);
+    deleteImg(del);
+  });
 
-    $(this).find("textarea").each(function() {
+  $(".edit-text").on("click", function(e) {
+   var edit = $(this);
+   editText(e, edit);
+  });
 
-      var categoria = $(this).attr("data-categoria"),
-          texto = $(this).val(),
-          successMsg = $(this).nextAll(".sucesso-msg").first();
+});
 
-      if($.trim(texto).length > 0) {
+
+//Add new Image to the record
+function sendImage(e, form) {
+  e.preventDefault();
+
+  var data = new FormData();
+
+  var horario = $(form).find("input[type=file]").attr("data-hora"),
+      categoria = $(form).find("input[type=file]").attr("data-categoria"),
+      imagem = $(form).find("input[type=file]")[0].files,
+      successMsg = $(form).nextAll(".sucesso-msg").first();
+
+  var sendBtn = $(form).find(".send-img"),
+      cancelBtn = $(form).find(".img-cancel"),
+      inputBtn = $(form).find("label"),
+      numImg = $(form).find(".num-fotos"),
+      imgWrap = $(form).next(".img-wrap"),
+      imgTag = $(imgWrap).find("img");
+      imgDelBtn = $(imgWrap).find(".img-del");
+
+  if(imagem.length > 0) {
+
+    data.append("horario", horario);
+    data.append("categoria", categoria);
+    data.append("imagem", imagem[0]);
+
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost/projetoy/Monitoramento/ajax',
+      data: data,
+      dataType: 'json',
+      contentType: false,
+      processData: false,
+      success: function(json) {
+
+        if(json.success = "yes") {
+          $(successMsg).html("Imagem enviada com sucesso!");
+
+          $(imgTag).attr("id", "img-"+json.imgId);
+
+          $([sendBtn, cancelBtn, numImg, imgDelBtn]).each(function() {
+            $(this).toggle();
+          });
+        }
+      }
+    });
+  }
+}
+
+//Add new weather description to the record
+function sendText(e, form) {
+  e.preventDefault();
+
+
+  var data = new FormData();
+
+  var horario = $(form).attr("data-hora"),
+      nome = $(form).find("select").val(),
+      cargo = $(form).find("select").attr("data-cargo"),
+      sendBtn = $(form).find(".send-text"),
+      editBtn = $(form).find(".edit-text"),
+      updateBtn = $(form).find(".update-text"),
+      cancelBtn = $(form).find(".update-cancel"),
+      textArea = $(form).find("textarea");
+      success = '';
+
+  $(form).find("textarea").each(function() {
+
+    var categoria = $(this).attr("data-categoria"),
+        texto = $(this).val(),
+        successMsg = $(this).prevAll(".reg-form").nextAll(".sucesso-msg").first();
+
+    if($.trim(texto).length > 0) {
+
+      var isVisible = updateBtn.is(":visible");
+
+      //UPDATE ENTRY
+      if(isVisible == true) {
+
+        data.append("update-horario", horario);
+        data.append("update-categoria", categoria);
+        data.append("update-texto", texto);
+        data.append("update-id_nome", nome);
+        data.append("update-cargo", cargo);
+
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost/projetoy/Monitoramento/ajax',
+          data: data,
+          dataType: 'json',
+          contentType: false,
+          processData: false,
+          success: function(json) {
+
+            $(updateBtn).hide();
+            $(cancelBtn).hide();
+
+            $(editBtn).fadeIn();
+
+            $(textArea).each(function() {
+              $(this).prop("disabled", true);
+            });
+          }
+        });
+
+
+      //ADD NEW ENTRY
+      } else {
 
         data.append("horario", horario);
         data.append("categoria", categoria);
@@ -114,21 +186,31 @@ $(document).ready(function() {
           processData: false,
           success: function(json) {
 
-            if(json.success = "yes") {
-              $(successMsg).html("Imagem enviada com sucesso!");
+            success = "yes";
+
+            isVisible = sendBtn.is(":visible");
+
+            if(isVisible == true) {
+              $([sendBtn, editBtn]).each(function() {
+                $(this).toggle();
+              });
             }
+
+            $(textArea).each(function() {
+              $(this).prop("disabled", true);
+            });
           }
         });
       }
-    });
+
+    }
   });
 
-  previewPhotos();
+  if(success) {
+    $(successMsg).html("Texto enviado com sucesso!");
 
-  deleteImg();
-  
-});
-
+  }
+}
 
 /*Gets the data from the current day and populates the fields,
 if no data has been added to that time and category yet, the
@@ -143,7 +225,9 @@ function receiveDayImages (json) {
 
       var imgURL = "http://localhost/projetoy/Monitoramento/assets/images/" + categoria + "/" + json[h][c].fileName,
           imgID = json[h][c].id,
-          imgWrap = ".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]";
+          imgWrap = ".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]",
+          imgDelBtn = $(imgWrap).find(".img-del"),
+          inputWrap = $(imgWrap).prev(".reg-form").find(".input-btn-wrap");
 
 
       $(imgWrap)
@@ -151,15 +235,21 @@ function receiveDayImages (json) {
           $('<img/>')
           .attr("src", imgURL)
           .attr("id", "img-"+imgID)
-          .attr("class", "img-width"))
-        .find('.img-del')
-          .toggle();
+          .attr("class", "img-width"));
+
+      $([imgDelBtn, inputWrap]).each(function() {
+        $(this).toggle();
+      });
+
     }
   }
 }
 
 function receiveDayText (json, cargo) {
   var h;
+
+  var sendBtn = '',
+      editBtn = '';
 
   for (h in json) {
     var hora = h;
@@ -169,98 +259,115 @@ function receiveDayText (json, cargo) {
       var text =  json[h][c].text,
           id = json[h][c].id_met;
 
+      var textArea = "textarea[data-categoria="+categoria+"][data-hora="+hora+"]",
+          select = "select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]",
+          sendBtn = $(textArea).siblings(".send-text"),
+          editBtn = $(textArea).siblings(".edit-text");
+
       //POPULATE TEXTAREA
-      $("textarea[data-categoria="+categoria+"][data-hora="+hora+"]").html(text);
-      //console.log(text);
+      $(textArea).html(text)
+        .prop("disabled", true);
 
       //POPULATE SELECT
       $("select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]")
         .prop('selected', true);
 
+
     }
+
+    $([sendBtn, editBtn]).each(function() {
+      $(this).toggle();
+    });
+
   }
 }
 
 //CRIA PREVIEW DA IMAGEM SELECIONADA PARA UPLOAD
-function previewPhotos () {
-  $("input[type=file]").change(function(e) {
-    var files = e.target.files.length,
-        selectConfirm = $(this).next(".num-fotos");
+function previewPhotos (e, input) {
 
-    if (files > 1){
-      $(selectConfirm).html(files+" arquivos selecionados")
-    } else {
-      $(selectConfirm).html(files+" arquivo selecionado")
-    }
+  var files = e.target.files.length,
+      selectConfirm = $(input).next(".num-fotos");
 
-    var imPreview = $(this).parents(".reg-form").next(".img-wrap"),
-        inputWrap = $(this).parent();
+  if (files > 1){
+    $(selectConfirm).html(files+" arquivos selecionados")
+  } else {
+    $(selectConfirm).html(files+" arquivo selecionado")
+  }
 
-    $(imPreview)
-      .append(
-        $("<img/>")
-        .attr("src", URL.createObjectURL(e.target.files[0]))
-        .attr("class", "img-width")
-        .attr("class", "img-thumbnail")
-      )
-      /*.find(".img-del")
-        .toggle()*/;
+  var imPreview = $(input).parents(".reg-form").next(".img-wrap"),
+      inputWrap = $(input).parent();
 
-    var cancelBtn = $(imPreview).prev("form").find(".img-cancel"),
-        sendBtn = $(imPreview).prev("form").find("button[type=submit]");
+  $(imPreview)
+    .append(
+      $("<img/>")
+      .attr("src", URL.createObjectURL(e.target.files[0]))
+      .attr("class", "img-width")
+      .attr("class", "img-thumbnail")
+    )
+    /*.find(".img-del")
+      .toggle()*/;
+
+  var cancelBtn = $(imPreview).prev("form").find(".img-cancel"),
+      sendBtn = $(imPreview).prev("form").find(".send-img");
+
+  $([cancelBtn, sendBtn, inputWrap]).each(function() {
+    $(this).toggle();
+  });
+
+  //Remove image preview when click "Cancel"
+  $(cancelBtn).on("click", function() {
+    $(imPreview).find("img").remove();
+    /*$(imPreview).find(".img-del").toggle();*/
+    $(selectConfirm).empty();
 
     $([cancelBtn, sendBtn, inputWrap]).each(function() {
       $(this).toggle();
     });
 
-    //Remove image preview when click "Cancel"
-    $(cancelBtn).on("click", function() {
-      $(imPreview).find("img").remove();
-      /*$(imPreview).find(".img-del").toggle();*/
-      $(selectConfirm).empty();
-
-      $([cancelBtn, sendBtn, inputWrap]).each(function() {
-        $(this).toggle();
-      });
-
-    });
-  })
+  });
 }
 
 //DELETAR IMAGEM
-function deleteImg () {
+function deleteImg (del) {
+  var data = new FormData();
 
-  $(".img-del").on("click", function() {
+  var im = $(del).next("img"),
+      imgID = $(del).next("img").attr("id"),
+      successMsg = $(del).parent().next(".sucesso-msg"),
+      inputWrap = $(del).parent().prev(".reg-form").find(".input-btn-wrap"),
+      delBtn = $(del);
 
-    var data = new FormData();
+  data.append("imgID", imgID);
 
-    var im = $(this).next("img"),
-        imgID = $(this).next("img").attr("id"),
-        successMsg = $(this).parent().next(".sucesso-msg"),
-        inputWrap = $(this).parent().prev(".reg-form").find(".input-btn-wrap"),
-        delBtn = $(this);
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost/projetoy/Monitoramento/ajax',
+    data: data,
+    dataType: 'json',
+    contentType: false,
+    processData: false,
+    success: function(json) {
 
-    data.append("imgID", imgID);
+      if(json.success = "yes") {
 
-    $.ajax({
-      type: 'POST',
-      url: 'http://localhost/projetoy/Monitoramento/ajax',
-      data: data,
-      dataType: 'json',
-      contentType: false,
-      processData: false,
-      success: function(json) {
+        $(successMsg).html("Imagem removida com sucesso!");
+        $(im).remove();
+        $(delBtn).toggle();
 
-        if(json.success = "yes") {
-
-          $(successMsg).html("Imagem removida com sucesso!");
-          $(im).remove();
-          $(delBtn).toggle();
-
-        }
       }
-    });
+    }
   });
+}
+
+//EDIT TEXT
+function editText(e, edit) {
+  e.preventDefault();
+
+  $(edit).toggle();
+  $(edit).siblings(".update-cancel, .update-text").each(function() {
+    $(this).fadeToggle();
+  });
+  $(edit).siblings("textarea").prop("disabled", false);
 }
 
 

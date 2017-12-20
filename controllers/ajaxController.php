@@ -71,6 +71,24 @@ class ajaxController extends controller {
 
     }
 
+    //ATUALIZA TEXTO
+    if(isset($_POST['update-texto']) && !empty($_POST['update-texto'])) {
+      $data['texto'] = addslashes($_POST['update-texto']);
+
+      $data['horario'] = $_POST['update-horario'];
+      $data['categoria'] = $_POST['update-categoria'];
+      $data['id_nome'] = $_POST['update-id_nome'];
+      $data['cargo'] = $_POST['update-cargo'];
+
+      //Envia para o bando de dados
+      $r = new Registros();
+      $r->updateTexto($data['texto'], $data['horario'], $data['categoria'], $data['date'], $data['id_nome'], $data['cargo']);
+
+      //SUCCESS
+      $data['success'] = "yes";
+
+    }
+
 
     echo json_encode($data);
     exit;

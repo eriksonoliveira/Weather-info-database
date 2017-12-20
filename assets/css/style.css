@@ -50,7 +50,7 @@ table.table-bordered > tbody > tr {
   display: none;
 }
 
-.img-cancel, button[type=submit] {
+.img-cancel, .send-img, .update-text, .update-cancel, .edit-text {
   display: none;
 }
 
