@@ -6,6 +6,11 @@ class adicionarController extends controller{
   }
   
   public function registro() {
+    if(empty($_SESSION['cLogin'])) {
+      header("Location: ".BASE_URL."login");
+      exit;
+    }
+
     $data = array(
       "success" => ''
     );
@@ -14,11 +19,6 @@ class adicionarController extends controller{
 
     $imagens = array();
     $descricao = array();
-
-    if(empty($_SESSION['cLogin'])) {
-      header("Location: ".BASE_URL."login");
-      exit;
-    }
 
     //Pegar Data do dia
     $date = time();
@@ -32,6 +32,12 @@ class adicionarController extends controller{
     $categs_desc = $c->getListaDesc();
 
     $data['cats'] = $categs;
+
+    //Pegar nomes sistemas
+    $s = new Fenomenos();
+    $sist = $s->getLista();
+
+    $data['fenomenos'] = $sist;
 
     //Nomes Meteorologistas
     $m = new Meteoros();

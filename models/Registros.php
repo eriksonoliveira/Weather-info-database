@@ -80,8 +80,7 @@ class Registros extends model {
   }
   
   public function getMeusAnuncios() {
-    
-    
+
     $array = array();
     $sql = $this->db->prepare("SELECT *,
       (select anuncios_imagens.url from anuncios_imagens where anuncios_imagens.id_anuncio = anuncios.id limit 1) as url
@@ -96,6 +95,22 @@ class Registros extends model {
     return $array;
   }
 
+  //Pesquisa registros dentro das datas especificadas
+  public function searchRegistry($start, $end) {
+
+    $array = array();
+
+    $sql = $this->db->prepare("SELECT date FROM registros WHERE date BETWEEN :date1 AND :date2");
+    $sql->bindValue(":date1", $start);
+    $sql->bindValue(":date2", $end);
+    $sql->execute();
+
+    if($sql->rowCount() > 0) {
+      $array = $sql->fetchAll();
+    }
+
+    return $array;
+  }
 
   //Retorna registros de texto e imagem para o dia solicitado
   public function getRegistro($date, $horarios) {
@@ -103,7 +118,8 @@ class Registros extends model {
     $array = array(
       "met" => array(),
       "tec" => array(),
-      "img" => array()
+      "img" => array(),
+      "phenom" => array()
     );
     
     foreach($horarios as $key => $value) {
@@ -164,6 +180,20 @@ class Registros extends model {
         }
       }
     }
+
+    //Tags de fenômenos
+    $sql = $this->db->prepare("SELECT id_sistema, (select sistemas.nome from sistemas where sistemas.id = fenomenos.id_sistema) as syst FROM fenomenos WHERE date = :date");
+    $sql->bindValue(":date", $date);
+    $sql->execute();
+
+    if($sql->rowCount() > 0) {
+      $resp = $sql->fetchAll();
+
+      for($i=0; $i < count($resp); $i++) {
+        $array['phenom'][$i] = $resp[$i];
+      }
+    }
+
     return $array;
   }
   
@@ -269,6 +299,16 @@ class Registros extends model {
     $sql->bindValue(":id_nome", $id_nome);
     $sql->execute();
     
+  }
+
+  //Adicionar tag de sistema
+  public function addSystem($id, $date) {
+
+    $sql = $this->db->prepare("INSERT INTO fenomenos SET id_sistema = :id, date = :date");
+    $sql->bindValue(":id", $id);
+    $sql->bindValue(":date", $date);
+    $sql->execute();
+
   }
 
   public function editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id) {

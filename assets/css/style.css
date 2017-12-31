@@ -1,14 +1,33 @@
 .navbar {
+  margin-bottom: 0;
+}
+
+.content-wrapper {
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: -20px;
+  background-color: #F5F5F5;
+}
+
+.navbar {
   border-radius: 0;
 }
 
-.table-bordered {
-    margin-top:40px;
+.table {
+  margin-top:40px;
+  box-shadow: 1px 1px 4px 2px #DDD;
+  box-sizing: border-box;
+  background-color: #FFF;
   }
+
+.table, .table td {
+  border: 1px solid #DDD;
+  box-sizing: border-box;
+}
 
 th {
   text-align: center;
-  background-color: #F5F5F5;
+  background-color: #F2F2F2;
 }
 /*table.table-bordered > thead > tr > th{
     border:1px solid blue;
@@ -88,4 +107,95 @@ table.table-bordered > tbody > tr {
 
 .cancel-upload:hover {
   cursor: pointer;
+}
+
+.system-tags {
+  border: 1px solid #DDD;
+  box-shadow: 1px 1px 4px 2px #DDD;
+  padding-bottom: 15px;
+  background-color: #FFF;
+}
+
+.system-tags .header {
+  height: 40px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 40px;
+  background-color: #F5F5F5;
+  border-bottom: 1px solid #DDD;
+}
+
+.system-tags .fenom-box {
+  padding: 15px;
+}
+
+.system-tags .fenom-box .fenom {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid #EEE;
+  border-radius: 6px;
+}
+
+.system-tags .fenom-box .fenom:hover {
+  background-color: #B1E7F7;
+}
+.system-tags .fenom-box .fenom input {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkmark {
+  display: inline-block;
+  padding: 5px;
+  border-radius: inherit;
+}
+
+.fenom input:checked ~ .checkmark {
+  background-color: #327FF2;
+  color: #FFF;
+}
+
+.system-tags .send-fenomenos {
+/*  position: absolute;*/
+  border: 1px solid #DDD;
+/*  bottom: 0; right: 50%;*/
+}
+
+.system-tags .btn-wrap {
+  text-align: center;
+}
+
+.home-container {
+  height: 100%;
+  width: 100%;
+  background-color: #eee;
+  margin-top: -70px;
+}
+
+.home-container .search-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.home-container .btn {
+  padding: 15px;
+  text-align: center;
+}
+
+.home-container .search-wrap i {
+  font-size: 15px;
+}
+.home-container .search-wrap i.fa-plus {
+  color: #4CAF50;
+}
+
+.home-container .search-wrap i.fa-search {
+  color: #2196F3;
 }

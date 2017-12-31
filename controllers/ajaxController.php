@@ -7,12 +7,12 @@ class ajaxController extends controller {
       "success" => ""
     );
 
-    //DATA
+    /*****DATA*****/
     $date = time();
     $d_form_Int = date("Y/m/d", $date);
     $data['date'] = $d_form_Int;
 
-    //HORARIOS
+    /*****HORARIOS*****/
     $h = new Horarios();
     $hs = $h->getHorarios();
 
@@ -36,7 +36,7 @@ class ajaxController extends controller {
       $r = new Registros();
       $imgID = $r->addImagem($imagem, $data['horario'], $data['categoria'], $data['date']);
 
-      //SUCCESS
+      //Success
       $data['success'] = "yes";
       $data['imgId'] = $imgID;
 
@@ -66,7 +66,7 @@ class ajaxController extends controller {
       $r = new Registros();
       $r->addTexto($data['texto'], $data['horario'], $data['categoria'], $data['date'], $data['id_nome'], $data['cargo']);
 
-      //SUCCESS
+      //Success
       $data['success'] = "yes";
 
     }
@@ -84,9 +84,18 @@ class ajaxController extends controller {
       $r = new Registros();
       $r->updateTexto($data['texto'], $data['horario'], $data['categoria'], $data['date'], $data['id_nome'], $data['cargo']);
 
-      //SUCCESS
+      //Success
       $data['success'] = "yes";
 
+    }
+
+    //ENVIA TAGS DOS SISTEMAS DO DIA
+    if(isset($_POST['systemId']) && !empty($_POST['systemId'])) {
+      $id = $_POST['systemId'];
+
+      //Envia para o bando de dados
+      $r = new Registros();
+      $r->addSystem($id, $data['date']);
     }
 
 

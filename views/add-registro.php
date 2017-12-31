@@ -1,11 +1,11 @@
-<?PHP echo $success; ?>
+<div class="content-wrapper">
 
-<div class="container">
-  <h1>Adicionar Monitoramento do dia</h1>
-  <h3><?PHP echo $dia;?></h3>
+  <div class="container">
+    <h1>Adicionar Monitoramento do dia</h1>
+    <h3><?PHP echo $dia;?></h3>
 
     <div>
-      <table class="table table-bordered">
+      <table class="table">
         <tbody>
           <tr>
             <th colspan="2">Imagem Sinótica</th>
@@ -66,7 +66,7 @@
 
 
     <div>
-      <table class="table table-bordered">
+      <table class="table">
         <tbody>
           <tr>
             <th colspan="2">Imagem de Satélite</th>
@@ -317,6 +317,27 @@
       </table>
     </div>
 
+    <div class="system-tags">
+      <div class="header">Fenômenos</div>
+      <div class="fenom-box">
+        <?PHP
+          $arr_length = count($fenomenos);
+          for($i = 0; $i < $arr_length; $i++):?>
+
+        <label class="fenom">
+          <input type="checkbox" data-id="<?PHP echo $fenomenos[$i]['id'];?>"/>
+          <span class="checkmark"><?PHP echo $fenomenos[$i]['nome'];?></span>
+        </label>
+
+        <?PHP
+        endfor;
+        ?>
+      </div>
+      <div class="btn-wrap">
+        <button class="btn send-fenomenos">Salvar</button>
+      </div>
+    </div>
+
     <div>
       <table class="table table-bordered">
         <tbody>
@@ -364,5 +385,7 @@
         </tbody>
       </table>
     </div>
+
+  </div>
 
 </div>

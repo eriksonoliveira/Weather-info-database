@@ -17,15 +17,16 @@ $(document).ready(function() {
     processData: false,
     success: function(json) {
 
-      var jsonImg = json.currDayReg.img;
-      var jsonMet = json.currDayReg.met;
-      var jsonTec = json.currDayReg.tec;
+      let jsonImg = json.currDayReg.img,
+          jsonMet = json.currDayReg.met,
+          jsonTec = json.currDayReg.tec,
+          jsonPhen = json.currDayReg.phenom;
 
-      console.log(json);
 
       receiveDayImages(jsonImg);
       receiveDayText(jsonMet, "meteoro");
       receiveDayText(jsonTec, "tec");
+      receiveDayPhenomena(jsonPhen);
 
     }
   });
@@ -64,6 +65,39 @@ $(document).ready(function() {
   $(".edit-text").on("click", function(e) {
    var edit = $(this);
    editText(e, edit);
+  });
+
+  //EDIT TEXT ENTRY
+  $(".send-fenomenos").on("click", function(e) {
+   let btn = $(this);
+   sendTag(e, btn);
+  });
+
+  //ENVIAR IMAGENS VIA AJAX
+  $(".search-btn").on("click", function(e) {
+    let btn = $(this);
+    searchRegistry(e, btn);
+  });
+
+  //DATEPICKER START DATE
+  $("input[name=calendar-1]").datepicker({
+    prevText: "Anterior",
+    nextText: "Próximo",
+    maxDate: new Date()
+  });
+
+
+  //DATEPICKER END DATE
+  $("input[name=calendar-2]").datepicker({
+    prevText: "Anterior",
+    nextText: "Próximo",
+    maxDate: new Date()
+  });
+
+  //SET MIN DATE FOR CALENDAR 2
+  $("input[name=calendar-1]").on("change", function() {
+    var minDate = $(this).val();
+    $("input[name=calendar-2]").datepicker("option", "minDate", minDate);
   });
 
 });
@@ -234,7 +268,7 @@ function sendText(e, btn) {
 
 /*Gets the data from the current day and populates the fields,
 if no data has been added to that time and category yet, the
-field will remais blank */
+field will remain blank */
 function receiveDayImages (json) {
   var h;
 
@@ -296,6 +330,20 @@ function receiveDayText (json, cargo) {
     $([sendBtn, editBtn]).each(function() {
       $(this).toggle();
     });
+
+  }
+}
+
+function receiveDayPhenomena(json) {
+  var i;
+  for(i in json) {
+    var phenomId = json[i].id_sistema,
+        phenomName = json[i].syst;
+
+    var checkbox = $(".fenom").find("input[data-id="+phenomId+"]"),
+        checkmark = $(checkbox).siblings("span");
+
+    $(checkbox).prop("checked", true);
 
   }
 }
@@ -387,9 +435,97 @@ function editText(e, edit) {
   $(edit).siblings("textarea").prop("disabled", false);
 }
 
+function sendTag(e, btn) {
+  e.preventDefault();
 
+  var data = new FormData();
 
+  var c = $(btn).parent().siblings(".fenom-box").find("input:checked");
 
+  $(c).each(function() {
+    var id = $(this).attr("data-id");
+
+    data.append("systemId", id);
+
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost/projetoy/Monitoramento/ajax',
+      data: data,
+      contentType: false,
+      processData: false,
+      success: function() {
+        console.log("enviado com sucesso");
+      }
+    });
+  });
+}
+
+//SEARCH REGISTRIES WITHIN THE DATA RANGE
+function searchRegistry(e, btn) {
+  e.preventDefault();
+
+  var data = new FormData();
+
+  var start = $(btn).siblings("#start").val(),
+      end = $(btn).siblings("#end").val();
+
+  var resultList = $(btn).parents(".search-container").find("#search-result-list");
+
+  if(!end) {
+    end = dateFormated();
+    console.log(start+",  "+end);
+  }
+
+  data.append("dateStart", start);
+  data.append("dateEnd", end);
+
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost/projetoy/Monitoramento/pesquisar/data',
+    data: data,
+    dataType: 'json',
+    contentType: false,
+    processData: false,
+    success: function(json) {
+
+      //console.log(json.result);
+
+      if(json.result.length == 0){
+        $(resultList).empty();
+      } else {
+        $(resultList).empty();
+
+        var d;
+        for(d in json.result) {
+
+          var instance = json.result[d].date;
+
+          $(resultList).append("<li><a href='#'>"+instance+"</a></li>");
+        }
+      }
+    }
+  });
+}
+
+//FORMATS TODAY DATA
+function dateFormated() {
+  var d = new Date();
+
+  var dd = d.getDate(),
+      mm = d.getMonth()+1,
+      yyyy = d.getFullYear();
+
+  if(dd < 10) {
+    dd = '0'+dd;
+  }
+  if(mm < 10) {
+    mm = '0'+mm;
+  }
+
+  var date = mm+"/"+dd+"/"+yyyy;
+
+  return date;
+}
 
 
 

@@ -1,8 +1,7 @@
-<div class="container-fluid">
-  <div class="jumbotron">
-    <h1>Nós temos hoje <?PHP echo $total_anuncios;?> anúncios</h1>
-    <p>E mais de <?PHP echo $total_usuarios;?> usuários cadastrados</p>
-    <a href="<?PHP echo BASE_URL; ?>adicionar/registro" class="btn btn-default">Adicionar Anúncio</a>
+<div class="home-container">
+  <div class="search-wrap">
+    <a href="<?PHP echo BASE_URL;?>pesquisar" class="btn btn-default home-search-btn"><i class="fa fa-search"></i>&nbsp; Fazer Pesquisa</a>
+    <a href="<?PHP echo BASE_URL; ?>adicionar/registro" class="btn btn-default home-add-btn"><i class="fa fa-plus"></i>&nbsp; Adicionar Registro</a>
   </div>
 </div>
 
