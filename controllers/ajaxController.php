@@ -4,36 +4,102 @@ class ajaxController extends controller {
 
   public function index() {
     $data = array(
+      "date" => "",
       "success" => ""
     );
 
-    //HORARIO E CATEGORIA
-    if (isset($_POST['horario']) && !empty($_POST['horario'])) {
-      $data['horario'] = $_POST['horario'];
-      $data['categoria'] = $_POST['categoria'];
+    /*****DATA*****/
+    /*$date = time();
+    $d_form_Int = date("Y/m/d", $date);
+    $data['date'] = $d_form_Int;*/
+
+    //RECEBE DADOS DO DIA ATUAL
+    if(isset($_POST['date']) && !empty($_POST['date'])) {
+      $data['date'] = $_POST['date'];
+
+      $r = new Registros;
+      $data['currDayReg'] = $r->getRegistro($data['date']);
+
+      $data['success'] = "yes";
     }
 
-    //IMAGEM
+    //ADICIONA IMAGEM
     if(isset($_FILES['imagem'])) {
       $imagem = $_FILES['imagem'];
+      $data['date'] = $_POST['date'];
 
-      /*move_uploaded_file($imagem['tmp_name'], 'assets/images/'.$imagem['name']);
+      $data['horario'] = $_POST['horario'];
+      $data['categoria'] = $_POST['categoria'];
 
-      $data['url_img'] = 'http://localhost/projetoy/Monitoramento/assets/images/'.$imagem['name'];
-*/    }
+      //Envia para o bando de dados
+      $r = new Registros();
+      $imgID = $r->addImagem($imagem, $data['horario'], $data['categoria'], $data['date']);
 
-    //DATA
-    $date = time();
-    $d_form_Int = date("Y/m/d", $date);
-    $data['date'] = $d_form_Int;
+      //Success
+      $data['success'] = "yes";
+      $data['imgId'] = $imgID;
 
-    //Envia para o bando de dados
-    $r = new Registros();
-    $r->addImagem($imagem, $data['horario'], $data['categoria'], $data['date']);
+    }
 
-    //SUCCESS
-    $data['success'] = "yes";
+    //DELETA IMAGEM
+    if(isset($_POST['imgID']) && !empty($_POST['imgID'])) {
 
+      $id = substr($_POST['imgID'], 4);
+
+      $r = new Registros();
+      $r->delImagem($id);
+
+      $data['success'] = "yes";
+    }
+
+    //ADICIONA TEXTO
+    if(isset($_POST['texto']) && !empty($_POST['texto'])) {
+      $data['texto'] = addslashes($_POST['texto']);
+      $data['horario'] = $_POST['horario'];
+      $data['categoria'] = $_POST['categoria'];
+      $data['id_nome'] = $_POST['id_nome'];
+      $data['cargo'] = $_POST['cargo'];
+      $data['date'] = $_POST['date'];
+
+      //Envia para o bando de dados
+      $r = new Registros();
+      $r->addTexto($data['texto'], $data['horario'], $data['categoria'], $data['date'], $data['id_nome'], $data['cargo']);
+
+      //Success
+      $data['success'] = "yes";
+
+    }
+
+    //ATUALIZA TEXTO
+    if(isset($_POST['update-texto']) && !empty($_POST['update-texto'])) {
+      $data['texto'] = addslashes($_POST['update-texto']);
+
+      $data['horario'] = $_POST['update-horario'];
+      $data['categoria'] = $_POST['update-categoria'];
+      $data['id_nome'] = $_POST['update-id_nome'];
+      $data['cargo'] = $_POST['update-cargo'];
+      $data['date'] = $_POST['date'];
+
+      //Envia para o bando de dados
+      $r = new Registros();
+      $r->updateTexto($data['texto'], $data['horario'], $data['categoria'], $data['date'], $data['id_nome'], $data['cargo']);
+
+      //Success
+      $data['success'] = "yes";
+
+    }
+
+    //ENVIA TAGS DOS SISTEMAS DO DIA
+    if(isset($_POST['systemId']) && !empty($_POST['systemId'])) {
+      $id = $_POST['systemId'];
+      $data['date'] = $_POST['date'];
+
+      //Envia para o bando de dados
+      $r = new Registros();
+      $r->addSystem($id, $data['date']);
+    }
+
+    //SENDS DATA IN JSON FORMAT
     echo json_encode($data);
     exit;
   }

@@ -80,8 +80,7 @@ class Registros extends model {
   }
   
   public function getMeusAnuncios() {
-    
-    
+
     $array = array();
     $sql = $this->db->prepare("SELECT *,
       (select anuncios_imagens.url from anuncios_imagens where anuncios_imagens.id_anuncio = anuncios.id limit 1) as url
@@ -95,65 +94,172 @@ class Registros extends model {
     
     return $array;
   }
-  
-/*  public function getAnuncio($id) {
+
+  //Pesquisa registros dentro das datas especificadas e que contém os fenômenos especificados
+  public function searchRegistry($start, $end, $systems) {
 
     $array = array();
+    $filter = array("1=1");
 
-    $sql = $this->db->prepare("SELECT
-    *,
-    (select categorias.nome from categorias where categorias.id = anuncios.id_categoria) as categoria,
-    (select usuarios.telefone from usuarios where usuarios.id = anuncios.id_usuario) as telefone
-    FROM anuncios WHERE id = :id");
-    $sql->bindValue(":id", $id);
-    $sql->execute();
+    if(!empty($systems)) {
 
-    if($sql->rowCount() > 0) {
-      $array = $sql->fetch();
-      $array['fotos'] = array();
+      //IF THE USER SELECTED MORE THAN ONE SYSTEM
+      $len = count($systems);
+      if($len > 1) {
+        $filter_multi = array();
 
-      $sql= $this->db->prepare('SELECT id,url FROM anuncios_imagens WHERE id_anuncio = :id_anuncio');
-      $sql->bindValue(":id_anuncio", $id);
+        foreach($systems as $k => $v) {
+          $filter_multi[] = "id_sistema = :sistema_".$v['key'];
+        }
+
+        $sql = $this->db->prepare("
+          SELECT DISTINCT date
+          FROM `sistemas`
+          WHERE date BETWEEN :date1 AND :date2 AND date IN (
+            SELECT date
+            FROM sistemas
+            WHERE ".implode(" OR ", $filter_multi)."
+            GROUP BY date
+            HAVING COUNT(*) >= $len ) ");
+
+        $sql->bindValue(":date1", $start);
+        $sql->bindValue(":date2", $end);
+        foreach($systems as $k => $v) {
+          $sql->bindValue(":sistema_".$v['key'], $v['key']);
+        }
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
+          $array = $sql->fetchAll();
+        }
+      }
+
+      $filter[] = "id_sistema = :sistema";
+    }
+
+    if(empty($array)) {
+      $sql = $this->db->prepare("
+      SELECT DISTINCT date
+      FROM sistemas
+      WHERE sistemas.date BETWEEN :date1 AND :date2 AND ".implode(" AND ", $filter));
+      $sql->bindValue(":date1", $start);
+      $sql->bindValue(":date2", $end);
+      if(!empty($systems)) {
+        $sql->bindValue(":sistema", $systems[0]['key']);
+      }
       $sql->execute();
 
       if($sql->rowCount() > 0) {
-        $array['fotos'] = $sql->fetchAll();
+        $array = $sql->fetchAll();
+      }
+    }
+
+    if(!empty($array)) {
+      for($i = 0; $i < count($array); $i++) {
+        $array[$i]['info'] = $this->getRegistro($array[$i]['date']);
       }
     }
 
     return $array;
-  } */
+  }
 
+  //Retorna registros de texto e imagem para o dia solicitado
   public function getRegistro($date) {
     
-    $array = array();
+    $array = array(
+      "met" => array(),
+      "tec" => array(),
+      "img" => array(),
+      "phenom" => array()
+    );
     
-    $sql = $this->db->prepare("SELECT 
-    *,
-    (select categorias.nome from categorias where categorias.id = anuncios.id_categoria) as categoria,
-    (select usuarios.telefone from usuarios where usuarios.id = anuncios.id_usuario) as telefone
-    FROM anuncios WHERE id = :id");
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-    
-    if($sql->rowCount() > 0) {
-      $array = $sql->fetch();
-      $array['fotos'] = array();
+    //HORARIOS
+    $h = new Horarios();
+    $horarios = $h->getHorarios();
+
+    foreach($horarios as $key => $value) {
       
-      $sql= $this->db->prepare('SELECT id,url FROM anuncios_imagens WHERE id_anuncio = :id_anuncio');
-      $sql->bindValue(":id_anuncio", $id);
+      //Descrição sinótica - Meteorologista
+      $sql = $this->db->prepare("SELECT texto, id_meteoro, cat_descricao FROM descricao_meteoro WHERE date = :date AND horario = :horario");
+      $sql->bindValue(":date", $date);
+      $sql->bindValue(":horario", $value['hora']);
       $sql->execute();
-      
+
       if($sql->rowCount() > 0) {
-        $array['fotos'] = $sql->fetchAll();
+        $resp = $sql->fetchAll();
+
+        foreach($resp as $respKey => $respVal) {
+        $descrCat = $respVal['cat_descricao'];
+
+        $array["met"][$value["hora"]][$descrCat]['text'] = $respVal['texto'];
+        $array["met"][$value["hora"]][$descrCat]['id_met'] = $respVal['id_meteoro'];
+
+        }
+
+      }
+
+      //Registros Significativos - Tecnico
+      $sql = $this->db->prepare("SELECT texto, id_tec, cat_descricao FROM descricao_tec WHERE date = :date AND horario = :horario");
+      $sql->bindValue(":date", $date);
+      $sql->bindValue(":horario", $value['hora']);
+      $sql->execute();
+
+      if($sql->rowCount() > 0) {
+        $resp = $sql->fetchAll();
+
+        foreach($resp as $respKey => $respVal) {
+        $descrCat = $respVal['cat_descricao'];
+
+        $array["tec"][$value["hora"]][$descrCat]['text'] = $respVal['texto'];
+        $array["tec"][$value["hora"]][$descrCat]['id_tec'] = $respVal['id_tec'];
+
+        }
+
+      }
+
+      //Imagens
+      $sql = $this->db->prepare("SELECT id, url, categoria FROM imagens WHERE date = :date AND horario = :horario ");
+      $sql->bindValue(":date", $date);
+      $sql->bindValue(":horario", $value['hora']);
+      $sql->execute();
+
+      if($sql->rowCount() > 0) {
+
+        $resp = $sql->fetchAll();
+
+        foreach($resp as $respKey => $respVal) {
+          $imgCat = $respVal['categoria'];
+
+          $array['img'][$value['hora']][$imgCat]['fileName'] = $respVal['url'];
+          $array['img'][$value['hora']][$imgCat]['id'] = $respVal['id'];
+        }
       }
     }
-    
+
+    //Tags de fenômenos
+    $sql = $this->db->prepare("SELECT id_sistema, (select sistemas_list.nome from sistemas_list where sistemas_list.id = sistemas.id_sistema) as syst, (select sistemas_list.class from sistemas_list where sistemas_list.id = sistemas.id_sistema) as class FROM sistemas WHERE date = :date ORDER BY CLASS");
+    $sql->bindValue(":date", $date);
+    $sql->execute();
+
+    if($sql->rowCount() > 0) {
+      $resp = $sql->fetchAll();
+
+      for($i=0; $i < count($resp); $i++) {
+
+        $array['phenom'][$resp[$i]['class']][$i.'-s']['syst'] = $resp[$i]['syst'];
+        $array['phenom'][$resp[$i]['class']][$i.'-s']['id_sistema'] = $resp[$i]['id_sistema'];
+
+      }
+    }
+
+    //print_r($array['phenom']);
     return $array;
   }
   
+  //Inserir nova imagem de registro
   public function addImagem($imagem, $horario, $categoria, $date) {
     
+    $imgID = '';
     
     if(count($imagem) > 0) {
 
@@ -194,30 +300,76 @@ class Registros extends model {
           $sql->bindValue(":horario", $horario);
           $sql->bindValue(":date", $date);
           $sql->execute();
+
+          $imgID = $this->db->lastInsertId();
+
         }
       //}
     }
+    return $imgID;
+  }
+
+  //Deletar imagem de registro
+  public function delImagem($id) {
+
+    $sql = $this->db->prepare("DELETE FROM imagens WHERE id = :id");
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
   }
   
-  public function addRegistro($descricao, $imagens, $day) {
+  //Inserir novo texto de registro
+  public function addTexto($texto, $horario, $categoria, $date, $id_nome, $cargo) {
     
-    //Verifica se a mesma data já não foi inserida
-    $sql = $this->db->prepare("SELECT id FROM diario WHERE data = :data");
-    $sql->bindValue(":data", $day);
+    $sql = '';
+    
+    if($cargo == "meteoro") {
+      $sql = $this->db->prepare("INSERT INTO descricao_meteoro SET texto = :texto, horario = :horario, cat_descricao = :categoria, date = :date, id_meteoro = :id_nome");
+    } else if($cargo == "tec") {
+      $sql = $this->db->prepare("INSERT INTO descricao_tec SET texto = :texto, horario = :horario, cat_descricao = :categoria, date = :date, id_tec = :id_nome");
+
+    }
+
+    $sql->bindValue(":texto", $texto);
+    $sql->bindValue(":horario", $horario);
+    $sql->bindValue(":categoria", $categoria);
+    $sql->bindValue(":date", $date);
+    $sql->bindValue(":id_nome", $id_nome);
+    $sql->execute();
+
+  }
+
+  //Atualizar texto de registro
+  public function updateTexto($texto, $horario, $categoria, $date, $id_nome, $cargo) {
+
+    $sql = '';
+
+    if($cargo == "meteoro") {
+      $sql = $this->db->prepare("UPDATE descricao_meteoro SET texto = :texto, id_meteoro = :id_nome WHERE horario = :horario AND date = :date AND cat_descricao = :categoria");
+    } else if($cargo == "tec") {
+      $sql = $this->db->prepare("UPDATE descricao_tec SET texto = :texto, id_tec = :id_nome WHERE horario = :horario AND date = :date AND cat_descricao = :categoria");
+
+    }
+
+    $sql->bindValue(":texto", $texto);
+    $sql->bindValue(":horario", $horario);
+    $sql->bindValue(":categoria", $categoria);
+    $sql->bindValue(":date", $date);
+    $sql->bindValue(":id_nome", $id_nome);
     $sql->execute();
     
-    if($sql->rowCount() == 0) {
-    
-      $sql = $this->db->prepare("INSERT INTO diario SET data = :data");
-      $sql->bindValue(":data", $day);
-      $sql->execute();
-
-      /*$lastId = $this->db->lastInsertId();
-
-      $this->addFotos($imagens, $lastId);*/
-    }
-    
   }
+
+  //Adicionar tag de sistema
+  public function addSystem($id, $date) {
+
+    $sql = $this->db->prepare("INSERT INTO sistemas SET id_sistema = :id, date = :date");
+    $sql->bindValue(":id", $id);
+    $sql->bindValue(":date", $date);
+    $sql->execute();
+
+  }
+
   public function editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id) {
     
     
