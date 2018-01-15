@@ -34,10 +34,11 @@ class adicionarController extends controller{
     $data['cats'] = $categs;
 
     //Pegar nomes sistemas
-    $s = new Fenomenos();
+    $s = new Sistemas();
     $sist = $s->getLista();
 
-    $data['fenomenos'] = $sist;
+    $data['sistemas'] = $sist['sistemas_list'];
+    $data['sistemas_classes'] = $sist['sistemas_class'];
 
     //Nomes Meteorologistas
     $m = new Meteoros();
@@ -57,12 +58,7 @@ class adicionarController extends controller{
 
     $data['horario'] = $hs;
     
-    //Pegar registros do dia atual que já foram feitos
-/*    $r = new Registros;
-    $data['currDayReg'] = $r->getRegistro($d_form_Int, $hs);
-
-    print_r($data['currDayReg']);*/
-
+    //LOADS TEMPLATE
     $this->loadTemplate('add-registro', $data);
     
   }

@@ -318,20 +318,36 @@
     </div>
 
     <div class="system-tags">
-      <div class="header">Fenômenos</div>
-      <div class="fenom-box">
-        <?PHP
-          $arr_length = count($fenomenos);
-          for($i = 0; $i < $arr_length; $i++):?>
+      <h2 class="header">Sistemas e Fenômenos</h2>
+      <div class="system-tags-container">
 
-        <label class="fenom">
-          <input type="checkbox" data-id="<?PHP echo $fenomenos[$i]['id'];?>"/>
-          <span class="checkmark"><?PHP echo $fenomenos[$i]['nome'];?></span>
-        </label>
+      <?PHP foreach($sistemas_classes as $k => $class):;?>
+
+        <div class="fenom-box">
+          <h3 class="fenom-heading"><?PHP echo $class;?></h3>
+          <?PHP
+
+//            for($i = 0; $i < count($sistemas); $i++):
+            foreach($sistemas as $sist):
+              if(ucfirst($sist['class']) == $class):
+          ?>
+
+          <label class="fenom">
+            <input type="checkbox" data-id="<?PHP echo $sist['id'];?>"/>
+            <span class="checkmark"><?PHP echo $sist['nome'];?></span>
+          </label>
+
+          <?PHP
+            endif;
+          endforeach;
+          ?>
+
+        </div>
 
         <?PHP
-        endfor;
+        endforeach;
         ?>
+
       </div>
       <div class="btn-wrap">
         <button class="btn send-fenomenos">Salvar</button>
@@ -344,7 +360,9 @@
           <tr>
             <th colspan="2">Registros Significativos</th>
           </tr>
+
             <?PHP for($i = 0; $i <=3; $i++):?>
+
           <tr>
             <td>
               <h5><?PHP echo $horario[$i]['hora'];?></h5>

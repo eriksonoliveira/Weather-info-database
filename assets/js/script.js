@@ -1,58 +1,34 @@
 $(document).ready(function() {
   
-//GET CURRENT DAY DATA ON PAGE LOAD
-  var data = new FormData();
+  //GET AND FORMAT DATE
+  var separator = "dash";
+  var date = dateFormated(separator);
 
-  var d = new Date();
-  var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
-
-  data.append("date", date);
-
-  $.ajax({
-    type: "POST",
-    url: "http://localhost/projetoy/Monitoramento/ajax",
-    data: data,
-    dataType: 'json',
-    contentType: false,
-    processData: false,
-    success: function(json) {
-
-      let jsonImg = json.currDayReg.img,
-          jsonMet = json.currDayReg.met,
-          jsonTec = json.currDayReg.tec,
-          jsonPhen = json.currDayReg.phenom;
-
-
-      receiveDayImages(jsonImg);
-      receiveDayText(jsonMet, "meteoro");
-      receiveDayText(jsonTec, "tec");
-      receiveDayPhenomena(jsonPhen);
-
-    }
-  });
+  //GET DATA FOR TODAY
+  getData(date);
   
   //ENVIAR IMAGENS VIA AJAX
   $(".send-img").on("click", function(e) {
     let btn = $(this);
-    sendImage(e, btn);
+    sendImage(e, btn, date);
   });
 
   //ENVIAR TEXTO AJAX
   $(".send-text").on("click", function(e) {
     let btn = $(this);
-    sendText(e, btn);
+    sendText(e, btn, date);
   });
 
   //ATUALIZAR TEXTO AJAX
   $(".update-text").on("click", function(e) {
     let btn = $(this);
-    updateText(e, btn);
+    updateText(e, btn, date);
   });
 
   //PREVIEW IMAGE BEFORE UPLOAD
   $("input[type=file]").change(function(e) {
     var inputFile = $(this);
-    previewPhotos(e, inputFile);
+    previewImages(e, inputFile);
   });
 
   //DELETE IMAGE
@@ -67,13 +43,13 @@ $(document).ready(function() {
    editText(e, edit);
   });
 
-  //EDIT TEXT ENTRY
+  //ENVIAR TAG DE FENOMENOS
   $(".send-fenomenos").on("click", function(e) {
    let btn = $(this);
-   sendTag(e, btn);
+   sendTag(e, btn, date);
   });
 
-  //ENVIAR IMAGENS VIA AJAX
+  //PESQUISA REGISTROS
   $(".search-btn").on("click", function(e) {
     let btn = $(this);
     searchRegistry(e, btn);
@@ -101,10 +77,41 @@ $(document).ready(function() {
   });
 
 });
+/***FUNCTIONS***/
 
+//GET CURRENT DAY DATA ON PAGE LOAD
+function getData(date) {
+  var data = new FormData();
+
+  data.append("date", date);
+
+  $.ajax({
+    type: "POST",
+    url: "http://localhost/projetoy/Monitoramento/ajax",
+    data: data,
+    dataType: 'json',
+    contentType: false,
+    processData: false,
+    success: function(json) {
+
+      let jsonImg = json.currDayReg.img,
+          jsonMet = json.currDayReg.met,
+          jsonTec = json.currDayReg.tec,
+          jsonPhen = json.currDayReg.phenom;
+
+      console.log(json);
+
+      receiveDayImages(jsonImg);
+      receiveDayText(jsonMet, "meteoro");
+      receiveDayText(jsonTec, "tec");
+      receiveDayPhenomena(jsonPhen);
+
+    }
+  });
+}
 
 //Add new Image to the record
-function sendImage(e, btn) {
+function sendImage(e, btn, date) {
   e.preventDefault();
 
   var data = new FormData();
@@ -126,6 +133,7 @@ function sendImage(e, btn) {
 
   if(imagem.length > 0) {
 
+    data.append("date", date);
     data.append("horario", horario);
     data.append("categoria", categoria);
     data.append("imagem", imagem[0]);
@@ -173,7 +181,7 @@ class KeyElements {
 }
 
 //Add new weather description (text) to the record
-function updateText(e, btn) {
+function updateText(e, btn, date) {
   e.preventDefault();
 
   var data = new FormData();
@@ -188,6 +196,7 @@ function updateText(e, btn) {
 
     if($.trim(texto).length > 0) {
 
+      data.append("update-date", date);
       data.append("update-horario", elements.horario);
       data.append("update-categoria", categoria);
       data.append("update-texto", texto);
@@ -218,7 +227,7 @@ function updateText(e, btn) {
   });
 }
 
-function sendText(e, btn) {
+function sendText(e, btn, date) {
   e.preventDefault();
 
   var data = new FormData();
@@ -233,6 +242,7 @@ function sendText(e, btn) {
 
     if($.trim(texto).length > 0) {
 
+      data.append("date", date);
       data.append("horario", elements.horario);
       data.append("categoria", categoria);
       data.append("texto", texto);
@@ -269,7 +279,7 @@ function sendText(e, btn) {
 /*Gets the data from the current day and populates the fields,
 if no data has been added to that time and category yet, the
 field will remain blank */
-function receiveDayImages (json) {
+function receiveDayImages(json) {
   var h;
 
   for (h in json) {
@@ -335,21 +345,23 @@ function receiveDayText (json, cargo) {
 }
 
 function receiveDayPhenomena(json) {
-  var i;
-  for(i in json) {
-    var phenomId = json[i].id_sistema,
-        phenomName = json[i].syst;
+  var p;
+  for(p in json) {
+    for(i in json[p]) {
+      var phenomId = json[p][i].id_sistema,
+          phenomName = json[p][i].syst;
 
-    var checkbox = $(".fenom").find("input[data-id="+phenomId+"]"),
-        checkmark = $(checkbox).siblings("span");
+      var checkbox = $(".fenom").find("input[data-id="+phenomId+"]"),
+          checkmark = $(checkbox).siblings(".checkmark");
 
-    $(checkbox).prop("checked", true);
+      $(checkbox).prop("checked", true);
+    }
 
   }
 }
 
 //CRIA PREVIEW DA IMAGEM SELECIONADA PARA UPLOAD
-function previewPhotos (e, input) {
+function previewImages (e, input) {
 
   var files = e.target.files.length,
       selectConfirm = $(input).next(".num-fotos");
@@ -435,17 +447,19 @@ function editText(e, edit) {
   $(edit).siblings("textarea").prop("disabled", false);
 }
 
-function sendTag(e, btn) {
+//SEND PHENOMENA TAG
+function sendTag(e, btn, date) {
   e.preventDefault();
 
   var data = new FormData();
 
-  var c = $(btn).parent().siblings(".fenom-box").find("input:checked");
+  var c = $(btn).parent().siblings(".system-tags-container").find(".fenom-box").find("input:checked");
 
   $(c).each(function() {
     var id = $(this).attr("data-id");
 
     data.append("systemId", id);
+    data.append("date", date);
 
     $.ajax({
       type: 'POST',
@@ -454,7 +468,7 @@ function sendTag(e, btn) {
       contentType: false,
       processData: false,
       success: function() {
-        console.log("enviado com sucesso");
+
       }
     });
   });
@@ -467,17 +481,27 @@ function searchRegistry(e, btn) {
   var data = new FormData();
 
   var start = $(btn).siblings("#start").val(),
-      end = $(btn).siblings("#end").val();
+      end = $(btn).siblings("#end").val(),
+      systems = [];
 
-  var resultList = $(btn).parents(".search-container").find("#search-result-list");
+  var resultList = $(btn).parents(".search-page-container").find(".search-result-list"),
+      resultTotal = $(resultList).siblings(".search-result-total"),
+      checked = $(btn).siblings("div").find(".systempick").find("input:checked");
 
+  $(checked).each(function() {
+    var id = $(this).attr("data-id");
+    systems.push({key: id});
+  });
+
+  //Se a data final não foi especificada
   if(!end) {
-    end = dateFormated();
-    console.log(start+",  "+end);
+    var separator = "slash";
+    end = dateFormated(separator);
   }
 
   data.append("dateStart", start);
   data.append("dateEnd", end);
+  data.append("systems", JSON.stringify(systems));
 
   $.ajax({
     type: 'POST',
@@ -488,7 +512,7 @@ function searchRegistry(e, btn) {
     processData: false,
     success: function(json) {
 
-      //console.log(json.result);
+      console.log(json);
 
       if(json.result.length == 0){
         $(resultList).empty();
@@ -500,7 +524,58 @@ function searchRegistry(e, btn) {
 
           var instance = json.result[d].date;
 
-          $(resultList).append("<li><a href='#'>"+instance+"</a></li>");
+          //Lists the result dates
+          $(resultList)
+            .append(
+            $('<li/>')
+              .addClass("result-item")
+              .addClass("panel-heading")
+              .append(
+              $("<a/>")
+                .attr("href", "#collapse-"+instance)
+                .attr("data-toggle", "collapse")
+                .addClass("collapsed")
+                .addClass("panel-title")
+                .html(instance)
+                .append(
+                $("<span/>")
+                  .addClass("collapse-icon")
+                )
+              )
+            );
+
+          //Creates the content
+          $(resultList)
+            .append(
+            $('<div/>')
+              .addClass("collapse")
+              .addClass("panel-collapse")
+              .attr("id", "collapse-"+instance)
+              .append(
+              $("<div/>")
+                .addClass("panel-body")
+                .append(
+                $("<div/>")
+                  .addClass("flex-container")
+                  .append(
+                    $("<div/>", {
+                    "class": "flex-container-text",
+                    text: "teste, teste"
+                  })
+                  )
+                  .append(
+                  $("<div/>")
+                    .append(
+                    $("<img/>")
+                      .attr("src", "http://localhost/projetoy/Monitoramento/assets/images/default.png")
+                      .addClass("flex-container-img")
+                    )
+                  )
+                )
+              )
+            );
+
+          $(resultTotal).html(json.result.length+" registros encontrados");
         }
       }
     }
@@ -508,7 +583,7 @@ function searchRegistry(e, btn) {
 }
 
 //FORMATS TODAY DATA
-function dateFormated() {
+function dateFormated(separator) {
   var d = new Date();
 
   var dd = d.getDate(),
@@ -522,19 +597,12 @@ function dateFormated() {
     mm = '0'+mm;
   }
 
-  var date = mm+"/"+dd+"/"+yyyy;
+  if(separator == "slash") {
+    var date = mm+"/"+dd+"/"+yyyy;
+  } else {
+    var date = yyyy+"-"+mm+"-"+dd;
+  }
 
   return date;
 }
-
-
-
-
-
-
-
-
-
-
-
 

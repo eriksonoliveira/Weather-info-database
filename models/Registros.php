@@ -95,25 +95,76 @@ class Registros extends model {
     return $array;
   }
 
-  //Pesquisa registros dentro das datas especificadas
-  public function searchRegistry($start, $end) {
+  //Pesquisa registros dentro das datas especificadas e que contém os fenômenos especificados
+  public function searchRegistry($start, $end, $systems) {
 
     $array = array();
+    $filter = array("1=1");
 
-    $sql = $this->db->prepare("SELECT date FROM registros WHERE date BETWEEN :date1 AND :date2");
-    $sql->bindValue(":date1", $start);
-    $sql->bindValue(":date2", $end);
-    $sql->execute();
+    if(!empty($systems)) {
 
-    if($sql->rowCount() > 0) {
-      $array = $sql->fetchAll();
+      //IF THE USER SELECTED MORE THAN ONE SYSTEM
+      $len = count($systems);
+      if($len > 1) {
+        $filter_multi = array();
+
+        foreach($systems as $k => $v) {
+          $filter_multi[] = "id_sistema = :sistema_".$v['key'];
+        }
+
+        $sql = $this->db->prepare("
+          SELECT DISTINCT date
+          FROM `sistemas`
+          WHERE date BETWEEN :date1 AND :date2 AND date IN (
+            SELECT date
+            FROM sistemas
+            WHERE ".implode(" OR ", $filter_multi)."
+            GROUP BY date
+            HAVING COUNT(*) >= $len ) ");
+
+        $sql->bindValue(":date1", $start);
+        $sql->bindValue(":date2", $end);
+        foreach($systems as $k => $v) {
+          $sql->bindValue(":sistema_".$v['key'], $v['key']);
+        }
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
+          $array = $sql->fetchAll();
+        }
+      }
+
+      $filter[] = "id_sistema = :sistema";
+    }
+
+    if(empty($array)) {
+      $sql = $this->db->prepare("
+      SELECT DISTINCT date
+      FROM sistemas
+      WHERE sistemas.date BETWEEN :date1 AND :date2 AND ".implode(" AND ", $filter));
+      $sql->bindValue(":date1", $start);
+      $sql->bindValue(":date2", $end);
+      if(!empty($systems)) {
+        $sql->bindValue(":sistema", $systems[0]['key']);
+      }
+      $sql->execute();
+
+      if($sql->rowCount() > 0) {
+        $array = $sql->fetchAll();
+      }
+    }
+
+    if(!empty($array)) {
+      for($i = 0; $i < count($array); $i++) {
+        $array[$i]['info'] = $this->getRegistro($array[$i]['date']);
+      }
     }
 
     return $array;
   }
 
   //Retorna registros de texto e imagem para o dia solicitado
-  public function getRegistro($date, $horarios) {
+  public function getRegistro($date) {
     
     $array = array(
       "met" => array(),
@@ -122,6 +173,10 @@ class Registros extends model {
       "phenom" => array()
     );
     
+    //HORARIOS
+    $h = new Horarios();
+    $horarios = $h->getHorarios();
+
     foreach($horarios as $key => $value) {
       
       //Descrição sinótica - Meteorologista
@@ -182,7 +237,7 @@ class Registros extends model {
     }
 
     //Tags de fenômenos
-    $sql = $this->db->prepare("SELECT id_sistema, (select sistemas.nome from sistemas where sistemas.id = fenomenos.id_sistema) as syst FROM fenomenos WHERE date = :date");
+    $sql = $this->db->prepare("SELECT id_sistema, (select sistemas_list.nome from sistemas_list where sistemas_list.id = sistemas.id_sistema) as syst, (select sistemas_list.class from sistemas_list where sistemas_list.id = sistemas.id_sistema) as class FROM sistemas WHERE date = :date ORDER BY CLASS");
     $sql->bindValue(":date", $date);
     $sql->execute();
 
@@ -190,10 +245,14 @@ class Registros extends model {
       $resp = $sql->fetchAll();
 
       for($i=0; $i < count($resp); $i++) {
-        $array['phenom'][$i] = $resp[$i];
+
+        $array['phenom'][$resp[$i]['class']][$i.'-s']['syst'] = $resp[$i]['syst'];
+        $array['phenom'][$resp[$i]['class']][$i.'-s']['id_sistema'] = $resp[$i]['id_sistema'];
+
       }
     }
 
+    //print_r($array['phenom']);
     return $array;
   }
   
@@ -304,7 +363,7 @@ class Registros extends model {
   //Adicionar tag de sistema
   public function addSystem($id, $date) {
 
-    $sql = $this->db->prepare("INSERT INTO fenomenos SET id_sistema = :id, date = :date");
+    $sql = $this->db->prepare("INSERT INTO sistemas SET id_sistema = :id, date = :date");
     $sql->bindValue(":id", $id);
     $sql->bindValue(":date", $date);
     $sql->execute();
