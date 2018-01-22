@@ -3,12 +3,25 @@ class Categorias extends model {
   
   public function getLista() {
 
-    $array = array();
+    $array = array(
+      "met" => array(
+        "superficie", "medios_altos", "condicao_tempo"
+      ),
+      "tec" => array(
+        "metar", "ocorrencias"
+      ),
+      "img" => array(
+        "im_sinotica", "im_satelite", "sondagem", "altos_niveis", "medios_niveis"
+      ),
+      "phenom" => array(
+        "sinótico", "mesoescala", "fenômenos"
+      )
+    );
 
-    $sql = $this->db->query("SELECT * FROM categorias");
+    /*$sql = $this->db->query("SELECT * FROM categorias");
     if($sql->rowCount() > 0) {
-      $array = $sql->fetchAll();
-    }
+      $array = $sql->fetchAll(PDO::FETCH_ASSOC);
+    }*/
 
     return $array;
   }

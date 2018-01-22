@@ -1,6 +1,5 @@
-<div class="content-wrapper">
-
-  <div class="container">
+<div class="add-content-container">
+  <div class="add-content-wrap container">
     <h1>Adicionar Monitoramento do dia</h1>
     <h3><?PHP echo $dia;?></h3>
 
@@ -18,8 +17,8 @@
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label>Inserir Imagem</label>
-                    <label for="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[0]['nome'];?>" data-categoria="<?PHP echo $cats[0]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -27,7 +26,7 @@
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats[0]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <span class="img-del"><webicon icon="fa:trash-o"/></span>
               </div>
 
@@ -43,8 +42,8 @@
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label>Inserir Imagem</label>
-                    <label for="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats[0]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[0]['nome'];?>" data-categoria="<?PHP echo $cats[0]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -52,7 +51,7 @@
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats[0]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <span class="img-del"><webicon icon="fa:trash-o"/></span>
               </div>
 
@@ -79,8 +78,8 @@
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label>Inserir Imagem</label>
-                    <label for="<?PHP echo $cats[6]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats[6]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[6]['nome'];?>" data-categoria="<?PHP echo $cats[6]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -88,7 +87,7 @@
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats[6]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <span class="img-del"><webicon icon="fa:trash-o"/></span>
               </div>
 
@@ -104,8 +103,8 @@
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label>Inserir Imagem</label>
-                    <label for="<?PHP echo $cats[6]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats[6]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[6]['nome'];?>" data-categoria="<?PHP echo $cats[6]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -113,7 +112,7 @@
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats[6]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <span class="img-del"><webicon icon="fa:trash-o"/></span>
               </div>
 
@@ -139,8 +138,8 @@
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label>Inserir Imagem</label>
-                    <label for="<?PHP echo $cats[5]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats[5]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[5]['nome'];?>" data-categoria="<?PHP echo $cats[5]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][2];?>" data-categoria="<?PHP echo $cats['img'][2];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -148,7 +147,7 @@
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats[5]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][2];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <span class="img-del"><webicon icon="fa:trash-o"/></span>
               </div>
 
@@ -174,8 +173,8 @@
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label>Inserir Imagem</label>
-                    <label for="<?PHP echo $cats[1]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats[1]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[1]['nome'];?>" data-categoria="<?PHP echo $cats[1]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][3];?>" data-categoria="<?PHP echo $cats['img'][3];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -183,7 +182,7 @@
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats[1]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][3];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <span class="img-del"><webicon icon="fa:trash-o"/></span>
               </div>
 
@@ -209,8 +208,8 @@
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label>Inserir Imagem</label>
-                    <label for="<?PHP echo $cats[2]['nome'].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats[2]['nome'].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats[2]['nome'];?>" data-categoria="<?PHP echo $cats[2]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn">Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][4];?>" data-categoria="<?PHP echo $cats['img'][4];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -218,7 +217,7 @@
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats[2]['nome'];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][4];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <span class="img-del"><webicon icon="fa:trash-o"/></span>
               </div>
 

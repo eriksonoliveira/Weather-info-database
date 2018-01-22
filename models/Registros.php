@@ -102,7 +102,6 @@ class Registros extends model {
     $filter = array("1=1");
 
     if(!empty($systems)) {
-
       //IF THE USER SELECTED MORE THAN ONE SYSTEM
       $len = count($systems);
       if($len > 1) {
@@ -132,21 +131,41 @@ class Registros extends model {
         if($sql->rowCount() > 0) {
           $array = $sql->fetchAll();
         }
+      } else {
+        //IF THE USER SELECTED ONLY ONE SYSTEM
+        $filter[] = "id_sistema = :sistema";
+
+        $sql = $this->db->prepare("
+        SELECT DISTINCT date
+        FROM sistemas
+        WHERE sistemas.date BETWEEN :date1 AND :date2 AND ".implode(" AND ", $filter));
+        $sql->bindValue(":date1", $start);
+        $sql->bindValue(":date2", $end);
+        if(!empty($systems)) {
+          $sql->bindValue(":sistema", $systems[0]['key']);
+        }
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
+          $array = $sql->fetchAll();
+        }
       }
-
-      $filter[] = "id_sistema = :sistema";
-    }
-
-    if(empty($array)) {
+    } else {
       $sql = $this->db->prepare("
       SELECT DISTINCT date
-      FROM sistemas
-      WHERE sistemas.date BETWEEN :date1 AND :date2 AND ".implode(" AND ", $filter));
+      FROM descricao_meteoro
+      WHERE descricao_meteoro.date BETWEEN :date1 AND :date2
+      UNION
+      SELECT DISTINCT date
+      FROM descricao_tec
+      WHERE descricao_tec.date BETWEEN :date1 AND :date2
+      UNION
+      SELECT DISTINCT date
+      FROM imagens
+      WHERE imagens.date BETWEEN :date1 AND :date2
+      ORDER BY date ASC");
       $sql->bindValue(":date1", $start);
       $sql->bindValue(":date2", $end);
-      if(!empty($systems)) {
-        $sql->bindValue(":sistema", $systems[0]['key']);
-      }
       $sql->execute();
 
       if($sql->rowCount() > 0) {
@@ -165,7 +184,6 @@ class Registros extends model {
 
   //Retorna registros de texto e imagem para o dia solicitado
   public function getRegistro($date) {
-    
     $array = array(
       "met" => array(),
       "tec" => array(),
@@ -175,7 +193,36 @@ class Registros extends model {
     
     //HORARIOS
     $h = new Horarios();
-    $horarios = $h->getHorarios();
+    $horarios = $h->getHourOnly();
+
+    //CATEGORIES
+    $c = new Categorias();
+    $categories = $c->getLista();
+
+    /*CREATE STRUCTURE FOR THE RESPONSE ARRAY*/
+    foreach($horarios as $hour) {
+      extract($hour);
+      foreach($categories['met'] as $category) {
+
+        $array['met'][$hora][$category] = array("id_met" => '', "text" => '');
+
+      }
+      foreach($categories['tec'] as $category) {
+
+        $array['tec'][$hora][$category] = array("id_tec" => '', "text" => '');
+
+      }
+      foreach($categories['img'] as $category) {
+
+        $array['img'][$hora][$category] = array("id" => '', "fileName" => '');
+
+      }
+      foreach($categories['phenom'] as $category) {
+
+        $array['phenom'][$category] = array();
+
+      }
+    }
 
     foreach($horarios as $key => $value) {
       
@@ -186,13 +233,17 @@ class Registros extends model {
       $sql->execute();
 
       if($sql->rowCount() > 0) {
-        $resp = $sql->fetchAll();
+        $resp = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         foreach($resp as $respKey => $respVal) {
-        $descrCat = $respVal['cat_descricao'];
+          extract($respVal);
 
-        $array["met"][$value["hora"]][$descrCat]['text'] = $respVal['texto'];
-        $array["met"][$value["hora"]][$descrCat]['id_met'] = $respVal['id_meteoro'];
+          $desc_met = array(
+
+          );
+
+        $array["met"][$value["hora"]][$cat_descricao]['text'] = $texto;
+        $array["met"][$value["hora"]][$cat_descricao]['id_met'] = $id_meteoro;
 
         }
 

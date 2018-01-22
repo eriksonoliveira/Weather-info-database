@@ -49,7 +49,7 @@ class pesquisarController extends controller{
     }
 
     //SENDS DATA IN JSON FORMAT
-    echo json_encode($data);
+    echo json_encode(array_values($data));
     exit;
   }
 

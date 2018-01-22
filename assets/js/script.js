@@ -287,24 +287,27 @@ function receiveDayImages(json) {
     for (c in json[h]) {
       var categoria = c;
 
-      var imgURL = "http://localhost/projetoy/Monitoramento/assets/images/" + categoria + "/" + json[h][c].fileName,
-          imgID = json[h][c].id,
-          imgWrap = ".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]",
-          imgDelBtn = $(imgWrap).find(".img-del"),
-          inputWrap = $(imgWrap).prev(".reg-form").find(".input-btn-wrap");
+      if(json[h][c].fileName) {
+
+        var imgURL = "http://localhost/projetoy/Monitoramento/assets/images/" + categoria + "/" + json[h][c].fileName,
+            imgID = json[h][c].id,
+            imgWrap = ".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]",
+            imgDelBtn = $(imgWrap).find(".img-del"),
+            inputWrap = $(imgWrap).prev(".reg-form").find(".input-btn-wrap");
 
 
-      $(imgWrap)
-        .append(
-          $('<img/>')
-            .attr("src", imgURL)
-            .attr("id", "img-"+imgID)
-            .attr("class", "img-width"));
+        $(imgWrap)
+          .append(
+            $('<img/>')
+              .attr("src", imgURL)
+              .attr("id", "img-"+imgID)
+              .attr("class", "img-width"));
 
-      $([imgDelBtn, inputWrap]).each(function() {
-        $(this).toggle();
-      });
+        $([imgDelBtn, inputWrap]).each(function() {
+          $(this).toggle();
+        });
 
+      }
     }
   }
 }
@@ -323,18 +326,24 @@ function receiveDayText (json, cargo) {
       var text =  json[h][c].text,
           id = json[h][c].id_met;
 
-      var textArea = "textarea[data-categoria="+categoria+"][data-hora="+hora+"]",
-          select = "select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]",
-          sendBtn = $(textArea).siblings(".send-text"),
-          editBtn = $(textArea).siblings(".edit-text");
+      if(text) {
 
-      //POPULATE TEXTAREA
-      $(textArea).html(text)
-        .prop("disabled", true);
+        var textArea = "textarea[data-categoria="+categoria+"][data-hora="+hora+"]",
+            select = "select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]",
+            sendBtn = $(textArea).siblings(".send-text"),
+            editBtn = $(textArea).siblings(".edit-text");
 
-      //POPULATE SELECT
-      $("select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]")
-        .prop('selected', true);
+        //POPULATE TEXTAREA
+        $(textArea).html(text)
+          .prop("disabled", true);
+
+        //POPULATE SELECT
+        $("select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]")
+          .prop('selected', true);
+      } else {
+        //EXIT FUNCTION IF TEXT IS EMPTY
+        return false;
+      }
     }
 
     $([sendBtn, editBtn]).each(function() {
@@ -514,15 +523,15 @@ function searchRegistry(e, btn) {
 
       console.log(json);
 
-      if(json.result.length == 0){
+      if(json.length == 0){
         $(resultList).empty();
       } else {
         $(resultList).empty();
 
         var d;
-        for(d in json.result) {
+        for(d in json[0]) {
 
-          var instance = json.result[d].date;
+          var instance = json[0][d].date;
 
           //Lists the result dates
           $(resultList)
@@ -544,7 +553,7 @@ function searchRegistry(e, btn) {
               )
             );
 
-          //Creates the content
+          //Creates the HTML structure
           $(resultList)
             .append(
             $('<div/>')
@@ -560,7 +569,6 @@ function searchRegistry(e, btn) {
                   .append(
                     $("<div/>", {
                     "class": "flex-container-text",
-                    text: "teste, teste"
                   })
                   )
                   .append(
@@ -575,8 +583,44 @@ function searchRegistry(e, btn) {
               )
             );
 
-          $(resultTotal).html(json.result.length+" registros encontrados");
+          //INSERTS THE RETURNED DATA (IMAGES, DESCRIPTIONS, AND PHENOMENA)
+          $(resultList).find("#collapse-"+instance).find(".flex-container-text")
+          .append(
+            function(){
+              if(json[0][d].info.met == 0) {
+                return "<p>Sem informações para este dia</p>";
+              } else {
+               return $("<ul/>")
+                  .append(
+                    $("<li/>")
+                      .html("<strong>Superfície:</strong> "+json[0][d].info.met["06Z"].superficie.text)
+                    )
+                    .append(
+                    $("<li/>")
+                      .html("<strong>Condição:</strong> "+json[0][d].info.met["06Z"].condicao_tempo.text)
+                    );
+              }
+            }
+          );
+
+          $(resultList).find("#collapse-"+instance).find(".flex-container-img")
+          .attr("src",
+            function(){
+              if(json[0][d].info.img == 0) {
+                return "http://localhost/projetoy/Monitoramento/assets/images/default.png";
+              } else {
+                var hours = Object.values(json[0][d].info.img);
+                var category = Object.values(hours[0]);
+                console.log(category[0].fileName);
+
+                return "http://localhost/projetoy/Monitoramento/assets/images/"+category[0].fileName;
+
+              }
+            }
+          );
+
         }
+        $(resultTotal).html(json[0].length+" registros encontrados");
       }
     }
   });

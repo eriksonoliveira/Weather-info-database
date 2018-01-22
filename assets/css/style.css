@@ -4,20 +4,20 @@ body, html {
   box-sizing: border-box;
 }
 
+.add-content-container {
+  width: 100%;
+  background-color: #F5F5F5;
+}
+
+.add-content-wrap {
+  margin-bottom: 0;
+  padding-top: 50px;
+}
+
 .navbar {
   margin-bottom: 0;
   position: absolute;
   width: 100%;
-}
-
-.content-wrapper {
-  width: 100%;
-  margin-bottom: 0;
-  margin-top: -20px;
-  background-color: #F5F5F5;
-}
-
-.navbar {
   border-radius: 0;
 }
 
@@ -187,14 +187,9 @@ table.table-bordered > tbody > tr {
   height: 100%;
   width: 100%;
   background-color: #eee;
-  margin-top: -70px;
-}
-
-.home-container .search-wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-container .btn {
@@ -202,19 +197,18 @@ table.table-bordered > tbody > tr {
   text-align: center;
 }
 
-.home-container .search-wrap i {
+.home-container .btn-box i {
   font-size: 15px;
 }
-.home-container .search-wrap i.fa-plus {
+.home-container .btn-box i.fa-plus {
   color: #4CAF50;
 }
 
-.home-container .search-wrap i.fa-search {
+.home-container .btn-box i.fa-search {
   color: #2196F3;
 }
 
 .login-container, .search-page-container {
-  padding-top: 50px;
   box-sizing: border-box;
 }
 
@@ -241,6 +235,7 @@ table.table-bordered > tbody > tr {
   min-height: 100vh;
   width: 100%;
   display: flex;
+  padding-top: 50px;
 /*  position: absolute;
   top: 50px;*/
 }
