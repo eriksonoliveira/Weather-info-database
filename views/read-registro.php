@@ -1,7 +1,7 @@
 <div class="add-content-container">
   <div class="add-content-wrap container">
     <h1>Adicionar Monitoramento do dia</h1>
-    <h3><?PHP echo $dia;?></h3>
+    <h3><?PHP echo $date;?></h3>
 
     <div>
       <table class="table">
@@ -325,6 +325,8 @@
         <div class="fenom-box">
           <h3 class="fenom-heading"><?PHP echo $class;?></h3>
           <?PHP
+
+//            for($i = 0; $i < count($sistemas); $i++):
             foreach($sistemas as $sist):
               if(ucfirst($sist['class']) == $class):
           ?>
@@ -406,4 +408,4 @@
 </div>
 
 <!-- load read-one-registry js -->
-<script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>
+<script src="<?PHP echo BASE_URL;?>assets/js/registries/read-registry.js"></script>

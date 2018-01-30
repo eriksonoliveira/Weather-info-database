@@ -241,7 +241,7 @@ table.table-bordered > tbody > tr {
 }
 
 .search-sidebar {
-  width: 320px;
+  width: 280px;
   background-color: #FFF;
   padding: 10px;
 }
@@ -251,7 +251,7 @@ table.table-bordered > tbody > tr {
 }
 
 .systempick {
-  width: 290px;
+  width: 250px;
   height: 100px;
   border: 1px solid #DDD;
   padding: 5px 0 10px 10px;
@@ -310,15 +310,34 @@ table.table-bordered > tbody > tr {
 
 .flex-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .flex-container-text {
-  flex-grow: 1;
+  min-width: 500px;
+  flex-grow: 3;
   order: 2;
-  padding: 10px;
+  padding: 20px 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-container-text li {
+  list-style-type: none;
+}
+
+.flex-container-text ul {
+  padding: 0;
 }
 
 .flex-container-img {
-  flex-grow: 1;
+/*  flex-grow: 1;*/
   order: 1;
+
+}
+
+.flex-container-img img {
+  width: 200px;
 }

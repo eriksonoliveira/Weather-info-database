@@ -204,12 +204,12 @@ class Registros extends model {
       extract($hour);
       foreach($categories['met'] as $category) {
 
-        $array['met'][$hora][$category] = array("id_met" => '', "text" => '');
+        $array['met'][$hora][$category] = array("id" => '', "text" => '');
 
       }
       foreach($categories['tec'] as $category) {
 
-        $array['tec'][$hora][$category] = array("id_tec" => '', "text" => '');
+        $array['tec'][$hora][$category] = array("id" => '', "text" => '');
 
       }
       foreach($categories['img'] as $category) {
@@ -222,14 +222,13 @@ class Registros extends model {
         $array['phenom'][$category] = array();
 
       }
-    }
-
-    foreach($horarios as $key => $value) {
+    //}
+    //foreach($horarios as $key => $value) {
       
       //Descrição sinótica - Meteorologista
       $sql = $this->db->prepare("SELECT texto, id_meteoro, cat_descricao FROM descricao_meteoro WHERE date = :date AND horario = :horario");
       $sql->bindValue(":date", $date);
-      $sql->bindValue(":horario", $value['hora']);
+      $sql->bindValue(":horario", $hora);
       $sql->execute();
 
       if($sql->rowCount() > 0) {
@@ -238,12 +237,8 @@ class Registros extends model {
         foreach($resp as $respKey => $respVal) {
           extract($respVal);
 
-          $desc_met = array(
-
-          );
-
-        $array["met"][$value["hora"]][$cat_descricao]['text'] = $texto;
-        $array["met"][$value["hora"]][$cat_descricao]['id_met'] = $id_meteoro;
+          $array["met"][$hora][$cat_descricao]['text'] = $texto;
+          $array["met"][$hora][$cat_descricao]['id'] = $id_meteoro;
 
         }
 
@@ -252,17 +247,17 @@ class Registros extends model {
       //Registros Significativos - Tecnico
       $sql = $this->db->prepare("SELECT texto, id_tec, cat_descricao FROM descricao_tec WHERE date = :date AND horario = :horario");
       $sql->bindValue(":date", $date);
-      $sql->bindValue(":horario", $value['hora']);
+      $sql->bindValue(":horario", $hora);
       $sql->execute();
 
       if($sql->rowCount() > 0) {
         $resp = $sql->fetchAll();
 
         foreach($resp as $respKey => $respVal) {
-        $descrCat = $respVal['cat_descricao'];
+          extract($respVal);
 
-        $array["tec"][$value["hora"]][$descrCat]['text'] = $respVal['texto'];
-        $array["tec"][$value["hora"]][$descrCat]['id_tec'] = $respVal['id_tec'];
+          $array["tec"][$hora][$cat_descricao]['text'] = $texto;
+          $array["tec"][$hora][$cat_descricao]['id'] = $id_tec;
 
         }
 
@@ -271,7 +266,7 @@ class Registros extends model {
       //Imagens
       $sql = $this->db->prepare("SELECT id, url, categoria FROM imagens WHERE date = :date AND horario = :horario ");
       $sql->bindValue(":date", $date);
-      $sql->bindValue(":horario", $value['hora']);
+      $sql->bindValue(":horario", $hora);
       $sql->execute();
 
       if($sql->rowCount() > 0) {
@@ -281,8 +276,8 @@ class Registros extends model {
         foreach($resp as $respKey => $respVal) {
           $imgCat = $respVal['categoria'];
 
-          $array['img'][$value['hora']][$imgCat]['fileName'] = $respVal['url'];
-          $array['img'][$value['hora']][$imgCat]['id'] = $respVal['id'];
+          $array['img'][$hora][$imgCat]['fileName'] = $respVal['url'];
+          $array['img'][$hora][$imgCat]['id'] = $respVal['id'];
         }
       }
     }
