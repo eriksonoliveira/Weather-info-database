@@ -78,7 +78,7 @@ class ajaxController extends controller {
       $data['categoria'] = $_POST['update-categoria'];
       $data['id_nome'] = $_POST['update-id_nome'];
       $data['cargo'] = $_POST['update-cargo'];
-      $data['date'] = $_POST['date'];
+      $data['date'] = $_POST['update-date'];
 
       //Envia para o bando de dados
       $r = new Registros();
