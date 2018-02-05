@@ -250,6 +250,17 @@ table.table-bordered > tbody > tr {
   display: block;
 }
 
+.datepick input[type=text] {
+  border: 1px solid #CCC;
+  border-radius: 0;
+  padding: 5px 0 5px 5px;
+}
+
+.datepick input[type=checkbox] {
+  border-radius: 0;
+  border: 1px solid #CCC;
+}
+
 .systempick {
   width: 250px;
   height: 100px;
@@ -262,9 +273,16 @@ table.table-bordered > tbody > tr {
 }
 
 .search-result-container {
-  flex: 1;
+  flex: 3;
   background-color: #EEE;
-  padding: 20px;
+  padding: 30px 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+#myChart {
+/*  width: 300px !important;*/
+  margin: 50px auto;
 }
 
 .search-result-list {
@@ -332,6 +350,17 @@ table.table-bordered > tbody > tr {
   padding: 0;
 }
 
+.view-registry {
+  background-color: #FF9800;
+  border-radius: 0;
+  color: #FFF;
+}
+
+.view-registry:hover {
+  background-color: #FFF;
+  border: 1px solid #FF9800;
+}
+
 .flex-container-img {
 /*  flex-grow: 1;*/
   order: 1;
@@ -340,4 +369,29 @@ table.table-bordered > tbody > tr {
 
 .flex-container-img img {
   width: 200px;
+}
+
+.bg-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 3;
+  display: none;
+}
+
+.img-modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  background-color: #FFF;
+  padding: 20px;
+  margin-left: -270px;
+  margin-top: -270px;
+  z-index: 4;
+  display: none;
 }

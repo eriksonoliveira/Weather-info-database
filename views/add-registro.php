@@ -405,5 +405,10 @@
 
 </div>
 
+<div class="bg-box"></div>
+<div class="img-modal-box">
+  <img src="" width="100%"/>
+</div>
+
 <!-- load read-one-registry js -->
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>

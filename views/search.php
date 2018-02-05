@@ -32,9 +32,19 @@
   </div>
 
   <div class="search-result-container">
-    <p class="search-result-total"></p>
     <div class="panel-group">
       <ul class="search-result-list panel"></ul>
     </div>
+    <div class="chart">
+      <canvas id="myChart" width="740" height="200"></canvas>
+    </div>
   </div>
+
+
+</div>
+
+
+<div class="bg-box"></div>
+<div class="img-modal-box">
+  <img src="" width="100%"/>
 </div>

@@ -21,6 +21,9 @@ $(document).ready(function() {
     $("input[name=calendar-2]").datepicker("option", "minDate", minDate);
   });
 
+  //TOGGLE MODAL WHEN USER CLICKS IMAGES
+  modal();
+
 });
 
 class KeyElements {
@@ -62,5 +65,20 @@ function dateFormated(separator) {
   }
 
   return date;
+}
+
+function modal() {
+  $(document).on("click", "a.img-clickable", function() {
+    var path = $(this).find("img").attr("src");
+
+    $(".img-modal-box img").attr("src", path);
+
+    //Show modal
+    $(".bg-box, .img-modal-box").fadeIn("fast");
+    //Hide modal
+    $(".bg-box").on("click", function() {
+      $(".bg-box, .img-modal-box").fadeOut("fast");
+    });
+  });
 }
 
