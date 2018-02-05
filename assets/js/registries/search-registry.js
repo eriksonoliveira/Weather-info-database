@@ -48,18 +48,19 @@ function searchRegistry(e, btn) {
 
       console.log(json);
 
-      if(json.length == 0){
-        $(resultList).empty();
+      if(json[0].data.length == 0){
+        $(resultList, "#myChart").empty();
       } else {
         $(resultList).empty();
 
         var d;
         var result_items_html = "";
 
-//        for(d in json[0]) {
-        $.each(json[0], function(key, value) {
+        //Draw chart
+        drawLineChart(json[0]['chart']);
 
-          //Lists the result dates
+        //Create table
+        $.each(json[0].data, function(key, value) {
 
           //Creates a collapsible list
           result_items_html+="<li class='result-item panel-heading'>";
@@ -88,16 +89,16 @@ function searchRegistry(e, btn) {
                   result_items_html+="<p>Sem informações para este dia</p>";
                 }
 
-                  result_items_html+="<a href='http://localhost/projetoy/Monitoramento/registros/?date="+value.date+"' target='_blank'>Registro Completo";
+                  result_items_html+="<a href='http://localhost/projetoy/Monitoramento/registros/?date="+value.date+"' target='_blank'>";
 
-          /******CONTINUE FROM HERE*******/
+                    result_items_html+="<button class='btn view-registry'>Ver/Editar</button>";
 
                   result_items_html+="</a>";
                 result_items_html+="</div>";
 
                 // satellite image
                 result_items_html+="<div class='flex-container-img'>";
-                  result_items_html+="<img src='"+appendImg(value)+"'/>";
+                  result_items_html+=appendImg(value);
                 result_items_html+="</div>";
               result_items_html+="</div>";
             result_items_html+="</div>";
@@ -107,15 +108,78 @@ function searchRegistry(e, btn) {
           $(resultList).html(result_items_html);
         });
 
-        // set img 'src' attribute
-        function appendImg(value) {
-          if(value.info.img["06Z"].im_satelite.fileName) {
-            return "http://localhost/projetoy/Monitoramento/assets/images/im_satelite/"+value.info.img["06Z"].im_satelite.fileName;
-          } else {
-            return "http://localhost/projetoy/Monitoramento/assets/images/default.png";
-          }
-        }
       }
     }
   });
+}
+
+// set img 'src' attribute
+function appendImg(value) {
+  var result_img = '';
+  if(value.info.img["06Z"].im_satelite.fileName) {
+
+    result_img += "<a href='javascript:;' class='img-clickable'>";
+      result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/im_satelite/"+value.info.img["06Z"].im_satelite.fileName+"'/>";
+    result_img += "</a>";
+
+    return result_img;
+  } else {
+
+    result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/default.png'/>";
+
+    return result_img;
+  }
+}
+
+
+//CHART
+function drawLineChart(results) {
+
+    // Split timestamp and data into separate arrays
+    var labels = [], data=[];
+    results.forEach(function(key, packet) {
+      console.log(packet);
+      labels.push(key.month);
+      data.push(key.count);
+    });
+
+    // Create the chart.js data structure using 'labels' and 'data'
+    var tempData = {
+      labels : labels,
+      datasets : [{
+        label: "Dias",
+        backgroundColor      : "rgba(20,50,80,0.7)",
+        pointColor            : "rgba(151,187,205,1)",
+        pointStrokeColor      : "#fff",
+        pointHighlightFill    : "#fff",
+        pointHighlightStroke  : "rgba(151,187,205,1)",
+        data                  : data
+      }]
+    };
+
+    // Get the context of the canvas element we want to select
+    var ctx = document.getElementById("myChart").getContext("2d");
+/*ctx.canvas.width = 300;
+ctx.canvas.height = 200;*/
+    // Instantiate a new chart
+    var myLineChart = new Chart(ctx, {
+
+       type: 'bar',
+       data: tempData,
+       options: {
+         responsive: false,
+         maintainAspectRatio: true,
+         scales: {
+           yAxes: [{
+             ticks: {
+               beginAtZero: true
+             }
+           }],
+           xAxes: [{
+             barPercentage: 0.4
+           }]
+         }
+       }
+    });
+//  });
 }

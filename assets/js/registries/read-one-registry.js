@@ -58,16 +58,18 @@ function receiveDayImages(json) {
             inputWrap = $(imgWrap).prev(".reg-form").find(".input-btn-wrap");
 
 
-        $(imgWrap)
-          .append(
-            $('<img/>')
-              .attr("src", imgURL)
-              .attr("id", "img-"+imgID)
-              .attr("class", "img-width"));
+        var img_html = '';
 
-        $([imgDelBtn, inputWrap]).each(function() {
+        img_html+="<a href='javascript:;' class='img-clickable'>";
+          img_html+="<img src='"+imgURL+"' id='img-"+imgID+"' class='img-width'/>";
+        img_html+="</a>";
+
+        $(imgWrap).append(img_html);
+
+        /*$([imgDelBtn, inputWrap]).each(function() {
           $(this).toggle();
-        });
+        });*/
+        $(inputWrap).toggle();
 
       }
     }

@@ -98,7 +98,10 @@ class Registros extends model {
   //Pesquisa registros dentro das datas especificadas e que contém os fenômenos especificados
   public function searchRegistry($start, $end, $systems) {
 
-    $array = array();
+    $array = array(
+      "data" => array(),
+      "chart" => array()
+    );
     $filter = array("1=1");
 
     if(!empty($systems)) {
@@ -110,6 +113,13 @@ class Registros extends model {
         foreach($systems as $k => $v) {
           $filter_multi[] = "id_sistema = :sistema_".$v['key'];
         }
+
+        /*
+        SELECT DATE_FORMAT(sistemas.date, '%M') as mes, sistemas.id_sistema, COUNT(*) AS conta
+        FROM `sistemas`
+        WHERE sistemas.id_sistema = '3'
+        GROUP BY DATE_FORMAT(sistemas.date, '%M')
+        */
 
         $sql = $this->db->prepare("
           SELECT DISTINCT date
@@ -129,26 +139,44 @@ class Registros extends model {
         $sql->execute();
 
         if($sql->rowCount() > 0) {
-          $array = $sql->fetchAll();
+          $array["data"] = $sql->fetchAll(PDO::FETCH_ASSOC);
         }
       } else {
-        //IF THE USER SELECTED ONLY ONE SYSTEM
-        $filter[] = "id_sistema = :sistema";
 
+        //IF THE USER SELECTED ONLY ONE PHENOMENON
+        //Query for dates
         $sql = $this->db->prepare("
         SELECT DISTINCT date
         FROM sistemas
-        WHERE sistemas.date BETWEEN :date1 AND :date2 AND ".implode(" AND ", $filter));
+        WHERE sistemas.date BETWEEN :date1 AND :date2 AND id_sistema = :sistema");
         $sql->bindValue(":date1", $start);
         $sql->bindValue(":date2", $end);
-        if(!empty($systems)) {
-          $sql->bindValue(":sistema", $systems[0]['key']);
-        }
+        $sql->bindValue(":sistema", $systems[0]['key']);
         $sql->execute();
 
+        //Insert results into $array
         if($sql->rowCount() > 0) {
-          $array = $sql->fetchAll();
+          $array["data"] = $sql->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        //Query for count
+        $sql2 = $this->db->prepare("
+        SELECT DATE_FORMAT(sistemas.date, '%M') as month, COUNT(*) AS count
+        FROM `sistemas`
+        WHERE sistemas.date BETWEEN :date1 AND :date2
+        AND sistemas.id_sistema = :sistema
+        GROUP BY DATE_FORMAT(sistemas.date, '%M')
+        ");
+        $sql2->bindValue(":date1", $start);
+        $sql2->bindValue(":date2", $end);
+        $sql2->bindValue(":sistema", $systems[0]['key']);
+        $sql2->execute();
+
+        //Insert results into $array
+        if($sql2->rowCount() > 0) {
+           $array["chart"] = $sql2->fetchAll(PDO::FETCH_ASSOC);
+        }
+
       }
     } else {
       $sql = $this->db->prepare("
@@ -169,13 +197,13 @@ class Registros extends model {
       $sql->execute();
 
       if($sql->rowCount() > 0) {
-        $array = $sql->fetchAll();
+        $array["data"] = $sql->fetchAll(PDO::FETCH_ASSOC);
       }
     }
 
-    if(!empty($array)) {
-      for($i = 0; $i < count($array); $i++) {
-        $array[$i]['info'] = $this->getRegistro($array[$i]['date']);
+    if(!empty($array["data"])) {
+      for($i = 0; $i < count($array["data"]); $i++) {
+        $array["data"][$i]["info"] = $this->getRegistro($array["data"][$i]["date"]);
       }
     }
 
