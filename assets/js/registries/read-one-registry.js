@@ -66,11 +66,9 @@ function receiveDayImages(json) {
 
         $(imgWrap).append(img_html);
 
-        /*$([imgDelBtn, inputWrap]).each(function() {
+        $([imgDelBtn, inputWrap]).each(function() {
           $(this).toggle();
-        });*/
-        $(inputWrap).toggle();
-
+        });
       }
     }
   }

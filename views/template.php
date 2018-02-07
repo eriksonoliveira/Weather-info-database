@@ -34,7 +34,8 @@
     <script src="<?PHP echo BASE_URL;?>assets/js/jquery-ui.js"></script>
     <script type="text/javascript" src="//cdn.rawgit.com/icons8/bower-webicon/v0.10.7/jquery-webicon.min.js"></script>
 
-    <!-- Chart.js -->
+    <!-- moment.js and Chart.js -->
+    <script src="<?PHP echo BASE_URL;?>assets/js/moment.min.js"></script>
     <script src="<?PHP echo BASE_URL;?>assets/js/Chart.min.js"></script>
 
     <!-- bootstrap Javascript -->

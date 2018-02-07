@@ -1,5 +1,5 @@
-<div class="add-content-container">
-  <div class="add-content-wrap container">
+<div class="registry-container">
+  <div class="registry-inner-container container">
     <h1>Adicionar Monitoramento do dia</h1>
     <h3><?PHP echo $dia;?></h3>
 

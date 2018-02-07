@@ -20,7 +20,7 @@ function searchRegistry(e, btn) {
 
   var resultList = $(btn).parents(".search-page-container").find(".search-result-list"),
       resultTotal = $(resultList).siblings(".search-result-total"),
-      checked = $(btn).siblings("div").find(".systempick").find("input:checked");
+      checked = $(btn).siblings(".systempick").find(".systempick-box").find("input:checked");
 
   $(checked).each(function() {
     var id = $(this).attr("data-id");
@@ -60,53 +60,52 @@ function searchRegistry(e, btn) {
         drawLineChart(json[0]['chart']);
 
         //Create table
+        result_items_html+="<table class='table table-hover'>";
+          result_items_html+="<tr>";
+            result_items_html+="<th>Data</th>";
+            result_items_html+="<th>Im. Satélite</th>";
+            result_items_html+="<th>Descrição</th>";
+            result_items_html+="<th></th>";
+          result_items_html+="</tr>";
+
+        //Create table
         $.each(json[0].data, function(key, value) {
 
-          //Creates a collapsible list
-          result_items_html+="<li class='result-item panel-heading'>";
-            result_items_html+="<a class='collapsed panel-title' data-toggle='collapse' href='#collapse-"+value.date+"'>"+value.date;
-            result_items_html+="<span class='collapse-icon'></span>";
-          result_items_html+="</a>";
-          result_items_html+="</li>";
-
-          result_items_html+="<div class='collapse panel-collapse' id='collapse-"+value.date+"'>";
-            result_items_html+="<div class='panel-body'>";
-              result_items_html+="<div class='flex-container'>";
-                result_items_html+="<div class='flex-container-text'>";
-
+          result_items_html+="<tr>";
+            result_items_html+="<td>"+value.date+"</td>";
+            result_items_html+="<td>";
+              result_items_html+=appendImg(value);
+            result_items_html+="</td>";
+            result_items_html+="<td>";
                 // weather description text
                 if(value.info.met["06Z"].superficie.text){
-                  result_items_html+="<ul>";
-                    result_items_html+="<li>";
-                      result_items_html+="<strong>Superfície:</strong> "+value.info.met["06Z"].superficie.text;
-                    result_items_html+="</li>";
-                    result_items_html+="<li>";
-                      result_items_html+="<strong>Condição:</strong> "+value.info.met["06Z"].condicao_tempo.text;
-                    result_items_html+="</li>";
-                  result_items_html+="</ul>";
+
+                  result_items_html+="<p><strong>Superfície:</strong> "+value.info.met["06Z"].superficie.text+"</p>";
+                  result_items_html+="<p><strong>Condição:</strong> "+value.info.met["06Z"].condicao_tempo.text+"</p>";
 
                 } else {
                   result_items_html+="<p>Sem informações para este dia</p>";
                 }
+            result_items_html+="</td>";
+            result_items_html+="<td>";
+              //action button
+              result_items_html+="<a href='http://localhost/projetoy/Monitoramento/registros/?date="+value.date+"' target='_blank'>";
 
-                  result_items_html+="<a href='http://localhost/projetoy/Monitoramento/registros/?date="+value.date+"' target='_blank'>";
+                //edit button
+                result_items_html+="<button class='btn view-registry'>Ver/Editar</button>";
 
-                    result_items_html+="<button class='btn view-registry'>Ver/Editar</button>";
+              result_items_html+="</a>"
+            result_items_html+="</td>";
+          result_items_html+="</tr>";
 
-                  result_items_html+="</a>";
-                result_items_html+="</div>";
 
-                // satellite image
-                result_items_html+="<div class='flex-container-img'>";
-                  result_items_html+=appendImg(value);
-                result_items_html+="</div>";
-              result_items_html+="</div>";
-            result_items_html+="</div>";
-          result_items_html+="</div>";
 
-          // inject to 'resultList'
-          $(resultList).html(result_items_html);
+
         });
+        result_items_html+="</table>";
+
+        // inject to 'resultList'
+        $(resultList).html(result_items_html);
 
       }
     }
@@ -119,7 +118,7 @@ function appendImg(value) {
   if(value.info.img["06Z"].im_satelite.fileName) {
 
     result_img += "<a href='javascript:;' class='img-clickable'>";
-      result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/im_satelite/"+value.info.img["06Z"].im_satelite.fileName+"'/>";
+      result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/im_satelite/"+value.info.img["06Z"].im_satelite.fileName+"' class='result-table-img'/>";
     result_img += "</a>";
 
     return result_img;
@@ -134,52 +133,56 @@ function appendImg(value) {
 
 //CHART
 function drawLineChart(results) {
+  // Split timestamp and data into separate arrays
+  var labels = [], data=[];
+  results.forEach(function(key, packet) {
+    console.log(packet);
+    labels.push(key.month);
+    data.push(key.count);
+  });
 
-    // Split timestamp and data into separate arrays
-    var labels = [], data=[];
-    results.forEach(function(key, packet) {
-      console.log(packet);
-      labels.push(key.month);
-      data.push(key.count);
-    });
+  // Create the chart.js data structure using 'labels' and 'data'
+  var tempData = {
+    labels : labels,
+    datasets : [{
+      label                : "Número de dias",
+      backgroundColor      : "rgba(38, 57, 73, 0.7)",
+      data                 : data
+    }]
+  };
 
-    // Create the chart.js data structure using 'labels' and 'data'
-    var tempData = {
-      labels : labels,
-      datasets : [{
-        label: "Dias",
-        backgroundColor      : "rgba(20,50,80,0.7)",
-        pointColor            : "rgba(151,187,205,1)",
-        pointStrokeColor      : "#fff",
-        pointHighlightFill    : "#fff",
-        pointHighlightStroke  : "rgba(151,187,205,1)",
-        data                  : data
-      }]
-    };
+  // Get the context of the canvas element we want to select
+  var ctx = document.getElementById("myChart").getContext("2d");
+  // Instantiate a new chart
+  var myLineChart = new Chart(ctx, {
 
-    // Get the context of the canvas element we want to select
-    var ctx = document.getElementById("myChart").getContext("2d");
-/*ctx.canvas.width = 300;
-ctx.canvas.height = 200;*/
-    // Instantiate a new chart
-    var myLineChart = new Chart(ctx, {
-
-       type: 'bar',
-       data: tempData,
-       options: {
-         responsive: false,
-         maintainAspectRatio: true,
-         scales: {
-           yAxes: [{
-             ticks: {
-               beginAtZero: true
+     type: 'bar',
+     data: tempData,
+     options: {
+       responsive: false,
+       maintainAspectRatio: true,
+       scales: {
+         yAxes: [{
+           ticks: {
+             beginAtZero: true
+           }
+         }],
+         xAxes: [{
+           offset: true,
+           gridLines: {
+             offsetGridLines: true
+           },
+           barPercentage: 0.3,
+           type: 'time',
+           time: {
+             unit: 'month',
+             round: 'month',
+             displayFormats: {
+               month: 'MMM YYYY'
              }
-           }],
-           xAxes: [{
-             barPercentage: 0.4
-           }]
-         }
+           }
+         }]
        }
-    });
-//  });
+     }
+  });
 }

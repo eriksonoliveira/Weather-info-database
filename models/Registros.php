@@ -161,11 +161,11 @@ class Registros extends model {
 
         //Query for count
         $sql2 = $this->db->prepare("
-        SELECT DATE_FORMAT(sistemas.date, '%M') as month, COUNT(*) AS count
+        SELECT DATE_FORMAT(sistemas.date, '%Y-%m') as month, COUNT(*) AS count
         FROM `sistemas`
         WHERE sistemas.date BETWEEN :date1 AND :date2
         AND sistemas.id_sistema = :sistema
-        GROUP BY DATE_FORMAT(sistemas.date, '%M')
+        GROUP BY DATE_FORMAT(sistemas.date, '%Y-%m')
         ");
         $sql2->bindValue(":date1", $start);
         $sql2->bindValue(":date2", $end);

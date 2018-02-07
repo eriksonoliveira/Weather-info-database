@@ -2,15 +2,15 @@
   <div class="search-sidebar">
     <form class="datepick">
       <label for="start">De:</label>
-      <input type="text" id="start" name="calendar-1"/>
+      <input type="text" id="start" name="calendar-1" autocomplete="off"/>
 
       <label for="end">Até:</label>
-      <input type="text" id="end" name="calendar-2"/>
+      <input type="text" id="end" name="calendar-2" autocomplete="off"/>
 
       <?PHP foreach($sistemas_class as $k => $class):?>
-      <div>
+      <div class="systempick">
         <h4 class="systempick_header"><?PHP echo $class;?></h4>
-        <div class="systempick">
+        <div class="systempick-box">
         <?PHP
             foreach($sistemas as $sist):
               if(ucfirst($sist['class']) == $class):
@@ -27,7 +27,7 @@
       </div>
       <?PHP endforeach;?>
 
-      <button class="search-btn">Pesquisar</button>
+      <button class="search-btn btn btn-default">Pesquisar</button>
     </form>
   </div>
 
