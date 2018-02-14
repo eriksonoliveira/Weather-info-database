@@ -16,16 +16,20 @@ function searchRegistry(e, btn) {
 
   var start = $(btn).siblings("#start").val(),
       end = $(btn).siblings("#end").val(),
-      systems = [];
+      systems = [],
+      draw = true;
 
-  var resultList = $(btn).parents(".search-page-container").find(".search-result-list"),
-      resultTotal = $(resultList).siblings(".search-result-total"),
+  var resultList = $(btn).parents(".search-page-container").find(".result-table"),
       checked = $(btn).siblings(".systempick").find(".systempick-box").find("input:checked");
 
   $(checked).each(function() {
     var id = $(this).attr("data-id");
     systems.push({key: id});
   });
+
+  if(systems.length == 0) {
+    draw = false;
+  }
 
   //Se a data final não foi especificada
   if(!end) {
@@ -48,58 +52,71 @@ function searchRegistry(e, btn) {
 
       console.log(json);
 
-      if(json[0].data.length == 0){
-        $(resultList, "#myChart").empty();
-      } else {
-        $(resultList).empty();
+      //Clear table and chart
+      $("#myChart").remove();
+      $(".result-stats-wrap").hide();
+      $(resultList).empty();
 
-        var d;
+      //End if return is empty
+      if(json[0].data.length == 0){
+        return;
+      } else {
+
         var result_items_html = "";
 
-        //Draw chart
-        drawLineChart(json[0]['chart']);
+        //Apend canvas element and draw chart
+        if(draw) {
+          $(".chart").append("<canvas id='myChart'></canvas>").addClass("chart-dimensions");
+          $(".result-stats-wrap").show();
+          drawLineChart(json[0]['chart']);
+        }
 
-        //Create table
+        //Create table head
         result_items_html+="<table class='table table-hover'>";
           result_items_html+="<tr>";
-            result_items_html+="<th>Data</th>";
-            result_items_html+="<th>Im. Satélite</th>";
-            result_items_html+="<th>Descrição</th>";
-            result_items_html+="<th></th>";
+            result_items_html+="<th colspan='4'>Registros</th>";
+          result_items_html+="</tr>";
+          result_items_html+="<tr class='result-table-categories'>";
+            result_items_html+="<td class='th-date'>Data</th>";
+            result_items_html+="<td class='th-img'>Im. Satélite</th>";
+            result_items_html+="<td class='th-info'>Descrição</th>";
+            result_items_html+="<td class='th-action'></th>";
           result_items_html+="</tr>";
 
-        //Create table
+        //Create table body
         $.each(json[0].data, function(key, value) {
 
           result_items_html+="<tr>";
-            result_items_html+="<td>"+value.date+"</td>";
+          //Date
+            result_items_html+="<td class='cell-center'>"+value.date+"</td>";
+          //Image
             result_items_html+="<td>";
               result_items_html+=appendImg(value);
             result_items_html+="</td>";
+          // weather description text
             result_items_html+="<td>";
-                // weather description text
-                if(value.info.met["06Z"].superficie.text){
+              if(value.info.met["06Z"].condicao_tempo.text){
 
-                  result_items_html+="<p><strong>Superfície:</strong> "+value.info.met["06Z"].superficie.text+"</p>";
-                  result_items_html+="<p><strong>Condição:</strong> "+value.info.met["06Z"].condicao_tempo.text+"</p>";
+                /*result_items_html+="<p><strong>Superfície:</strong> "+value.info.met["06Z"].superficie.text+"</p>";*/
+                result_items_html+="<p><strong>Condição:</strong> "+value.info.met["06Z"].condicao_tempo.text+"</p>";
 
-                } else {
-                  result_items_html+="<p>Sem informações para este dia</p>";
-                }
+              } else {
+                result_items_html+="<p>Sem informações para este dia</p>";
+              }
+
+              result_items_html+="<p class='ocorrencias'><strong>Ocorrências:</strong></p>";
+              result_items_html+="<p>"+appendPhenom(value.info.phenom)+"</p>";
             result_items_html+="</td>";
-            result_items_html+="<td>";
+            result_items_html+="<td class='cell-center'>";
               //action button
               result_items_html+="<a href='http://localhost/projetoy/Monitoramento/registros/?date="+value.date+"' target='_blank'>";
 
                 //edit button
-                result_items_html+="<button class='btn view-registry'>Ver/Editar</button>";
+                result_items_html+="<button class='btn view-registry'>Visualizar</button>";
 
               result_items_html+="</a>"
             result_items_html+="</td>";
           result_items_html+="</tr>";
-
-
-
 
         });
         result_items_html+="</table>";
@@ -124,19 +141,42 @@ function appendImg(value) {
     return result_img;
   } else {
 
-    result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/default.png'/>";
+    result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/default.png' class='result-table-img'/>";
 
     return result_img;
   }
+}
+
+function appendPhenom(data) {
+  let result_phenom = '',
+      array = [],
+      category, phenom;
+
+  for(var p in data ) {
+    category = data[p];
+    for(var i in category) {
+      phenom = data[p][i];
+      if(phenom) {
+        //Push phenom names into 'array'
+        array.push(phenom.syst);
+
+      } else {
+        return "Sem registro";
+      }
+    }
+  }
+  //Create string containing the phenomena names
+  result_phenom = array.join(", ");
+  return result_phenom;
 }
 
 
 //CHART
 function drawLineChart(results) {
   // Split timestamp and data into separate arrays
-  var labels = [], data=[];
+  var labels = [], data=[], sum=0;
   results.forEach(function(key, packet) {
-    console.log(packet);
+    sum+=Number(key.count);
     labels.push(key.month);
     data.push(key.count);
   });
@@ -145,8 +185,10 @@ function drawLineChart(results) {
   var tempData = {
     labels : labels,
     datasets : [{
-      label                : "Número de dias",
-      backgroundColor      : "rgba(38, 57, 73, 0.7)",
+      label                : "Ocorrências",
+      backgroundColor      : "rgba(93, 208, 184, 0.7)",
+      borderColor          : "rgb(32, 190, 158, 1)",
+      borderWidth          : 2,
       data                 : data
     }]
   };
@@ -159,18 +201,30 @@ function drawLineChart(results) {
      type: 'bar',
      data: tempData,
      options: {
-       responsive: false,
+       legend: {display: false},
+       title: {
+         display: true,
+         text: "Número de dias (por mês)"
+       },
+       layout: {
+         padding: {
+           top: 10,
+           bottom: 10
+         }
+       },
+       responsive: true,
        maintainAspectRatio: true,
        scales: {
          yAxes: [{
            ticks: {
-             beginAtZero: true
+             beginAtZero: true,
+             stepSize: 1
            }
          }],
          xAxes: [{
            offset: true,
            gridLines: {
-             offsetGridLines: true
+             offsetGridLines: false
            },
            barPercentage: 0.3,
            type: 'time',
@@ -185,4 +239,29 @@ function drawLineChart(results) {
        }
      }
   });
+
+  showSum(sum);
+
+}
+
+function showSum(sum) {
+  if(sum > 0) {
+    let result_total = '';
+
+
+    result_total+="<div>";
+      result_total+="<i class='fa fa-bar-chart'></i>";
+    result_total+="</div>";
+    result_total+="<div>";
+      result_total+="<div><small><strong>Total</strong></small></div>";
+      result_total+="<strong>"+sum+"</strong>";
+      if(sum > 1) {
+        result_total+="<small>Dias</small>";
+      } else {
+        result_total+="<small>Dia</small>";
+      }
+    result_total+="</div>";
+
+    $(".result-sum div").html(result_total);
+  }
 }

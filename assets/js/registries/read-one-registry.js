@@ -91,8 +91,8 @@ function receiveDayText (json, cargo) {
 
         var textArea = "textarea[data-categoria="+categoria+"][data-hora="+hora+"]",
             select = "select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]",
-            sendBtn = $(textArea).siblings(".send-text"),
-            editBtn = $(textArea).siblings(".edit-text");
+            buttons = $(textArea).siblings(".buttons");
+            /*editBtn = $(textArea).siblings(".edit-text");*/
 
         //POPULATE TEXTAREA
         $(textArea).html(text)
@@ -101,15 +101,19 @@ function receiveDayText (json, cargo) {
         //POPULATE SELECT
         $("select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]")
           .prop('selected', true);
+
+        $(buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
+
       } else {
         //EXIT FUNCTION IF TEXT IS EMPTY
         //return false;
       }
     }
 
-    $([sendBtn, editBtn]).each(function() {
+
+    /*$([sendBtn, editBtn]).each(function() {
       $(this).toggle();
-    });
+    });*/
 
   }
 }

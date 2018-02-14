@@ -262,10 +262,12 @@
                   <label>Condição de tempo:</label>
                   <textarea class="form-control" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
 
+                  <div class="buttons">
                   <button type="submit" class="btn btn-success send-text">Enviar</button>
-                  <button class="btn btn-primary edit-text">Editar</button>
+                  <!--<button class="btn btn-primary edit-text">Editar</button>
                   <button type="submit" class="btn btn-primary update-text">Atualizar</button>
-                  <button class="btn btn-danger update-cancel">Cancelar</button>
+                  <button class="btn btn-danger update-cancel">Cancelar</button>-->
+                  </div>
 
                 </div>
               </form>
@@ -300,10 +302,12 @@
                   <label>Condição de tempo:</label>
                   <textarea class="form-control" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
 
+                  <div class="buttons">
                   <button type="submit" class="btn btn-success send-text">Enviar</button>
-                  <button class="btn btn-primary edit-text">Editar</button>
+                  <!--<button class="btn btn-primary edit-text">Editar</button>
                   <button type="submit" class="btn btn-primary update-text">Atualizar</button>
-                  <button class="btn btn-danger update-cancel">Cancelar</button>
+                  <button class="btn btn-danger update-cancel">Cancelar</button>-->
+                  </div>
 
 
                 </div>

@@ -102,10 +102,12 @@ class Registros extends model {
       "data" => array(),
       "chart" => array()
     );
+
     $filter = array("1=1");
 
     if(!empty($systems)) {
-      //IF THE USER SELECTED MORE THAN ONE SYSTEM
+
+      //IF THE USER SELECTED MORE THAN ONE PHENOMENA
       $len = count($systems);
       if($len > 1) {
         $filter_multi = array();
@@ -114,23 +116,17 @@ class Registros extends model {
           $filter_multi[] = "id_sistema = :sistema_".$v['key'];
         }
 
-        /*
-        SELECT DATE_FORMAT(sistemas.date, '%M') as mes, sistemas.id_sistema, COUNT(*) AS conta
-        FROM `sistemas`
-        WHERE sistemas.id_sistema = '3'
-        GROUP BY DATE_FORMAT(sistemas.date, '%M')
-        */
-
+        //Get dates
         $sql = $this->db->prepare("
-          SELECT DISTINCT date
-          FROM `sistemas`
-          WHERE date BETWEEN :date1 AND :date2 AND date IN (
-            SELECT date
-            FROM sistemas
-            WHERE ".implode(" OR ", $filter_multi)."
-            GROUP BY date
-            HAVING COUNT(*) >= $len ) ");
-
+        SELECT DISTINCT date
+        FROM sistemas
+        WHERE date BETWEEN :date1 AND :date2 AND date IN (
+          SELECT date
+          FROM sistemas
+          WHERE ".implode(" OR ", $filter_multi)."
+          GROUP BY date
+          HAVING COUNT(*) >= $len )
+        ");
         $sql->bindValue(":date1", $start);
         $sql->bindValue(":date2", $end);
         foreach($systems as $k => $v) {
@@ -138,13 +134,40 @@ class Registros extends model {
         }
         $sql->execute();
 
+        //Insert results into $array
         if($sql->rowCount() > 0) {
           $array["data"] = $sql->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        //Get count
+        $sql2 = $this->db->prepare("
+        SELECT DATE_FORMAT(sistemas.date, '%Y-%m') as month, COUNT(DISTINCT sistemas.date) AS count
+        FROM sistemas
+        WHERE sistemas.date BETWEEN :date1 AND :date2
+        AND sistemas.date IN (
+          SELECT date
+          FROM sistemas
+          WHERE ".implode(" OR ", $filter_multi)."
+          GROUP BY date
+          HAVING COUNT(*) >= $len )
+        GROUP BY DATE_FORMAT(sistemas.date, '%Y-%m')
+        ");
+        $sql2->bindValue(":date1", $start);
+        $sql2->bindValue(":date2", $end);
+        foreach($systems as $k => $v) {
+          $sql2->bindValue(":sistema_".$v['key'], $v['key']);
+        }
+        $sql2->execute();
+
+        //Insert results into $array
+        if($sql2->rowCount() > 0) {
+           $array["chart"] = $sql2->fetchAll(PDO::FETCH_ASSOC);
+        }
+
       } else {
 
         //IF THE USER SELECTED ONLY ONE PHENOMENON
-        //Query for dates
+        //Get dates
         $sql = $this->db->prepare("
         SELECT DISTINCT date
         FROM sistemas
@@ -159,10 +182,10 @@ class Registros extends model {
           $array["data"] = $sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        //Query for count
+        //Get count
         $sql2 = $this->db->prepare("
         SELECT DATE_FORMAT(sistemas.date, '%Y-%m') as month, COUNT(*) AS count
-        FROM `sistemas`
+        FROM sistemas
         WHERE sistemas.date BETWEEN :date1 AND :date2
         AND sistemas.id_sistema = :sistema
         GROUP BY DATE_FORMAT(sistemas.date, '%Y-%m')
@@ -179,6 +202,8 @@ class Registros extends model {
 
       }
     } else {
+
+      //If no phenomena was selected
       $sql = $this->db->prepare("
       SELECT DISTINCT date
       FROM descricao_meteoro
@@ -191,6 +216,10 @@ class Registros extends model {
       SELECT DISTINCT date
       FROM imagens
       WHERE imagens.date BETWEEN :date1 AND :date2
+      UNION
+      SELECT DISTINCT date
+      FROM sistemas
+      WHERE sistemas.date BETWEEN :date1 AND :date2
       ORDER BY date ASC");
       $sql->bindValue(":date1", $start);
       $sql->bindValue(":date2", $end);
@@ -201,6 +230,7 @@ class Registros extends model {
       }
     }
 
+    //Get info for the returned dates
     if(!empty($array["data"])) {
       for($i = 0; $i < count($array["data"]); $i++) {
         $array["data"][$i]["info"] = $this->getRegistro($array["data"][$i]["date"]);
@@ -230,28 +260,23 @@ class Registros extends model {
     /*CREATE STRUCTURE FOR THE RESPONSE ARRAY*/
     foreach($horarios as $hour) {
       extract($hour);
+
+      //Description from meteorologist
       foreach($categories['met'] as $category) {
-
         $array['met'][$hora][$category] = array("id" => '', "text" => '');
-
       }
+      //Description from technician
       foreach($categories['tec'] as $category) {
-
         $array['tec'][$hora][$category] = array("id" => '', "text" => '');
-
       }
+      //Images
       foreach($categories['img'] as $category) {
-
         $array['img'][$hora][$category] = array("id" => '', "fileName" => '');
-
       }
+      //Phenomena
       foreach($categories['phenom'] as $category) {
-
         $array['phenom'][$category] = array();
-
       }
-    //}
-    //foreach($horarios as $key => $value) {
       
       //Descrição sinótica - Meteorologista
       $sql = $this->db->prepare("SELECT texto, id_meteoro, cat_descricao FROM descricao_meteoro WHERE date = :date AND horario = :horario");

@@ -129,7 +129,6 @@ function sendText(e, btn, date) {
   e.preventDefault();
 
   var data = new FormData();
-
   var elements = new KeyElements(btn);
 
   $(elements.textArea).each(function() {
@@ -158,8 +157,9 @@ function sendText(e, btn, date) {
 
           elements.success = "yes";
 
-          $(elements.sendBtn).hide();
-          $(elements.editBtn).show();
+          $(elements.buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
+          /*$(elements.sendBtn).hide();
+          $(elements.editBtn).show();*/
 
           $(elements.textArea).each(function() {
             $(this).prop("disabled", true);

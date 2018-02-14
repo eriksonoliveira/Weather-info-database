@@ -7,8 +7,8 @@
       <label for="end">Até:</label>
       <input type="text" id="end" name="calendar-2" autocomplete="off"/>
 
-      <?PHP foreach($sistemas_class as $k => $class):?>
       <div class="systempick">
+      <?PHP foreach($sistemas_class as $k => $class):?>
         <h4 class="systempick_header"><?PHP echo $class;?></h4>
         <div class="systempick-box">
         <?PHP
@@ -24,19 +24,23 @@
             endforeach;
           ?>
         </div>
-      </div>
       <?PHP endforeach;?>
+      </div>
 
-      <button class="search-btn btn btn-default">Pesquisar</button>
+      <button class="search-btn btn"><i class="fa fa-search"></i>&nbsp; Pesquisar</button>
     </form>
   </div>
 
-  <div class="search-result-container">
-    <div class="panel-group">
-      <ul class="search-result-list panel"></ul>
-    </div>
-    <div class="chart">
-      <canvas id="myChart" width="740" height="200"></canvas>
+  <div class="result-wrap">
+    <div class="result-table"></div>
+    <div class="result-stats-wrap">
+      <div class="result-stats-heading"></div>
+      <div class="result-stats">
+        <div class="chart"></div>
+        <div class="result-sum">
+          <div></div>
+        </div>
+      </div>
     </div>
   </div>
 

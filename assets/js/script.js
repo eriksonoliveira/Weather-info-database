@@ -30,10 +30,11 @@ class KeyElements {
   constructor(btn) {
     this.btn = btn;
 
-    this.form = $(btn).parents(".form-txt");
+    this.form = $(btn).parents(".buttons").parents(".form-txt");
     this.horario = $(this.form).attr("data-hora");
     this.nome = $(this.form).find("select").val();
     this.cargo = $(this.form).find("select").attr("data-cargo");
+    this.buttons = $(this.form).find(".buttons");
     this.sendBtn = $(this.form).find(".send-text");
     this.editBtn = $(this.form).find(".edit-text");
     this.updateBtn = $(this.form).find(".update-text");
