@@ -44,7 +44,17 @@ class KeyElements {
   }
 }
 
-//FORMATS TODAY DATA
+//Get query variable from url
+function getQueryVariable() {
+  var d = window.location.search.substring(1);
+  var pair = d.split("=");
+  if (pair[0] == "date") {
+   return pair[1];
+  }
+  return false;
+}
+
+//Format date
 function dateFormated(separator) {
   var d = new Date();
 

@@ -2,18 +2,32 @@ $(document).ready(function() {
 
   //GET AND FORMAT DATE
   var separator = "dash";
-  var date = dateFormated(separator);
+  var date;
+
+  //Check if GET date variable was passed
+  date = getQueryVariable();
+
+  if(date === false) {
+    //If not, use the date of the current day
+    date = dateFormated(separator);
+  }
 
   //ENABLE TEXT EDITING
-  $(".edit-text").on("click", function(e) {
-   var edit = $(this);
+  $(document).on("click", ".edit-text", function(e) {
+   let edit = $(".edit-text");
    editText(e, edit);
   });
 
   //UPDATE TEXT
-  $(".update-text").on("click", function(e) {
+  $(document).on("click", ".update-text", function(e) {
     let btn = $(this);
     updateText(e, btn, date);
+  });
+
+  //CANCEL UPDATE
+  $(document).on("click", ".update-cancel", function(e) {
+    let btn = $(this);
+    cancelUpdate(e, btn);
   });
 
 });
@@ -22,11 +36,11 @@ $(document).ready(function() {
 function editText(e, edit) {
   e.preventDefault();
 
-  $(edit).toggle();
-  $(edit).siblings(".update-cancel, .update-text").each(function() {
-    $(this).fadeToggle();
-  });
-  $(edit).siblings("textarea").prop("disabled", false);
+  var buttons = $(edit).parent();
+  $(buttons).html("<button type='submit' class='btn btn-primary update-text'>Atualizar</button><button class='btn btn-danger update-cancel'>Cancelar</button>");
+  console.log(buttons.html());
+
+  $(buttons).siblings("textarea").prop("disabled", false);
 }
 
 //Update text entry
@@ -61,10 +75,9 @@ function updateText(e, btn, date) {
         processData: false,
         success: function(json) {
 
-          $(elements.updateBtn).hide();
-          $(elements.cancelBtn).hide();
+          var buttons = $(btn).parent();
 
-          $(elements.editBtn).fadeIn();
+          $(btn).html("<button class='btn btn-primary edit-text'>Editar</button>");
 
           $(elements.textArea).each(function() {
             $(this).prop("disabled", true);
@@ -74,4 +87,14 @@ function updateText(e, btn, date) {
 
     }
   });
+}
+
+function cancelUpdate(e, btn) {
+  e.preventDefault();
+
+  var buttons = $(btn).parent();
+
+  $(buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
+
+  $(buttons).siblings("textarea").prop("disabled", true);
 }

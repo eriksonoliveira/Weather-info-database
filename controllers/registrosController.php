@@ -8,7 +8,7 @@ class registrosController extends controller{
     
     if(isset($_GET['date']) && !empty($_GET['date'])) {
 
-      $data['date'] = addslashes($_GET['date']);
+      $data['dia'] = addslashes($_GET['date']);
 
 
       if(empty($_SESSION['cLogin'])) {
@@ -54,8 +54,9 @@ class registrosController extends controller{
       $data['horario'] = $hs;
 
 
-      /* load view */
-      $this->loadTemplate('read-registro', $data);
+      //Load view
+//      $this->loadTemplate('read-registro', $data);
+      $this->loadTemplate('add-registro', $data);
     }
 
   }

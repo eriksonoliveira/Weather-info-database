@@ -2,7 +2,15 @@ $(document).ready(function() {
 
   //GET AND FORMAT DATE
   var separator = "dash";
-  var date = dateFormated(separator); /*FIX DATE FOR OLD REGISTRIES*/
+   var date;
+
+  //Check if GET date variable was passed
+  date = getQueryVariable();
+
+  if(date === false) {
+    //If not, use the date of the current day
+    date = dateFormated(separator);
+  }
 
     //PREVIEW IMAGE BEFORE UPLOAD
   $("input[type=file]").change(function(e) {
@@ -17,7 +25,7 @@ $(document).ready(function() {
   });
 
   //SEND TEXT
-  $(".send-text").on("click", function(e) {
+  $(document).on("click", ".send-text", function(e) {
     let btn = $(this);
     sendText(e, btn, date);
   });
@@ -32,7 +40,7 @@ $(document).ready(function() {
 
 //CRIA PREVIEW DA IMAGEM SELECIONADA PARA UPLOAD
 function previewImages (e, input) {
-
+console.log("test");
   var files = e.target.files.length,
       selectConfirm = $(input).next(".num-fotos");
 
@@ -114,7 +122,7 @@ function sendImage(e, btn, date) {
         if(json.success = "yes") {
           $(successMsg).html("Imagem enviada com sucesso!");
 
-          $(imgTag).attr("id", "img-"+json.imgId);
+          $(imgTag).attr("id", "img-"+json.imgId).attr("class", "img-width");
 
           $([sendBtn, cancelBtn, numImg, imgDelBtn]).each(function() {
             $(this).toggle();

@@ -11,15 +11,6 @@ $(document).ready(function() {
 
 });
 
-//Get query variable from url
-function getQueryVariable() {
-  var d = window.location.search.substring(1);
-  var pair = d.split("=");
-  if (pair[0] == "date") {
-   return pair[1];
-  }
-  return false;
-}
 
 //GET CURRENT DAY DATA ON PAGE LOAD
 function getData(date) {
@@ -77,7 +68,9 @@ function receiveDayImages(json) {
             $('<img/>')
               .attr("src", imgURL)
               .attr("id", "img-"+imgID)
-              .attr("class", "img-width"));
+              /*.attr("class", "img-width")*/
+              .addClass("img-registry")
+            );
 
         $([imgDelBtn, inputWrap]).each(function() {
           $(this).toggle();
@@ -105,8 +98,9 @@ function receiveDayText (json, cargo) {
 
         var textArea = "textarea[data-categoria="+categoria+"][data-hora="+hora+"]",
             select = "select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]",
-            sendBtn = $(textArea).siblings(".send-text"),
-            editBtn = $(textArea).siblings(".edit-text");
+            buttons = $(textArea).siblings(".buttons");
+//            sendBtn = $(textArea).siblings(".send-text"),
+//            editBtn = $(textArea).siblings(".edit-text");
 
         //POPULATE TEXTAREA
         $(textArea).html(text)
@@ -115,16 +109,11 @@ function receiveDayText (json, cargo) {
         //POPULATE SELECT
         $("select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]")
           .prop('selected', true);
-      } else {
-        //EXIT FUNCTION IF TEXT IS EMPTY
-        //return false;
+
+        //Update buttons
+        $(buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
       }
     }
-
-    $([sendBtn, editBtn]).each(function() {
-      $(this).toggle();
-    });
-
   }
 }
 

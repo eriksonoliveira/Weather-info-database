@@ -71,13 +71,18 @@ table.table-bordered > tbody > tr {
 }
 
 .input-btn-wrap label {
-  display: block;
 }
 
 .input-btn-wrap .inputBtn {
-  width: 140px;
-  margin:auto;
+  padding: 15px;
+  margin: auto;
   border-radius: 0;
+  background-color: #20BE9E;
+  color: #FFF;
+}
+
+.inputBtn i {
+  font-size: 20px;
 }
 
 .hora, .categoria {
@@ -93,7 +98,7 @@ table.table-bordered > tbody > tr {
   display: none;
 }
 
-.img-cancel, .send-img, .update-text, .update-cancel/*, .edit-text */{
+.img-cancel, .send-img{
   display: none;
 }
 
@@ -106,6 +111,10 @@ table.table-bordered > tbody > tr {
 
 .img-width {
   width: 250px;
+}
+
+.img-registry {
+
 }
 
 .img-del {
@@ -174,7 +183,6 @@ table.table-bordered > tbody > tr {
 
 .system-tags .fenom-box .fenom:hover {
   background-color: #AED2EA;
-/*  background-color: #B1E7F7;*/
 }
 .system-tags .fenom-box .fenom input {
   position: absolute;
@@ -210,13 +218,36 @@ table.table-bordered > tbody > tr {
 }
 
 .home-container .btn {
-  padding: 15px;
+  padding: 25px 20px;
   text-align: center;
+  font-size: 18px;
+  color: #FFF;
+  transition: all 0.1s;
+}
+
+.home-search-btn {
+  background-color: #1F83C5;
+}
+
+.home-search-btn:hover {
+  background-color: #70B0DA;
+  border: 2px solid #1F83C5;
+}
+
+.home-add-btn {
+  background-color: #20BE9E;
+}
+
+.home-add-btn:hover {
+  background-color: #5DD0B8;
+  border: 2px solid #20BE9E;
 }
 
 .home-container .btn-box i {
-  font-size: 15px;
+  font-size: 19px;
 }
+
+/*
 .home-container .btn-box i.fa-plus {
   color: #4CAF50;
 }
@@ -224,6 +255,7 @@ table.table-bordered > tbody > tr {
 .home-container .btn-box i.fa-search {
   color: #2196F3;
 }
+*/
 
 .login-container, .search-page-container {
   box-sizing: border-box;

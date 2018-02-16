@@ -126,6 +126,7 @@ class Registros extends model {
           WHERE ".implode(" OR ", $filter_multi)."
           GROUP BY date
           HAVING COUNT(*) >= $len )
+          ORDER BY sistemas.date
         ");
         $sql->bindValue(":date1", $start);
         $sql->bindValue(":date2", $end);
@@ -171,7 +172,8 @@ class Registros extends model {
         $sql = $this->db->prepare("
         SELECT DISTINCT date
         FROM sistemas
-        WHERE sistemas.date BETWEEN :date1 AND :date2 AND id_sistema = :sistema");
+        WHERE sistemas.date BETWEEN :date1 AND :date2 AND id_sistema = :sistema
+        ORDER BY sistemas.date");
         $sql->bindValue(":date1", $start);
         $sql->bindValue(":date2", $end);
         $sql->bindValue(":sistema", $systems[0]['key']);

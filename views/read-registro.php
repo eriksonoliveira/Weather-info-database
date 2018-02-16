@@ -1,7 +1,7 @@
-<div class="add-content-container">
-  <div class="add-content-wrap container">
+<div class="registry-container">
+  <div class="registry-inner-container container">
     <h1>Adicionar Monitoramento do dia</h1>
-    <h3><?PHP echo $date;?></h3>
+    <h3><?PHP echo $dia;?></h3>
 
     <div>
       <table class="table">
@@ -262,10 +262,12 @@
                   <label>Condição de tempo:</label>
                   <textarea class="form-control" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
 
+                  <div class="buttons">
                   <button type="submit" class="btn btn-success send-text">Enviar</button>
-                  <button class="btn btn-primary edit-text">Editar</button>
+                  <!--<button class="btn btn-primary edit-text">Editar</button>
                   <button type="submit" class="btn btn-primary update-text">Atualizar</button>
-                  <button class="btn btn-danger update-cancel">Cancelar</button>
+                  <button class="btn btn-danger update-cancel">Cancelar</button>-->
+                  </div>
 
                 </div>
               </form>
@@ -300,10 +302,12 @@
                   <label>Condição de tempo:</label>
                   <textarea class="form-control" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
 
+                  <div class="buttons">
                   <button type="submit" class="btn btn-success send-text">Enviar</button>
-                  <button class="btn btn-primary edit-text">Editar</button>
+                  <!--<button class="btn btn-primary edit-text">Editar</button>
                   <button type="submit" class="btn btn-primary update-text">Atualizar</button>
-                  <button class="btn btn-danger update-cancel">Cancelar</button>
+                  <button class="btn btn-danger update-cancel">Cancelar</button>-->
+                  </div>
 
 
                 </div>
@@ -325,8 +329,6 @@
         <div class="fenom-box">
           <h3 class="fenom-heading"><?PHP echo $class;?></h3>
           <?PHP
-
-//            for($i = 0; $i < count($sistemas); $i++):
             foreach($sistemas as $sist):
               if(ucfirst($sist['class']) == $class):
           ?>
@@ -386,10 +388,12 @@
                   <label>Ocorrências:</label>
                   <textarea class="form-control" data-categoria="ocorrencias" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
 
+                  <div class="buttons">
                   <button type="submit" class="btn btn-success send-text">Enviar</button>
-                  <button class="btn btn-primary edit-text">Editar</button>
+                  <!--<button class="btn btn-primary edit-text">Editar</button>
                   <button type="submit" class="btn btn-primary update-text">Atualizar</button>
-                  <button class="btn btn-danger update-cancel">Cancelar</button>
+                  <button class="btn btn-danger update-cancel">Cancelar</button>-->
+                  </div>
 
 
                 </div>
@@ -407,5 +411,10 @@
 
 </div>
 
-<!-- load read-one-registry js -->
+<div class="bg-box"></div>
+<div class="img-modal-box">
+  <img src="" width="100%"/>
+</div>
+
+<!-- load read-registry js -->
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-registry.js"></script>

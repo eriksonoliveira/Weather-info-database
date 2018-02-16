@@ -1,7 +1,15 @@
 $(document).ready(function() {
   //GET AND FORMAT DATE
-  var separator = "dash";
-  var date = dateFormated(separator);
+  var date;
+
+  //Check if GET date variable was passed
+  date = getQueryVariable();
+
+  if(date === false) {
+    //If not, use the date of the current day
+    let separator = "dash";
+    date = dateFormated(separator);
+  }
 
   //GET DATA FOR TODAY
   getData(date);
@@ -91,30 +99,21 @@ function receiveDayText (json, cargo) {
 
         var textArea = "textarea[data-categoria="+categoria+"][data-hora="+hora+"]",
             select = "select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]",
-            buttons = $(textArea).siblings(".buttons");
-            /*editBtn = $(textArea).siblings(".edit-text");*/
+            buttons = $(textArea).siblings(".buttons")
 
-        //POPULATE TEXTAREA
+        //Populate textarea
         $(textArea).html(text)
           .prop("disabled", true);
 
-        //POPULATE SELECT
+        //Populate select
         $("select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]")
           .prop('selected', true);
 
+        //Update buttons
         $(buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
 
-      } else {
-        //EXIT FUNCTION IF TEXT IS EMPTY
-        //return false;
       }
     }
-
-
-    /*$([sendBtn, editBtn]).each(function() {
-      $(this).toggle();
-    });*/
-
   }
 }
 
