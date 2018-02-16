@@ -263,11 +263,12 @@ table.table-bordered > tbody > tr {
 
 .login-container {
   width: 100%;
-  height: -webkit-calc(100% - 50px);
+  height: 100vh;
+/*  height: -webkit-calc(100% - 50px);
   height: -moz-calc(100% - 50px);
   height: calc(100% - 50px);
   position: absolute;
-  top: 50px;
+  top: 50px;*/
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -279,9 +280,9 @@ table.table-bordered > tbody > tr {
   max-width: 300px;
   flex-grow: 1;
   padding: 20px;
-  border: 1px solid;
+/*  border: 1px solid;
   background-color: #FFF;
-  box-shadow: 0px 0px 8px #666;
+  box-shadow: 0px 0px 8px #666;*/
 }
 
 .search-page-container {

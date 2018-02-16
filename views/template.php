@@ -12,19 +12,19 @@
   </head>
   <body>
 
+    <?PHP if(isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])): ?>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="<?PHP echo BASE_URL; ?>" class="navbar-brand">Monitoramento</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <?PHP if(isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])): ?>
             <li><a href=""><?PHP echo $_SESSION['nome-usuario']?></a></li>
             <li><a href="<?PHP echo BASE_URL; ?>login/sair">Sair</a></li>    
           <?PHP else:  ?>
-            <li><a href="<?PHP echo BASE_URL; ?>cadastrar">Cadastre-se</a></li>
-            <li><a href="<?PHP echo BASE_URL; ?>login">Login</a></li>
-          <?PHP endif; ?>
+    <!--        <li><a href="<?PHP //echo BASE_URL; ?>cadastrar">Cadastre-se</a></li>
+            <li><a href="<?PHP //echo BASE_URL; ?>login">Login</a></li>
+-->          <?PHP endif; ?>
         </ul>
       </div>
     </nav>

@@ -15,7 +15,7 @@ class ajaxController extends controller {
 
     //RECEBE DADOS DO DIA ATUAL
     if(isset($_POST['date']) && !empty($_POST['date'])) {
-      $data['date'] = $_POST['date'];
+      $data['date'] = addslashes($_POST['date']);
 
       $r = new Registros;
       $data['currDayReg'] = $r->getRegistro($data['date']);
