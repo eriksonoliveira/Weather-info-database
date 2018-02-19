@@ -14,7 +14,7 @@ $(document).ready(function() {
 
   //ENABLE TEXT EDITING
   $(document).on("click", ".edit-text", function(e) {
-   let edit = $(".edit-text");
+   let edit = $(this);
    editText(e, edit);
   });
 
@@ -38,7 +38,6 @@ function editText(e, edit) {
 
   var buttons = $(edit).parent();
   $(buttons).html("<button type='submit' class='btn btn-primary update-text'>Atualizar</button><button class='btn btn-danger update-cancel'>Cancelar</button>");
-  console.log(buttons.html());
 
   $(buttons).siblings("textarea").prop("disabled", false);
 }
@@ -77,7 +76,7 @@ function updateText(e, btn, date) {
 
           var buttons = $(btn).parent();
 
-          $(btn).html("<button class='btn btn-primary edit-text'>Editar</button>");
+          $(buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
 
           $(elements.textArea).each(function() {
             $(this).prop("disabled", true);

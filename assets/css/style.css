@@ -65,9 +65,13 @@ table.table-bordered > tbody > tr {
 }*/
 
 .reg-form {
-  width: 300px;
+  width: 80%;
   margin: auto;
   text-align: center;
+}
+
+.reg-form textarea {
+  height: 80px;
 }
 
 .input-btn-wrap label {
