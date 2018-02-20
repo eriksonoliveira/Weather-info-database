@@ -26,7 +26,9 @@
               </form>
 
               <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                <span class="img-del"><webicon icon="fa:trash-o"/></span>
+                <div class="img-overlay">
+                  <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
+                </div>
               </div>
 
               <p class="sucesso-msg"></p>

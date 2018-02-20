@@ -14,7 +14,7 @@ $(document).ready(function() {
   //GET DATA FOR TODAY
   getData(date);
 
-  //Scroll to top buttons
+  //Show button on scroll
   $(document).scroll(function() {
     scrollBtn();
   });

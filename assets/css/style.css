@@ -121,11 +121,15 @@ table.table-bordered > tbody > tr {
 
 }
 
+.img-overlay {
+
+}
+
 .img-del {
   display: none;
   position: absolute;
   bottom: 5px; right: 50%;
-  z-index: 2;
+/*  z-index: 2;*/
   color: #AAA;
 }
 
