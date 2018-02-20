@@ -93,3 +93,19 @@ function modal() {
   });
 }
 
+function scrollBtn() {
+  let documentTop = $(document).scrollTop();
+
+  if(documentTop > 50) {
+    $(".scroll-top").css("display", "block");
+  } else {
+    $(".scroll-top").css("display", "none");
+  }
+}
+
+function scrollToTop() {
+  $("html, body").animate({
+    scrollTop: 0
+  }, 500);
+}
+

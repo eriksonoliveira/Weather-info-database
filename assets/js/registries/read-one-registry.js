@@ -14,6 +14,11 @@ $(document).ready(function() {
   //GET DATA FOR TODAY
   getData(date);
 
+  //Scroll to top buttons
+  $(document).scroll(function() {
+    scrollBtn();
+  });
+
 });
 //GET CURRENT DAY DATA ON PAGE LOAD
 function getData(date) {

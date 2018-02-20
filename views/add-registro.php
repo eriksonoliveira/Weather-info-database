@@ -409,5 +409,7 @@
   <img src="" width="100%"/>
 </div>
 
+<button class="scroll-top btn btn-primary" title="Ir para o topo" onclick="scrollToTop()">Topo</button>
+
 <!-- load read-one-registry js -->
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>
