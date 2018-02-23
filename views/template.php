@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Monitoramento Meteorológico</title>
+    <title><?PHP echo $title;?> - Monitoramento Meteorológico</title>
     <!-- bootstrap CSS -->
     <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/bootstrap.min.css"/>
     <!-- jQueryUI CSS -->
@@ -21,10 +21,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href=""><?PHP echo $_SESSION['nome-usuario']?></a></li>
             <li><a href="<?PHP echo BASE_URL; ?>login/sair">Sair</a></li>    
-          <?PHP else:  ?>
-    <!--        <li><a href="<?PHP //echo BASE_URL; ?>cadastrar">Cadastre-se</a></li>
-            <li><a href="<?PHP //echo BASE_URL; ?>login">Login</a></li>
--->          <?PHP endif; ?>
+    <?PHP endif; ?>
         </ul>
       </div>
     </nav>

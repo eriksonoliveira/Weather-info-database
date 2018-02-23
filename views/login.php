@@ -17,7 +17,7 @@
         <input type="password" name="senha" id="senha" placeholder="Email" class="form-control"/>
       </div>
       <input type="submit" value="Fazer Login" class="btn btn-primary login-submit"/>
-      <div class="form-group login-forgot"><a href="#">Esqueci a senha</a></div>
+      <div class="form-group login-forgot"><a href="<?PHP echo BASE_URL;?>forgot">Esqueci a senha</a></div>
     </form>
   </div>
 </div>

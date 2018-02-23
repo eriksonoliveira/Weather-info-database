@@ -8,7 +8,9 @@ class homeController extends controller {
       exit;
     }
 
-    $data = array();
+    $data = array(
+      'title' => 'Home'
+    );
     
     $a = new Registros();
     $u = new Usuarios();

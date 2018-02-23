@@ -7,7 +7,9 @@ class pesquisarController extends controller{
       exit;
     }
 
-    $data = array();
+    $data = array(
+      'title' => 'Pesquisar'
+    );
 
     $s = new Sistemas();
     $sist = $s->getLista();

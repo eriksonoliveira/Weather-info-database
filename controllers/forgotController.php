@@ -1,10 +1,10 @@
 <?PHP
-class loginController extends controller{
-  
+class forgotController extends controller{
+
   public function index() {
     $data = array(
       'alert' => '',
-      'title' => 'Login'
+      'title' => 'Esqueci a senha'
     );
 
     $u = new Usuarios();
@@ -19,15 +19,8 @@ class loginController extends controller{
         $data['alert'] = "<div class='alert alert-danger'>Usuario e/ou senha errados</div>";
       }
     }
-    
-    $this->loadTemplate('login', $data);
-  }
-  
-  public function sair() {
 
-    unset($_SESSION['cLogin']);
-    header("Location: ".BASE_URL);
-  
+    $this->loadTemplate('forgot', $data);
   }
 }
 ?>

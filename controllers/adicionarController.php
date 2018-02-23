@@ -12,7 +12,8 @@ class adicionarController extends controller{
     }
 
     $data = array(
-      "success" => ''
+      "success" => '',
+      'title' => 'Ver registro'
     );
     
     $horarios = array("00","06","12","18");
