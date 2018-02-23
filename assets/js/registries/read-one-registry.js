@@ -40,7 +40,7 @@ function getData(date) {
           jsonTec = json.currDayReg.tec,
           jsonPhen = json.currDayReg.phenom;
 
-      console.log(json);
+//      console.log(json);
 
       receiveDayImages(jsonImg);
       receiveDayText(jsonMet, "meteoro");
@@ -73,15 +73,14 @@ function receiveDayImages(json) {
 
         var img_html = '';
 
-        img_html+="<a href='javascript:;' class='img-clickable'>";
-          img_html+="<img src='"+imgURL+"' id='img-"+imgID+"' class='img-width'/>";
-        img_html+="</a>";
+        img_html+=
+          "<a href='javascript:;' class='img-clickable'>" +
+            "<img src='"+imgURL+"' id='img-"+imgID+"' class='img-width'/>" +
+          "</a>";
 
         $(imgWrap).append(img_html);
 
-        $([imgDelBtn, inputWrap]).each(function() {
-          $(this).toggle();
-        });
+        $(inputWrap).toggle();
       }
     }
   }

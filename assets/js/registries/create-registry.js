@@ -40,30 +40,23 @@ $(document).ready(function() {
 
 //CRIA PREVIEW DA IMAGEM SELECIONADA PARA UPLOAD
 function previewImages (e, input) {
-console.log("test");
-  var files = e.target.files.length,
-      selectConfirm = $(input).next(".num-fotos");
-
-  if (files > 1){
-    $(selectConfirm).html(files+" arquivos selecionados")
-  } else {
-    $(selectConfirm).html(files+" arquivo selecionado")
-  }
 
   var imPreview = $(input).parents(".reg-form").next(".img-wrap"),
-      inputWrap = $(input).parent();
-
-  $(imPreview)
-    .append(
-      $("<img/>")
-        .attr("src", URL.createObjectURL(e.target.files[0]))
-        .attr("class", "img-width")
-        .attr("class", "img-thumbnail")
-    );
+      inputWrap = $(input).parent(),
+      img_html = '';
 
   var cancelBtn = $(imPreview).prev("form").find(".img-cancel"),
       sendBtn = $(imPreview).prev("form").find(".send-img");
 
+  //Create image thumbnail
+  img_html+=
+    "<a href='javascript:;'>" +
+        "<img src='"+URL.createObjectURL(e.target.files[0])+"' class='img-width'/>" +
+    "</a>";
+
+  $(imPreview).append(img_html);
+
+  //Toggle form buttons
   $([cancelBtn, sendBtn, inputWrap]).each(function() {
     $(this).toggle();
   });
@@ -71,9 +64,6 @@ console.log("test");
   //Remove image preview when click "Cancel"
   $(cancelBtn).on("click", function() {
     $(imPreview).find("img").remove();
-
-    /*$(imPreview).find(".img-del").toggle();*/
-    $(selectConfirm).empty();
 
     $([cancelBtn, sendBtn, inputWrap]).each(function() {
       $(this).toggle();
@@ -90,11 +80,10 @@ function sendImage(e, btn, date) {
 
   var sendBtn = $(btn),
       cancelBtn = $(btn).siblings(".img-cancel"),
-      numImg = $(btn).siblings(".num-fotos"),
       imgWrap = $(btn).parents(".form-img").siblings(".img-wrap"),
       inputBtn = $(imgWrap).find("label"),
-      imgTag = $(imgWrap).find("img");
-      imgDelBtn = $(imgWrap).find(".img-del"),
+      imgTag = $(imgWrap).find("img"),
+      imgLink = $(imgWrap).find("a");
       form = $(btn).parents(".form-img");
 
   var horario = $(form).find("input[type=file]").attr("data-hora"),
@@ -123,8 +112,9 @@ function sendImage(e, btn, date) {
           $(successMsg).html("Imagem enviada com sucesso!");
 
           $(imgTag).attr("id", "img-"+json.imgId).attr("class", "img-width");
+          $(imgLink).attr("class", "img-clickable");
 
-          $([sendBtn, cancelBtn, numImg, imgDelBtn]).each(function() {
+          $([sendBtn, cancelBtn]).each(function() {
             $(this).toggle();
           });
         }

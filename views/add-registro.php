@@ -19,7 +19,6 @@
                     <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="btn btn-default inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
                     <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
                 </div>
@@ -45,14 +44,15 @@
                     <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
                     <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="reset">Cancelar</button>
                 </div>
               </form>
 
               <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                <span class="img-del"><webicon icon="fa:trash-o"/></span>
+                <div class="img-overlay">
+                  <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
+                </div>
               </div>
 
               <p class="sucesso-msg"></p>
@@ -80,14 +80,15 @@
                     <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
                     <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
               <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                <span class="img-del"><webicon icon="fa:trash-o"/></span>
+                <div class="img-overlay">
+                  <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
+                </div>
               </div>
 
               <p class="sucesso-msg"></p>
@@ -104,14 +105,15 @@
                     <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
                     <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="reset">Cancelar</button>
                 </div>
               </form>
 
               <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                <span class="img-del"><webicon icon="fa:trash-o"/></span>
+                <div class="img-overlay">
+                  <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
+                </div>
               </div>
 
               <p class="sucesso-msg"></p>
@@ -138,14 +140,15 @@
                     <label for="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
                     <input id="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][2];?>" data-categoria="<?PHP echo $cats['img'][2];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
               <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][2];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                <span class="img-del"><webicon icon="fa:trash-o"/></span>
+                <div class="img-overlay">
+                  <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
+                </div>
               </div>
 
               <p class="sucesso-msg"></p>
@@ -172,14 +175,15 @@
                     <label for="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
                     <input id="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][3];?>" data-categoria="<?PHP echo $cats['img'][3];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
               <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][3];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                <span class="img-del"><webicon icon="fa:trash-o"/></span>
+                <div class="img-overlay">
+                  <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
+                </div>
               </div>
 
               <p class="sucesso-msg"></p>
@@ -206,14 +210,15 @@
                     <label for="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
                     <input id="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][4];?>" data-categoria="<?PHP echo $cats['img'][4];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <p class="num-fotos"></p>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
               <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][4];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                <span class="img-del"><webicon icon="fa:trash-o"/></span>
+                <div class="img-overlay">
+                  <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
+                </div>
               </div>
 
               <p class="sucesso-msg"></p>
@@ -259,9 +264,6 @@
 
                   <div class="buttons">
                   <button type="submit" class="btn btn-success send-text">Enviar</button>
-                  <!--<button class="btn btn-primary edit-text">Editar</button>
-                  <button type="submit" class="btn btn-primary update-text">Atualizar</button>
-                  <button class="btn btn-danger update-cancel">Cancelar</button>-->
                   </div>
 
                 </div>
@@ -299,9 +301,6 @@
 
                   <div class="buttons">
                   <button type="submit" class="btn btn-success send-text">Enviar</button>
-                  <!--<button class="btn btn-primary edit-text">Editar</button>
-                  <button type="submit" class="btn btn-primary update-text">Atualizar</button>
-                  <button class="btn btn-danger update-cancel">Cancelar</button>-->
                   </div>
 
 
@@ -385,9 +384,6 @@
 
                   <div class="buttons">
                   <button type="submit" class="btn btn-success send-text">Enviar</button>
-                  <!--<button class="btn btn-primary edit-text">Editar</button>
-                  <button type="submit" class="btn btn-primary update-text">Atualizar</button>
-                  <button class="btn btn-danger update-cancel">Cancelar</button>-->
                   </div>
 
 
@@ -407,11 +403,10 @@
 </div>
 
 <div class="bg-box"></div>
-<div class="img-modal-box">
-  <img src="" width="100%"/>
-</div>
+<div class="modal-box"></div>
 
-<button class="scroll-top btn btn-primary" title="Ir para o topo" onclick="scrollToTop()">Topo</button>
+<button class="scroll-top btn btn-primary" title="Ir para o topo" onclick="scrollToTop()"><i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+</button>
 
 <!-- load read-one-registry js -->
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>

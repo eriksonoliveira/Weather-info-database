@@ -1,22 +1,29 @@
 $(document).ready(function() {
 
   //DELETE IMAGE
+
+  //Delete confirmation alert
   $(".img-del").on("click", function() {
     var del = $(this);
-    deleteImg(del);
-  });
 
+    //Show confirmation alert
+    modal(del, 2);
+
+    //Delete Image
+    $(document).on("click", ".modal-del-confirm", function() {
+        deleteImg(del);
+    });
+  });
 });
 
-//DELETAR IMAGEM
+//Select image ID and send AJAX request
 function deleteImg (del) {
   var data = new FormData();
 
-  var im = $(del).next("img"),
-      imgID = $(del).next("img").attr("id"),
-      successMsg = $(del).parent().next(".sucesso-msg"),
-      inputWrap = $(del).parent().prev(".reg-form").find(".input-btn-wrap"),
-      delBtn = $(del);
+  var im = $(del).parent().siblings("a").find("img"),
+      imgID = $(im).attr("id"),
+      successMsg = $(del).parents(".img-wrap").next(".sucesso-msg"),
+      inputWrap = $(del).parents(".img-wrap").prev(".reg-form").find(".input-btn-wrap");
 
   data.append("imgID", imgID);
 
@@ -33,7 +40,8 @@ function deleteImg (del) {
 
         $(successMsg).html("Imagem removida com sucesso!");
         $(im).remove();
-        $(delBtn).toggle();
+        $(inputWrap).toggle();
+        $(".bg-box, .modal-box").fadeOut("fast");
 
       }
     }

@@ -49,6 +49,4 @@
 
 
 <div class="bg-box"></div>
-<div class="img-modal-box">
-  <img src="" width="100%"/>
-</div>
+<div class="modal-box"></div>

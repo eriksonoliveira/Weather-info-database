@@ -117,25 +117,34 @@ table.table-bordered > tbody > tr {
   width: 250px;
 }
 
-.img-registry {
-
+.img-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  background-color: rgba(46, 46, 46, 0.6);
+  transition: .3s;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.img-overlay {
-
+.img-wrap:hover .img-overlay {
+  height: 50px;
 }
 
 .img-del {
-  display: none;
   position: absolute;
-  bottom: 5px; right: 50%;
-/*  z-index: 2;*/
-  color: #AAA;
+  text-align: center;
+  color: #DDD;
 }
 
 .img-del:hover {
   cursor: pointer;
-  color: #DDD;
+  color: #FFF;
 }
 
 .img-del webicon {
@@ -221,7 +230,14 @@ table.table-bordered > tbody > tr {
   position: fixed;
   bottom: 20px;
   right: 30px;
-  z-index: 99;
+  width: 50px;
+  height: 50px;
+  font-size: 22px;
+  text-align: center;
+  background-color: rgba(31,131,197, .7);
+  border: 0;
+  border-radius: 0;
+  z-index: 8;
 }
 
 .home-container {
@@ -486,16 +502,16 @@ small {
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.7);
-  z-index: 3;
+  z-index: 9;
   display: none;
 }
 
-.img-modal-box {
+.modal-box {
   position: fixed;
   top: 50%;
   left: 50%;
   width: 500px;
-  height: 500px;
+  height: auto;
   background-color: #FFF;
   padding: 20px;
   margin-left: -270px;

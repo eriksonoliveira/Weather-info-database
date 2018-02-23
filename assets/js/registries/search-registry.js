@@ -134,13 +134,16 @@ function appendImg(value) {
   var result_img = '';
   if(value.info.img["06Z"].im_satelite.fileName) {
 
-    result_img += "<a href='javascript:;' class='img-clickable'>";
-      result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/im_satelite/"+value.info.img["06Z"].im_satelite.fileName+"' class='result-table-img'/>";
-    result_img += "</a>";
+    //Create html structure
+    result_img +=
+      "<a href='javascript:;' class='img-clickable'>" +
+        "<img src='http://localhost/projetoy/Monitoramento/assets/images/im_satelite/"+value.info.img["06Z"].im_satelite.fileName+"' class='result-table-img'/>" +
+      "</a>";
 
     return result_img;
   } else {
 
+    //Show default image
     result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/default.png' class='result-table-img'/>";
 
     return result_img;

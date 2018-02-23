@@ -22,7 +22,9 @@ $(document).ready(function() {
   });
 
   //TOGGLE MODAL WHEN USER CLICKS IMAGES
-  modal();
+  $(document).on("click", ".img-clickable", function() {
+    modal(this, 1);
+  });
 
 });
 
@@ -78,18 +80,34 @@ function dateFormated(separator) {
   return date;
 }
 
-function modal() {
-  $(document).on("click", "a.img-clickable", function() {
-    var path = $(this).find("img").attr("src");
+//Create modal boxes for images and delete confirmation
+function modal(el, type) {
+  var path,
+      modal_html = '';
 
-    $(".img-modal-box img").attr("src", path);
+  //Type == 1 form img, type == 2 for delete confirmation
+  if(type == 1) {
+    //Get img src attribute
+    path = $(el).find("img").attr("src");
 
-    //Show modal
-    $(".bg-box, .img-modal-box").fadeIn("fast");
-    //Hide modal
-    $(".bg-box").on("click", function() {
-      $(".bg-box, .img-modal-box").fadeOut("fast");
-    });
+    //Create modal image sctructure
+    modal_html+="<img src='"+path+"' width='100%'/>";
+
+    //Insert the content
+  } else if(type == 2) {
+    modal_html+=
+      "<p>Excluir a imagem?</p>" +
+      "<button class='modal-del-confirm'>Excluir</button>" +
+      "<button class='modal-del-cancel'>Cancelar</button>";
+  }
+
+  //Insert the content and show modal
+  $(".modal-box").html(modal_html);
+  $(".bg-box, .modal-box").fadeIn("fast");
+
+  //Hide modal
+  $(".bg-box, .modal-del-cancel").on("click", function() {
+    $(".bg-box, .modal-box").fadeOut("fast");
   });
 }
 
@@ -103,6 +121,7 @@ function scrollBtn() {
   }
 }
 
+//Scroll to top animation
 function scrollToTop() {
   $("html, body").animate({
     scrollTop: 0
