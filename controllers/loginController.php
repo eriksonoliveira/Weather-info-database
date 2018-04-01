@@ -11,7 +11,7 @@ class loginController extends controller{
 
     if(isset($_POST['email']) && !empty($_POST['email'])) {
       $email = addslashes($_POST['email']);
-      $senha = $_POST['senha'];
+      $senha = md5($_POST['senha']);
 
       if($u->login($email, $senha)) {
         header('Location: '.BASE_URL);

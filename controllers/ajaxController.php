@@ -104,6 +104,92 @@ class ajaxController extends controller {
     exit;
   }
 
+  //UPDATE FORGOT PASSWORD
+  public function pass_forgot() {
+    $data = array(
+      'confirmation' => ''
+    );
+
+    $u = new Usuarios();
+
+    if(isset($_POST['email']) && !empty($_POST['email'])) {
+      $email = addslashes($_POST['email']);
+
+      //If the email existis in the database, send the recovery message
+      $user_id = $u->hasUser($email);
+      if($user_id) {
+
+        //Generate the code
+        $code = md5(time().rand(0, 9999).rand(0, 9999));
+
+        //Insert into the database
+        $u->insertRecovCode($code, $user_id['id']);
+
+        //SEND MAIL
+        $m = new Mail();
+
+        $msg = "Email de recuperação de senha do sistema de Monitoramento Meteorológico.\r\n
+        Utilize este link para redefinir a sua senha: <a href='".BASE_URL."password/recover/?code=".$code."'>".BASE_URL."password/recover/?code=".$code."</a>.";
+
+        $m->sendMail($email, $msg);
+
+//        $data['confirmation'] = "Utilize <a href='".BASE_URL."password/recover/?code=".$code."'>este link</a> para redefinir a sua senha.";
+        $data['confirmation'] = "Um email com um link para recuperação de senha foi enviado para o seu e-mail ".$email.".";
+      } else {
+        $data['confirmation'] = "<div class='alert alert-danger'>Usuario não cadastrado!</div>";
+      }
+
+      //SENDS DATA IN JSON FORMAT
+      echo json_encode($data);
+      exit;
+    }
+  }
+
+  public function pass_recovery() {
+    $data = array(
+      'confirmation' => ''
+    );
+
+    if(isset($_POST['newPass']) && !empty($_POST['newPass'])) {
+      $newPass = md5($_POST['newPass']);
+      $id = addslashes($_POST['userID']);
+
+      $u = new Usuarios();
+
+      $updated = $u->updatePass($newPass, $id);
+
+      if($updated) {
+        $data['confirmation'] = "Senha atualizada com sucesso!</br>
+        Faça o <a href='".BASE_URL."/login'>login</a>";
+      }
+
+      echo json_encode($data);
+      exit;
+    }
+  }
+
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
