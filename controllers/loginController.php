@@ -2,6 +2,11 @@
 class loginController extends controller{
   
   public function index() {
+    ob_start();
+    if(isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])) {
+      header('Location: '.BASE_URL);
+    }
+
     $data = array(
       'alert' => '',
       'title' => 'Login'
@@ -22,6 +27,7 @@ class loginController extends controller{
     }
     
     $this->loadTemplate('login', $data);
+    ob_end_flush();
   }
   
   public function sair() {
