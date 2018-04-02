@@ -296,6 +296,7 @@ table.table-bordered > tbody > tr {
   justify-content: center;
   align-items: center;
   background-color: #F3F3F3;
+  font-family: 'Open Sans';
 }
 
 .login-form {

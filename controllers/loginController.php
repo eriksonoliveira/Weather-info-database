@@ -15,6 +15,7 @@ class loginController extends controller{
 
       if($u->login($email, $senha)) {
         header('Location: '.BASE_URL);
+        exit;
       } else {
         $data['alert'] = "<div class='alert alert-danger'>Usuario e/ou senha errados</div>";
       }
