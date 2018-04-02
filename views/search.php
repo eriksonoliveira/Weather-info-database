@@ -16,7 +16,9 @@
               if(ucfirst($sist['class']) == $class):
           ?>
           <span>
-            <input type="checkbox" data-id="<?PHP echo $sist['id'];?>"/><?PHP echo $sist['nome']."<br/>";?>
+            <input class="css-checkbox" type="checkbox" id="check-<?PHP echo $sist['id'];?>" data-id="<?PHP echo $sist['id'];?>"/>
+            <label class="css-label" for="check-<?PHP echo $sist['id'];?>"><?PHP echo $sist['nome'];?></label>
+            <?PHP //echo $sist['nome']."<br/>";?>
           </span>
 
           <?PHP
@@ -33,6 +35,9 @@
 
   <div class="result-wrap">
     <div class="result-table"></div>
+    <div aria-label="Page navigation" class="result-table-pagination">
+      <ul class="pagination"></ul>
+    </div>
     <div class="result-stats-wrap">
       <div class="result-stats-heading"></div>
       <div class="result-stats">

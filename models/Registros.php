@@ -96,7 +96,9 @@ class Registros extends model {
   }
 
   //Pesquisa registros dentro das datas especificadas e que contém os fenômenos especificados
-  public function searchRegistry($start, $end, $systems) {
+  public function searchRegistry($start, $end, $systems, $page) {
+
+    $p = new Pagination();
 
     $array = array(
       "data" => array(),
@@ -204,9 +206,10 @@ class Registros extends model {
 
       }
     } else {
-
       //If no phenomena was selected
-      $sql = $this->db->prepare("
+
+      //Get total of pages
+      $sql1 = $this->db->prepare("
       SELECT DISTINCT date
       FROM descricao_meteoro
       WHERE descricao_meteoro.date BETWEEN :date1 AND :date2
@@ -221,14 +224,39 @@ class Registros extends model {
       UNION
       SELECT DISTINCT date
       FROM sistemas
-      WHERE sistemas.date BETWEEN :date1 AND :date2
-      ORDER BY date ASC");
-      $sql->bindValue(":date1", $start);
-      $sql->bindValue(":date2", $end);
-      $sql->execute();
+      WHERE sistemas.date BETWEEN :date1 AND :date2");
+      $sql1->bindValue(":date1", $start);
+      $sql1->bindValue(":date2", $end);
+      $items_per_page = 10;
+      $total_pages = $p->getTotalPages($sql1, $items_per_page);
 
-      if($sql->rowCount() > 0) {
-        $array["data"] = $sql->fetchAll(PDO::FETCH_ASSOC);
+      $start_item = $p->getStart($page, $items_per_page);
+
+      //Get Results limited by $items_per_page
+      $sql2 = $this->db->prepare(
+      "SELECT DISTINCT date
+      FROM descricao_meteoro
+      WHERE descricao_meteoro.date BETWEEN :date1 AND :date2
+      UNION
+      SELECT DISTINCT date
+      FROM descricao_tec
+      WHERE descricao_tec.date BETWEEN :date1 AND :date2
+      UNION
+      SELECT DISTINCT date
+      FROM imagens
+      WHERE imagens.date BETWEEN :date1 AND :date2
+      UNION
+      SELECT DISTINCT date
+      FROM sistemas
+      WHERE sistemas.date BETWEEN :date1 AND :date2
+      ORDER BY date ASC LIMIT ".$start_item.", ".$items_per_page);
+      $sql2->bindValue(":date1", $start);
+      $sql2->bindValue(":date2", $end);
+      $sql2->execute();
+
+      if($sql2->rowCount() > 0) {
+        $array["data"] = $sql2->fetchAll(PDO::FETCH_ASSOC);
+        $array['num_pages'] = $total_pages;
       }
     }
 

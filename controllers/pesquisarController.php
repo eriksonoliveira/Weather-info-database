@@ -33,6 +33,7 @@ class pesquisarController extends controller{
     if(isset($_POST['dateStart']) && !empty($_POST['dateStart'])) {
       $start = addslashes($_POST['dateStart']);
       $end = addslashes($_POST['dateEnd']);
+      $page = addslashes($_POST['page']);
       if(isset($_POST['systems'])) {
         $systems = $_POST['systems'];
         $systems = json_decode($systems, true);
@@ -45,7 +46,7 @@ class pesquisarController extends controller{
       $endDate = $e[2]."-".$e[0]."-".$e[1];
 
       $r = new Registros();
-      $data['result'] = $r->searchRegistry($startDate, $endDate, $systems);
+      $data['result'] = $r->searchRegistry($startDate, $endDate, $systems, $page);
 
       /*$data['result'] = "start: ".$startDate. ", End: ". $endDate;*/
     }
