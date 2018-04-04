@@ -2,7 +2,7 @@
   <div class="search-sidebar">
     <form class="datepick">
       <label for="start">De:</label>
-      <input type="text" id="start" name="calendar-1" autocomplete="off"/>
+      <input type="text" id="start" name="calendar-1" autocomplete="off" placeholder="Data de início"/>
 
       <label for="end">Até:</label>
       <input type="text" id="end" name="calendar-2" autocomplete="off"/>
@@ -34,10 +34,10 @@
   </div>
 
   <div class="result-wrap">
-    <div class="result-table"></div>
-    <div aria-label="Page navigation" class="result-table-pagination">
+    <div class="result-table-pagination" aria-label="Page navigation">
       <ul class="pagination"></ul>
     </div>
+    <div class="result-table"></div>
     <div class="result-stats-wrap">
       <div class="result-stats-heading"></div>
       <div class="result-stats">

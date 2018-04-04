@@ -339,9 +339,9 @@ table.table-bordered > tbody > tr {
 
 .search-sidebar {
   width: 280px;
-  background-color: #FFF;
   padding: 15px;
   box-shadow: 3px 0px 5px -5px #555;
+  background-color: #3D4D5C;
 }
 
 input[type=checkbox].css-checkbox {
@@ -357,10 +357,10 @@ input[type=checkbox].css-checkbox {
 }
 
 input[type=checkbox].css-checkbox + label.css-label {
-  padding-left:30px;
-  height:25px;
+  padding-left:25px;
+  height:20px;
   display:inline-block;
-  line-height:25px;
+  line-height:20px;
   background-repeat:no-repeat;
   background-position: 0 0;
   font-size:13px;
@@ -374,6 +374,7 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 
 label.css-label {
   background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_391ce065f36b1460c4845fa9b5173fba.png);
+  background-size: 20px 45px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -382,12 +383,16 @@ label.css-label {
   user-select: none;
 }
 
+.datepick {
+  color: #8E97A0;
+}
+
 .datepick > input {
   display: block;
 }
 
 .datepick input[type=text] {
-  border: 1px solid #CCC;
+  border: 1px solid #8E97A0;;
   border-radius: 0;
   padding: 5px 0 5px 5px;
 }

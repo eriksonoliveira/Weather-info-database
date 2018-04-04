@@ -1,104 +1,11 @@
 <?PHP 
 class Registros extends model {
-  
-  public function getTotalAnuncios($filtros) {
-    
-    
-    $filtrostring = array('1=1');
-    if(!empty($filtros['categoria'])) {
-      $filtrostring[] = 'anuncios.id_categoria = :id_categoria';
-    }
-    if(!empty($filtros['valor'])) {
-      $filtrostring[] = 'anuncios.valor BETWEEN :preco1 AND :preco2';
-    }    
-    if(!empty($filtros['estado'])) {
-      $filtrostring[] = 'anuncios.estado = :estado';
-    }
-    
-    $sql = $this->db->prepare("SELECT COUNT(*) as conta FROM anuncios WHERE ".implode(" AND ", $filtrostring));
-    
-    if(!empty($filtros['categoria'])) {
-      $sql->bindValue(":id_categoria", $filtros['categoria']);
-    }
-    if(!empty($filtros['valor'])) {
-      $preco = explode('-', $filtros['valor']);
-      $sql->bindValue(":preco1", $preco[0]);
-      $sql->bindValue(":preco2", $preco[1]);
-    }    
-    if(!empty($filtros['estado'])) {
-      $sql->bindValue(":estado", $filtros['estado']);
-    }
-    $sql->execute();
-    
-    $row = $sql->fetch();
-    
-    return $row['conta'];
-  }
-  
-  public function getUltimosAnuncios($page, $items_per_page, $filtros) {
-    
-    
-    $offset = ($page - 1) * $items_per_page;
-    
-    $array = array();
-    
-    $filtrostring = array('1=1');
-    if(!empty($filtros['categoria'])) {
-      $filtrostring[] = 'anuncios.id_categoria = :id_categoria';
-    }
-    if(!empty($filtros['valor'])) {
-      $filtrostring[] = 'anuncios.valor BETWEEN :preco1 AND :preco2';
-    }    
-    if(!empty($filtros['estado'])) {
-      $filtrostring[] = 'anuncios.estado = :estado';
-    }
-    
-    $sql = $this->db->prepare("SELECT *,
-      (select anuncios_imagens.url from anuncios_imagens where anuncios_imagens.id_anuncio = anuncios.id limit 1) as url,
-      (select categorias.nome from categorias where categorias.id = anuncios.id_categoria) as categoria
-      FROM anuncios WHERE ".implode(' AND ', $filtrostring)." ORDER BY id DESC LIMIT $offset, $items_per_page");
-    
-    if(!empty($filtros['categoria'])) {
-      $sql->bindValue(":id_categoria", $filtros['categoria']);
-    }
-    if(!empty($filtros['valor'])) {
-      $preco = explode('-', $filtros['valor']);
-      $sql->bindValue(":preco1", $preco[0]);
-      $sql->bindValue(":preco2", $preco[1]);
-    }    
-    if(!empty($filtros['estado'])) {
-      $sql->bindValue(":estado", $filtros['estado']);
-    }
-    
-    $sql->execute();
-    
-    if($sql->rowCount() > 0) {
-      $array = $sql->fetchAll();
-    }
-    
-    return $array;
-  }
-  
-  public function getMeusAnuncios() {
-
-    $array = array();
-    $sql = $this->db->prepare("SELECT *,
-      (select anuncios_imagens.url from anuncios_imagens where anuncios_imagens.id_anuncio = anuncios.id limit 1) as url
-      FROM anuncios WHERE id_usuario = :id_usuario");
-    $sql->bindValue(":id_usuario", $_SESSION['cLogin']);
-    $sql->execute();
-    
-    if($sql->rowCount() > 0) {
-      $array = $sql->fetchAll();
-    }
-    
-    return $array;
-  }
 
   //Pesquisa registros dentro das datas especificadas e que contém os fenômenos especificados
   public function searchRegistry($start, $end, $systems, $page) {
 
     $p = new Pagination();
+    $items_per_page = 10;
 
     $array = array(
       "data" => array(),
@@ -108,9 +15,9 @@ class Registros extends model {
     $filter = array("1=1");
 
     if(!empty($systems)) {
+      $len = count($systems);
 
       //IF THE USER SELECTED MORE THAN ONE PHENOMENA
-      $len = count($systems);
       if($len > 1) {
         $filter_multi = array();
 
@@ -118,8 +25,8 @@ class Registros extends model {
           $filter_multi[] = "id_sistema = :sistema_".$v['key'];
         }
 
-        //Get dates
-        $sql = $this->db->prepare("
+        //Get total pages
+        $sql1 = $this->db->prepare("
         SELECT DISTINCT date
         FROM sistemas
         WHERE date BETWEEN :date1 AND :date2 AND date IN (
@@ -130,20 +37,42 @@ class Registros extends model {
           HAVING COUNT(*) >= $len )
           ORDER BY sistemas.date
         ");
-        $sql->bindValue(":date1", $start);
-        $sql->bindValue(":date2", $end);
+        $sql1->bindValue(":date1", $start);
+        $sql1->bindValue(":date2", $end);
         foreach($systems as $k => $v) {
-          $sql->bindValue(":sistema_".$v['key'], $v['key']);
+          $sql1->bindValue(":sistema_".$v['key'], $v['key']);
         }
-        $sql->execute();
+
+        $total_pages = $p->getTotalPages($sql1, $items_per_page); //Number of pages
+        $start_item = $p->getStart($page, $items_per_page); //Item the DB query starts from
+
+        //Get the data limited by $items_per_page
+        $sql2 = $this->db->prepare("
+        SELECT DISTINCT date
+        FROM sistemas
+        WHERE date BETWEEN :date1 AND :date2 AND date IN (
+          SELECT date
+          FROM sistemas
+          WHERE ".implode(" OR ", $filter_multi)."
+          GROUP BY date
+          HAVING COUNT(*) >= $len )
+          ORDER BY sistemas.date LIMIT ".$start_item.", ".$items_per_page
+        );
+        $sql2->bindValue(":date1", $start);
+        $sql2->bindValue(":date2", $end);
+        foreach($systems as $k => $v) {
+          $sql2->bindValue(":sistema_".$v['key'], $v['key']);
+        }
+        $sql2->execute();
 
         //Insert results into $array
-        if($sql->rowCount() > 0) {
-          $array["data"] = $sql->fetchAll(PDO::FETCH_ASSOC);
+        if($sql2->rowCount() > 0) {
+          $array["data"] = $sql2->fetchAll(PDO::FETCH_ASSOC);
+          $array['num_pages'] = $total_pages;
         }
 
         //Get count
-        $sql2 = $this->db->prepare("
+        $sql3 = $this->db->prepare("
         SELECT DATE_FORMAT(sistemas.date, '%Y-%m') as month, COUNT(DISTINCT sistemas.date) AS count
         FROM sistemas
         WHERE sistemas.date BETWEEN :date1 AND :date2
@@ -155,16 +84,16 @@ class Registros extends model {
           HAVING COUNT(*) >= $len )
         GROUP BY DATE_FORMAT(sistemas.date, '%Y-%m')
         ");
-        $sql2->bindValue(":date1", $start);
-        $sql2->bindValue(":date2", $end);
+        $sql3->bindValue(":date1", $start);
+        $sql3->bindValue(":date2", $end);
         foreach($systems as $k => $v) {
-          $sql2->bindValue(":sistema_".$v['key'], $v['key']);
+          $sql3->bindValue(":sistema_".$v['key'], $v['key']);
         }
-        $sql2->execute();
+        $sql3->execute();
 
         //Insert results into $array
-        if($sql2->rowCount() > 0) {
-           $array["chart"] = $sql2->fetchAll(PDO::FETCH_ASSOC);
+        if($sql3->rowCount() > 0) {
+           $array["chart"] = $sql3->fetchAll(PDO::FETCH_ASSOC);
         }
 
       } else {
@@ -227,9 +156,8 @@ class Registros extends model {
       WHERE sistemas.date BETWEEN :date1 AND :date2");
       $sql1->bindValue(":date1", $start);
       $sql1->bindValue(":date2", $end);
-      $items_per_page = 10;
-      $total_pages = $p->getTotalPages($sql1, $items_per_page);
 
+      $total_pages = $p->getTotalPages($sql1, $items_per_page);
       $start_item = $p->getStart($page, $items_per_page);
 
       //Get Results limited by $items_per_page
