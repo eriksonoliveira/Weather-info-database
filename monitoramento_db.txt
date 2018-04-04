@@ -1,6 +1,0 @@
-banco de dados monitoramento:
-
-- usuarios
-    nome
-    email
-    senha
