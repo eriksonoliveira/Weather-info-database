@@ -188,7 +188,7 @@ function sendTag(e, btn, date) {
 
     $.ajax({
       type: 'POST',
-      url: 'http://localhost/projetoy/Monitoramento/ajax',
+      url: 'http://localhost/projetoy/Monitoramento/ajax/sendTags',
       data: data,
       contentType: false,
       processData: false,

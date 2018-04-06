@@ -35,7 +35,6 @@ class Registros extends model {
           WHERE ".implode(" OR ", $filter_multi)."
           GROUP BY date
           HAVING COUNT(*) >= $len )
-          ORDER BY sistemas.date
         ");
         $sql1->bindValue(":date1", $start);
         $sql1->bindValue(":date2", $end);
@@ -97,22 +96,35 @@ class Registros extends model {
         }
 
       } else {
+      //IF THE USER SELECTED ONLY ONE PHENOMENON
 
-        //IF THE USER SELECTED ONLY ONE PHENOMENON
+        //Get number of pages
+        $sql1 = $this->db->prepare("
+        SELECT DISTINCT date
+        FROM sistemas
+        WHERE sistemas.date BETWEEN :date1 AND :date2 AND id_sistema = :sistema");
+        $sql1->bindValue(":date1", $start);
+        $sql1->bindValue(":date2", $end);
+        $sql1->bindValue(":sistema", $systems[0]['key']);
+
+        $total_pages = $p->getTotalPages($sql1, $items_per_page); //Number of pages
+        $start_item = $p->getStart($page, $items_per_page); //Item the DB query starts from
+
         //Get dates
-        $sql = $this->db->prepare("
+        $sql2 = $this->db->prepare("
         SELECT DISTINCT date
         FROM sistemas
         WHERE sistemas.date BETWEEN :date1 AND :date2 AND id_sistema = :sistema
-        ORDER BY sistemas.date");
-        $sql->bindValue(":date1", $start);
-        $sql->bindValue(":date2", $end);
-        $sql->bindValue(":sistema", $systems[0]['key']);
-        $sql->execute();
+        ORDER BY sistemas.date LIMIT ".$start_item.", ".$items_per_page);
+        $sql2->bindValue(":date1", $start);
+        $sql2->bindValue(":date2", $end);
+        $sql2->bindValue(":sistema", $systems[0]['key']);
+        $sql2->execute();
 
         //Insert results into $array
-        if($sql->rowCount() > 0) {
-          $array["data"] = $sql->fetchAll(PDO::FETCH_ASSOC);
+        if($sql2->rowCount() > 0) {
+          $array["data"] = $sql2->fetchAll(PDO::FETCH_ASSOC);
+          $array['num_pages'] = $total_pages;
         }
 
         //Get count

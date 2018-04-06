@@ -392,14 +392,19 @@ label.css-label {
 }
 
 .datepick input[type=text] {
-  border: 1px solid #8E97A0;;
+  /*border: 1px solid #8E97A0;*/
+  border: 0px;
   border-radius: 0;
   padding: 5px 0 5px 5px;
+  background-color: #324251;
+}
+
+.datepick input[type=text]:focus {
+  background-color: #293642;
 }
 
 .datepick input[type=checkbox] {
   border-radius: 0;
-  border: 1px solid #CCC;
 }
 
 .systempick {
@@ -408,13 +413,23 @@ label.css-label {
 
 .systempick-box {
   width: 250px;
-  height: 100px;
-  border: 1px solid #DDD;
+  height: 110px;
+  /*border: 1px solid #DDD;*/
   padding: 5px 0 10px 10px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  background-color: #324251;
+}
+
+.systempick-box > span {
+  display: inline-block;
+  width: 100%;
+}
+
+.systempick-box span:hover {
+  background-color: #293642;
 }
 
 .result-wrap {
@@ -427,24 +442,28 @@ label.css-label {
 
 .result-stats-wrap {
   display: none;
-  box-shadow: 1px 1px 4px 2px #DDDDDD;
+/*  box-shadow: 1px 1px 4px 2px #DDDDDD;*/
 }
 
 
+/*
 .result-stats-heading {
   width: 100%;
   height: 40px;
   background-color: #F0F0F0;
   border-bottom: 1px solid #DDDDDD;
 }
+*/
 
 .result-stats {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   background-color: #FFFFFF;
-  padding: 20px 0;
+  /*padding: 20px 0;*/
+  max-width: 950px;
+  margin: auto;
 }
 
 .chart-dimensions {
@@ -458,7 +477,10 @@ label.css-label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-basis: 200px;
+  /*flex-basis: 200px;*/
+  align-self: stretch;
+  flex: 1;
+  background-color: #DFDFDF;
 }
 
 .result-sum > div {
@@ -466,11 +488,11 @@ label.css-label {
   padding: 10px 0;
   display: inherit;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  color: #324251;
+  color: #20BE9E;
+/*  color: #324251;*/
   font-size: 28px;
-  box-shadow: 0 0 5px 5px #DDDDDD;
 }
 
 .result-sum > div > div {
@@ -478,11 +500,6 @@ label.css-label {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-}
-
-.result-sum i {
-  font-size: 24px;
-  color: #20BE9E;
 }
 
 small {
@@ -515,26 +532,12 @@ small {
   list-style: none;
   float: left;
   font-size: 18px;
-/*  padding: 8px 16px;*/
 }
 
 .result-table-pagination ul li a {
   text-decoration: none;
   transition: background-color .3s;
 }
-
-/*
-.result-table-pagination ul li.active-page {
-  background-color: dodgerblue;
-  color: white;
-}
-*/
-
-/*
-.result-table-pagination ul li a:hover {
-  background-color: #DDD;
-}
-*/
 
 .cell-center {
   text-align: center;
@@ -547,12 +550,13 @@ small {
   color: #FFF;
   font-weight: bold;
   transition: background-color 0.1s;
+  border: 2px solid transparent;
 }
 
 .view-registry:hover, .search-btn:hover {
   background-color: #5DD0B8;
   color: #FFF;
-  border: 1px solid #20BE9E;
+  border: 2px solid #20BE9E;
 }
 
 .flex-container-img {

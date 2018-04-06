@@ -2,10 +2,10 @@
   <div class="search-sidebar">
     <form class="datepick">
       <label for="start">De:</label>
-      <input type="text" id="start" name="calendar-1" autocomplete="off" placeholder="Data de início"/>
+      <input type="text" id="start" name="calendar-1" autocomplete="off" placeholder="Data inicial"/>
 
       <label for="end">Até:</label>
-      <input type="text" id="end" name="calendar-2" autocomplete="off"/>
+      <input type="text" id="end" name="calendar-2" autocomplete="off" placeholder="Data final"/>
 
       <div class="systempick">
       <?PHP foreach($sistemas_class as $k => $class):?>
@@ -39,7 +39,7 @@
     </div>
     <div class="result-table"></div>
     <div class="result-stats-wrap">
-      <div class="result-stats-heading"></div>
+<!--      <div class="result-stats-heading"></div>-->
       <div class="result-stats">
         <div class="chart"></div>
         <div class="result-sum">

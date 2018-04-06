@@ -89,6 +89,13 @@ class ajaxController extends controller {
 
     }
 
+
+    //SENDS DATA IN JSON FORMAT
+    echo json_encode($data);
+    exit;
+  }
+
+  public function sendTags() {
     //ENVIA TAGS DOS SISTEMAS DO DIA
     if(isset($_POST['systemId']) && !empty($_POST['systemId'])) {
       $id = $_POST['systemId'];

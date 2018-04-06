@@ -230,7 +230,7 @@ function drawLineChart(results) {
        legend: {display: false},
        title: {
          display: true,
-         text: "Número de dias (por mês)"
+         text: "NÚMERO DE DIAS (por mês)"
        },
        layout: {
          padding: {
@@ -276,15 +276,15 @@ function showSum(sum) {
 
 
     result_total+="<div>";
-      result_total+="<i class='fa fa-bar-chart'></i>";
+      //result_total+="<i class='fa fa-bar-chart'></i>";
     result_total+="</div>";
     result_total+="<div>";
-      result_total+="<div><small><strong>Total</strong></small></div>";
+      result_total+="<div><small><strong>TOTAL</strong></small></div>";
       result_total+="<strong>"+sum+"</strong>";
       if(sum > 1) {
-        result_total+="<small>Dias</small>";
+        result_total+="<small>DIAS</small>";
       } else {
-        result_total+="<small>Dia</small>";
+        result_total+="<small>DIA</small>";
       }
     result_total+="</div>";
 
