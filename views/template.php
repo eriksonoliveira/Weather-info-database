@@ -3,6 +3,9 @@
     <title><?PHP echo $title;?> - Monitoramento Meteorológico</title>
     <!-- bootstrap CSS -->
     <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/bootstrap.min.css"/>
+    <!--   Materialize CSS   -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- jQueryUI CSS -->
     <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/jquery-ui.css"/>
     <!-- font-awesome icons -->
@@ -40,6 +43,9 @@
 
     <!-- bootstrap Javascript -->
     <script src="<?PHP echo BASE_URL;?>assets/js/bootstrap.min.js"></script>
+
+    <!--   Materialize JS   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
     <!-- app js script -->
     <script src="<?PHP echo BASE_URL;?>assets/js/script.js"></script>
