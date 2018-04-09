@@ -9,11 +9,11 @@
 
     <form method="POST">
       <div class="form-group">
-        <label for="email">Email:</label>
+<!--        <label for="email">Email:</label>-->
         <input type="email" name="email" id="email" placeholder="Email" class="form-control"/>
       </div>
       <div class="form-group">
-        <label for="senha">Senha:</label>
+<!--        <label for="senha">Senha:</label>-->
         <input type="password" name="senha" id="senha" placeholder="Email" class="form-control"/>
       </div>
       <input type="submit" value="Fazer Login" class="btn btn-primary login-submit"/>

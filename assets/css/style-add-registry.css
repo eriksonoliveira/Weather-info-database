@@ -1,0 +1,58 @@
+html, body {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.prev {
+  position: absolute;
+  top: 5vh;
+  left: 5vh;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color .2s ease-out;
+  cursor: pointer;
+  display: none;
+}
+
+.prev:hover {
+  background-color: #EEE;
+}
+
+.prev .material-icons {
+  font-size: 2.2rem;
+}
+
+.menu {
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-box {
+  max-width: 600px;
+}
+
+.menu-box-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.menu-box-buttons .btn {
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+  margin: 2px;
+  padding: 0;
+}
+
+.menu-input-form {
+  display: none;
+}

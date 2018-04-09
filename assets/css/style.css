@@ -78,6 +78,7 @@ table.table-bordered > tbody > tr {
 }
 
 .input-btn-wrap .inputBtn {
+  height: auto;
   padding: 15px;
   margin: auto;
   border-radius: 0;
@@ -203,7 +204,7 @@ table.table-bordered > tbody > tr {
 }
 .system-tags .fenom-box .fenom input {
   position: absolute;
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 .checkmark {
