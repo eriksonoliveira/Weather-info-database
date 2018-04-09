@@ -101,7 +101,6 @@ class ajaxController extends controller {
     //ENVIA TAGS DOS SISTEMAS DO DIA
     if(isset($_POST['systemId']) && !empty($_POST['systemId'])) {
       $id = $_POST['systemId'];
-      $category = $_POST['category'];
       $this->data['date'] = $_POST['date'];
 
       //Envia para o bando de dados

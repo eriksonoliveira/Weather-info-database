@@ -12,28 +12,31 @@
   </div>
   <div class="menu">
     <div class="menu-box">
-      <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-        <a href="im_satelite" class="waves-effect waves-light btn menu-btn">Imagem de Satélite</a>
-        <a href="im_sinotica" class="btn menu-btn">Imagem Sinótica</a>
-        <a href="medios_niveis" class="btn menu-btn">Níveis Médios</a>
-      </div>
-      <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-        <a href="altos_niveis" class="btn menu-btn">Altos níveis</a>
-        <a href="descricao" class="btn menu-btn">Descrição Sinótica</a>
-        <a href="fenomenos" class="btn menu-btn">Fenômenos</a>
-      </div>
-      <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-        <a href="dados_observados" class="btn menu-btn">Ocorrências</a>
-        <a href="#" class="btn menu-btn">Fotos</a>
-        <a href="#" class="btn menu-btn">Vídeos</a>
+      <div class="menu-box-inner">
+        <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
+          <a href="im_satelite" class="waves-effect waves-light btn menu-btn">Imagem de Satélite</a>
+          <a href="im_sinotica" class="btn menu-btn">Imagem Sinótica</a>
+          <a href="medios_niveis" class="btn menu-btn">Níveis Médios</a>
+        </div>
+        <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
+          <a href="altos_niveis" class="btn menu-btn">Altos níveis</a>
+          <a href="descricao" class="btn menu-btn">Descrição Sinótica</a>
+          <a href="fenomenos" class="btn menu-btn">Fenômenos</a>
+        </div>
+        <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
+          <a href="dados_observados" class="btn menu-btn">Ocorrências</a>
+          <a href="#" class="btn menu-btn">Fotos</a>
+          <a href="#" class="btn menu-btn">Vídeos</a>
+        </div>
       </div>
     </div>
 
     <div id="im_satelite" class="menu-input-form">
-      <table class="table">
+      <div class="center">
+        <table class="table">
         <tbody>
           <tr>
-            <th colspan="2">Imagem Sinótica</th>
+            <th colspan="2">Imagem de Satélite</th>
           </tr>
           <tr>
             <?PHP for($i = 0; $i <= 1; $i++):?>
@@ -42,15 +45,15 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="btn btn-default inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="img-overlay">
                   <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
                 </div>
@@ -67,15 +70,15 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
-                    <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
+                    <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
                   <button class="btn btn-danger img-cancel" type="reset">Cancelar</button>
                 </div>
               </form>
 
-              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+              <div class="img-wrap" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="img-overlay">
                   <span class="img-del" title="Excluir imagem"><webicon icon="fa:trash-o"/></span>
                 </div>
@@ -87,10 +90,12 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div id="im_sinotica" class="menu-input-form">
-      <table class="table">
+      <div class="center">
+        <table class="table">
         <tbody>
           <tr>
             <th colspan="2">Imagem Sinótica</th>
@@ -147,10 +152,12 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div id="altos_niveis" class="menu-input-form">
-      <table class="table table-bordered">
+      <div class="center">
+        <table class="table table-bordered">
         <tbody>
           <tr>
             <th colspan="2">Jato em altos níveis</th>
@@ -182,10 +189,12 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div id="medios_niveis" class="menu-input-form">
-      <table class="table table-bordered">
+      <div class="center">
+        <table class="table table-bordered">
         <tbody>
           <tr>
             <th colspan="2">Geopotencial em médios níveis</th>
@@ -217,6 +226,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div id="descricao" class="menu-input-form">
@@ -354,7 +364,8 @@
     </div>
 
     <div id="sondagem" class="menu-input-form">
-      <table class="table table-bordered">
+      <div class="center">
+        <table class="table table-bordered">
         <tbody>
           <tr>
             <th colspan="2">Radiossondagem de Florianópolis</th>
@@ -386,10 +397,12 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div id="fenomenos" class="menu-input-form">
-      <div class="system-tags">
+      <div class="center">
+        <div class="system-tags">
       <h2 class="header">Sistemas e Fenômenos</h2>
       <div class="system-tags-container">
 
@@ -423,6 +436,7 @@
         <button class="btn send-fenomenos">Salvar</button>
       </div>
     </div>
+      </div>
     </div>
   </div>
 </div>
@@ -441,4 +455,4 @@
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>
 
 <!-- load add-menu js -->
-<script src="<?PHP echo BASE_URL;?>assets/js/registries/add-menu.js"></script>
+<script src="<?PHP echo BASE_URL;?>assets/js/add-menu.js"></script>

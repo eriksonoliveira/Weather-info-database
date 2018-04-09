@@ -6,7 +6,7 @@ body, html {
 
 nav.navbar {
   width: 100%;
-  position: absolute;
+  position: absolute !important;
   margin-bottom: 0;
   border-radius: 0;
   border: 0;
@@ -38,7 +38,7 @@ nav.navbar {
 
 
 .table {
-  margin-top:30px;
+  margin: 30px 0;
   box-shadow: 1px 1px 4px 2px #DDD;
   box-sizing: border-box;
   background-color: #FFF;
@@ -68,6 +68,10 @@ table.table-bordered > tbody > tr {
   width: 80%;
   margin: auto;
   text-align: center;
+}
+
+.reg-form .buttons {
+  padding-top: 15px;
 }
 
 .reg-form textarea {
@@ -314,6 +318,7 @@ table.table-bordered > tbody > tr {
 .login-icon {
   font-size: 60px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .login-submit {
