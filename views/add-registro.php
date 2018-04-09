@@ -321,7 +321,7 @@
       <?PHP foreach($sistemas_classes as $k => $class):;?>
 
         <div class="fenom-box">
-          <h3 class="fenom-heading"><?PHP echo $class;?></h3>
+          <h3 class="fenom-heading" data-class="<?PHP echo $class;?>"><?PHP echo $class;?></h3>
           <?PHP
             foreach($sistemas as $sist):
               if(ucfirst($sist['class']) == $class):

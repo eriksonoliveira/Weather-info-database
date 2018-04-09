@@ -26,7 +26,7 @@ function searchRegistry(e, btn) {
 
   //Get checked checkboxes
   $(checked).each(function() {
-    var id = $(this).attr("data-id");
+    let id = $(this).attr("data-id");
     systems.push({key: id});
   });
 

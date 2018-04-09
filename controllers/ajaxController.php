@@ -1,43 +1,45 @@
 <?PHP
 
 class ajaxController extends controller {
-
-  public function index() {
-    $data = array(
+  public function __construct() {
+    $this->data = array(
       "date" => "",
       "success" => ""
     );
+  }
+
+  public function index() {
 
     /*****DATA*****/
     /*$date = time();
     $d_form_Int = date("Y/m/d", $date);
-    $data['date'] = $d_form_Int;*/
+    $this->data['date'] = $d_form_Int;*/
 
     //RECEBE DADOS DO DIA ATUAL
     if(isset($_POST['date']) && !empty($_POST['date'])) {
-      $data['date'] = addslashes($_POST['date']);
+      $this->data['date'] = addslashes($_POST['date']);
 
       $r = new Registros;
-      $data['currDayReg'] = $r->getRegistro($data['date']);
+      $this->data['currDayReg'] = $r->getRegistro($this->data['date']);
 
-      $data['success'] = "yes";
+      $this->data['success'] = "yes";
     }
 
     //ADICIONA IMAGEM
     if(isset($_FILES['imagem'])) {
       $imagem = $_FILES['imagem'];
-      $data['date'] = $_POST['date'];
+      $this->data['date'] = $_POST['date'];
 
-      $data['horario'] = $_POST['horario'];
-      $data['categoria'] = $_POST['categoria'];
+      $this->data['horario'] = $_POST['horario'];
+      $this->data['categoria'] = $_POST['categoria'];
 
       //Envia para o bando de dados
       $r = new Registros();
-      $imgID = $r->addImagem($imagem, $data['horario'], $data['categoria'], $data['date']);
+      $imgID = $r->addImagem($imagem, $this->data['horario'], $this->data['categoria'], $this->data['date']);
 
       //Success
-      $data['success'] = "yes";
-      $data['imgId'] = $imgID;
+      $this->data['success'] = "yes";
+      $this->data['imgId'] = $imgID;
 
     }
 
@@ -49,49 +51,49 @@ class ajaxController extends controller {
       $r = new Registros();
       $r->delImagem($id);
 
-      $data['success'] = "yes";
+      $this->data['success'] = "yes";
     }
 
     //ADICIONA TEXTO
     if(isset($_POST['texto']) && !empty($_POST['texto'])) {
-      $data['texto'] = addslashes($_POST['texto']);
-      $data['horario'] = $_POST['horario'];
-      $data['categoria'] = $_POST['categoria'];
-      $data['id_nome'] = $_POST['id_nome'];
-      $data['cargo'] = $_POST['cargo'];
-      $data['date'] = $_POST['date'];
+      $this->data['texto'] = addslashes($_POST['texto']);
+      $this->data['horario'] = $_POST['horario'];
+      $this->data['categoria'] = $_POST['categoria'];
+      $this->data['id_nome'] = $_POST['id_nome'];
+      $this->data['cargo'] = $_POST['cargo'];
+      $this->data['date'] = $_POST['date'];
 
       //Envia para o bando de dados
       $r = new Registros();
-      $r->addTexto($data['texto'], $data['horario'], $data['categoria'], $data['date'], $data['id_nome'], $data['cargo']);
+      $r->addTexto($this->data['texto'], $this->data['horario'], $this->data['categoria'], $this->data['date'], $this->data['id_nome'], $this->data['cargo']);
 
       //Success
-      $data['success'] = "yes";
+      $this->data['success'] = "yes";
 
     }
 
     //ATUALIZA TEXTO
     if(isset($_POST['update-texto']) && !empty($_POST['update-texto'])) {
-      $data['texto'] = addslashes($_POST['update-texto']);
+      $this->data['texto'] = addslashes($_POST['update-texto']);
 
-      $data['horario'] = $_POST['update-horario'];
-      $data['categoria'] = $_POST['update-categoria'];
-      $data['id_nome'] = $_POST['update-id_nome'];
-      $data['cargo'] = $_POST['update-cargo'];
-      $data['date'] = $_POST['update-date'];
+      $this->data['horario'] = $_POST['update-horario'];
+      $this->data['categoria'] = $_POST['update-categoria'];
+      $this->data['id_nome'] = $_POST['update-id_nome'];
+      $this->data['cargo'] = $_POST['update-cargo'];
+      $this->data['date'] = $_POST['update-date'];
 
       //Envia para o bando de dados
       $r = new Registros();
-      $r->updateTexto($data['texto'], $data['horario'], $data['categoria'], $data['date'], $data['id_nome'], $data['cargo']);
+      $r->updateTexto($this->data['texto'], $this->data['horario'], $this->data['categoria'], $this->data['date'], $this->data['id_nome'], $this->data['cargo']);
 
       //Success
-      $data['success'] = "yes";
+      $this->data['success'] = "yes";
 
     }
 
 
     //SENDS DATA IN JSON FORMAT
-    echo json_encode($data);
+    echo json_encode($this->data);
     exit;
   }
 
@@ -99,21 +101,22 @@ class ajaxController extends controller {
     //ENVIA TAGS DOS SISTEMAS DO DIA
     if(isset($_POST['systemId']) && !empty($_POST['systemId'])) {
       $id = $_POST['systemId'];
-      $data['date'] = $_POST['date'];
+      $category = $_POST['category'];
+      $this->data['date'] = $_POST['date'];
 
       //Envia para o bando de dados
       $r = new Registros();
-      $r->addSystem($id, $data['date']);
+      $r->addSystem($id, $this->data['date']);
     }
 
-    //SENDS DATA IN JSON FORMAT
-    echo json_encode($data);
+    //SEND DATA IN JSON FORMAT
+    echo json_encode($this->data);
     exit;
   }
 
   //UPDATE FORGOT PASSWORD
   public function pass_forgot() {
-    $data = array(
+    $this->data = array(
       'confirmation' => ''
     );
 
@@ -140,20 +143,20 @@ class ajaxController extends controller {
 
         $m->sendMail($email, $msg);
 
-//        $data['confirmation'] = "Utilize <a href='".BASE_URL."password/recover/?code=".$code."'>este link</a> para redefinir a sua senha.";
-        $data['confirmation'] = "Um email com um link para recuperação de senha foi enviado para o seu e-mail ".$email.".";
+//        $this->data['confirmation'] = "Utilize <a href='".BASE_URL."password/recover/?code=".$code."'>este link</a> para redefinir a sua senha.";
+        $this->data['confirmation'] = "Um email com um link para recuperação de senha foi enviado para o seu e-mail ".$email.".";
       } else {
-        $data['confirmation'] = "<div class='alert alert-danger'>Usuario não cadastrado!</div>";
+        $this->data['confirmation'] = "<div class='alert alert-danger'>Usuario não cadastrado!</div>";
       }
 
       //SENDS DATA IN JSON FORMAT
-      echo json_encode($data);
+      echo json_encode($this->data);
       exit;
     }
   }
 
   public function pass_recovery() {
-    $data = array(
+    $this->data = array(
       'confirmation' => ''
     );
 
@@ -166,11 +169,11 @@ class ajaxController extends controller {
       $updated = $u->updatePass($newPass, $id);
 
       if($updated) {
-        $data['confirmation'] = "Senha atualizada com sucesso!</br>
+        $this->data['confirmation'] = "Senha atualizada com sucesso!</br>
         Faça o <a href='".BASE_URL."/login'>login</a>";
       }
 
-      echo json_encode($data);
+      echo json_encode($this->data);
       exit;
     }
   }
