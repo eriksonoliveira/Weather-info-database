@@ -1,23 +1,41 @@
 $(document).ready(function() {
 
-  //DELETE IMAGE
+  //GET AND FORMAT DATE
+  var separator = "dash";
+  var date;
 
-  //Delete confirmation alert
+  //Check if GET date variable was passed
+  date = getQueryVariable();
+
+  if(date === false) {
+    //If not, use the date of the current day
+    date = dateFormated(separator);
+  }
+
+  //DELETE IMAGE
   $(".img-del").on("click", function() {
-    var del = $(this);
+    var img = $(this);
 
     //Show confirmation alert
-    modal(del, 2);
+    modal(img, 2);
 
     //Delete Image
     $(document).on("click", ".modal-del-confirm", function() {
-        deleteImg(del);
+        deleteImg(img);
     });
+  });
+
+  //DELETE WEATHER SYSTEM
+  $(".fenom input[type=checkbox]").change(function() {
+    if(this.checked == false) {
+      let checkbox = $(this);
+      deleteSystem(checkbox, date);
+    }
   });
 });
 
 //Select image ID and send AJAX request
-function deleteImg (del) {
+function deleteImg(del) {
   var data = new FormData();
 
   var im = $(del).parent().siblings("a").find("img"),
@@ -46,4 +64,22 @@ function deleteImg (del) {
       }
     }
   });
+}
+
+function deleteSystem(checkbox, date) {
+  let id = $(checkbox).attr("data-id");
+  let path = "ajax/deleteSystem";
+  function callback() {
+    return true;
+  }
+
+
+  let data = {
+    systemId: id,
+    date: date
+  };
+
+  let ajax = new AjaxRequest();
+  ajax.setData(data);
+  ajax.call(path, callback);
 }

@@ -1,9 +1,5 @@
-<!--
-<div class="registry-container">
-  <div class="registry-inner-container container">
-    <h3>Adicionar Monitoramento do dia</h3>
-    <h4><?PHP //echo $dia;?></h4>
--->
+<h3>Adicionar Monitoramento do dia</h3>
+<h4><?PHP echo $dia;?></h4>
 
 
 <div class="container">

@@ -31,9 +31,11 @@ $(document).ready(function() {
   });
 
   //SEND TAG
-  $(".send-fenomenos").on("click", function(e) {
-   let btn = $(this);
-   sendTag(e, btn, date);
+  $(".fenom input[type=checkbox]").change(function() {
+    if(this.checked) {
+     let checkbox = $(this);
+     sendTag(checkbox, date);
+    }
   });
 
 });
@@ -173,15 +175,14 @@ function sendText(e, btn, date) {
 }
 
 //SEND PHENOMENA TAG
-function sendTag(e, btn, date) {
-  e.preventDefault();
+function sendTag(checkbox, date) {
 
   var data = new FormData();
 
-  var c = $(btn).parent().siblings(".system-tags-container").find(".fenom-box").find("input:checked");
+//  var c = $(btn).parent().siblings(".system-tags-container").find(".fenom-box").find("input:checked");
 
-  $(c).each(function() {
-    var id = $(this).attr("data-id");
+//  $(c).each(function() {
+    var id = $(checkbox).attr("data-id");
 
     data.append("systemId", id);
     data.append("date", date);
@@ -196,5 +197,5 @@ function sendTag(e, btn, date) {
 
       }
     });
-  });
+//  });
 }

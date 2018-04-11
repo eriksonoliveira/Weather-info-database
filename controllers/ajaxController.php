@@ -3,8 +3,7 @@
 class ajaxController extends controller {
   public function __construct() {
     $this->data = array(
-      "date" => "",
-      "success" => ""
+      "date" => ""
     );
   }
 
@@ -97,8 +96,8 @@ class ajaxController extends controller {
     exit;
   }
 
+  //ENVIA TAGS DOS SISTEMAS DO DIA
   public function sendTags() {
-    //ENVIA TAGS DOS SISTEMAS DO DIA
     if(isset($_POST['systemId']) && !empty($_POST['systemId'])) {
       $id = $_POST['systemId'];
       $this->data['date'] = $_POST['date'];
@@ -111,6 +110,18 @@ class ajaxController extends controller {
     //SEND DATA IN JSON FORMAT
     echo json_encode($this->data);
     exit;
+  }
+
+  public function deleteSystem() {
+      $deleteItem = json_decode($_POST['systemData'], true);
+
+    $this->data['date'] = $deleteItem['date'];
+      $r = new Registros();
+      $t = $r->deleteSystem($deleteItem['systemId'], $deleteItem['date']);
+
+      //SEND DATA IN JSON FORMAT
+      echo json_encode($this->data);
+      exit;
   }
 
   //UPDATE FORGOT PASSWORD

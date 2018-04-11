@@ -28,6 +28,33 @@ $(document).ready(function() {
 
 });
 
+//AJAX Requests
+function AjaxRequest() {
+  this.data;
+}
+
+AjaxRequest.prototype = {
+  constructor: AjaxRequest,
+  setData: function(arg) {
+    this.data = new FormData();
+
+    this.data.append("systemData", JSON.stringify(arg));
+  },
+  call: function(path, callback) {
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost/projetoy/Monitoramento/'+path+'',
+      data: this.data,
+      dataType: 'json',
+      contentType: false,
+      processData: false,
+      success: function(json) {
+        callback(json);
+      }
+    });
+  }
+}
+
 class KeyElements {
   constructor(btn) {
     this.btn = btn;

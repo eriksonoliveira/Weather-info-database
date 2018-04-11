@@ -28,7 +28,6 @@ $(document).ready(function() {
 
   $(".prev").on("click", function() {
     let id = $('.menu-input-form[style="display: block;"]').attr("id");
-    console.log(id);
     form.toggleMenus(id);
   });
 

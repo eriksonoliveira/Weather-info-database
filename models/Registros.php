@@ -436,61 +436,16 @@ class Registros extends model {
     $sql->bindValue(":id", $id);
     $sql->bindValue(":date", $date);
     $sql->execute();
-
-  }
-
-  public function editAnuncio($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id) {
     
-    
-    $sql = $this->db->prepare("UPDATE anuncios SET titulo = :titulo, id_categoria = :id_categoria, id_usuario = :id_usuario, descricao = :descricao, valor = :valor, estado = :estado WHERE id = :id");
-    
-    $sql->bindValue(":titulo", $titulo);
-    $sql->bindValue(":id_categoria", $categoria);
-    $sql->bindValue(":id_usuario", $_SESSION['cLogin']);
-    $sql->bindValue(":descricao", $descricao);
-    $sql->bindValue(":valor", $valor);
-    $sql->bindValue(":estado", $estado);
-    $sql->bindValue(":id", $id);
-    $sql->execute();   
-    
-    $this->addFotos($fotos, $id);
-    
+    echo $date." ".$id;
   }
   
-  
-  public function excluirAnuncio($id) {
-    
-    
-    $sql = $this->db->prepare("DELETE FROM anuncios_imagens WHERE id_anuncio = :id_anuncio");
-    $sql->bindValue(":id_anuncio", $id);
-    $sql->execute();
-        
-    $sql = $this->db->prepare("DELETE FROM anuncios WHERE id = :id");
+  //Adicionar tag de sistema
+  public function deleteSystem($id, $date) {
+
+    $sql = $this->db->prepare("DELETE FROM sistemas WHERE id_sistema = :id AND date = :date");
     $sql->bindValue(":id", $id);
+    $sql->bindValue(":date", $date);
     $sql->execute();
-    
-    
-  }
-
-  public function excluirFoto($id) {
-    
-
-    $id_anuncio = 0;
-
-    $sql = $this->db->prepare("SELECT id_anuncio FROM anuncios_imagens WHERE id = :id");
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-
-    if($sql->rowCount() > 0) {
-      $row = $sql->fetch();
-      $id_anuncio = $row['id_anuncio'];
-    }
-
-    $sql = $this->db->prepare("DELETE FROM anuncios_imagens WHERE id = :id");
-    $sql->bindValue(":id", $id);
-    $sql->execute();
-
-    return $id_anuncio;
   }
 }
-?>
