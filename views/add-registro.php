@@ -1,28 +1,30 @@
-<h3>Adicionar Monitoramento do dia</h3>
-<h4><?PHP echo $dia;?></h4>
+<div class="add-reg-heading mui--text-center">
+  <div class="mui--text-display1">Adicionar Monitoramento do dia</div>
+  <div class="mui--text-headline"><?PHP echo $dia;?></div>
+</div>
 
 
 <div class="container">
-  <div class="prev">
+  <div class="back">
     <span> <i class="material-icons">arrow_back</i></span>
   </div>
   <div class="menu">
     <div class="menu-box">
       <div class="menu-box-inner">
         <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-          <a href="im_satelite" class="waves-effect waves-light btn menu-btn">Imagem de Satélite</a>
-          <a href="im_sinotica" class="btn menu-btn">Imagem Sinótica</a>
-          <a href="medios_niveis" class="btn menu-btn">Níveis Médios</a>
+          <a href="im_satelite" class="mui-btn mui-btn--primary menu-btn">Imagem de Satélite</a>
+          <a href="im_sinotica" class="mui-btn mui-btn--primary menu-btn">Imagem Sinótica</a>
+          <a href="medios_niveis" class="mui-btn mui-btn--primary menu-btn">Níveis Médios</a>
         </div>
         <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-          <a href="altos_niveis" class="btn menu-btn">Altos níveis</a>
-          <a href="descricao" class="btn menu-btn">Descrição Sinótica</a>
-          <a href="fenomenos" class="btn menu-btn">Fenômenos</a>
+          <a href="altos_niveis" class="mui-btn mui-btn--primary menu-btn">Altos níveis</a>
+          <a href="descricao" class="mui-btn mui-btn--primary menu-btn">Descrição Sinótica</a>
+          <a href="fenomenos" class="mui-btn mui-btn--primary menu-btn">Fenômenos</a>
         </div>
         <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-          <a href="dados_observados" class="btn menu-btn">Ocorrências</a>
-          <a href="#" class="btn menu-btn">Fotos</a>
-          <a href="#" class="btn menu-btn">Vídeos</a>
+          <a href="dados_observados" class="mui-btn mui-btn--primary menu-btn">Ocorrências</a>
+          <a href="sondagem" class="mui-btn mui-btn--primary menu-btn">Radiossondagem</a>
+          <a href="#" class="mui-btn mui-btn--primary menu-btn">Vídeos</a>
         </div>
       </div>
     </div>
@@ -41,11 +43,11 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <button type="submit" class="btn btn-success send-img">Enviar</button>
-                  <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
+                  <button type="submit" class="mui-btn mui-btn--primary send-img">Enviar</button>
+                  <button class="mui-btn mui-btn--danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
@@ -66,7 +68,7 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -103,7 +105,7 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="btn btn-default inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -128,7 +130,7 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -165,7 +167,7 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <label for="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][3];?>" data-categoria="<?PHP echo $cats['img'][3];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -202,7 +204,7 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <label for="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][4];?>" data-categoria="<?PHP echo $cats['img'][4];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -373,7 +375,7 @@
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
-                    <label for="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" class="btn btn-info inputBtn"><i class="fa fa-plus"></i> &nbsp; Adicionar Imagem</label>
+                    <label for="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][2];?>" data-categoria="<?PHP echo $cats['img'][2];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
                   <button type="submit" class="btn btn-success send-img">Enviar</button>
@@ -399,39 +401,36 @@
     <div id="fenomenos" class="menu-input-form">
       <div class="center">
         <div class="system-tags">
-      <h2 class="header">Sistemas e Fenômenos</h2>
-      <div class="system-tags-container">
+          <h2 class="header">Sistemas e Fenômenos</h2>
+          <div class="system-tags-container">
 
-      <?PHP foreach($sistemas_classes as $k => $class):;?>
+          <?PHP foreach($sistemas_classes as $k => $class):;?>
 
-        <div class="fenom-box">
-          <h3 class="fenom-heading" data-class="<?PHP echo $class;?>"><?PHP echo $class;?></h3>
-          <?PHP
-            foreach($sistemas as $sist):
-              if(ucfirst($sist['class']) == $class):
-          ?>
+            <div class="fenom-box">
+              <h3 class="fenom-heading" data-class="<?PHP echo $class;?>"><?PHP echo $class;?></h3>
+              <?PHP
+                foreach($sistemas as $sist):
+                  if(ucfirst($sist['class']) == $class):
+              ?>
 
-          <label class="fenom">
-            <input type="checkbox" data-id="<?PHP echo $sist['id'];?>"/>
-            <span class="checkmark"><?PHP echo $sist['nome'];?></span>
-          </label>
+              <label class="fenom">
+                <input type="checkbox" data-id="<?PHP echo $sist['id'];?>"/>
+                <span class="checkmark"><?PHP echo $sist['nome'];?></span>
+              </label>
 
-          <?PHP
-            endif;
-          endforeach;
-          ?>
+              <?PHP
+                endif;
+              endforeach;
+              ?>
 
+            </div>
+
+            <?PHP
+            endforeach;
+            ?>
+
+          </div>
         </div>
-
-        <?PHP
-        endforeach;
-        ?>
-
-      </div>
-      <div class="btn-wrap">
-        <button class="btn send-fenomenos">Salvar</button>
-      </div>
-    </div>
       </div>
     </div>
   </div>
