@@ -55,3 +55,5 @@
 
 <div class="bg-box"></div>
 <div class="modal-box"></div>
+
+<div class="loader"></div>

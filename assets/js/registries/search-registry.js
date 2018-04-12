@@ -50,9 +50,12 @@ function searchRegistry(e, btn) {
     url: 'http://localhost/projetoy/Monitoramento/pesquisar/data',
     data: data,
     dataType: 'json',
+    beforeSend: function() {
+      $(".loader").addClass("show"); },
     contentType: false,
     processData: false,
     success: function(json){
+      $(".loader").removeClass("show");
       showResults(json);
 
       pageNumbers(json);
