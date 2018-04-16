@@ -334,10 +334,15 @@ table.table-bordered > tbody > tr {
 
 .login-submit {
   width: 100%;
-  background-color: #1F83C5;
+  margin-top: 10px;
 }
 
-.login-submit:hover {
+.blue {
+  background-color: #1F83C5;
+  color: white;
+}
+
+.blue:hover {
   background-color: #1466A2;
 }
 
@@ -633,4 +638,25 @@ small {
   margin-top: -270px;
   z-index: 10;
   display: none;
+}
+
+.pass-forg-content .card-title {
+  margin-bottom:
+}
+
+.pass-forg-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.pass-forg-content .card-body {
+  padding: 3.25rem !important;
+}
+
+.pass-forg-content .card-body .card-title {
+  margin-bottom: 1.75rem;
 }

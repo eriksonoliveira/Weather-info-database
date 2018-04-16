@@ -34,12 +34,11 @@
   </div>
 
   <div class="result-wrap">
-    <div class="result-table-pagination" aria-label="Page navigation">
+    <nav class="result-table-pagination" aria-label="Page navigation">
       <ul class="pagination"></ul>
-    </div>
+    </nav>
     <div class="result-table"></div>
     <div class="result-stats-wrap">
-<!--      <div class="result-stats-heading"></div>-->
       <div class="result-stats">
         <div class="chart"></div>
         <div class="result-sum">

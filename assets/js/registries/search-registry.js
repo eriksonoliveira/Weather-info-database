@@ -146,8 +146,8 @@ function pageNumbers(json) {
   var num_pages = json[0].num_pages,
       pages_links = '';
   for(let count = 0; count < num_pages; count++) {
-    pages_links+="<li class='page-filter'>";
-      pages_links+="<a href='#"+(count+1)+"' onclick='getPage("+(count+1)+", this)'>"+(count+1)+"</a>";
+    pages_links+="<li class='page-filter page-item'>";
+      pages_links+="<a href='#"+(count+1)+"' class='page-link' onclick='getPage("+(count+1)+", this)'>"+(count+1)+"</a>";
     pages_links+="</li>";
   }
 

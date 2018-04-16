@@ -2,7 +2,8 @@
   <head>
     <title><?PHP echo $title;?> - Monitoramento Meteorológico</title>
     <!-- bootstrap CSS -->
-    <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/bootstrap.min.css"/>
+    <!--<link type="text/css" rel="stylesheet" href="<?PHP //echo BASE_URL;?>assets/css/bootstrap.min.css"/>-->
+    <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/bootstrap-material-design.min.css"/>
     <!-- Material UI framework -->
     <link href="//cdn.muicss.com/mui-0.9.39-rc1/css/mui.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -43,8 +44,10 @@
     <script src="<?PHP echo BASE_URL;?>assets/js/moment.min.js"></script>
     <script src="<?PHP echo BASE_URL;?>assets/js/Chart.min.js"></script>
 
-    <!-- bootstrap Javascript -->
-    <script src="<?PHP echo BASE_URL;?>assets/js/bootstrap.min.js"></script>
+    <!-- bootstrap Javascript and Popper.js-->
+<!--    <script src="<?PHP //echo BASE_URL;?>assets/js/bootstrap.min.js"></script>-->
+    <script src="<?PHP echo BASE_URL;?>assets/js/popper.min.js"></script>
+    <script src="<?PHP echo BASE_URL;?>assets/js/bootstrap-material-design.min.js"></script>
 
     <!--   Material UI framework   -->
     <script src="//cdn.muicss.com/mui-0.9.39-rc1/js/mui.min.js"></script>

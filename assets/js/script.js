@@ -112,7 +112,7 @@ function modal(el, type) {
   var path,
       modal_html = '';
 
-  //Type == 1 form img, type == 2 for delete confirmation
+  //Type == 1 display images, type == 2 display delete confirmation
   if(type == 1) {
     //Get img src attribute
     path = $(el).find("img").attr("src");
@@ -124,8 +124,8 @@ function modal(el, type) {
   } else if(type == 2) {
     modal_html+=
       "<p>Excluir a imagem?</p>" +
-      "<button class='modal-del-confirm'>Excluir</button>" +
-      "<button class='modal-del-cancel'>Cancelar</button>";
+      "<button class='modal-del-confirm btn btn-outline-success'>Excluir</button>" +
+      "<button class='modal-del-cancel btn btn-outline-danger'>Cancelar</button>";
   }
 
   //Insert the content and show modal

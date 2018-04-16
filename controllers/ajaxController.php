@@ -153,8 +153,7 @@ class ajaxController extends controller {
 
         $m->sendMail($email, $msg);
 
-//        $this->data['confirmation'] = "Utilize <a href='".BASE_URL."password/recover/?code=".$code."'>este link</a> para redefinir a sua senha.";
-        $this->data['confirmation'] = "Um email com um link para recuperação de senha foi enviado para o seu e-mail ".$email.".";
+        $this->data['confirmation'] = "<div class='card-text'>Um email com um link para recuperação de senha foi enviado para o seu e-mail ".$email.".</div>";
       } else {
         $this->data['confirmation'] = "<div class='alert alert-danger'>Usuario não cadastrado!</div>";
       }
