@@ -8,6 +8,8 @@ html, body {
   max-width: 1000px;
   height: 100%;
   padding-top: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .back {

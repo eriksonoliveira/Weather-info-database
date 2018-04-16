@@ -15,7 +15,7 @@ nav.navbar {
   z-index: 100;
 }
 
-.navbar a {
+.navbar-brand, .nav-item .dropdown-toggle {
   color: #E5E9Ef !important;
 }
 
@@ -39,9 +39,8 @@ nav.navbar {
 
 .add-reg-heading {
   width: 100%;
-  position: absolute;
-  top: 70px;
-
+  position: relative;
+  top: 20px;
 }
 
 .table {
@@ -406,7 +405,7 @@ label.css-label {
 }
 
 .datepick {
-  color: #8E97A0;
+  color: #8E97A0 !important;
 }
 
 .datepick > input {
@@ -414,11 +413,11 @@ label.css-label {
 }
 
 .datepick input[type=text] {
-  /*border: 1px solid #8E97A0;*/
   border: 0px;
   border-radius: 0;
   padding: 5px 0 5px 5px;
   background-color: #324251;
+  color: #8E97A0 !important;
 }
 
 .datepick input[type=text]:focus {

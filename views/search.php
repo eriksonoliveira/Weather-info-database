@@ -2,10 +2,10 @@
   <div class="search-sidebar">
     <form class="datepick">
       <label for="start">De:</label>
-      <input type="text" id="start" name="calendar-1" autocomplete="off" placeholder="Data inicial"/>
+      <input type="text" id="start" name="calendar-1" autocomplete="off"/>
 
       <label for="end">Até:</label>
-      <input type="text" id="end" name="calendar-2" autocomplete="off" placeholder="Data final"/>
+      <input type="text" id="end" name="calendar-2" autocomplete="off"/>
 
       <div class="systempick">
       <?PHP foreach($sistemas_class as $k => $class):?>

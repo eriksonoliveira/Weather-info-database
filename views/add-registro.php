@@ -1,10 +1,8 @@
-<div class="add-reg-heading mui--text-center">
-  <div class="mui--text-display1">Adicionar Monitoramento do dia</div>
-  <div class="mui--text-headline"><?PHP echo $dia;?></div>
-</div>
-
-
 <div class="container">
+  <div class="add-reg-heading mui--text-center">
+    <div class="mui--text-display1">Adicionar Monitoramento do dia</div>
+    <div class="mui--text-headline"><?PHP echo $dia;?></div>
+  </div>
   <div class="back">
     <span> <i class="material-icons">arrow_back</i></span>
   </div>

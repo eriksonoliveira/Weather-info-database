@@ -22,18 +22,24 @@
   <body>
 
     <?PHP if(isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])): ?>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="<?PHP echo BASE_URL; ?>" class="navbar-brand">Monitoramento</a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href=""><?PHP echo $_SESSION['nome-usuario']?></a></li>
-            <li><a href="<?PHP echo BASE_URL; ?>login/sair">Sair</a></li>    
-    <?PHP endif; ?>
+        <ul class="navbar-nav navbar-right ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?PHP echo $_SESSION['nome-usuario']?>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="buttonMenu1">
+              <a  class="dropdown-item" href="<?PHP echo BASE_URL; ?>login/sair">Sair</a>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>
+    <?PHP endif; ?>
     
     <!-- jQuery library -->
     <script src="<?PHP echo BASE_URL;?>assets/js/jquery-3.2.1.min.js"></script>
