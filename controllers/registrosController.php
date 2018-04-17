@@ -3,7 +3,8 @@ class registrosController extends controller{
   
   public function index() {
     $data = array(
-      "success" => ""
+      "success" => "",
+      'title' => 'Ver registro'
     );
     
     if(isset($_GET['date']) && !empty($_GET['date'])) {

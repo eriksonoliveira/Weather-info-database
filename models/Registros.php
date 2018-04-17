@@ -336,7 +336,7 @@ class Registros extends model {
       /*for($q=0;$q<count($imagem['tmp_name']);$q++) { */
         $tipo = $imagem['type'];
 
-        if(in_array($tipo, array('image/jpeg', 'image/png'))) {
+        if(in_array($tipo, array('image/jpeg', 'image/png', 'image/gif'))) {
           $tmpname = md5(time().rand(0, 9999)).'.jpg';
           move_uploaded_file($imagem['tmp_name'], 'assets/images/'.$categoria.'/'.$tmpname);
           
@@ -357,6 +357,8 @@ class Registros extends model {
             $origi = imagecreatefromjpeg('assets/images/'.$categoria.'/'.$tmpname);
           } elseif($tipo == 'image/png') {
             $origi = imagecreatefrompng('assets/images/'.$categoria.'/'.$tmpname);
+          } elseif($tipo == 'image/gif') {
+            $origi = imagecreatefromgif('assets/images/'.$categoria.'/'.$tmpname);
           }
           
           imagecopyresampled($img, $origi, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
