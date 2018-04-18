@@ -39,8 +39,7 @@ nav.navbar {
 
 .add-reg-heading {
   width: 100%;
-  position: relative;
-  top: 20px;
+  margin: 20px 0;
 }
 
 .table {
@@ -55,25 +54,34 @@ nav.navbar {
   box-sizing: border-box;
 }
 
+.input-table-time {
+/*  position: relative;*/
+}
+
+.menu-input-table td {
+  position: relative;
+  height: 170px;
+}
+
+
 th {
   text-align: center;
   background-color: #F0F0F0;
 }
-/*table.table-bordered > thead > tr > th{
-    border:1px solid blue;
-}
-table.table-bordered > tbody > tr > td{
-    border:1px solid blue;
-}
-
-table.table-bordered > tbody > tr {
-    border:1px solid blue;
-}*/
 
 .reg-form {
-  width: 80%;
+  width: 90%;
   margin: auto;
   text-align: center;
+}
+
+.form-img {
+  position: absolute;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
 .reg-form .buttons {
@@ -82,22 +90,6 @@ table.table-bordered > tbody > tr {
 
 .reg-form textarea {
   height: 80px;
-}
-
-.input-btn-wrap label {
-}
-
-.input-btn-wrap .inputBtn {
-/*
-  height: auto;
-  padding: 15px;
-  margin: auto;
-*/
-/*
-  border-radius: 0;
-  background-color: #20BE9E;
-  color: #FFF;
-*/
 }
 
 .inputBtn i {
@@ -343,6 +335,14 @@ table.table-bordered > tbody > tr {
 
 .blue:hover {
   background-color: #1466A2;
+}
+
+.red {
+  background-color: #F44336;
+}
+
+.green {
+  background-color: #4CAF50;
 }
 
 .login-forgot {

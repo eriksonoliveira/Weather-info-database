@@ -14,14 +14,14 @@ $(document).ready(function() {
 
   //DELETE IMAGE
   $(".img-del").on("click", function() {
-    var img = $(this);
+    var imgDel = $(this);
 
     //Show confirmation alert
-    modal(img, 2);
+    modal(imgDel, 2);
 
     //Delete Image
     $(document).on("click", ".modal-del-confirm", function() {
-        deleteImg(img);
+        deleteImg(imgDel);
     });
   });
 
@@ -58,7 +58,7 @@ function deleteImg(del) {
 
         $(successMsg).html("Imagem removida com sucesso!");
         $(im).remove();
-        $(inputWrap).toggle();
+        $(inputWrap).show();
         $(".bg-box, .modal-box").fadeOut("fast");
 
       }

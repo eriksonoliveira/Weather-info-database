@@ -68,10 +68,9 @@ function receiveDayImages(json) {
             imgID = json[h][c].id,
             imgWrap = ".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]",
             imgDelBtn = $(imgWrap).find(".img-del"),
-            inputWrap = $(imgWrap).prev(".reg-form").find(".input-btn-wrap");
-
-
-        var img_html = '';
+            inputForm = $(imgWrap).prev(".form-img"),
+            inputWrap = $(inputForm).find(".input-btn-wrap"),
+            img_html = '';
 
         img_html+=
           "<a href='javascript:;' class='img-clickable'>" +
@@ -79,8 +78,9 @@ function receiveDayImages(json) {
           "</a>";
 
         $(imgWrap).append(img_html);
+        $(inputForm).css("z-index", "auto");
 
-        $(inputWrap).toggle();
+        $(inputWrap).hide();
       }
     }
   }

@@ -43,33 +43,38 @@ $(document).ready(function() {
 //CRIA PREVIEW DA IMAGEM SELECIONADA PARA UPLOAD
 function previewImages (e, input) {
 
-  var imPreview = $(input).parents(".reg-form").next(".img-wrap"),
+  var imPreview = $(input).parents(".form-img").next(".img-wrap"),
+      imOverlay = $(imPreview).find(".img-overlay"),
       inputWrap = $(input).parent(),
+      inputForm = $(input).parents(".form-img"),
       img_html = '';
 
   var cancelBtn = $(imPreview).prev("form").find(".img-cancel"),
       sendBtn = $(imPreview).prev("form").find(".send-img");
 
-  //Create image thumbnail
-  img_html+=
-    "<a href='javascript:;'>" +
-        "<img src='"+URL.createObjectURL(e.target.files[0])+"' class='img-width'/>" +
-    "</a>";
+  //Create image thumbnail and delete button overlay
+  img_html+="<a href='javascript:;'>";
+    img_html+="<img src='"+URL.createObjectURL(e.target.files[0])+"' class='img-width'/>";
+  img_html+="</a>";
 
   $(imPreview).append(img_html);
+  $(imOverlay).css("display", "none");
+  $(inputForm).css("z-index", "2");
 
   //Toggle form buttons
-  $([cancelBtn, sendBtn, inputWrap]).each(function() {
-    $(this).toggle();
+  $([cancelBtn, sendBtn]).each(function() {
+    $(this).show();
   });
+    $(inputWrap).hide();
 
-  //Remove image preview when click "Cancel"
+  //Remove image preview and restore form to default when click "Cancel"
   $(cancelBtn).on("click", function() {
     $(imPreview).find("img").remove();
 
-    $([cancelBtn, sendBtn, inputWrap]).each(function() {
-      $(this).toggle();
+    $([cancelBtn, sendBtn]).each(function() {
+      $(this).hide();
     });
+    $(inputWrap).show();
 
   });
 }
@@ -83,9 +88,10 @@ function sendImage(e, btn, date) {
   var sendBtn = $(btn),
       cancelBtn = $(btn).siblings(".img-cancel"),
       imgWrap = $(btn).parents(".form-img").siblings(".img-wrap"),
-      inputBtn = $(imgWrap).find("label"),
+      inputForm = $(btn).parents(".form-img"),
+      imOverlay = $(imgWrap).find(".img-overlay"),
       imgTag = $(imgWrap).find("img"),
-      imgLink = $(imgWrap).find("a");
+      imgLink = $(imgWrap).find("a"),
       form = $(btn).parents(".form-img");
 
   var horario = $(form).find("input[type=file]").attr("data-hora"),
@@ -115,10 +121,13 @@ function sendImage(e, btn, date) {
 
           $(imgTag).attr("id", "img-"+json.imgId).attr("class", "img-width");
           $(imgLink).attr("class", "img-clickable");
+          $(imOverlay).css("display", "flex");
 
           $([sendBtn, cancelBtn]).each(function() {
-            $(this).toggle();
+            $(this).hide();
           });
+
+          $(inputForm).css("z-index", "auto");
         }
       }
     });

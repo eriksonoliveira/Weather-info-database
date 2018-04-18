@@ -124,8 +124,8 @@ function modal(el, type) {
   } else if(type == 2) {
     modal_html+=
       "<p>Excluir a imagem?</p>" +
-      "<button class='modal-del-confirm btn btn-outline-success'>Excluir</button>" +
-      "<button class='modal-del-cancel btn btn-outline-danger'>Cancelar</button>";
+      "<button class='modal-del-confirm mui-btn mui-btn--primary'>Excluir</button>" +
+      "<button class='modal-del-cancel mui-btn mui-btn--danger'>Cancelar</button>";
   }
 
   //Insert the content and show modal

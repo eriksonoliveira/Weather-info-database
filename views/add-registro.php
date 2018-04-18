@@ -29,7 +29,7 @@
 
     <div id="im_satelite" class="menu-input-form">
       <div class="center">
-        <table class="table">
+        <table class="table menu-input-table">
         <tbody>
           <tr>
             <th colspan="2">Imagem de Satélite</th>
@@ -37,7 +37,7 @@
           <tr>
             <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
@@ -62,15 +62,15 @@
           <tr>
             <?PHP for($i = 2; $i <= 3; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label for="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][1].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][1];?>" data-categoria="<?PHP echo $cats['img'][1];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <button type="submit" class="btn btn-success send-img">Enviar</button>
-                  <button class="btn btn-danger img-cancel" type="reset">Cancelar</button>
+                  <button type="submit" class="mui-btn mui-btn--primary send-img">Enviar</button>
+                  <button class="mui-btn mui-btn--danger img-cancel" type="reset">Cancelar</button>
                 </div>
               </form>
 
@@ -91,7 +91,7 @@
 
     <div id="im_sinotica" class="menu-input-form">
       <div class="center">
-        <table class="table">
+        <table class="table menu-input-table">
         <tbody>
           <tr>
             <th colspan="2">Imagem Sinótica</th>
@@ -99,15 +99,15 @@
           <tr>
             <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <button type="submit" class="btn btn-success send-img">Enviar</button>
-                  <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
+                  <button type="submit" class="mui-btn mui-btn--primary send-img">Enviar</button>
+                  <button class="mui-btn mui-btn--danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
@@ -124,15 +124,15 @@
           <tr>
             <?PHP for($i = 2; $i <= 3; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label for="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][0].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][0];?>" data-categoria="<?PHP echo $cats['img'][0];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <button type="submit" class="btn btn-success send-img">Enviar</button>
-                  <button class="btn btn-danger img-cancel" type="reset">Cancelar</button>
+                  <button type="submit" class="mui-btn mui-btn--primary send-img">Enviar</button>
+                  <button class="mui-btn mui-btn--danger img-cancel" type="reset">Cancelar</button>
                 </div>
               </form>
 
@@ -153,7 +153,7 @@
 
     <div id="altos_niveis" class="menu-input-form">
       <div class="center">
-        <table class="table table-bordered">
+        <table class="table menu-input-table table-bordered">
         <tbody>
           <tr>
             <th colspan="2">Jato em altos níveis</th>
@@ -161,15 +161,15 @@
           <tr>
             <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label for="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][3].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][3];?>" data-categoria="<?PHP echo $cats['img'][3];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <button type="submit" class="btn btn-success send-img">Enviar</button>
-                  <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
+                  <button type="submit" class="mui-btn mui-btn--primary send-img">Enviar</button>
+                  <button class="mui-btn mui-btn--danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
@@ -190,7 +190,7 @@
 
     <div id="medios_niveis" class="menu-input-form">
       <div class="center">
-        <table class="table table-bordered">
+        <table class="table menu-input-table table-bordered">
         <tbody>
           <tr>
             <th colspan="2">Geopotencial em médios níveis</th>
@@ -198,15 +198,15 @@
           <tr>
             <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label for="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][4].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][4];?>" data-categoria="<?PHP echo $cats['img'][4];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <button type="submit" class="btn btn-success send-img">Enviar</button>
-                  <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
+                  <button type="submit" class="mui-btn mui-btn--primary send-img">Enviar</button>
+                  <button class="mui-btn mui-btn--danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
@@ -234,7 +234,7 @@
           <tr>
             <?PHP for($i = 0; $i <=1; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label for="categoria">Meteorologista:</label>
@@ -271,7 +271,7 @@
           <tr>
             <?PHP for($i = 2; $i <=3; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label for="categoria">Meteorologista:</label>
@@ -321,7 +321,7 @@
 
           <tr>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label>Tecnico:</label>
@@ -361,7 +361,7 @@
 
     <div id="sondagem" class="menu-input-form">
       <div class="center">
-        <table class="table table-bordered">
+        <table class="table menu-input-table table-bordered">
         <tbody>
           <tr>
             <th colspan="2">Radiossondagem de Florianópolis</th>
@@ -369,15 +369,15 @@
           <tr>
             <?PHP for($i = 0; $i <= 1; $i++):?>
             <td>
-              <p><?PHP echo $horario[$i]['hora'];?></p>
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
               <form class="reg-form form-img" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <div class="input-btn-wrap">
                     <label for="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" class="mui-btn mui-btn--fab mui-btn--primary inputBtn">+</label>
                     <input id="<?PHP echo $cats['img'][2].''.$horario[$i]['hora'];?>" type="file" name="<?PHP echo $cats['img'][2];?>" data-categoria="<?PHP echo $cats['img'][2];?>" data-hora="<?PHP echo $horario[$i]['hora'];?>"/>
                   </div>
-                  <button type="submit" class="btn btn-success send-img">Enviar</button>
-                  <button class="btn btn-danger img-cancel" type="button">Cancelar</button>
+                  <button type="submit" class="mui-btn mui-btn--primary send-img">Enviar</button>
+                  <button class="mui-btn mui-btn--danger img-cancel" type="button">Cancelar</button>
                 </div>
               </form>
 
