@@ -4,6 +4,8 @@ $(document).ready(function() {
   $("input[name=calendar-1]").datepicker({
     prevText: "Anterior",
     nextText: "Próximo",
+    changeMonth: true,
+    changeYear: true,
     maxDate: new Date()
   });
 
@@ -12,6 +14,8 @@ $(document).ready(function() {
   $("input[name=calendar-2]").datepicker({
     prevText: "Anterior",
     nextText: "Próximo",
+    changeMonth: true,
+    changeYear: true,
     maxDate: new Date()
   });
 
