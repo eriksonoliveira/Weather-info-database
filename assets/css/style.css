@@ -428,8 +428,14 @@ label.css-label {
 }
 
 .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
-  border: 0;
+  border: 1px solid #BEBEBE;
   margin: 2px 2px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+  font-size:
 }
 
 .systempick {
