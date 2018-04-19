@@ -22,7 +22,7 @@
         <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
           <a href="dados_observados" class="mui-btn mui-btn--primary menu-btn">Ocorrências</a>
           <a href="sondagem" class="mui-btn mui-btn--primary menu-btn">Radiossondagem</a>
-          <a href="#" class="mui-btn mui-btn--primary menu-btn">Vídeos</a>
+          <a href="#" class="mui-btn mui-btn--primary menu-btn">Informações gerais</a>
         </div>
       </div>
     </div>
@@ -238,7 +238,7 @@
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label for="categoria">Meteorologista:</label>
-                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="custom-select" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                     <?PHP
                       foreach($mets as $met):
                     ?>
@@ -275,7 +275,7 @@
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label for="categoria">Meteorologista:</label>
-                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="custom-select" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                     <?PHP
                       foreach($mets as $met):
                     ?>
@@ -325,7 +325,7 @@
               <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                 <div class="form-group">
                   <label>Tecnico:</label>
-                  <select name="tec_nome_<?PHP echo $horario[$i]['hora'];?>" class="form-control" data-cargo="tec" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+                  <select name="tec_nome_<?PHP echo $horario[$i]['hora'];?>" class="custom-select" data-cargo="tec" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                     <?PHP
                       foreach($tecs as $tec):
                     ?>

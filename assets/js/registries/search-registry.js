@@ -80,7 +80,7 @@ function showResults(json) {
 
     //Apend canvas element and draw chart
     if(draw) {
-      $(".chart").append("<canvas id='myChart'></canvas>").addClass("chart-dimensions");
+      $(".chart").append("<canvas id='myChart' style='background-color: #20BE9E;'></canvas>").addClass("chart-dimensions");
       $(".result-stats-wrap").show();
       drawLineChart(json[0]['chart']);
     }
@@ -111,7 +111,6 @@ function showResults(json) {
         result_items_html+="<td>";
           if(value.info.met["06Z"].condicao_tempo.text){
 
-            /*result_items_html+="<p><strong>Superfície:</strong> "+value.info.met["06Z"].superficie.text+"</p>";*/
             result_items_html+="<p><strong>Condição:</strong> "+value.info.met["06Z"].condicao_tempo.text+"</p>";
 
           } else {
@@ -126,7 +125,7 @@ function showResults(json) {
           result_items_html+="<a href='http://localhost/projetoy/Monitoramento/registros/?date="+value.date+"' target='_blank'>";
 
             //edit button
-            result_items_html+="<button class='btn view-registry'>Visualizar</button>";
+            result_items_html+="<button class='mui-btn view-registry'>Visualizar</button>";
 
           result_items_html+="</a>"
         result_items_html+="</td>";
@@ -215,9 +214,8 @@ function drawLineChart(results) {
     labels : labels,
     datasets : [{
       label                : "Ocorrências",
-      backgroundColor      : "rgba(93, 208, 184, 0.7)",
-      borderColor          : "rgb(32, 190, 158, 1)",
-      borderWidth          : 2,
+      backgroundColor      : "rgba(146,224,208, 0.7)",
+//      backgroundColor      : "rgba(122, 217, 197, 0.7)",
       data                 : data
     }]
   };
@@ -233,7 +231,8 @@ function drawLineChart(results) {
        legend: {display: false},
        title: {
          display: true,
-         text: "NÚMERO DE DIAS (por mês)"
+         text: "NÚMERO DE DIAS (por mês)",
+         fontColor: "#EEE"
        },
        layout: {
          padding: {
@@ -247,13 +246,19 @@ function drawLineChart(results) {
          yAxes: [{
            ticks: {
              beginAtZero: true,
-             stepSize: 1
+             stepSize: 1,
+             fontColor: "#EEE"
+           },
+           gridLines: {
+             color: "#BBB",
+             zeroLineColor: "#BBB"
            }
          }],
          xAxes: [{
            offset: true,
            gridLines: {
-             offsetGridLines: false
+             offsetGridLines: false,
+             color: "#BBB"
            },
            barPercentage: 0.3,
            type: 'time',
@@ -263,6 +268,9 @@ function drawLineChart(results) {
              displayFormats: {
                month: 'MMM YYYY'
              }
+           },
+           ticks: {
+             fontColor: "#EEE"
            }
          }]
        }

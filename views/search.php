@@ -29,7 +29,7 @@
       <?PHP endforeach;?>
       </div>
 
-      <button class="search-btn btn"><i class="fa fa-search"></i>&nbsp; Pesquisar</button>
+      <button class="search-btn mui-btn"><i class="fa fa-search"></i>&nbsp; Pesquisar</button>
     </form>
   </div>
 
