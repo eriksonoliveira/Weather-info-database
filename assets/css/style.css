@@ -65,8 +65,8 @@ nav.navbar {
 
 
 th {
-  text-align: center;
-  background-color: #E5E5E5;
+  text-align: left;
+  background-color: #F5F5F5;
 }
 
 .reg-form {
@@ -260,12 +260,18 @@ th {
   align-items: center;
 }
 
-.home-container .btn {
-  padding: 25px 20px;
+.home-container .mui-btn {
+  height: auto !important;
+  padding: 25px 35px !important;
+  line-height: normal !important;
   text-align: center;
   font-size: 18px;
-  color: #FFF;
-  transition: all 0.1s;
+  color: #FFF !important;
+  transition: all 0.1s !important;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  margin-left: 2px !important;
+  margin-right: 2px !important;
 }
 
 .home-search-btn {
@@ -467,22 +473,33 @@ label.css-label {
   background-color: #293642;
 }
 
-.loader {
+.loader-wrap {
   position: absolute;
   left: 50%;
   top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
-  width: 50px;
-  height: 50px;
-  border: 8px solid #3498db;
-/*  border: 16px solid #f3f3f3;*/
-  border-top: 8px solid #A3D0EF;
+  padding: 20px;
+  background-color: rgba(136,136,136,.3);
   border-radius: 50%;
-  animation: spin 2s linear infinite;
   display: none;
 }
 
-.loader.show {
+.loader {
+ /* position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;*/
+  width: 50px;
+  height: 50px;
+  border: 5px solid #3498db;
+  border-top: 5px solid #A3D0EF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loader-wrap.show {
   display: block;
 }
 
@@ -497,6 +514,7 @@ label.css-label {
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
+  position: relative;
 }
 
 .result-stats-wrap {

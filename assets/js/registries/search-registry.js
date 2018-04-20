@@ -51,20 +51,20 @@ function searchRegistry(e, btn) {
     data: data,
     dataType: 'json',
     beforeSend: function() {
-      $(".loader").addClass("show"); },
+      $(".loader-wrap").addClass("show"); },
     contentType: false,
     processData: false,
     success: function(json){
-      $(".loader").removeClass("show");
-      showResults(json);
+      $(".loader-wrap").removeClass("show");
 
+      showResults(json);
       pageNumbers(json);
     }
   });
 }
 
 function showResults(json) {
-  console.log(json);
+  //console.log(json);
 
   //Clear table and chart
   $("#myChart").remove();
@@ -305,28 +305,29 @@ function showSum(sum) {
 
 function getPage(page, elem) {
   let data = new FormData();
+  var parent  = $(elem).parent();
 
   data.append("dateStart", start);
   data.append("dateEnd", end);
   data.append("systems", JSON.stringify(systems));
   data.append("page", page);
 
-  var parent  = $(elem).parent();
-
-  console.log(parent);
-
-    $.ajax({
+  $.ajax({
     type: 'POST',
     url: 'http://localhost/projetoy/Monitoramento/pesquisar/data',
     data: data,
     dataType: 'json',
+    beforeSend: function() {
+      $(".loader-wrap").addClass("show"); },
     contentType: false,
     processData: false,
     success: function(json){
+      $(".loader-wrap").removeClass("show");
       showResults(json);
     }
   });
 
+  //Add the class 'active' to the clicked link
   $(".page-filter").removeClass("active");
   $(parent).addClass("active");
 }

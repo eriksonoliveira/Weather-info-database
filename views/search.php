@@ -46,6 +46,9 @@
         </div>
       </div>
     </div>
+    <div class="loader-wrap">
+      <div class="loader"></div>
+    </div>
   </div>
 
 
@@ -55,4 +58,3 @@
 <div class="bg-box"></div>
 <div class="modal-box"></div>
 
-<div class="loader"></div>

@@ -117,8 +117,14 @@ function sendImage(e, btn, date) {
       success: function(json) {
 
         if(json.success = "yes") {
-          $(successMsg).html("Imagem enviada com sucesso!");
 
+          //Show message and hide it after 3 seconds
+          $(successMsg).html("Imagem enviada com sucesso!");
+          setTimeout(function() {
+            $(successMsg).fadeOut();
+          }, 3000);
+
+          //Display image thumbnail
           $(imgTag).attr("id", "img-"+json.imgId).attr("class", "img-width");
           $(imgLink).attr("class", "img-clickable");
           $(imOverlay).css("display", "flex");

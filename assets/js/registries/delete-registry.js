@@ -56,7 +56,13 @@ function deleteImg(del) {
 
       if(json.success = "yes") {
 
+        //Show message and hide it after 3 seconds
         $(successMsg).html("Imagem removida com sucesso!");
+        setTimeout(function() {
+            $(successMsg).fadeOut();
+        }, 3000);
+
+        //remove image thumbnail
         $(im).remove();
         $(inputWrap).show();
         $(".bg-box, .modal-box").fadeOut("fast");
@@ -66,20 +72,22 @@ function deleteImg(del) {
   });
 }
 
+//Delete Weather phenomena
 function deleteSystem(checkbox, date) {
   let id = $(checkbox).attr("data-id");
   let path = "ajax/deleteSystem";
-  function callback() {
-    return true;
-  }
 
+  function callback(json) {
+//    return true;
+    console.log(json);
+  }
 
   let data = {
     systemId: id,
     date: date
   };
 
-  let ajax = new AjaxRequest();
-  ajax.setData(data);
-  ajax.call(path, callback);
+  let Delete = new AjaxRequest();
+  Delete.setData(data);
+  Delete.call(path);
 }

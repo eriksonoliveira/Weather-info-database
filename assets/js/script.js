@@ -44,7 +44,7 @@ AjaxRequest.prototype = {
 
     this.data.append("systemData", JSON.stringify(arg));
   },
-  call: function(path, callback) {
+  call: function(path, callback = 0) {
     $.ajax({
       type: 'POST',
       url: 'http://localhost/projetoy/Monitoramento/'+path+'',
@@ -53,7 +53,9 @@ AjaxRequest.prototype = {
       contentType: false,
       processData: false,
       success: function(json) {
-        callback(json);
+        if(callback) {
+          callback(json);
+        }
       }
     });
   }
