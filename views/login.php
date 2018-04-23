@@ -18,7 +18,11 @@
           <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control"/>
         </div>
         <input type="submit" value="Fazer Login" class="btn login-submit  blue"/>
-        <div class="form-group login-forgot"><a href="<?PHP echo BASE_URL;?>password/forgot">Esqueci a senha</a></div>
+        <div class="form-group login-forgot">
+          <a href="<?PHP echo BASE_URL;?>password/forgot">Esqueci a senha</a>
+          <br>
+          <a href="<?PHP echo BASE_URL;?>cadastrar">Cadastrar-se</a>
+        </div>
       </form>
     </div>
   </div>

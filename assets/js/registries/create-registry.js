@@ -83,31 +83,57 @@ function previewImages (e, input) {
 function sendImage(e, btn, date) {
   e.preventDefault();
 
-  var data = new FormData();
-
-  var sendBtn = $(btn),
-      cancelBtn = $(btn).siblings(".img-cancel"),
-      imgWrap = $(btn).parents(".form-img").siblings(".img-wrap"),
-      inputForm = $(btn).parents(".form-img"),
-      imOverlay = $(imgWrap).find(".img-overlay"),
-      imgTag = $(imgWrap).find("img"),
-      imgLink = $(imgWrap).find("a"),
-      form = $(btn).parents(".form-img");
-
-  var horario = $(form).find("input[type=file]").attr("data-hora"),
-      categoria = $(form).find("input[type=file]").attr("data-categoria"),
-      imagem = $(form).find("input[type=file]")[0].files,
-      successMsg = $(form).nextAll(".sucesso-msg").first();
-
+  let form = $(btn).parents(".form-img"),
+      imagem = $(form).find("input[type=file]")[0].files;
 
   if(imagem.length > 0) {
+    //DOM elements
+    let sendBtn = $(btn),
+        cancelBtn = $(btn).siblings(".img-cancel"),
+        imgWrap = $(btn).parents(".form-img").siblings(".img-wrap"),
+        inputForm = $(btn).parents(".form-img"),
+        imOverlay = $(imgWrap).find(".img-overlay"),
+        imgTag = $(imgWrap).find("img"),
+        imgLink = $(imgWrap).find("a"),
+        horario = $(form).find("input[type=file]").attr("data-hora"),
+        categoria = $(form).find("input[type=file]").attr("data-categoria"),
+        successMsg = $(form).nextAll(".sucesso-msg").first();
 
+    let path = "ajax";
+
+    let data = new FormData();
     data.append("date", date);
     data.append("horario", horario);
     data.append("categoria", categoria);
     data.append("imagem", imagem[0]);
 
-    $.ajax({
+    function callback(json) {
+      if(json.success = "yes") {
+
+        //Show message and hide it after 3 seconds
+        $(successMsg).html("Imagem enviada com sucesso!");
+        setTimeout(function() {
+          $(successMsg).fadeOut();
+        }, 3000);
+
+        //Display image thumbnail
+        $(imgTag).attr("id", "img-"+json.imgId).attr("class", "img-width");
+        $(imgLink).attr("class", "img-clickable");
+        $(imOverlay).css("display", "flex");
+
+        $([sendBtn, cancelBtn]).each(function() {
+          $(this).hide();
+        });
+
+        $(inputForm).css("z-index", "auto");
+      }
+    }
+
+    //Send image to the Database
+    let Image = new AjaxRequest(data);
+    Image.call(path, callback);
+
+    /*$.ajax({
       type: 'POST',
       url: 'http://localhost/projetoy/Monitoramento/ajax',
       data: data,
@@ -136,7 +162,7 @@ function sendImage(e, btn, date) {
           $(inputForm).css("z-index", "auto");
         }
       }
-    });
+    });*/
   }
 }
 

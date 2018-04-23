@@ -5,7 +5,8 @@ class cadastrarController extends controller{
     $data = array(
       'success' => '',
       'failure' => '',
-      'warning' => ''
+      'warning' => '',
+      'title' => 'Cadastrar'
     );
 
     $u = new Usuarios();
@@ -21,7 +22,7 @@ class cadastrarController extends controller{
         if($u->cadastrar($nome, $email, $senha, $funcao)) { 
 
           $data['success'] = "<div class='alert alert-success'>
-            <strong>Parabéns!</strong> Cadastrado com sucesso. <a href='".BASE_URL."login' class='alert-link'>Faça o login agora</a>
+            Cadastrado com sucesso. <a href='".BASE_URL."login' class='alert-link'>Faça o login agora</a>
           </div>";
              
         } else {

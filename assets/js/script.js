@@ -32,19 +32,13 @@ $(document).ready(function() {
 
 });
 
-//AJAX Requests
-function AjaxRequest() {
-  this.data;
-}
+//Handle Ajax Requests
+class AjaxRequest {
+  constructor(data) {
+    this.data = data;
+  }
 
-AjaxRequest.prototype = {
-  constructor: AjaxRequest,
-  setData: function(arg) {
-    this.data = new FormData();
-
-    this.data.append("systemData", JSON.stringify(arg));
-  },
-  call: function(path, callback = 0) {
+  call(path, callback = 0) {
     $.ajax({
       type: 'POST',
       url: 'http://localhost/projetoy/Monitoramento/'+path+'',

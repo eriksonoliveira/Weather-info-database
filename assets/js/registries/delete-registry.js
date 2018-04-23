@@ -76,18 +76,14 @@ function deleteImg(del) {
 function deleteSystem(checkbox, date) {
   let id = $(checkbox).attr("data-id");
   let path = "ajax/deleteSystem";
-
-  function callback(json) {
-//    return true;
-    console.log(json);
-  }
-
-  let data = {
+  let data = new FormData();
+  let dataObj = {
     systemId: id,
     date: date
   };
 
-  let Delete = new AjaxRequest();
-  Delete.setData(data);
+  data.append("systemData", JSON.stringify(dataObj));
+
+  let Delete = new AjaxRequest(data);
   Delete.call(path);
 }
