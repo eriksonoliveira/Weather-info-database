@@ -132,37 +132,6 @@ function sendImage(e, btn, date) {
     //Send image to the Database
     let Image = new AjaxRequest(data);
     Image.call(path, callback);
-
-    /*$.ajax({
-      type: 'POST',
-      url: 'http://localhost/projetoy/Monitoramento/ajax',
-      data: data,
-      dataType: 'json',
-      contentType: false,
-      processData: false,
-      success: function(json) {
-
-        if(json.success = "yes") {
-
-          //Show message and hide it after 3 seconds
-          $(successMsg).html("Imagem enviada com sucesso!");
-          setTimeout(function() {
-            $(successMsg).fadeOut();
-          }, 3000);
-
-          //Display image thumbnail
-          $(imgTag).attr("id", "img-"+json.imgId).attr("class", "img-width");
-          $(imgLink).attr("class", "img-clickable");
-          $(imOverlay).css("display", "flex");
-
-          $([sendBtn, cancelBtn]).each(function() {
-            $(this).hide();
-          });
-
-          $(inputForm).css("z-index", "auto");
-        }
-      }
-    });*/
   }
 }
 
