@@ -107,6 +107,7 @@ function sendImage(e, btn, date) {
     data.append("categoria", categoria);
     data.append("imagem", imagem[0]);
 
+    //Run this function after success of AJAX request
     function callback(json) {
       if(json.success = "yes") {
 
@@ -129,7 +130,7 @@ function sendImage(e, btn, date) {
       }
     }
 
-    //Send image to the Database
+    //Send image to the Database and run callback function
     let Image = new AjaxRequest(data);
     Image.call(path, callback);
   }

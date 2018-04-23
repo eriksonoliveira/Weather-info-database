@@ -33,6 +33,12 @@
               <?PHP echo $_SESSION['nome-usuario']?>
             </a>
             <div class="dropdown-menu" aria-labelledby="buttonMenu1">
+              <a  class="dropdown-item" href="<?PHP echo BASE_URL; ?>user/?usr=<?PHP echo $_SESSION['cLogin']; ?>">Meus dados</a>
+            <?PHP
+              if($_SESSION['permission'] == 'admin'):
+            ?>
+              <a  class="dropdown-item" href="<?PHP echo BASE_URL; ?>admin">Usuarios</a>
+            <?PHP endif; ?>
               <a  class="dropdown-item" href="<?PHP echo BASE_URL; ?>login/sair">Sair</a>
             </div>
           </li>

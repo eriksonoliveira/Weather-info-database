@@ -9,15 +9,20 @@ class Usuarios extends model {
     return $row['conta'];
   }
   
+  public function getLista() {
+
+    $array = array();
+
+    $sql = $this->db->query("SELECT * FROM usuarios ORDER BY nome");
+    if($sql->rowCount() > 0) {
+      $array = $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    return $array;
+  }
+
   public function cadastrar($nome, $email, $senha, $funcao) {
-    
-    
-    //verifica se este email já foi cadastrado
-/*    $sql = $this->db->prepare("SELECT id FROM usuarios WHERE email = :email");
-    $sql->bindValue(":email", $email);
-    $sql->execute();
-    
-    if($sql->rowCount() == 0) {*/
+
     if($this->hasUser($email) == false) {
       
       $sql = $this->db->prepare("INSERT INTO usuarios SET nome = :nome, email = :email, senha = :senha, funcao = :funcao");
@@ -36,7 +41,7 @@ class Usuarios extends model {
   
   public function login($email, $senha) {
     
-    $sql = $this->db->prepare("SELECT id, nome FROM usuarios WHERE email = :email AND senha = :senha");
+    $sql = $this->db->prepare("SELECT id, nome, permissoes FROM usuarios WHERE email = :email AND senha = :senha");
     $sql->bindValue(':email', $email);
     $sql->bindValue(':senha', $senha);
     $sql->execute();
@@ -45,6 +50,7 @@ class Usuarios extends model {
       $dado = $sql->fetch();
       $_SESSION['cLogin'] = $dado['id'];
       $_SESSION['nome-usuario'] = $dado['nome'];
+      $_SESSION['permission'] = $dado['permissoes'];
       
       return true;
     } else {
@@ -106,7 +112,22 @@ class Usuarios extends model {
 
     return true;
   }
+
+  public function getInfo($id) {
+    $array = array();
+
+    $sql = $this->db->prepare("SELECT * FROM usuarios WHERE id = :id ORDER BY nome");
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    if($sql->rowCount() > 0) {
+      $array = $sql->fetch(PDO::FETCH_ASSOC);
+    }
+
+    return $array;
+  }
 }
+
 ?>
 
 
