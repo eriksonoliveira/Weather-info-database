@@ -64,8 +64,6 @@ function searchRegistry(e, btn) {
 }
 
 function showResults(json) {
-  //console.log(json);
-
   //Clear table and chart
   $("#myChart").remove();
   $(".result-stats-wrap").hide();
@@ -111,10 +109,10 @@ function showResults(json) {
         result_items_html+="<td>";
           if(value.info.met["06Z"].condicao_tempo.text){
 
-            result_items_html+="<p><strong>Condição:</strong> "+value.info.met["06Z"].condicao_tempo.text+"</p>";
+            result_items_html+="<p class='mb-3'><strong>Condição:</strong> "+value.info.met["06Z"].condicao_tempo.text+"</p>";
 
           } else {
-            result_items_html+="<p>Sem informações para este dia</p>";
+            result_items_html+="<p class='mb-3'>Sem informações para este dia</p>";
           }
 
           result_items_html+="<p class='ocorrencias'><strong>Ocorrências:</strong></p>";
@@ -197,7 +195,6 @@ function appendPhenom(data) {
   result_phenom = array.join(", ");
   return result_phenom;
 }
-
 
 //CHART
 function drawLineChart(results) {
