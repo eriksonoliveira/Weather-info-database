@@ -7,7 +7,7 @@
       </div>
       <form method="POST" class="pass-forg-form">
         <div class="form-group">
-          <input type="email" class="form-control" name="email" placeholder="Email de cadastro"/><br>
+          <input type="email" class="form-control input-blue" name="email" placeholder="Email de cadastro"/><br>
           <button type="submit" class="btn blue">Enviar</button>
         </div>
       </form>

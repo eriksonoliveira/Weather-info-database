@@ -254,7 +254,6 @@ th {
 .home-container {
   height: 100%;
   width: 100%;
-  background-color: #F3F3F3;;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -307,7 +306,6 @@ th {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #EFEFEF;;
   font-family: 'Open Sans';
 }
 
@@ -340,6 +338,15 @@ th {
 
 .blue:hover {
   background-color: #1466A2;
+  color: #C3C3C3;
+}
+
+.grey-bg {
+  background-color: #EFEFEF;
+}
+
+.input-blue {
+  background-image: linear-gradient(0deg,#1F83C5 2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
 }
 
 .red {
@@ -671,4 +678,15 @@ small {
 
 .pass-forg-content .card-body .card-title {
   margin-bottom: 1.75rem;
+}
+
+.user-edit-form {
+  width: 25em;
+}
+.user-edit-form .form-control, .user-edit-form .form-check {
+  margin-bottom: 2.5em;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #1F83C5;
 }

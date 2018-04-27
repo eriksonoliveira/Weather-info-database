@@ -126,6 +126,17 @@ class Usuarios extends model {
 
     return $array;
   }
+
+  public function updateInfo($name, $id, $email, $permission) {
+    $sql = $this->db->prepare("UPDATE usuarios SET nome = :nome, email = :email, permissoes = :permissoes WHERE id = :id");
+    $sql->bindValue(":nome", $name);
+    $sql->bindValue(":email", $email);
+    $sql->bindValue(":permissoes", $permission);
+    $sql->bindValue(":id", $id);
+    $sql->execute();
+
+    return true;
+  }
 }
 
 ?>

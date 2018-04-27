@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="login-container grey-bg">
   <div class="login-header">
     <h1>Monitoramento</h1>
   </div>
@@ -11,13 +11,13 @@
       <form method="POST">
         <div class="form-group">
   <!--        <label for="email">Email:</label>-->
-          <input type="email" name="email" id="email" placeholder="Email" class="form-control"/>
+          <input type="email" name="email" id="email" placeholder="Email" class="form-control input-blue"/>
         </div>
         <div class="form-group">
   <!--        <label for="senha">Senha:</label>-->
-          <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control"/>
+          <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control input-blue"/>
         </div>
-        <input type="submit" value="Fazer Login" class="btn login-submit  blue"/>
+        <input type="submit" value="Fazer Login" class="mui-btn login-submit blue"/>
         <div class="form-group login-forgot">
           <a href="<?PHP echo BASE_URL;?>password/forgot">Esqueci a senha</a>
           <br>

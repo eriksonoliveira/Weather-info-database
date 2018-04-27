@@ -25,5 +25,20 @@ class userController extends controller{
     $this->loadTemplate('user', $this->data);
   }
 
+  public function saveUserInfo() {
+    $name = addslashes($_POST['usrName']);
+    $id = addslashes($_POST['usrId']);
+    $email = addslashes($_POST['usrEmail']);
+    $permission = addslashes($_POST['permission']);
+
+    $u = new Usuarios();
+    $u->updateInfo($name, $id, $email, $permission);
+
+    $this->data['success'] = 'yes';
+
+    echo json_encode($this->data);
+    exit;
+  }
+
 }
 ?>

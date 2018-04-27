@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     //PREVIEW IMAGE BEFORE UPLOAD
   $("input[type=file]").change(function(e) {
-    var inputFile = $(this);
+    let inputFile = $(this);
     previewImages(e, inputFile);
   });
 
