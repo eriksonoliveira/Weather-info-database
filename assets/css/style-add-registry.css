@@ -87,8 +87,16 @@ html, body {
   background-color: #2BBBAD;
 }
 
-#descricao, #dados_observados {
+textarea {
+  padding: 1.8em 1em !important;
+}
+
+#descricao, #dados_observados, #info-gerais {
   width: 60vw;
   min-width: 500px;
+}
+
+#info-gerais textarea {
+  height: 150px;
 }
 

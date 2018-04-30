@@ -30,7 +30,6 @@ class adicionarController extends controller{
     //Pegar categorias
     $c = new Categorias();
     $categs = $c->getLista();
-    $categs_desc = $c->getListaDesc();
 
     $data['cats'] = $categs;
 

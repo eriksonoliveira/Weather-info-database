@@ -6,6 +6,7 @@ $(document).ready(function() {
     nextText: "Próximo",
     changeMonth: true,
     changeYear: true,
+    dateFormat: "dd-mm-yy",
     maxDate: new Date()
   });
 
@@ -16,6 +17,7 @@ $(document).ready(function() {
     nextText: "Próximo",
     changeMonth: true,
     changeYear: true,
+    dateFormat: "dd-mm-yy",
     maxDate: new Date()
   });
 
@@ -30,6 +32,24 @@ $(document).ready(function() {
     modal(this, 1);
   });
 
+  //MATERIAL FLOATING EFFECT ON INPUT LABELS
+  $("input.form-control, textarea.form-control").focus(function() {
+    $(this).parent(".bmd-form-group").addClass("is-focused");
+  });
+
+  $("input.form-control, textarea.form-control").blur(function() {
+    $(this).parent(".bmd-form-group").removeClass("is-focused");
+  });
+
+  $("input.form-control, textarea.form-control").on("change", function() {
+    if($(this).val().length > 0) {
+      $(this).parent(".bmd-form-group").addClass("is-filled");
+    } else {
+      $(this).parent(".bmd-form-group").removeClass("is-filled");
+    }
+  });
+
+
 });
 
 //Handle Ajax Requests
@@ -41,7 +61,7 @@ class AjaxRequest {
   call(path, callback = 0) {
     $.ajax({
       type: 'POST',
-      url: 'http://localhost/projetoy/Monitoramento/'+path+'',
+      url: baseUrl+''+path,
       data: this.data,
       dataType: 'json',
       contentType: false,
@@ -58,6 +78,7 @@ class AjaxRequest {
 class KeyElements {
   constructor(btn) {
     this.btn = btn;
+
 
     this.form = $(btn).parents(".buttons").parents(".form-txt");
     this.horario = $(this.form).attr("data-hora");
@@ -84,7 +105,7 @@ function getQueryVariable() {
 }
 
 //Format date
-function dateFormated(separator) {
+function dateFormated(separator, format) {
   var d = new Date();
 
   var dd = d.getDate(),
@@ -98,10 +119,18 @@ function dateFormated(separator) {
     mm = '0'+mm;
   }
 
-  if(separator == "slash") {
-    var date = mm+"/"+dd+"/"+yyyy;
+  if(format) {
+    if(separator == "slash") {
+      var date = mm+"/"+dd+"/"+yyyy;
+    } else {
+      var date = dd+"-"+mm+"-"+yyyy;
+    }
   } else {
-    var date = yyyy+"-"+mm+"-"+dd;
+    if(separator == "slash") {
+      var date = mm+"/"+dd+"/"+yyyy;
+    } else {
+      var date = yyyy+"-"+mm+"-"+dd;
+    }
   }
 
   return date;

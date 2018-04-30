@@ -21,15 +21,35 @@ class Usuarios extends model {
     return $array;
   }
 
-  public function cadastrar($nome, $email, $senha, $funcao) {
+  public function getListaTable($page, $users_per_page) {
+
+    $array = array();
+    $p = new Pagination();
+
+    $sql1 = $this->db->query("SELECT * FROM usuarios ORDER BY nome");
+
+    $total_pages = $p->getTotalPages($sql1, $users_per_page);
+    $start_item = $p->getStart($page, $users_per_page);
+
+    $sql2 = $this->db->query("SELECT * FROM usuarios ORDER BY nome LIMIT ".$start_item.", ".$users_per_page);
+    if($sql2->rowCount() > 0) {
+      $array['data'] = $sql2->fetchAll(PDO::FETCH_ASSOC);
+      $array['num_pages'] = $total_pages;
+    }
+
+    return $array;
+  }
+
+  public function cadastrar($nome, $email, $senha, $funcao, $permissoes) {
 
     if($this->hasUser($email) == false) {
       
-      $sql = $this->db->prepare("INSERT INTO usuarios SET nome = :nome, email = :email, senha = :senha, funcao = :funcao");
+      $sql = $this->db->prepare("INSERT INTO usuarios (nome, email, senha, funcao, permissoes) VALUES (:nome, :email, :senha, :funcao, :permissoes)");
       $sql->bindValue(":nome", $nome);
       $sql->bindValue(":email", $email);
       $sql->bindValue(":senha", md5($senha));
       $sql->bindValue(":funcao", $funcao);
+      $sql->bindValue(":permissoes", $permissoes);
       $sql->execute();
       
       return true;

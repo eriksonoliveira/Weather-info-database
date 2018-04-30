@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   //GET AND FORMAT DATE
   var separator = "dash";
-   var date;
+  var date;
 
   //Check if GET date variable was passed
   date = getQueryVariable();
@@ -159,7 +159,7 @@ function sendText(e, btn, date) {
 
       $.ajax({
         type: 'POST',
-        url: 'http://localhost/projetoy/Monitoramento/ajax',
+        url: baseUrl+'ajax',
         data: data,
         dataType: 'json',
         contentType: false,
@@ -168,9 +168,7 @@ function sendText(e, btn, date) {
 
           elements.success = "yes";
 
-          $(elements.buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
-          /*$(elements.sendBtn).hide();
-          $(elements.editBtn).show();*/
+          $(elements.buttons).html("<button class='btn btn-info edit-text'>Editar</button>");
 
           $(elements.textArea).each(function() {
             $(this).prop("disabled", true);
@@ -189,24 +187,19 @@ function sendText(e, btn, date) {
 function sendTag(checkbox, date) {
 
   var data = new FormData();
+  var id = $(checkbox).attr("data-id");
 
-//  var c = $(btn).parent().siblings(".system-tags-container").find(".fenom-box").find("input:checked");
+  data.append("systemId", id);
+  data.append("date", date);
 
-//  $(c).each(function() {
-    var id = $(checkbox).attr("data-id");
+  $.ajax({
+    type: 'POST',
+    url: baseUrl+'ajax/sendTags',
+    data: data,
+    contentType: false,
+    processData: false,
+    success: function() {
 
-    data.append("systemId", id);
-    data.append("date", date);
-
-    $.ajax({
-      type: 'POST',
-      url: 'http://localhost/projetoy/Monitoramento/ajax/sendTags',
-      data: data,
-      contentType: false,
-      processData: false,
-      success: function() {
-
-      }
-    });
-//  });
+    }
+  });
 }

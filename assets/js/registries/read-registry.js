@@ -20,7 +20,7 @@ function getData(date) {
 
   $.ajax({
     type: "POST",
-    url: "http://localhost/projetoy/Monitoramento/ajax",
+    url: baseUrl+'ajax',
     data: data,
     dataType: 'json',
     contentType: false,

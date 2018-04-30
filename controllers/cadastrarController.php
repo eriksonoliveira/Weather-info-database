@@ -16,10 +16,11 @@ class cadastrarController extends controller{
       $email = addslashes($_POST['email']);
       $senha = $_POST['senha'];
       $funcao = addslashes($_POST['funcao']);
+      $permissoes = 'user';
 
       if(!empty($nome) && !empty($email) && !empty($senha)) {
 
-        if($u->cadastrar($nome, $email, $senha, $funcao)) { 
+        if($u->cadastrar($nome, $email, $senha, $funcao, $permissoes)) {
 
           $data['success'] = "<div class='alert alert-success'>
             Cadastrado com sucesso. <a href='".BASE_URL."login' class='alert-link'>Faça o login agora</a>

@@ -10,6 +10,9 @@ class Categorias extends model {
       "tec" => array(
         "metar", "ocorrencias"
       ),
+      "info" => array(
+        "general_info"
+      ),
       "img" => array(
         "im_sinotica", "im_satelite", "sondagem", "altos_niveis", "medios_niveis"
       ),

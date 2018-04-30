@@ -1,8 +1,8 @@
 <html>
   <head>
     <title><?PHP echo $title;?> - Monitoramento Meteorológico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- bootstrap CSS -->
-    <!--<link type="text/css" rel="stylesheet" href="<?PHP //echo BASE_URL;?>assets/css/bootstrap.min.css"/>-->
     <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/bootstrap-material-design.min.css"/>
     <!-- Material UI framework -->
     <link href="//cdn.muicss.com/mui-0.9.39-rc1/css/mui.min.css" rel="stylesheet" type="text/css" />
@@ -25,14 +25,14 @@
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a href="<?PHP echo BASE_URL; ?>" class="navbar-brand">Monitoramento</a>
+          <a href="<?PHP echo BASE_URL; ?>" class="navbar-brand ml-3">Monitoramento</a>
         </div>
-        <ul class="navbar-nav navbar-right ml-auto">
+        <ul class="navbar-nav navbar-right ml-auto mr-3">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <?PHP echo $_SESSION['nome-usuario']?>
             </a>
-            <div class="dropdown-menu" aria-labelledby="buttonMenu1">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="buttonMenu1">
               <a  class="dropdown-item" href="<?PHP echo BASE_URL; ?>user/?usr=<?PHP echo $_SESSION['cLogin']; ?>">Meus dados</a>
             <?PHP
               if($_SESSION['permission'] == 'admin'):
@@ -74,7 +74,7 @@
     <!-- registries scripts -->
     <script src="<?PHP echo BASE_URL;?>assets/js/registries/create-registry.js"></script>
     <script src="<?PHP echo BASE_URL;?>assets/js/registries/delete-registry.js"></script>
-    <script src="<?PHP echo BASE_URL;?>assets/js/registries/search-registry.js"></script>
+<!--    <script src="<?PHP //echo BASE_URL;?>assets/js/registries/search-registry.js"></script>-->
     <script src="<?PHP echo BASE_URL;?>assets/js/registries/update-registry.js"></script>
   </body>
 </html>

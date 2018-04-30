@@ -16,4 +16,5 @@
 </div>
 
 
+<script type="text/javascript">var baseUrl = "<?php echo BASE_URL; ?>";</script>
 <script src="<?php echo BASE_URL;?>assets/js/password-forgot.js"></script>

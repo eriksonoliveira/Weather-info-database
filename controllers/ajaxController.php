@@ -9,11 +9,6 @@ class ajaxController extends controller {
 
   public function index() {
 
-    /*****DATA*****/
-    /*$date = time();
-    $d_form_Int = date("Y/m/d", $date);
-    $this->data['date'] = $d_form_Int;*/
-
     //RECEBE DADOS DO DIA ATUAL
     if(isset($_POST['date']) && !empty($_POST['date'])) {
       $this->data['date'] = addslashes($_POST['date']);

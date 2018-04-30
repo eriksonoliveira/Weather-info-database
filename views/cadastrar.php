@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="card cadastrar-content" style="max-width: 750px;">
+<div class="container cadastrar-container">
+  <div class="card cadastrar-content" style="width: 60%; min-width: 300px;">
     <div class="card-body">
       <div class="card-title">
         <h1>Cadastre-se</h1>

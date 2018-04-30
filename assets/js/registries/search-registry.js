@@ -6,6 +6,16 @@ $(document).ready(function() {
     searchRegistry(e, btn);
   });
 
+  //SHOW SIDEBAR ON SMALL SCREENS
+  $(".show-sidebar").on("click", function() {
+    $(".search-sidebar").addClass("active");
+  });
+
+  //CLOSE SIDEBAR
+  $(".close-sidebar").on("click", function() {
+    $(".search-sidebar").removeClass("active");
+  });
+
 });
 
 var start, end, systems, draw, resultList;
@@ -16,13 +26,13 @@ function searchRegistry(e, btn) {
 
   let data = new FormData();
 
-  start = $(btn).siblings("#start").val();
-  end = $(btn).siblings("#end").val();
+  start = $(btn).siblings(".form-group").find("#start").val();
+  end = $(btn).siblings(".form-group").find("#end").val();
   systems = [];
   draw = true;
 
   resultList = $(btn).parents(".search-page-container").find(".result-table");
-  var checked = $(btn).siblings(".systempick").find(".systempick-box").find("input:checked");
+  let checked = $(btn).siblings(".systempick").find(".systempick-box").find("input:checked");
 
   //Get checked checkboxes
   $(checked).each(function() {
@@ -36,8 +46,9 @@ function searchRegistry(e, btn) {
 
   //Se a data final não foi especificada
   if(!end) {
-    var separator = "slash";
-    end = dateFormated(separator);
+    let separator = "dash";
+    let format = "BRZ";
+    end = dateFormated(separator, format);
   }
 
   data.append("dateStart", start);
@@ -47,7 +58,7 @@ function searchRegistry(e, btn) {
 
   $.ajax({
     type: 'POST',
-    url: 'http://localhost/projetoy/Monitoramento/pesquisar/data',
+    url: baseUrl+'pesquisar/data',
     data: data,
     dataType: 'json',
     beforeSend: function() {
@@ -83,7 +94,40 @@ function showResults(json) {
       drawLineChart(json[0]['chart']);
     }
 
-    //Create table head
+    let results_table = renderTable(json);
+
+    //inject to 'resultList'
+    $(resultList).html(results_table);
+
+  }
+}
+
+//Pagination
+function pageNumbers(json) {
+  var $pagination = $(".result-table-pagination ul");
+
+  let totalPages = Math.ceil(json[0].num_pages),
+      defaultOpts = {
+        totalPages: totalPages,
+        visiblePages: 5,
+        first: 'Primeira',
+        prev: 'Anterior',
+        next: 'Próxima',
+        last: 'Última',
+        onPageClick: function(event, page) {
+          getPage(page);
+      }
+      };
+
+  $pagination.twbsPagination('destroy');
+  $pagination.twbsPagination($.extend({}, defaultOpts));
+}
+
+function renderTable(json) {
+  let result_items_html = '';
+
+  //Create table head
+  result_items_html+="<div class='table-responsive-sm'>"
     result_items_html+="<table class='table table-hover'>";
       result_items_html+="<tr>";
         result_items_html+="<th colspan='4'>Registros</th>";
@@ -97,10 +141,12 @@ function showResults(json) {
 
     //Create table body
     $.each(json[0].data, function(key, value) {
+      let formatDate = value.date.split("-");
+      let dateFormatBr = formatDate[2]+"-"+formatDate[1]+"-"+formatDate[0];
 
       result_items_html+="<tr>";
       //Date
-        result_items_html+="<td class='cell-center'>"+value.date+"</td>";
+        result_items_html+="<td class='cell-center'>"+dateFormatBr+"</td>";
       //Image
         result_items_html+="<td>";
           result_items_html+=appendImg(value);
@@ -120,7 +166,7 @@ function showResults(json) {
         result_items_html+="</td>";
         result_items_html+="<td class='cell-center'>";
           //action button
-          result_items_html+="<a href='http://localhost/projetoy/Monitoramento/registros/?date="+value.date+"' target='_blank'>";
+          result_items_html+="<a href='"+baseUrl+"registros/?date="+value.date+"' target='_blank'>";
 
             //edit button
             result_items_html+="<button class='mui-btn view-registry'>Visualizar</button>";
@@ -131,43 +177,27 @@ function showResults(json) {
 
     });
     result_items_html+="</table>";
+  result_items_html+="</div>";
 
-    //inject to 'resultList'
-    $(resultList).html(result_items_html);
-
-  }
-}
-
-//Pagination
-function pageNumbers(json) {
-  var num_pages = json[0].num_pages,
-      pages_links = '';
-  for(let count = 0; count < num_pages; count++) {
-    pages_links+="<li class='page-filter page-item'>";
-      pages_links+="<a href='#"+(count+1)+"' class='page-link' onclick='getPage("+(count+1)+", this)'>"+(count+1)+"</a>";
-    pages_links+="</li>";
-  }
-
-  $(".result-table-pagination ul").html(pages_links);
-  $(".result-table-pagination ul").children().first().addClass("active");
+  return result_items_html;
 }
 
 // set img 'src' attribute
 function appendImg(value) {
-  var result_img = '';
+  let result_img = '';
   if(value.info.img["06Z"].im_satelite.fileName) {
 
     //Create html structure
     result_img +=
       "<a href='javascript:;' class='img-clickable'>" +
-        "<img src='http://localhost/projetoy/Monitoramento/assets/images/im_satelite/"+value.info.img["06Z"].im_satelite.fileName+"' class='result-table-img'/>" +
+        "<img src='"+baseUrl+"assets/images/im_satelite/"+value.info.img["06Z"].im_satelite.fileName+"' class='result-table-img'/>" +
       "</a>";
 
     return result_img;
   } else {
 
     //Show default image
-    result_img += "<img src='http://localhost/projetoy/Monitoramento/assets/images/default.png' class='result-table-img'/>";
+    result_img += "<img src='"+baseUrl+"assets/images/default-thumbnail.jpg' class='result-table-img'/>";
 
     return result_img;
   }
@@ -199,7 +229,7 @@ function appendPhenom(data) {
 //CHART
 function drawLineChart(results) {
   // Split timestamp and data into separate arrays
-  var labels = [], data=[], sum=0;
+  let labels = [], data=[], sum=0;
   results.forEach(function(key, packet) {
     sum+=Number(key.count);
     labels.push(key.month);
@@ -207,7 +237,7 @@ function drawLineChart(results) {
   });
 
   // Create the chart.js data structure using 'labels' and 'data'
-  var tempData = {
+  let tempData = {
     labels : labels,
     datasets : [{
       label                : "Ocorrências",
@@ -218,9 +248,9 @@ function drawLineChart(results) {
   };
 
   // Get the context of the canvas element we want to select
-  var ctx = document.getElementById("myChart").getContext("2d");
+  let ctx = document.getElementById("myChart").getContext("2d");
   // Instantiate a new chart
-  var myLineChart = new Chart(ctx, {
+  let myLineChart = new Chart(ctx, {
 
      type: 'bar',
      data: tempData,
@@ -300,9 +330,9 @@ function showSum(sum) {
   }
 }
 
-function getPage(page, elem) {
+//Get new data
+function getPage(page) {
   let data = new FormData();
-  var parent  = $(elem).parent();
 
   data.append("dateStart", start);
   data.append("dateEnd", end);
@@ -311,20 +341,21 @@ function getPage(page, elem) {
 
   $.ajax({
     type: 'POST',
-    url: 'http://localhost/projetoy/Monitoramento/pesquisar/data',
+    url: baseUrl+'pesquisar/data',
     data: data,
     dataType: 'json',
     beforeSend: function() {
+      //Show loader animation
       $(".loader-wrap").addClass("show"); },
     contentType: false,
     processData: false,
     success: function(json){
+      //Hide animation
       $(".loader-wrap").removeClass("show");
-      showResults(json);
+
+      let results_table = renderTable(json);
+      //insert table into 'resultList'
+      $(resultList).html(results_table);
     }
   });
-
-  //Add the class 'active' to the clicked link
-  $(".page-filter").removeClass("active");
-  $(parent).addClass("active");
 }

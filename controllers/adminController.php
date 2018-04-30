@@ -19,10 +19,13 @@ class adminController extends controller{
   }
 
   public function users() {
+    $page = addslashes($_POST['page']);
 
-    //Nomes Usuarios
+    //Users' names
     $u = new Usuarios();
-    $users = $u->getLista();
+
+    $users_per_page = 5;
+    $users = $u->getListaTable($page, $users_per_page);
 
     $this->data['users'] = $users;
 

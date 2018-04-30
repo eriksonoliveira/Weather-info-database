@@ -1,5 +1,10 @@
 <?PHP
 class pesquisarController extends controller{
+  public function __construct() {
+    $this->data = array(
+      'title' => 'Pesquisar'
+    );
+  }
 
   public function index() {
     if(empty($_SESSION['cLogin'])) {
@@ -7,18 +12,14 @@ class pesquisarController extends controller{
       exit;
     }
 
-    $data = array(
-      'title' => 'Pesquisar'
-    );
-
     $s = new Sistemas();
     $sist = $s->getLista();
 
-    $data['sistemas'] = $sist['sistemas_list'];
-    $data['sistemas_class'] = $sist['sistemas_class'];
+    $this->data['sistemas'] = $sist['sistemas_list'];
+    $this->data['sistemas_class'] = $sist['sistemas_class'];
 
     //LOADS TEMPLATE
-    $this->loadTemplate('search', $data);
+    $this->loadTemplate('search', $this->data);
   }
 
   public function data() {
@@ -26,7 +27,6 @@ class pesquisarController extends controller{
       header("Location: ".BASE_URL."login");
       exit;
     }
-
 
     $data = array();
 
@@ -39,16 +39,17 @@ class pesquisarController extends controller{
         $systems = json_decode($systems, true);
       }
 
-      $s = explode("/", $start);
-      $e = explode("/", $end);
+      $s = explode("-", $start);
+      $e = explode("-", $end);
 
-      $startDate = $s[2]."-".$s[0]."-".$s[1];
-      $endDate = $e[2]."-".$e[0]."-".$e[1];
+      $startDate = $s[2]."-".$s[1]."-".$s[0];
+      $endDate = $e[2]."-".$e[1]."-".$e[0];
+
+      //Number of items for pagination
+      $items_per_page = 10;
 
       $r = new Registros();
-      $data['result'] = $r->searchRegistry($startDate, $endDate, $systems, $page);
-
-      /*$data['result'] = "start: ".$startDate. ", End: ". $endDate;*/
+      $data['result'] = $r->searchRegistry($startDate, $endDate, $systems, $page, $items_per_page);
     }
 
     //SENDS DATA IN JSON FORMAT

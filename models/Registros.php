@@ -2,27 +2,24 @@
 class Registros extends model {
 
   //Pesquisa registros dentro das datas especificadas e que contém os fenômenos especificados
-  public function searchRegistry($start, $end, $systems, $page) {
-
-    $p = new Pagination();
-    $items_per_page = 10;
-
+  public function searchRegistry($start, $end, $systems, $page, $items_per_page) {
     $array = array(
       "data" => array(),
       "chart" => array()
     );
 
-    $filter = array("1=1");
+    $p = new Pagination();
 
+    //If the search includes weather phenomena
     if(!empty($systems)) {
       $len = count($systems);
 
-      //IF THE USER SELECTED MORE THAN ONE PHENOMENA
+      //If the user selected more than one phenomena
       if($len > 1) {
-        $filter_multi = array();
+        $filter = array();
 
         foreach($systems as $k => $v) {
-          $filter_multi[] = "id_sistema = :sistema_".$v['key'];
+          $filter[] = "id_sistema = :sistema_".$v['key'];
         }
 
         //Get total pages
@@ -32,7 +29,7 @@ class Registros extends model {
         WHERE date BETWEEN :date1 AND :date2 AND date IN (
           SELECT date
           FROM sistemas
-          WHERE ".implode(" OR ", $filter_multi)."
+          WHERE ".implode(" OR ", $filter)."
           GROUP BY date
           HAVING COUNT(*) >= $len )
         ");
@@ -42,8 +39,10 @@ class Registros extends model {
           $sql1->bindValue(":sistema_".$v['key'], $v['key']);
         }
 
-        $total_pages = $p->getTotalPages($sql1, $items_per_page); //Number of pages
-        $start_item = $p->getStart($page, $items_per_page); //Item the DB query starts from
+        //Get number of pages necessary for pagination
+        $total_pages = $p->getTotalPages($sql1, $items_per_page);
+        //Get first item of page
+        $start_item = $p->getStart($page, $items_per_page);
 
         //Get the data limited by $items_per_page
         $sql2 = $this->db->prepare("
@@ -52,7 +51,7 @@ class Registros extends model {
         WHERE date BETWEEN :date1 AND :date2 AND date IN (
           SELECT date
           FROM sistemas
-          WHERE ".implode(" OR ", $filter_multi)."
+          WHERE ".implode(" OR ", $filter)."
           GROUP BY date
           HAVING COUNT(*) >= $len )
           ORDER BY sistemas.date LIMIT ".$start_item.", ".$items_per_page
@@ -70,7 +69,7 @@ class Registros extends model {
           $array['num_pages'] = $total_pages;
         }
 
-        //Get count
+        //Get total of dates
         $sql3 = $this->db->prepare("
         SELECT DATE_FORMAT(sistemas.date, '%Y-%m') as month, COUNT(DISTINCT sistemas.date) AS count
         FROM sistemas
@@ -78,7 +77,7 @@ class Registros extends model {
         AND sistemas.date IN (
           SELECT date
           FROM sistemas
-          WHERE ".implode(" OR ", $filter_multi)."
+          WHERE ".implode(" OR ", $filter)."
           GROUP BY date
           HAVING COUNT(*) >= $len )
         GROUP BY DATE_FORMAT(sistemas.date, '%Y-%m')
@@ -127,7 +126,7 @@ class Registros extends model {
           $array['num_pages'] = $total_pages;
         }
 
-        //Get count
+        //Get total of dates
         $sql2 = $this->db->prepare("
         SELECT DATE_FORMAT(sistemas.date, '%Y-%m') as month, COUNT(*) AS count
         FROM sistemas
@@ -200,7 +199,7 @@ class Registros extends model {
       }
     }
 
-    //Get info for the returned dates
+    //Get meteorological data for the returned dates
     if(!empty($array["data"])) {
       for($i = 0; $i < count($array["data"]); $i++) {
         $array["data"][$i]["info"] = $this->getRegistro($array["data"][$i]["date"]);
@@ -238,6 +237,10 @@ class Registros extends model {
       //Description from technician
       foreach($categories['tec'] as $category) {
         $array['tec'][$hora][$category] = array("id" => '', "text" => '');
+      }
+      //General info
+      foreach($categories['info'] as $category) {
+        $array['info'] = array("text" => '');
       }
       //Images
       foreach($categories['img'] as $category) {
@@ -282,6 +285,22 @@ class Registros extends model {
           $array["tec"][$hora][$cat_descricao]['text'] = $texto;
           $array["tec"][$hora][$cat_descricao]['id'] = $id_tec;
 
+        }
+
+      }
+
+      //Informações gerais
+      $sql = $this->db->prepare("SELECT texto FROM info_geral WHERE date = :date");
+      $sql->bindValue(":date", $date);
+      $sql->execute();
+
+      if($sql->rowCount() > 0) {
+        $resp = $sql->fetchAll();
+
+        foreach($resp as $respKey => $respVal) {
+          extract($respVal);
+
+          $array["info"]['text'] = $texto;
         }
 
       }
@@ -399,6 +418,14 @@ class Registros extends model {
     } else if($cargo == "tec") {
       $sql = $this->db->prepare("INSERT INTO descricao_tec SET texto = :texto, horario = :horario, cat_descricao = :categoria, date = :date, id_tec = :id_nome");
 
+    } else {
+      $sql = $this->db->prepare("INSERT INTO info_geral SET texto = :texto, date = :date");
+      $sql->bindValue(":texto", $texto);
+      $sql->bindValue(":date", $date);
+
+      $sql->execute();
+
+      return true;
     }
 
     $sql->bindValue(":texto", $texto);
@@ -415,19 +442,26 @@ class Registros extends model {
 
     $sql = '';
 
-    if($cargo == "meteoro") {
-      $sql = $this->db->prepare("UPDATE descricao_meteoro SET texto = :texto, id_meteoro = :id_nome WHERE horario = :horario AND date = :date AND cat_descricao = :categoria");
-    } else if($cargo == "tec") {
-      $sql = $this->db->prepare("UPDATE descricao_tec SET texto = :texto, id_tec = :id_nome WHERE horario = :horario AND date = :date AND cat_descricao = :categoria");
+    if($cargo !== "undefined") {
+      if($cargo == "meteoro") {
+        $sql = $this->db->prepare("UPDATE descricao_meteoro SET texto = :texto, id_meteoro = :id_nome WHERE horario = :horario AND date = :date AND cat_descricao = :categoria");
+      } else if($cargo == "tec") {
+        $sql = $this->db->prepare("UPDATE descricao_tec SET texto = :texto, id_tec = :id_nome WHERE horario = :horario AND date = :date AND cat_descricao = :categoria");
+      }
 
+      $sql->bindValue(":texto", $texto);
+      $sql->bindValue(":horario", $horario);
+      $sql->bindValue(":categoria", $categoria);
+      $sql->bindValue(":date", $date);
+      $sql->bindValue(":id_nome", $id_nome);
+      $sql->execute();
+    } else {
+      $sql = $this->db->prepare("UPDATE info_geral SET texto = :texto WHERE date = :date");
+
+      $sql->bindValue(":texto", $texto);
+      $sql->bindValue(":date", $date);
+      $sql->execute();
     }
-
-    $sql->bindValue(":texto", $texto);
-    $sql->bindValue(":horario", $horario);
-    $sql->bindValue(":categoria", $categoria);
-    $sql->bindValue(":date", $date);
-    $sql->bindValue(":id_nome", $id_nome);
-    $sql->execute();
     
   }
 

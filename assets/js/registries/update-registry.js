@@ -37,9 +37,9 @@ function editText(e, edit) {
   e.preventDefault();
 
   var buttons = $(edit).parent();
-  $(buttons).html("<button type='submit' class='btn btn-primary update-text'>Atualizar</button><button class='btn btn-danger update-cancel'>Cancelar</button>");
+  $(buttons).html("<button type='submit' class='btn btn-raised btn-primary update-text'>Atualizar</button><button class='btn update-cancel'>Cancelar</button>");
 
-  $(buttons).siblings("textarea").prop("disabled", false);
+  $(buttons).siblings(".bmd-form-group").find("textarea").prop("disabled", false);
 }
 
 //Update text entry
@@ -67,7 +67,7 @@ function updateText(e, btn, date) {
 
       $.ajax({
         type: 'POST',
-        url: 'http://localhost/projetoy/Monitoramento/ajax',
+        url: baseUrl+'ajax',
         data: data,
         dataType: 'json',
         contentType: false,
@@ -95,5 +95,5 @@ function cancelUpdate(e, btn) {
 
   $(buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
 
-  $(buttons).siblings("textarea").prop("disabled", true);
+  $(buttons).siblings(".bmd-form-group").find("textarea").prop("disabled", true);
 }

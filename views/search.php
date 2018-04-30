@@ -1,11 +1,20 @@
 <div class="search-page-container">
+  <button class="btn bmd-btn-fab show-sidebar">
+    <i class="material-icons">search</i>
+  </button>
   <div class="search-sidebar">
+    <button type="button" class="close close-sidebar" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
     <form class="datepick">
-      <label for="start">De:</label>
-      <input type="text" id="start" name="calendar-1" autocomplete="off"/>
-
-      <label for="end">Até:</label>
-      <input type="text" id="end" name="calendar-2" autocomplete="off"/>
+      <div class="form-group bmd-form-group mb-0">
+        <label for="start" class="bmd-label-floating">De:</label>
+        <input type="text" id="start" name="calendar-1" autocomplete="off" class="form-control input-green"/>
+      </div>
+      <div class="form-group bmd-form-group">
+        <label for="end" class="bmd-label-floating">Até:</label>
+        <input type="text" id="end" name="calendar-2" autocomplete="off" class="form-control input-green"/>
+      </div>
 
       <div class="systempick">
       <?PHP foreach($sistemas_class as $k => $class):?>
@@ -58,3 +67,6 @@
 <div class="bg-box"></div>
 <div class="modal-box"></div>
 
+<script src="<?PHP echo BASE_URL;?>assets/js/jquery.twbsPagination.min.js"></script>
+<script type="text/javascript">var baseUrl = "<?php echo BASE_URL; ?>";</script>
+<script src="<?PHP echo BASE_URL;?>assets/js/registries/search-registry.js"></script>

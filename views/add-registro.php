@@ -23,7 +23,7 @@
           <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
             <a href="dados_observados" class="mui-btn mui-btn--primary menu-btn">Ocorrências</a>
             <a href="sondagem" class="mui-btn mui-btn--primary menu-btn">Radiossondagem</a>
-            <a href="#" class="mui-btn mui-btn--primary menu-btn">Informações gerais</a>
+            <a href="info-gerais" class="mui-btn mui-btn--primary menu-btn">Informações gerais</a>
           </div>
         </div>
       </div>
@@ -237,8 +237,8 @@
               <td>
                 <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
                 <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                  <div class="form-group">
-                    <label for="categoria">Meteorologista:</label>
+                  <div class="form-group bmd-form-group">
+                    <label for="categoria" class="text-center">Meteorologista:</label>
                     <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="custom-select" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                       <?PHP
                         foreach($mets as $met):
@@ -250,20 +250,27 @@
                         endforeach;
                       ?>
                     </select>
-                    <label>Superfície:</label>
-                    <textarea class="form-control" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
-
-                    <label>Níveis médios e altos:</label>
-                    <textarea class="form-control" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
-
-                    <label>Condição de tempo:</label>
-                    <textarea class="form-control" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
-
-                    <div class="buttons">
-                    <button type="submit" class="btn btn-success send-text">Enviar</button>
-                    </div>
-
                   </div>
+
+                  <div class="form-group bmd-form-group">
+                  <label class="bmd-label-floating">Superfície:</label>
+                  <textarea class="form-control input-blue" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                  </div>
+
+                  <div class="form-group bmd-form-group">
+                  <label class="bmd-label-floating">Níveis médios e altos:</label>
+                  <textarea class="form-control input-blue" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                  </div>
+
+                  <div class="form-group bmd-form-group">
+                  <label class="bmd-label-floating">Condição de tempo:</label>
+                  <textarea class="form-control input-blue" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
+                  </div>
+
+                  <div class="buttons">
+                  <button type="submit" class="btn btn-raised btn-success send-text">Enviar</button>
+                  </div>
+
                 </form>
                 <p class="sucesso-msg"></p>
               </td>
@@ -275,7 +282,7 @@
                 <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
                 <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                   <div class="form-group">
-                    <label for="categoria">Meteorologista:</label>
+                    <label for="categoria" class="text-center">Meteorologista:</label>
                     <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="custom-select" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
                       <?PHP
                         foreach($mets as $met):
@@ -287,20 +294,25 @@
                         endforeach;
                       ?>
                     </select>
-                    <label>Superfície:</label>
-                    <textarea class="form-control" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                  </div>
 
-                    <label>Níveis médios e altos:</label>
-                    <textarea class="form-control" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                  <div class="form-group bmd-form-group">
+                  <label class="bmd-label-floating">Superfície:</label>
+                  <textarea class="form-control input-blue" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                  </div>
 
-                    <label>Condição de tempo:</label>
-                    <textarea class="form-control" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
+                  <div class="form-group bmd-form-group">
+                  <label class="bmd-label-floating">Níveis médios e altos:</label>
+                  <textarea class="form-control input-blue" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                  </div>
 
-                    <div class="buttons">
-                    <button type="submit" class="btn btn-success send-text">Enviar</button>
-                    </div>
+                  <div class="form-group bmd-form-group">
+                  <label class="bmd-label-floating">Condição de tempo:</label>
+                  <textarea class="form-control input-blue" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
+                  </div>
 
-
+                  <div class="buttons">
+                  <button type="submit" class="btn btn-raised btn-success send-text">Enviar</button>
                   </div>
                 </form>
                 <p class="sucesso-msg"></p>
@@ -337,25 +349,55 @@
                         endforeach;
                       ?>
                     </select>
-
-                    <label>METAR:</label>
-                    <textarea class="form-control" data-categoria="metar" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
-
-                    <label>Ocorrências:</label>
-                    <textarea class="form-control" data-categoria="ocorrencias" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
-
-                    <div class="buttons">
-                    <button type="submit" class="btn btn-success send-text">Enviar</button>
-                    </div>
-
-
                   </div>
+
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">METAR:</label>
+                    <textarea class="form-control input-blue" data-categoria="metar" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                  </div>
+
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Ocorrências:</label>
+                    <textarea class="form-control input-blue" data-categoria="ocorrencias" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                  </div>
+
+                  <div class="buttons">
+                  <button type="submit" class="btn btn-raised btn-success send-text">Enviar</button>
+                  </div>
+
+
                 </form>
                 <p class="sucesso-msg"></p>
               </td>
             </tr>
               <?PHP endfor;?>
 
+          </tbody>
+        </table>
+      </div>
+
+      <div id="info-gerais" class="menu-input-form">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th colspan="2">Informações Gerais</th>
+            </tr>
+            <tr>
+              <td>
+                <form class="reg-form form-txt" type="POST">
+                  <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Informações:</label>
+                    <textarea class="form-control" data-categoria="info-gerais"></textarea><br>
+                  </div>
+
+                  <div class="buttons">
+                  <button type="submit" class="btn btn-raised btn-success send-text">Enviar</button>
+                  </div>
+
+                </form>
+                <p class="sucesso-msg"></p>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -447,6 +489,7 @@
 </button>
 
 <!-- load read-one-registry js -->
+<script type="text/javascript">var baseUrl = "<?php echo BASE_URL; ?>";</script>
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>
 
 <!-- load add-menu js -->

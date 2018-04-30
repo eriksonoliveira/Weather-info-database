@@ -22,13 +22,13 @@ $(document).ready(function() {
 });
 //GET CURRENT DAY DATA ON PAGE LOAD
 function getData(date) {
-  var data = new FormData();
+  let data = new FormData();
 
   data.append("date", date);
 
   $.ajax({
     type: "POST",
-    url: "http://localhost/projetoy/Monitoramento/ajax",
+    url: baseUrl+'ajax',
     data: data,
     dataType: 'json',
     contentType: false,
@@ -38,13 +38,15 @@ function getData(date) {
       let jsonImg = json.currDayReg.img,
           jsonMet = json.currDayReg.met,
           jsonTec = json.currDayReg.tec,
+          jsonInfo = json.currDayReg.info,
           jsonPhen = json.currDayReg.phenom;
 
-//      console.log(json);
+      console.log(json);
 
       receiveDayImages(jsonImg);
       receiveDayText(jsonMet, "meteoro");
       receiveDayText(jsonTec, "tec");
+      receiveDayInfo(jsonInfo);
       receiveDayPhenomena(jsonPhen);
 
     }
@@ -55,11 +57,9 @@ function getData(date) {
 if no data has been added to that time and category yet, the
 field will remain blank */
 function receiveDayImages(json) {
-  var h;
-
-  for (h in json) {
+  for (let h in json) {
     var hora = h;
-    for (c in json[h]) {
+    for (let c in json[h]) {
       var categoria = c;
 
       if(json[h][c].fileName) {
@@ -91,9 +91,9 @@ function receiveDayText (json, cargo) {
   var sendBtn = '',
       editBtn = '';
 
-  for (var h in json) {
+  for (let h in json) {
     var hora = h;
-    for (var c in json[h]) {
+    for (let c in json[h]) {
       var categoria = c;
 
       var text =  json[h][c].text,
@@ -103,7 +103,7 @@ function receiveDayText (json, cargo) {
 
         var textArea = "textarea[data-categoria="+categoria+"][data-hora="+hora+"]",
             select = "select[data-cargo="+cargo+"][data-hora="+hora+"] option[value=" + id + "]",
-            buttons = $(textArea).siblings(".buttons")
+            buttons = $(textArea).parent(".bmd-form-group").siblings(".buttons");
 
         //Populate textarea
         $(textArea).html(text)
@@ -114,24 +114,38 @@ function receiveDayText (json, cargo) {
           .prop('selected', true);
 
         //Update buttons
-        $(buttons).html("<button class='btn btn-primary edit-text'>Editar</button>");
+        $(buttons).html("<button class='btn btn-info edit-text'>Editar</button>");
 
       }
     }
   }
 }
 
+function receiveDayInfo(json) {
+  let textArea = $("#info-gerais").find("textArea[data-categoria=info-gerais]"),
+      text = json.text,
+      buttons = $(textArea).parent(".bmd-form-group").siblings(".buttons");
+
+  if(text) {
+    textArea.html(text)
+      .prop("disabled", true);
+
+    //Update buttons
+    $(buttons).html("<button class='btn btn-info edit-text'>Editar</button>");
+  }
+}
+
 function receiveDayPhenomena(json) {
-  var p;
-  for(p in json) {
-    for(i in json[p]) {
-      var phenomId = json[p][i].id_sistema,
+  for(let p in json) {
+    for(let i in json[p]) {
+      let phenomId = json[p][i].id_sistema,
           phenomName = json[p][i].syst;
 
-      var checkbox = $(".fenom").find("input[data-id="+phenomId+"]"),
+      let checkbox = $(".fenom").find("input[data-id="+phenomId+"]"),
           checkmark = $(checkbox).siblings(".checkmark");
 
       $(checkbox).prop("checked", true);
+
     }
 
   }

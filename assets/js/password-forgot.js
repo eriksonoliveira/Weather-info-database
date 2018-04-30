@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     $.ajax({
       type: 'POST',
-      url: 'http://localhost/projetoy/Monitoramento/ajax/pass_forgot',
+      url: baseUrl+'ajax/pass_forgot',
       data: data,
       dataType: 'json',
       contentType: false,

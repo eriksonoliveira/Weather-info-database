@@ -7,7 +7,7 @@ body, html {
 
 nav.navbar {
   width: 100%;
-  position: absolute !important;
+  position: fixed ;
   margin-bottom: 0;
   border-radius: 0;
   border: 0;
@@ -89,11 +89,15 @@ th {
 }
 
 .reg-form textarea {
-  height: 80px;
+  height: 115px;
 }
 
 .reg-form select {
   margin-bottom: 1.5rem;
+}
+
+.reg-form .bmd-label-floating {
+  left: 0;
 }
 
 .inputBtn i {
@@ -259,7 +263,7 @@ th {
   align-items: center;
 }
 
-.home-container .mui-btn {
+.home-container .btn {
   height: auto !important;
   padding: 25px 35px !important;
   line-height: normal !important;
@@ -275,11 +279,13 @@ th {
 
 .home-search-btn {
   background-color: #1F83C5;
+  color: #FFF;
 }
 
 .home-search-btn:hover {
   background-color: #70B0DA;
   border: 2px solid #1F83C5;
+  color: #FFF;
 }
 
 .home-add-btn {
@@ -299,7 +305,7 @@ th {
   box-sizing: border-box;
 }
 
-.login-container, .pass-forg-container, .user-container {
+.login-container, .pass-forg-container, .user-container, .cadastrar-container {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -323,12 +329,10 @@ th {
 .login-icon {
   font-size: 60px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .login-submit {
   width: 100%;
-  margin-top: 10px;
 }
 
 .blue {
@@ -341,12 +345,24 @@ th {
   color: #C3C3C3;
 }
 
+.light-blue {
+  color: #2196F3;
+}
+
+.light-blue:hover {
+  color: #1466A2;
+}
+
 .grey-bg {
   background-color: #EFEFEF;
 }
 
 .input-blue {
-  background-image: linear-gradient(0deg,#1F83C5 2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0);
+  background-image: linear-gradient(0deg,#1F83C5 2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(0,0,0,.26) 1px,transparent 0) !important;
+}
+
+.input-green {
+  background-image: linear-gradient(0deg,#009688 2px,rgba(0,150,136,0) 0),linear-gradient(0deg,rgba(183,189,195,.26) 1px,transparent 0) !important;
 }
 
 .red {
@@ -424,16 +440,24 @@ label.css-label {
   display: block;
 }
 
+.datepick .bmd-form-group {
+  width: 180px;
+}
+
 .datepick input[type=text] {
-  border: 0px;
-  border-radius: 0;
-  padding: 5px 0 5px 5px;
-  background-color: #324251;
-  color: #8E97A0 !important;
+  color: #CCD0D4 !important;
 }
 
 .datepick input[type=text]:focus {
-  background-color: #293642;
+/*  background-color: #293642;*/
+}
+
+.datepick .bmd-form-group label {
+  color: #8E97A0;
+}
+
+.datepick .bmd-form-group.is-focused label {
+  color: #2BBBAD;
 }
 
 .datepick input[type=checkbox] {
@@ -500,8 +524,8 @@ label.css-label {
   z-index: 1;*/
   width: 50px;
   height: 50px;
-  border: 5px solid #3498db;
-  border-top: 5px solid #A3D0EF;
+  border: 4px solid #3498db;
+  border-top: 4px solid #A3D0EF;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -687,6 +711,43 @@ small {
   margin-bottom: 2.5em;
 }
 
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #1F83C5;
+.form-check-label input[type=checkbox] {
+  position: relative;
+  vertical-align: middle;
+  bottom: 3px;
+}
+
+.bmd-form-group.is-focused label {
+  color: #1F83C5;
+}
+
+.show-sidebar, .close-sidebar {
+  display: none;
+}
+
+@media only screen and (max-width: 800px) {
+  .search-sidebar {
+    position: fixed;
+    margin-left: -280px;
+    transition: margin-left .4s ease;
+  }
+
+  .search-sidebar.active {
+    margin-left: 0;
+    z-index: 3;
+  }
+
+  .show-sidebar {
+    position: relative;
+    top: 20px;
+    left: 25px;
+    display: block;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .close-sidebar {
+    display: block;
+  }
+
 }

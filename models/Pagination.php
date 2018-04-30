@@ -16,6 +16,7 @@ class Pagination extends model {
     return $total_pages;
   }
 
+  //Get first item of selected page
   public function getStart($page, $items_per_page) {
     $start = ($page - 1) * $items_per_page;
 
