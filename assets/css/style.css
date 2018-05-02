@@ -479,6 +479,11 @@ label.css-label {
   font-size:
 }
 
+.ui-datepicker-trigger {
+  width: 25px;
+  cursor: pointer;
+}
+
 .systempick {
   margin: 25px 0;
 }
@@ -486,7 +491,6 @@ label.css-label {
 .systempick-box {
   width: 250px;
   height: 110px;
-  /*border: 1px solid #DDD;*/
   padding: 5px 0 10px 10px;
   overflow-y: scroll;
   display: flex;
@@ -726,6 +730,10 @@ small {
 }
 
 @media only screen and (max-width: 800px) {
+  .navbar-header {
+
+  }
+
   .search-sidebar {
     position: fixed;
     margin-left: -280px;
@@ -751,3 +759,17 @@ small {
   }
 
 }
+
+@media only screen and (max-width: 576px) {
+  html {
+    font-size: 1rem !important;
+  }
+
+  .navbar-header {
+    font-size: 1.0em !important;
+  }
+
+  .navbar .dropdown-toggle {
+    font-size: 0.9em;
+  }
+

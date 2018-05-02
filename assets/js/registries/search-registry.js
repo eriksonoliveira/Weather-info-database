@@ -46,9 +46,10 @@ function searchRegistry(e, btn) {
 
   //Se a data final não foi especificada
   if(!end) {
-    let separator = "dash";
-    let format = "BRZ";
-    end = dateFormated(separator, format);
+    let separator = "dash",
+        date = '',
+        format = "BRZ";
+    end = dateFormated(separator, date, format);
   }
 
   data.append("dateStart", start);
@@ -166,7 +167,7 @@ function renderTable(json) {
         result_items_html+="</td>";
         result_items_html+="<td class='cell-center'>";
           //action button
-          result_items_html+="<a href='"+baseUrl+"registros/?date="+value.date+"' target='_blank'>";
+          result_items_html+="<a href='"+baseUrl+"registros/ver/"+value.date+"' target='_blank'>";
 
             //edit button
             result_items_html+="<button class='mui-btn view-registry'>Visualizar</button>";

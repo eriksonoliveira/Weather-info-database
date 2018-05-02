@@ -1,14 +1,8 @@
 $(document).ready(function() {
-
-  //GET AND FORMAT DATE
-  var separator = "dash";
-  var date;
-
-  //Check if GET date variable was passed
-  date = getQueryVariable();
-
+  //date is passed as a global variable
+  //If no date was passed, use the date of the current day
   if(date === false) {
-    //If not, use the date of the current day
+    let separator = "dash";
     date = dateFormated(separator);
   }
 
@@ -73,17 +67,19 @@ function deleteImg(del) {
 }
 
 //Delete Weather phenomena
-function deleteSystem(checkbox, date) {
+function deleteSystem(checkbox, regDate) {
   let id = $(checkbox).attr("data-id");
+
   let path = "ajax/deleteSystem";
   let data = new FormData();
   let dataObj = {
     systemId: id,
-    date: date
+    date: regDate
   };
 
   data.append("systemData", JSON.stringify(dataObj));
 
+  //Make ajax request to delete system
   let Delete = new AjaxRequest(data);
   Delete.call(path);
 }

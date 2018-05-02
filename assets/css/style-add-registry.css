@@ -37,6 +37,12 @@ html, body {
   font-size: 2.2rem;
 }
 
+.add-reg-heading .hasDatepicker {
+  width: 5em;
+  display: inline-block;
+  font-size: inherit !important;
+}
+
 .menu {
   height: 100%;
   margin: auto;
@@ -51,12 +57,12 @@ html, body {
 }
 
 .menu-box-inner {
-  max-width: 600px;
+  max-width: 750px;
 }
 
 .menu-box-buttons {
   display: flex;
-  flex-wrap: nowrap;
+/*  flex-wrap: nowrap;*/
 }
 
 .menu-box-buttons .btn {
@@ -73,11 +79,21 @@ html, body {
 }
 
 .menu-box-buttons .menu-btn {
+/*
   width: 200px;
   height: 100px;
+*/
+  min-width: 210px;
+  height: 100px;
+/*  height: auto !important;*/
+  padding: 0px 35px !important;
+/*  line-height: normal !important;*/
   line-height: 100px;
+  text-align: center !important;
+  vertical-align: middle;
+  box-sizing: border-box;
   margin: 2px;
-  padding: 0;
+/*  white-space: normal;*/
   color: #FFF;
   transition: .1s ease;
   background-color: #26A69A;

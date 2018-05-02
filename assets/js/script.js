@@ -21,6 +21,21 @@ $(document).ready(function() {
     maxDate: new Date()
   });
 
+  //CREATE DATEPICKER ADD REGISTRY PAGE
+  $("input[name=calendar-3]").datepicker({
+    showOn: "button",
+    buttonImage: baseUrl+"assets/images/calendar.png",
+    buttonImageOnly: true,
+    prevText: "Anterior",
+    nextText: "Próximo",
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: "dd-mm-yy",
+    maxDate: new Date()
+  });
+
+  $(".ui-datepicker-trigger").attr("title", "Escolher dia");
+
   //SET MIN DATE FOR CALENDAR-A2
   $("input[name=calendar-1]").on("change", function() {
     var minDate = $(this).val();
@@ -105,18 +120,25 @@ function getQueryVariable() {
 }
 
 //Format date
-function dateFormated(separator, format) {
-  var d = new Date();
+function dateFormated(separator, date, format) {
+  var d, dd, mm, yyyy;
 
-  var dd = d.getDate(),
-      mm = d.getMonth()+1,
-      yyyy = d.getFullYear();
+  if(date) {
+    dd = date[0];
+    mm = date[1];
+    yyyy = date[2];
+  } else {
+    d = new Date();
+    dd = d.getDate();
+    mm = d.getMonth()+1;
+    yyyy = d.getFullYear();
 
-  if(dd < 10) {
-    dd = '0'+dd;
-  }
-  if(mm < 10) {
-    mm = '0'+mm;
+    if(dd < 10) {
+      dd = '0'+dd;
+    }
+    if(mm < 10) {
+      mm = '0'+mm;
+    }
   }
 
   if(format) {
@@ -166,21 +188,3 @@ function modal(el, type) {
     $(".bg-box, .modal-box").fadeOut("fast");
   });
 }
-
-function scrollBtn() {
-  let documentTop = $(document).scrollTop();
-
-  if(documentTop > 50) {
-    $(".scroll-top").css("display", "block");
-  } else {
-    $(".scroll-top").css("display", "none");
-  }
-}
-
-//Scroll to top animation
-function scrollToTop() {
-  $("html, body").animate({
-    scrollTop: 0
-  }, 500);
-}
-

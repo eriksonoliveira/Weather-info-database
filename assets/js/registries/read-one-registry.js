@@ -1,30 +1,33 @@
 $(document).ready(function() {
-  //GET AND FORMAT DATE
-  var date;
-
-  //Check if GET date variable was passed
-  date = getQueryVariable();
-
+  //date is passed as a global variable
+  //If no date was passed, use the date of the current day
   if(date === false) {
-    //If not, use the date of the current day
     let separator = "dash";
     date = dateFormated(separator);
   }
 
-  //GET DATA FOR TODAY
+  //GET DATA FOR THE DAY
   getData(date);
 
-  //Show button on scroll
-  $(document).scroll(function() {
-    scrollBtn();
+  //GET NEW DATE FROM DATEPICKER CHANGE
+  $("input[name=calendar-3]").on("change", function() {
+    let newDate = $(this).val();
+
+    let dateSplit = newDate.split("-");
+
+    let newDateFormated = dateFormated("dash", dateSplit),
+        newUrl = baseUrl+"registros/ver/"+newDateFormated;
+
+    //RELOAD PAGE WITH NEW DATE IN THE URL
+    window.location.assign(newUrl);
   });
 
 });
 //GET CURRENT DAY DATA ON PAGE LOAD
-function getData(date) {
+function getData(regDate) {
   let data = new FormData();
 
-  data.append("date", date);
+  data.append("date", regDate);
 
   $.ajax({
     type: "POST",
@@ -41,7 +44,7 @@ function getData(date) {
           jsonInfo = json.currDayReg.info,
           jsonPhen = json.currDayReg.phenom;
 
-      console.log(json);
+      //console.log(json);
 
       receiveDayImages(jsonImg);
       receiveDayText(jsonMet, "meteoro");

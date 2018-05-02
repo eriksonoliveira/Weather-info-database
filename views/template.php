@@ -22,7 +22,7 @@
   <body>
 
     <?PHP if(isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])): ?>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-sm">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="<?PHP echo BASE_URL; ?>" class="navbar-brand ml-3">Monitoramento</a>
@@ -70,11 +70,5 @@
     
     <!-- load view -->
     <?PHP $this->loadViewInTemplate($viewName, $viewData);?>
-
-    <!-- registries scripts -->
-    <script src="<?PHP echo BASE_URL;?>assets/js/registries/create-registry.js"></script>
-    <script src="<?PHP echo BASE_URL;?>assets/js/registries/delete-registry.js"></script>
-<!--    <script src="<?PHP //echo BASE_URL;?>assets/js/registries/search-registry.js"></script>-->
-    <script src="<?PHP echo BASE_URL;?>assets/js/registries/update-registry.js"></script>
   </body>
 </html>

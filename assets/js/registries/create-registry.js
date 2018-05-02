@@ -1,14 +1,8 @@
 $(document).ready(function() {
 
-  //GET AND FORMAT DATE
-  var separator = "dash";
-  var date;
-
-  //Check if GET date variable was passed
-  date = getQueryVariable();
-
+  //If no date was passed, use the date of the current day
   if(date === false) {
-    //If not, use the date of the current day
+    let separator = "dash";
     date = dateFormated(separator);
   }
 
@@ -22,6 +16,7 @@ $(document).ready(function() {
   $(".send-img").on("click", function(e) {
     let btn = $(this);
     sendImage(e, btn, date);
+  console.log(date);
   });
 
   //SEND TEXT
@@ -80,7 +75,7 @@ function previewImages (e, input) {
 }
 
 //Add new Image to the record
-function sendImage(e, btn, date) {
+function sendImage(e, btn, regDate) {
   e.preventDefault();
 
   let form = $(btn).parents(".form-img"),
@@ -102,7 +97,7 @@ function sendImage(e, btn, date) {
     let path = "ajax";
 
     let data = new FormData();
-    data.append("date", date);
+    data.append("date", regDate);
     data.append("horario", horario);
     data.append("categoria", categoria);
     data.append("imagem", imagem[0]);
@@ -136,7 +131,7 @@ function sendImage(e, btn, date) {
   }
 }
 
-function sendText(e, btn, date) {
+function sendText(e, btn, regDate) {
   e.preventDefault();
 
   var data = new FormData();
@@ -150,7 +145,7 @@ function sendText(e, btn, date) {
 
     if($.trim(texto).length > 0) {
 
-      data.append("date", date);
+      data.append("date", regDate);
       data.append("horario", elements.horario);
       data.append("categoria", categoria);
       data.append("texto", texto);
@@ -184,13 +179,13 @@ function sendText(e, btn, date) {
 }
 
 //SEND PHENOMENA TAG
-function sendTag(checkbox, date) {
+function sendTag(checkbox, regDate) {
 
   var data = new FormData();
   var id = $(checkbox).attr("data-id");
 
   data.append("systemId", id);
-  data.append("date", date);
+  data.append("date", regDate);
 
   $.ajax({
     type: 'POST',

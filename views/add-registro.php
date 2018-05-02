@@ -2,28 +2,29 @@
   <div class="container">
     <div class="add-reg-heading mui--text-center">
       <div class="mui--text-display1">Adicionar Monitoramento do dia</div>
-      <div class="mui--text-headline"><?PHP echo $dia;?></div>
+      <div class="mui--text-headline"><input type="text" class="form-control mr-2" name="calendar-3" value="<?PHP echo $dateFormated;?>"/></div>
+
     </div>
     <div class="back">
       <span> <i class="material-icons">arrow_back</i></span>
     </div>
     <div class="menu">
       <div class="menu-box">
-        <div class="menu-box-inner">
-          <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-            <a href="im_satelite" class="mui-btn mui-btn--primary menu-btn">Imagem de Satélite</a>
-            <a href="im_sinotica" class="mui-btn mui-btn--primary menu-btn">Imagem Sinótica</a>
-            <a href="medios_niveis" class="mui-btn mui-btn--primary menu-btn">Níveis Médios</a>
+        <div class="menu-box-inner container">
+          <div class="menu-box-buttons row">
+            <a href="im_satelite" class="mui-btn mui-btn--primary menu-btn col-sm">Imagem de Satélite</a>
+            <a href="im_sinotica" class="mui-btn mui-btn--primary menu-btn col-sm">Imagem Sinótica</a>
+            <a href="medios_niveis" class="mui-btn mui-btn--primary menu-btn col-sm">Níveis Médios</a>
           </div>
-          <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-            <a href="altos_niveis" class="mui-btn mui-btn--primary menu-btn">Altos níveis</a>
-            <a href="descricao" class="mui-btn mui-btn--primary menu-btn">Descrição Sinótica</a>
-            <a href="fenomenos" class="mui-btn mui-btn--primary menu-btn">Fenômenos</a>
+          <div class="menu-box-buttons row">
+            <a href="altos_niveis" class="mui-btn mui-btn--primary menu-btn col-sm">Altos níveis</a>
+            <a href="descricao" class="mui-btn mui-btn--primary menu-btn col-sm">Descrição Sinótica</a>
+            <a href="fenomenos" class="mui-btn mui-btn--primary menu-btn col-sm">Fenômenos</a>
           </div>
-          <div class="menu-box-buttons"> <!-- Utilizar materialize card para  o box de botões -->
-            <a href="dados_observados" class="mui-btn mui-btn--primary menu-btn">Ocorrências</a>
-            <a href="sondagem" class="mui-btn mui-btn--primary menu-btn">Radiossondagem</a>
-            <a href="info-gerais" class="mui-btn mui-btn--primary menu-btn">Informações gerais</a>
+          <div class="menu-box-buttons row">
+            <a href="dados_observados" class="mui-btn mui-btn--primary menu-btn col-sm">Ocorrências</a>
+            <a href="sondagem" class="mui-btn mui-btn--primary menu-btn col-sm">Radiossondagem</a>
+            <a href="info-gerais" class="mui-btn mui-btn--primary menu-btn col-sm">Informações gerais</a>
           </div>
         </div>
       </div>
@@ -488,9 +489,15 @@
 <button class="scroll-top btn btn-primary" title="Ir para o topo" onclick="scrollToTop()"><i class="fa fa-long-arrow-up" aria-hidden="true"></i>
 </button>
 
-<!-- load read-one-registry js -->
-<script type="text/javascript">var baseUrl = "<?php echo BASE_URL; ?>";</script>
+<!-- registries scripts -->
+<script type="text/javascript">
+  var baseUrl = "<?php echo BASE_URL; ?>";
+  var date = "<?PHP echo $day;?>";
+</script>
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>
+<script src="<?PHP echo BASE_URL;?>assets/js/registries/create-registry.js"></script>
+<script src="<?PHP echo BASE_URL;?>assets/js/registries/delete-registry.js"></script>
+<script src="<?PHP echo BASE_URL;?>assets/js/registries/update-registry.js"></script>
 
 <!-- load add-menu js -->
 <script src="<?PHP echo BASE_URL;?>assets/js/add-menu.js"></script>

@@ -1,14 +1,8 @@
 $(document).ready(function() {
-
-  //GET AND FORMAT DATE
-  var separator = "dash";
-  var date;
-
-  //Check if GET date variable was passed
-  date = getQueryVariable();
-
+  //date is passed as a global variable
+  //If no date was passed, use the date of the current day
   if(date === false) {
-    //If not, use the date of the current day
+    let separator = "dash";
     date = dateFormated(separator);
   }
 
@@ -43,7 +37,7 @@ function editText(e, edit) {
 }
 
 //Update text entry
-function updateText(e, btn, date) {
+function updateText(e, btn, regDate) {
   e.preventDefault();
 
   var data = new FormData();
@@ -58,7 +52,7 @@ function updateText(e, btn, date) {
 
     if($.trim(texto).length > 0) {
 
-      data.append("update-date", date);
+      data.append("update-date", regDate);
       data.append("update-horario", elements.horario);
       data.append("update-categoria", categoria);
       data.append("update-texto", texto);

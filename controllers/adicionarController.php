@@ -23,9 +23,11 @@ class adicionarController extends controller{
 
     //Pegar Data do dia
     $date = time();
-    $d_form_BR = date("d/m/Y", $date);
-    $d_form_Int = date("Y/m/d", $date);
-    $data['dia'] = $d_form_BR;
+    $d_form_BR = date("d-m-Y", $date);
+    $d_form_Int = date("Y-m-d", $date);
+    $data['dateFormated'] = $d_form_BR;
+
+    $data['day'] = $d_form_Int;
 
     //Pegar categorias
     $c = new Categorias();

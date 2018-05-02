@@ -1,16 +1,18 @@
 <?PHP
 class registrosController extends controller{
   
-  public function index() {
+  public function ver($dateParams) {
     $data = array(
       "success" => "",
       'title' => 'Ver registro'
     );
     
-    if(isset($_GET['date']) && !empty($_GET['date'])) {
+    if($dateParams) {
+      $dateSplit = explode("-", $dateParams);
+      $dateFormated = $dateSplit[2]."-".$dateSplit[1]."-".$dateSplit[0];
 
-      $data['dia'] = addslashes($_GET['date']);
-
+      $data['day'] = addslashes($dateParams);
+      $data['dateFormated'] = $dateFormated;
 
       if(empty($_SESSION['cLogin'])) {
         header("Location: ".BASE_URL."login");
