@@ -491,7 +491,7 @@
 
 <!-- registries scripts -->
 <script type="text/javascript">
-  var baseUrl = "<?php echo BASE_URL; ?>";
+  //var baseUrl = "<?php //echo BASE_URL; ?>";
   var date = "<?PHP echo $day;?>";
 </script>
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>

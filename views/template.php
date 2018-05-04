@@ -66,6 +66,7 @@
 
 
     <!-- app js script -->
+    <script type="text/javascript">var baseUrl = "<?php echo BASE_URL; ?>";</script>
     <script src="<?PHP echo BASE_URL;?>assets/js/script.js"></script>
     
     <!-- load view -->
