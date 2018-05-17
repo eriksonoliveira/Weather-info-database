@@ -103,6 +103,10 @@ html, body {
   background-color: #2BBBAD;
 }
 
+.menu-input-table {
+  table-layout: fixed;
+}
+
 textarea {
   padding: 1.8em 1em !important;
 }
@@ -116,3 +120,9 @@ textarea {
   height: 150px;
 }
 
+@media only screen and (max-width: 576px) {
+  .back .material-icons {
+    font-size: 1.7rem;
+  }
+
+}

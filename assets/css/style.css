@@ -762,14 +762,55 @@ small {
 
 @media only screen and (max-width: 576px) {
   html {
-    font-size: 1rem !important;
+    /*font-size: 0.9rem !important;*/
+    font-size: 13px !important;
+  }
+  
+  .login-form {
+    max-width: 85%;
+    max-height: 70%;
+    margin-top: 10%;
+  }
+  
+  .login-icon {
+    font-size: 50px;
+    height: 70px;
   }
 
+  .navbar {
+    padding: 0.5rem 0.5rem;
+  }
+  
   .navbar-header {
     font-size: 1.0em !important;
   }
+  
+  .navbar-right {
+    margin-right: 0rem!important;
+  }
 
-  .navbar .dropdown-toggle {
+/*   .navbar .dropdown-toggle {
+    font-size: 0.9em;
+  } */
+  
+  .navbar-nav .dropdown-menu {
+    position: absolute;
     font-size: 0.9em;
   }
+  
+  .home-container .btn {
+    padding: 25px 10px !important;
+  }
+ 
+  .add-reg-heading {
+    margin: 25px 0;
+  }
+  
+  .add-reg-heading * {
+    font-size: 1.5rem;
+    line-height: 30px;
+  }
+  
+  
+}
 
