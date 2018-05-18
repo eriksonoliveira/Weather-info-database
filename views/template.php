@@ -25,7 +25,10 @@
     <?PHP if(isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])): ?>
     <nav class="navbar navbar-expand">
       <div class="container-fluid">
-        <div class="navbar-header">
+        <button class="btn show-sidebar">
+          <i class="material-icons">search</i>
+        </button>
+        <div class="navbar-header"> 
           <a href="<?PHP echo BASE_URL; ?>" class="navbar-brand ml-3">Monitoramento</a>
         </div>
         <div class="navbar-nav navbar-right ml-auto mr-3">

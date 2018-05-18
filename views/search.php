@@ -1,7 +1,7 @@
 <div class="search-page-container">
-  <button class="btn bmd-btn-fab show-sidebar">
+<!--   <button class="btn bmd-btn-fab show-sidebar">
     <i class="material-icons">search</i>
-  </button>
+  </button> -->
   <div class="search-sidebar">
     <button type="button" class="close close-sidebar" aria-label="Close">
       <span aria-hidden="true">&times;</span>
