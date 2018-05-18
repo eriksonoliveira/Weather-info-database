@@ -128,7 +128,7 @@ function renderTable(json) {
   let result_items_html = '';
 
   //Create table head
-  result_items_html+="<div class='table-responsive-sm'>"
+  result_items_html+="<div class='table-responsive-md'>"
     result_items_html+="<table class='table table-hover'>";
       result_items_html+="<tr>";
         result_items_html+="<th colspan='4'>Registros</th>";

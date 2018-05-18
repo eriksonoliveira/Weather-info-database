@@ -10,7 +10,7 @@ html, body {
  width: 100%;
 }
 
-.container {
+.inner-container {
   max-width: 1000px;
   height: 100%;
   padding-top: 50px;
@@ -19,14 +19,21 @@ html, body {
 }
 
 .back {
-  position: absolute;
-  top: 8vh;
-  left: 5vh;
-  padding: 5px;
+  margin-top: 2.2rem;
+  width: 35px;
+  height: 35px;
+  border: 0;
   border-radius: 50%;
   transition: background-color .2s ease-out;
   cursor: pointer;
-  display: none;
+  opacity: 0;
+  visibility: none;
+  transition: opacity .3s;
+}
+
+.back.active {
+  visibility: visible;
+  opacity: 1;
 }
 
 .back:hover {
@@ -62,38 +69,34 @@ html, body {
 
 .menu-box-buttons {
   display: flex;
-/*  flex-wrap: nowrap;*/
-}
-
-.menu-box-buttons .btn {
 }
 
 .menu-input-form {
-  display: none;
+  position: absolute;
+  max-width: 800px;
+  opacity: 0;
+  visibility: none;
+  transition: opacity .3s;
+  z-index: -1;
 }
 
-.center {
-  height: 100%;
-  display: flex;
-  align-items: center;
+.menu-input-form.active {
+  position; relative;
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
 }
 
 .menu-box-buttons .menu-btn {
-/*
-  width: 200px;
-  height: 100px;
-*/
+
   min-width: 210px;
   height: 100px;
-/*  height: auto !important;*/
   padding: 0px 35px !important;
-/*  line-height: normal !important;*/
   line-height: 100px;
   text-align: center !important;
   vertical-align: middle;
   box-sizing: border-box;
   margin: 2px;
-/*  white-space: normal;*/
   color: #FFF;
   transition: .1s ease;
   background-color: #26A69A;
@@ -105,6 +108,12 @@ html, body {
 
 .menu-input-table {
   table-layout: fixed;
+}
+
+.center {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 textarea {
@@ -121,8 +130,19 @@ textarea {
 }
 
 @media only screen and (max-width: 576px) {
+  .back {
+    width: 29px;
+    height: 38px;
+    text-align: center;
+    padding: 2px;
+  }
+  
   .back .material-icons {
     font-size: 1.7rem;
+  }
+  
+  .menu-box {
+    display: block;
   }
 
 }

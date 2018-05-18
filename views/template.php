@@ -2,6 +2,7 @@
   <head>
     <title><?PHP echo $title;?> - Monitoramento Meteorológico</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
     <!-- bootstrap CSS -->
     <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/bootstrap-material-design.min.css"/>
     <!-- Material UI framework -->
@@ -22,17 +23,20 @@
   <body>
 
     <?PHP if(isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])): ?>
-    <nav class="navbar navbar-expand-sm">
+    <nav class="navbar navbar-expand">
       <div class="container-fluid">
         <div class="navbar-header">
           <a href="<?PHP echo BASE_URL; ?>" class="navbar-brand ml-3">Monitoramento</a>
         </div>
-        <ul class="navbar-nav navbar-right ml-auto mr-3">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="navbar-nav navbar-right ml-auto mr-3">
+          <div class="nav-item dropdown btn-group">
+            <a class="nav-link dropdown-toggle d-none d-sm-block" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <?PHP echo $_SESSION['nome-usuario']?>
             </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="buttonMenu1">
+            <a class="btn bmd-btn-icon dropdown-toggle d-sm-none" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">more_vert</i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
               <a  class="dropdown-item" href="<?PHP echo BASE_URL; ?>user/?usr=<?PHP echo $_SESSION['cLogin']; ?>">Meus dados</a>
             <?PHP
               if($_SESSION['permission'] == 'admin'):
@@ -41,8 +45,8 @@
             <?PHP endif; ?>
               <a  class="dropdown-item" href="<?PHP echo BASE_URL; ?>login/sair">Sair</a>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </nav>
     <?PHP endif; ?>

@@ -13,22 +13,19 @@ $(document).ready(function() {
 
     $(menu).fadeToggle("fast", function() {
       $([id, backBtn]).each(function(){
-        $(this).fadeToggle();
+        $(this).toggleClass("active");
       });
     });
   });
 
   //Hide form and show menu if click on back button
   $(backBtn).on("click", function() {
-    let id = $('.menu-input-form[style="display: block;"]').attr("id");
+    let id = $('.menu-input-form[class*="active"]').attr("id");
     id = $("#"+id);
 
-    $(backBtn).fadeToggle("fast");
-    $([id]).each(function() {
-      $(this).fadeToggle("fast", function() {
-        $(menu).fadeToggle();
-      });
-    });
+    $(backBtn).toggleClass("active");
+    $(id).toggleClass("active");
+    $(menu).fadeToggle();
   });
 
 });

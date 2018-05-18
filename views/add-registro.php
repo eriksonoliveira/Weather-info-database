@@ -1,16 +1,16 @@
 <div class="add-reg-container grey-bg">
-  <div class="container">
+  <div class="container inner-container">
+    <div class="back">
+      <span> <i class="material-icons">arrow_back</i></span>
+    </div>
     <div class="add-reg-heading mui--text-center">
       <div class="mui--text-display1">Adicionar Monitoramento do dia</div>
       <div class="mui--text-headline"><input type="text" class="form-control mr-2" name="calendar-3" value="<?PHP echo $dateFormated;?>"/></div>
 
     </div>
-    <div class="back">
-      <span> <i class="material-icons">arrow_back</i></span>
-    </div>
     <div class="menu">
       <div class="menu-box">
-        <div class="menu-box-inner container">
+        <div class="menu-box-inner">
           <div class="menu-box-buttons row">
             <a href="im_satelite" class="mui-btn mui-btn--primary menu-btn col-sm">Imagem de Satélite</a>
             <a href="im_sinotica" class="mui-btn mui-btn--primary menu-btn col-sm">Imagem Sinótica</a>
@@ -491,7 +491,6 @@
 
 <!-- registries scripts -->
 <script type="text/javascript">
-  //var baseUrl = "<?php //echo BASE_URL; ?>";
   var date = "<?PHP echo $day;?>";
 </script>
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>
