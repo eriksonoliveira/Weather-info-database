@@ -5,12 +5,12 @@ require 'environment.php';
 $config = array();
 if(ENVIRONMENT == 'development') {
   define('BASE_URL', 'http://localhost/projetoy/Monitoramento/');
-  $config['dbname'] = 'monitoramento';
+  $config['dbname'] = 'monitoramento_new';
   $config['dbhost'] = 'localhost';
   $config['dbuser'] = 'root';
   $config['dbpass'] = 'alagoas6e';
 } else {
-  define('BASE_URL', 'http://meusite.com/');
+  define('BASE_URL', 'https://eriksonoliveira.com/');
   $config['dbname'] = 'classificados';
   $config['dbhost'] = 'localhost';
   $config['dbuser'] = 'root';

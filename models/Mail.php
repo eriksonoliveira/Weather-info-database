@@ -2,7 +2,7 @@
 class Mail extends model {
   public function sendMail($to, $msg) {
 
-    $from = "forwarder.erikson@eriksonoliveira.com"
+    $from = "forwarder.erikson@eriksonoliveira.com";
     $receiver = $to;
     $subject = "Recuperação de senha - Monitoramento Meteorológico";
     $msg_body = "Message: ".$msg;

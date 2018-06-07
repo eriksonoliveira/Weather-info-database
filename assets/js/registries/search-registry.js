@@ -243,15 +243,14 @@ function drawLineChart(results) {
     datasets : [{
       label                : "Ocorrências",
       backgroundColor      : "rgba(146,224,208, 0.7)",
-//      backgroundColor      : "rgba(122, 217, 197, 0.7)",
       data                 : data
     }]
   };
 
   // Get the context of the canvas element we want to select
-  let ctx = document.getElementById("myChart").getContext("2d");
+  const ctx = document.getElementById("myChart").getContext("2d");
   // Instantiate a new chart
-  let myLineChart = new Chart(ctx, {
+  const myLineChart = new Chart(ctx, {
 
      type: 'bar',
      data: tempData,
@@ -288,7 +287,6 @@ function drawLineChart(results) {
              offsetGridLines: false,
              color: "#BBB"
            },
-           barPercentage: 0.3,
            type: 'time',
            time: {
              unit: 'month',
@@ -298,7 +296,8 @@ function drawLineChart(results) {
              }
            },
            ticks: {
-             fontColor: "#EEE"
+             fontColor: "#EEE",
+             autoSkip: false
            }
          }]
        }
@@ -315,7 +314,6 @@ function showSum(sum) {
 
 
     result_total+="<div>";
-      //result_total+="<i class='fa fa-bar-chart'></i>";
     result_total+="</div>";
     result_total+="<div>";
       result_total+="<div><small><strong>TOTAL</strong></small></div>";
