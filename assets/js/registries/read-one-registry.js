@@ -77,7 +77,7 @@ function receiveDayImages(json) {
 
         img_html+=
           "<a href='javascript:;' class='img-clickable'>" +
-            "<img src='"+imgURL+"' id='img-"+imgID+"' class='img-width'/>" +
+            "<img src='"+imgURL+"' id='img-"+imgID+"' class='img-width img-fluid'/>" +
           "</a>";
 
         $(imgWrap).append(img_html);

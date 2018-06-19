@@ -1,4 +1,5 @@
 <?PHP
+
 class adicionarController extends controller{
   
   public function index() {
@@ -15,13 +16,8 @@ class adicionarController extends controller{
       "success" => '',
       'title' => 'Ver registro'
     );
-    
-    $horarios = array("00","06","12","18");
 
-    $imagens = array();
-    $descricao = array();
-
-    //Pegar Data do dia
+    //Get date and converto to Brazilian format
     $date = time();
     $d_form_BR = date("d-m-Y", $date);
     $d_form_Int = date("Y-m-d", $date);
@@ -29,32 +25,32 @@ class adicionarController extends controller{
 
     $data['day'] = $d_form_Int;
 
-    //Pegar categorias
+    //Get names categories
     $c = new Categorias();
     $categs = $c->getLista();
 
     $data['cats'] = $categs;
 
-    //Pegar nomes sistemas
+    //Get names systems
     $s = new Sistemas();
     $sist = $s->getLista();
 
     $data['sistemas'] = $sist['sistemas_list'];
     $data['sistemas_classes'] = $sist['sistemas_class'];
 
-    //Nomes Meteorologistas
+    //Get names Met
     $m = new Meteoros();
     $mets = $m->getLista();
 
     $data['mets'] = $mets;
 
-    //Nomes Tecnicos
+    //Get names Tec
     $t = new Tecnicos();
     $tecs = $t->getLista();
 
     $data['tecs'] = $tecs;
 
-    //Pegar horarios
+    //Get hours
     $h = new Horarios();
     $hs = $h->getHorarios();
 

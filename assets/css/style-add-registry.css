@@ -76,14 +76,16 @@ html, body {
   max-width: 800px;
   opacity: 0;
   visibility: none;
+  display: none;
   transition: opacity .3s;
   z-index: -1;
 }
 
 .menu-input-form.active {
-  position; relative;
-  visibility: visible;
+  position: relative;
   opacity: 1;
+  visibility: visible;
+  display: block;
   z-index: 1;
 }
 
