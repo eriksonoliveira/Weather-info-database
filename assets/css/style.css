@@ -150,7 +150,7 @@ th {
 }
 
 .img-wrap:hover .img-overlay {
-  height: 50px;
+  height: 30%;
 }
 
 .img-del {
@@ -819,6 +819,14 @@ small {
     line-height: 30px;
   }
   
+  .img-wrap {
+    max-width: 100%;
+  }
+
+  .img-overlay {
+    height: 30%;
+  }
+
 }
 
 @media only screen and (max-height: 600px) {

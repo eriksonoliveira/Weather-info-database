@@ -47,9 +47,9 @@ function previewImages (e, input) {
   var cancelBtn = $(imPreview).prev("form").find(".img-cancel"),
       sendBtn = $(imPreview).prev("form").find(".send-img");
 
-  //Create image thumbnail and delete button overlay
+  //Create image preview and delete button overlay
   img_html+="<a href='javascript:;'>";
-    img_html+="<img src='"+URL.createObjectURL(e.target.files[0])+"' class='img-width'/>";
+    img_html+="<img src='"+URL.createObjectURL(e.target.files[0])+"' class='img-width img-fluid'/>";
   img_html+="</a>";
 
   $(imPreview).append(img_html);
@@ -113,7 +113,7 @@ function sendImage(e, btn, regDate) {
         }, 3000);
 
         //Display image thumbnail
-        $(imgTag).attr("id", "img-"+json.imgId).attr("class", "img-width");
+        $(imgTag).attr("id", "img-"+json.imgId).attr("class", "img-width img-fluid");
         $(imgLink).attr("class", "img-clickable");
         $(imOverlay).css("display", "flex");
 
