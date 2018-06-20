@@ -2,7 +2,7 @@
 class notfoundController extends controller{
   public function __construct() {
     $this->data = array(
-      "success" => '',
+      'success' => '',
       'title' => '404 - Page Not Found'
     );
   }

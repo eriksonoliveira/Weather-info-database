@@ -3,23 +3,23 @@ class registrosController extends controller{
   
   public function ver($dateParams) {
     $data = array(
-      "success" => "",
+      'success' => '',
       'title' => 'Ver registro'
     );
     
     if($dateParams) {
-      $dateSplit = explode("-", $dateParams);
-      $dateFormated = $dateSplit[2]."-".$dateSplit[1]."-".$dateSplit[0];
+      $dateSplit = explode('-', $dateParams);
+      $dateFormated = $dateSplit[2].'-'.$dateSplit[1].'-'.$dateSplit[0];
 
       $data['day'] = addslashes($dateParams);
       $data['dateFormated'] = $dateFormated;
 
       if(empty($_SESSION['cLogin'])) {
-        header("Location: ".BASE_URL."login");
+        header('Location: '.BASE_URL.'login');
         exit;
       }
 
-      $horarios = array("00","06","12","18");
+      $horarios = array('00','06','12','18');
 
       $imagens = array();
       $descricao = array();

@@ -22,23 +22,23 @@ class cadastrarController extends controller{
 
         if($u->cadastrar($nome, $email, $senha, $funcao, $permissoes)) {
 
-          $data['success'] = "<div class='alert alert-success'>
-            Cadastrado com sucesso. <a href='".BASE_URL."login' class='alert-link'>Faça o login agora</a>
-          </div>";
+          $data['success'] = '<div class='alert alert-success'>
+            Cadastrado com sucesso. <a href=''.BASE_URL.'login' class='alert-link'>Faça o login agora</a>
+          </div>';
              
         } else {
           
-          $data['failure'] = "<div class='alert alert-warning'>
-            Este usuário já existe. <a href='".BASE_URL."login' class='alert-link'>Faça o login agora</a>
-          </div>";
+          $data['failure'] = '<div class='alert alert-warning'>
+            Este usuário já existe. <a href=''.BASE_URL.'login' class='alert-link'>Faça o login agora</a>
+          </div>';
              
         }
 
       } else {
       
-        $data['warning'] = "<div class='alert alert-warning'>
+        $data['warning'] = '<div class='alert alert-warning'>
           Preencha todos os campos
-        </div>";
+        </div>';
          
       }
 

@@ -8,7 +8,7 @@ class pesquisarController extends controller{
 
   public function index() {
     if(empty($_SESSION['cLogin'])) {
-      header("Location: ".BASE_URL."login");
+      header('Location: '.BASE_URL.'login');
       exit;
     }
 
@@ -24,7 +24,7 @@ class pesquisarController extends controller{
 
   public function data() {
     if(empty($_SESSION['cLogin'])) {
-      header("Location: ".BASE_URL."login");
+      header('Location: '.BASE_URL.'login');
       exit;
     }
 
@@ -39,11 +39,11 @@ class pesquisarController extends controller{
         $systems = json_decode($systems, true);
       }
 
-      $s = explode("-", $start);
-      $e = explode("-", $end);
+      $s = explode('-', $start);
+      $e = explode('-', $end);
 
-      $startDate = $s[2]."-".$s[1]."-".$s[0];
-      $endDate = $e[2]."-".$e[1]."-".$e[0];
+      $startDate = $s[2].'-'.$s[1].'-'.$s[0];
+      $endDate = $e[2].'-'.$e[1].'-'.$e[0];
 
       //Number of items for pagination
       $items_per_page = 10;
