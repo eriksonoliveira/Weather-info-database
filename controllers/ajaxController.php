@@ -144,13 +144,13 @@ class ajaxController extends controller {
         $m = new Mail();
 
         $msg = 'Email de recuperação de senha do sistema de Monitoramento Meteorológico.\r\n
-        Utilize este link para redefinir a sua senha: <a href=''.BASE_URL.'password/recover/?code='.$code.''>'.BASE_URL.'password/recover/?code='.$code.'</a>.';
+        Utilize este link para redefinir a sua senha: <a href="'.BASE_URL.'password/recover/?code='.$code.'">'.BASE_URL.'password/recover/?code='.$code.'</a>.';
 
         $m->sendMail($email, $msg);
 
-        $this->data['confirmation'] = '<div class='card-text'>Um email com um link para recuperação de senha foi enviado para o seu e-mail '.$email.'.</div>';
+        $this->data['confirmation'] = '<div class="card-text">Um email com um link para recuperação de senha foi enviado para o seu e-mail '.$email.'.</div>';
       } else {
-        $this->data['confirmation'] = '<div class='alert alert-danger'>Usuario não cadastrado!</div>';
+        $this->data['confirmation'] = '<div class="alert alert-danger">Usuario não cadastrado!</div>';
       }
 
       //SENDS DATA IN JSON FORMAT
@@ -174,7 +174,7 @@ class ajaxController extends controller {
 
       if($updated) {
         $this->data['confirmation'] = 'Senha atualizada com sucesso!</br>
-        Faça o <a href=''.BASE_URL.'/login'>login</a>';
+        Faça o <a href="'.BASE_URL.'/login">login</a>';
       }
 
       echo json_encode($this->data);

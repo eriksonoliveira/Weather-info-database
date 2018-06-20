@@ -1,7 +1,4 @@
 <div class="search-page-container">
-<!--   <button class="btn bmd-btn-fab show-sidebar">
-    <i class="material-icons">search</i>
-  </button> -->
   <div class="search-sidebar">
     <button type="button" class="close close-sidebar" aria-label="Close">
       <span aria-hidden="true">&times;</span>
@@ -27,7 +24,6 @@
           <span>
             <input class="css-checkbox" type="checkbox" id="check-<?PHP echo $sist['id'];?>" data-id="<?PHP echo $sist['id'];?>"/>
             <label class="css-label" for="check-<?PHP echo $sist['id'];?>"><?PHP echo $sist['nome'];?></label>
-            <?PHP //echo $sist['nome']."<br/>";?>
           </span>
 
           <?PHP

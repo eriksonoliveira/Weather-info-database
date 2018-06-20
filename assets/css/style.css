@@ -728,6 +728,10 @@ small {
   display: none;
 }
 
+.close-sidebar {
+  font-size: 2rem;
+}
+
 @media only screen and (max-width: 800px) {
   .navbar-header {
 
