@@ -3,6 +3,8 @@
     <title><?PHP echo $title;?> - Monitoramento Meteorológico</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
+    <meta name="author" content="Erikson Oliveira">
+
     <!-- bootstrap CSS -->
     <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/bootstrap-material-design.min.css"/>
     <!-- Material UI framework -->
@@ -25,9 +27,11 @@
     <?PHP if(isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])): ?>
     <nav class="navbar navbar-expand">
       <div class="container-fluid">
+        <?PHP if($title === 'Pesquisar'):?>
         <button class="btn show-sidebar">
           <i class="material-icons">search</i>
         </button>
+        <?PHP endif; ?>
         <div class="navbar-header"> 
           <a href="<?PHP echo BASE_URL; ?>" class="navbar-brand ml-3">Monitoramento</a>
         </div>
