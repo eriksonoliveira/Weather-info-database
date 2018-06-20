@@ -147,7 +147,7 @@ function renderTable(json) {
 
       result_items_html+="<tr>";
       //Date
-        result_items_html+="<td class='cell-center'>"+dateFormatBr+"</td>";
+        result_items_html+="<td class='cell-center result-table-date'>"+dateFormatBr+"</td>";
       //Image
         result_items_html+="<td>";
           result_items_html+=appendImg(value);
@@ -166,10 +166,10 @@ function renderTable(json) {
           result_items_html+="<p>"+appendPhenom(value.info.phenom)+"</p>";
         result_items_html+="</td>";
         result_items_html+="<td class='cell-center'>";
-          //action button
+          //action link
           result_items_html+="<a href='"+baseUrl+"registros/ver/"+value.date+"' target='_blank'>";
 
-            //edit button
+            //view button
             result_items_html+="<button class='mui-btn view-registry'>Visualizar</button>";
 
           result_items_html+="</a>"

@@ -515,10 +515,9 @@ label.css-label {
 }
 
 .loader-wrap {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed;
+  left: 50vw;
+  top: 45vh;
   z-index: 1;
   padding: 20px;
   background-color: rgba(136,136,136,.3);
@@ -527,11 +526,6 @@ label.css-label {
 }
 
 .loader {
- /* position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;*/
   width: 50px;
   height: 50px;
   border: 4px solid #3498db;
@@ -623,16 +617,16 @@ small {
 }
 
 .th-date {
-  width: 15%;
+  max-width: 15%;
 }
 .th-img {
-  width: 20%;
+  max-width: 20%;
 }
 .th-info {
-  width: 50%;
+  max-width: 50%;
 }
 .th-action {
-  width: 15%;
+  max-width: 15%;
 }
 
 .result-table-categories {
@@ -695,13 +689,12 @@ small {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 50vw;
-  max-width: 600px;
+  transform: translate(-50%, -50%);
+  width: 55vw;
+  max-width: 700px;
   height: auto;
   background-color: #FFF;
   padding: 20px;
-  margin-left: -270px;
-  margin-top: -270px;
   z-index: 10;
   display: none;
 }
@@ -758,8 +751,6 @@ small {
 
   .show-sidebar {
     position: relative;
-/*     top: 20px;
-    left: 25px; */
     display: block;
     cursor: pointer;
     color: #FFF;
@@ -770,11 +761,24 @@ small {
     display: block;
   }
 
+  .result-table-pagination ul li {
+    font-size: 14px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+  }
+
+  .pagination .page-link {
+    min-width: 2.0em;
+    padding: .2rem .45rem;
+    margin-right: .2em;
+  }
+
 }
 
 @media only screen and (max-width: 576px) {
   html {
-    /*font-size: 0.9rem !important;*/
     font-size: 13px !important;
   }
   
@@ -825,6 +829,47 @@ small {
 
   .img-overlay {
     height: 30%;
+  }
+
+  .modal-box {
+    width: 70vw;
+  }
+
+  .loader-wrap {
+    left: 45vw;
+  }
+
+  .loader {
+    width: 35px;
+    height: 35px;
+  }
+
+  .result-wrap {
+    padding: 20px 15px;
+  }
+
+  .result-table table {
+    overflow-x: auto !important;
+    max-width: 340px;
+  }
+
+  .result-table-date {
+    font-size: 11px;
+  }
+
+  .result-table-img {
+    width: 70px;
+  }
+
+  .result-table table td p {
+    font-size: 11px;
+  }
+
+  .view-registry {
+    height: 30px;
+    padding: 0 4px;
+    font-size: 11px;
+    line-height: 30px;
   }
 
 }
