@@ -3,7 +3,7 @@
 class ajaxController extends controller {
   public function __construct() {
     $this->data = array(
-      "date" => ""
+      'date' => ''
     );
   }
 
@@ -16,7 +16,7 @@ class ajaxController extends controller {
       $r = new Registros;
       $this->data['currDayReg'] = $r->getRegistro($this->data['date']);
 
-      $this->data['success'] = "yes";
+      $this->data['success'] = 'yes';
     }
 
     //ADICIONA IMAGEM
@@ -32,7 +32,7 @@ class ajaxController extends controller {
       $imgID = $r->addImagem($imagem, $this->data['horario'], $this->data['categoria'], $this->data['date']);
 
       //Success
-      $this->data['success'] = "yes";
+      $this->data['success'] = 'yes';
       $this->data['imgId'] = $imgID;
 
     }
@@ -45,7 +45,7 @@ class ajaxController extends controller {
       $r = new Registros();
       $r->delImagem($id);
 
-      $this->data['success'] = "yes";
+      $this->data['success'] = 'yes';
     }
 
     //ADICIONA TEXTO
@@ -62,7 +62,7 @@ class ajaxController extends controller {
       $r->addTexto($this->data['texto'], $this->data['horario'], $this->data['categoria'], $this->data['date'], $this->data['id_nome'], $this->data['cargo']);
 
       //Success
-      $this->data['success'] = "yes";
+      $this->data['success'] = 'yes';
 
     }
 
@@ -81,7 +81,7 @@ class ajaxController extends controller {
       $r->updateTexto($this->data['texto'], $this->data['horario'], $this->data['categoria'], $this->data['date'], $this->data['id_nome'], $this->data['cargo']);
 
       //Success
-      $this->data['success'] = "yes";
+      $this->data['success'] = 'yes';
 
     }
 
@@ -143,14 +143,14 @@ class ajaxController extends controller {
         //SEND MAIL
         $m = new Mail();
 
-        $msg = "Email de recuperação de senha do sistema de Monitoramento Meteorológico.\r\n
-        Utilize este link para redefinir a sua senha: <a href='".BASE_URL."password/recover/?code=".$code."'>".BASE_URL."password/recover/?code=".$code."</a>.";
+        $msg = 'Email de recuperação de senha do sistema de Monitoramento Meteorológico.\r\n
+        Utilize este link para redefinir a sua senha: <a href=''.BASE_URL.'password/recover/?code='.$code.''>'.BASE_URL.'password/recover/?code='.$code.'</a>.';
 
         $m->sendMail($email, $msg);
 
-        $this->data['confirmation'] = "<div class='card-text'>Um email com um link para recuperação de senha foi enviado para o seu e-mail ".$email.".</div>";
+        $this->data['confirmation'] = '<div class='card-text'>Um email com um link para recuperação de senha foi enviado para o seu e-mail '.$email.'.</div>';
       } else {
-        $this->data['confirmation'] = "<div class='alert alert-danger'>Usuario não cadastrado!</div>";
+        $this->data['confirmation'] = '<div class='alert alert-danger'>Usuario não cadastrado!</div>';
       }
 
       //SENDS DATA IN JSON FORMAT
@@ -173,8 +173,8 @@ class ajaxController extends controller {
       $updated = $u->updatePass($newPass, $id);
 
       if($updated) {
-        $this->data['confirmation'] = "Senha atualizada com sucesso!</br>
-        Faça o <a href='".BASE_URL."/login'>login</a>";
+        $this->data['confirmation'] = 'Senha atualizada com sucesso!</br>
+        Faça o <a href=''.BASE_URL.'/login'>login</a>';
       }
 
       echo json_encode($this->data);

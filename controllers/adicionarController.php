@@ -8,19 +8,19 @@ class adicionarController extends controller{
   
   public function registro() {
     if(empty($_SESSION['cLogin'])) {
-      header("Location: ".BASE_URL."login");
+      header('Location: '.BASE_URL.'login');
       exit;
     }
 
     $data = array(
-      "success" => '',
+      'success' => '',
       'title' => 'Ver registro'
     );
 
     //Get date and converto to Brazilian format
     $date = time();
-    $d_form_BR = date("d-m-Y", $date);
-    $d_form_Int = date("Y-m-d", $date);
+    $d_form_BR = date('d-m-Y', $date);
+    $d_form_Int = date('Y-m-d', $date);
     $data['dateFormated'] = $d_form_BR;
 
     $data['day'] = $d_form_Int;

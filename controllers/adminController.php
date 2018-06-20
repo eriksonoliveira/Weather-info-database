@@ -2,14 +2,14 @@
 class adminController extends controller{
   public function __construct() {
     $this->data = array(
-      "success" => '',
+      'success' => '',
       'title' => 'Admin'
     );
   }
 
   public function index() {
     if(empty($_SESSION['cLogin'])) {
-      header("Location: ".BASE_URL."login");
+      header('Location: '.BASE_URL.'login');
       exit;
     }
 

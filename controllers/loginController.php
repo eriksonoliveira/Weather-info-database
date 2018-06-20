@@ -22,7 +22,7 @@ class loginController extends controller{
         header('Location: '.BASE_URL);
         exit;
       } else {
-        $data['alert'] = "<div class='alert alert-danger'>Usuario e/ou senha errados</div>";
+        $data['alert'] = '<div class='alert alert-danger'>Usuario e/ou senha errados</div>';
       }
     }
     
@@ -33,7 +33,7 @@ class loginController extends controller{
   public function sair() {
 
     unset($_SESSION['cLogin']);
-    header("Location: ".BASE_URL);
+    header('Location: '.BASE_URL);
   
   }
 }
