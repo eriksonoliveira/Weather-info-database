@@ -68,7 +68,6 @@
     <script src="<?PHP echo BASE_URL;?>assets/js/Chart.min.js"></script>
 
     <!-- bootstrap Javascript and Popper.js-->
-<!--    <script src="<?PHP //echo BASE_URL;?>assets/js/bootstrap.min.js"></script>-->
     <script src="<?PHP echo BASE_URL;?>assets/js/popper.min.js"></script>
     <script src="<?PHP echo BASE_URL;?>assets/js/bootstrap-material-design.min.js"></script>
 
