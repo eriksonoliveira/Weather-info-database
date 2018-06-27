@@ -1,1 +1,7 @@
 /assets/images/
+
+node_modules/
+
+gulpfile.js
+
+.babelrc

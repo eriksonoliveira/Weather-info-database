@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   //If no date was passed, use the date of the current day
   if(date === false) {
-    let separator = "dash";
+    var separator = "dash";
     date = dateFormated(separator);
   }
 

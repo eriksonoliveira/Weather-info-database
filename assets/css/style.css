@@ -454,10 +454,6 @@ label.css-label {
   color: #CCD0D4 !important;
 }
 
-.datepick input[type=text]:focus {
-/*  background-color: #293642;*/
-}
-
 .datepick .bmd-form-group label {
   color: #8E97A0;
 }
@@ -545,7 +541,7 @@ label.css-label {
 
 .result-wrap {
   flex: 3;
-  padding: 20px 30px;
+  padding: 30px 30px;
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-end;
@@ -554,9 +550,7 @@ label.css-label {
 
 .result-stats-wrap {
   display: none;
-/*  box-shadow: 1px 1px 4px 2px #DDDDDD;*/
 }
-
 
 .result-stats {
   display: flex;
@@ -564,10 +558,14 @@ label.css-label {
   align-items: center;
   flex-wrap: wrap;
   background-color: #FFFFFF;
-  /*padding: 20px 0;*/
   max-width: 950px;
   margin: auto;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.result-empty {
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 .chart-dimensions {
@@ -581,7 +579,6 @@ label.css-label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /*flex-basis: 200px;*/
   align-self: stretch;
   flex: 1;
   background:linear-gradient(235deg, rgba(32,190,158,1) 0%, rgba(15,152,130,1) 100% );
@@ -595,8 +592,6 @@ label.css-label {
   justify-content: center;
   align-items: center;
   color: #FFF;
-/*  color: #20BE9E;*/
-/*  color: #324251;*/
   font-size: 28px;
 }
 
@@ -732,6 +727,11 @@ small {
   font-size: 2rem;
 }
 
+.not-found-header {
+  margin-top: 80px;
+}
+
+
 @media only screen and (max-width: 800px) {
   .navbar-header {
 
@@ -849,7 +849,7 @@ small {
   }
 
   .result-wrap {
-    padding: 20px 15px;
+    padding: 20px 0;
   }
 
   .result-table table {
