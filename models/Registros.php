@@ -39,6 +39,19 @@ class Registros extends model {
           $sql1->bindValue(':sistema_'.$v['key'], $v['key']);
         }
 
+      /*  $sql1 = $this->db->prepare('
+        SELECT DISTINCT date
+        FROM sistemas
+        WHERE sistemas.date BETWEEN "2018-04-01" AND "2018-04-19" AND sistemas.date IN (
+          SELECT date
+          FROM sistemas
+          WHERE sistemas.id_sistema = "1" OR sistemas.id_sistema = "3"
+          GROUP BY date
+          HAVING COUNT(*) >= 2 )
+        ');
+*/
+//        print_r($systems);
+
         //Get number of pages necessary for pagination
         $total_pages = $p->getTotalPages($sql1, $items_per_page);
         //Get first item of page
@@ -48,7 +61,7 @@ class Registros extends model {
         $sql2 = $this->db->prepare('
         SELECT DISTINCT date
         FROM sistemas
-        WHERE date BETWEEN :date1 AND :date2 AND date IN (
+        WHERE sistemas.date BETWEEN :date1 AND :date2 AND sistemas.date IN (
           SELECT date
           FROM sistemas
           WHERE '.implode(' OR ', $filter).'
@@ -62,6 +75,7 @@ class Registros extends model {
           $sql2->bindValue(':sistema_'.$v['key'], $v['key']);
         }
         $sql2->execute();
+
 
         //Insert results into $array
         if($sql2->rowCount() > 0) {

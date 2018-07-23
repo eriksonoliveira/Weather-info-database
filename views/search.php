@@ -63,4 +63,5 @@
 <div class="modal-box"></div>
 
 <script src="<?PHP echo BASE_URL;?>assets/js/vendor/jquery.twbsPagination.min.js"></script>
-<script src="<?PHP echo BASE_URL;?>assets/js/registries/search-registries.min.js"></script>
+<!--<script src="<?PHP //echo BASE_URL;?>assets/js/registries/search-registries.min.js"></script>-->
+<script src="<?PHP echo BASE_URL;?>assets/js/registries/search-registry.js"></script>
