@@ -1,7 +1,9 @@
 /assets/images/
 
 node_modules/
+tmp/
+dist/
 
+package-lock.json
 gulpfile.js
-
 .babelrc

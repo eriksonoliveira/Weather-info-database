@@ -16,7 +16,6 @@ $(document).ready(function() {
   $(".send-img").on("click", function(e) {
     let btn = $(this);
     sendImage(e, btn, date);
-  console.log(date);
   });
 
   //SEND TEXT
