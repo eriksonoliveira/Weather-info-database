@@ -857,6 +857,10 @@ small {
     max-width: 340px;
   }
 
+  .table {
+    margin: 30 auto;
+  }
+
   .result-table-date {
     font-size: 11px;
   }
@@ -867,6 +871,14 @@ small {
 
   .result-table table td p {
     font-size: 11px;
+  }
+
+  .result-sum {
+    display: none;
+  }
+
+  .chart-dimensions {
+    width: 100vw;
   }
 
   .view-registry {

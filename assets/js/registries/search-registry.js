@@ -96,7 +96,7 @@ function showResults(json) {
     if (draw) {
       $(".chart").append("<canvas id='myChart' style='background-color: #20BE9E;'></canvas>").addClass("chart-dimensions");
       $(".result-stats-wrap").show();
-      drawLineChart(json[0]['chart']);
+      drawBarChart(json[0]['chart']);
     }
 
     var results_table = renderTable(json);
@@ -226,7 +226,7 @@ function appendPhenom(data) {
 }
 
 //CHART
-function drawLineChart(results) {
+function drawBarChart(results) {
   // Split timestamp and data into separate arrays
   var labels = [],
       data = [],
@@ -311,15 +311,15 @@ function showSum(sum) {
   if (sum > 0) {
     var result_total = '';
 
+//    result_total += "<div>";
+//    result_total += "</div>";
     result_total += "<div>";
-    result_total += "</div>";
-    result_total += "<div>";
-    result_total += "<div><small><strong>TOTAL</strong></small></div>";
-    result_total += "<strong>" + sum + "</strong>";
+    result_total += "<div class='result-sum-label'><small><strong>TOTAL</strong></small></div>";
+    result_total += "<strong class='result-sum-total'>" + sum + "</strong>";
     if (sum > 1) {
-      result_total += "<small>DIAS</small>";
+      result_total += "<small class='result-sum-label'>DIAS</small>";
     } else {
-      result_total += "<small>DIA</small>";
+      result_total += "<small class='result-sum-label'>DIA</small>";
     }
     result_total += "</div>";
 
