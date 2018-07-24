@@ -131,6 +131,11 @@ textarea {
   height: 150px;
 }
 
+.menu-input-title {
+  border: 1px solid #EBEBEB;
+  background-color: #F5F5F5;
+}
+
 @media only screen and (max-width: 576px) {
   .back {
     width: 29px;
@@ -145,6 +150,15 @@ textarea {
   
   .menu-box {
     display: block;
+  }
+
+  #descricao, #dados_observados, #info-gerais {
+    width: 90vw;
+    min-width: unset;
+  }
+
+  .input-table-time {
+    font-size: 1.3rem;
   }
 
 }

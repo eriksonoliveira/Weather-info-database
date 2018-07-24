@@ -227,101 +227,57 @@
         </div>
       </div>
 
-      <div id="descricao" class="menu-input-form">
-        <table class="table table-bordered">
-          <tbody>
-            <tr>
-              <th colspan="2">Descrição sinótica</th>
-            </tr>
-            <tr>
-              <?PHP for($i = 0; $i <=1; $i++):?>
-              <td>
-                <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
-                <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                  <div class="form-group bmd-form-group">
-                    <label for="categoria" class="text-center">Meteorologista:</label>
-                    <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="custom-select" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                      <?PHP
-                        foreach($mets as $met):
-                      ?>
-                      <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
-                      </option>
+      <div id="descricao" class="menu-input-form mb-5">
+        <div class="card mb-3">
+          <div class="menu-input-title pl-3">
+            <h3 colspan="2">Descrição sinótica</h3>
+          </div>
+          <div class="row px-3">
+            <?PHP for($i = 0; $i <=3; $i++):?>
+            <div class="col-md-6 pb-2 pt-2 menu-input-border">
+              <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
 
-                      <?PHP
-                        endforeach;
-                      ?>
-                    </select>
-                  </div>
+              <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+                <div class="form-group bmd-form-group">
+                  <label for="categoria" class="text-center">Meteorologista:</label>
+                  <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="custom-select" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
+                    <?PHP
+                      foreach($mets as $met):
+                    ?>
+                    <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
+                    </option>
 
-                  <div class="form-group bmd-form-group">
-                  <label class="bmd-label-floating">Superfície:</label>
-                  <textarea class="form-control input-blue" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
-                  </div>
+                    <?PHP
+                      endforeach;
+                    ?>
+                  </select>
+                </div>
 
-                  <div class="form-group bmd-form-group">
-                  <label class="bmd-label-floating">Níveis médios e altos:</label>
-                  <textarea class="form-control input-blue" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
-                  </div>
+                <div class="form-group bmd-form-group">
+                <label class="bmd-label-floating">Superfície:</label>
+                <textarea class="form-control input-blue" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                </div>
 
-                  <div class="form-group bmd-form-group">
-                  <label class="bmd-label-floating">Condição de tempo:</label>
-                  <textarea class="form-control input-blue" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
-                  </div>
+                <div class="form-group bmd-form-group">
+                <label class="bmd-label-floating">Níveis médios e altos:</label>
+                <textarea class="form-control input-blue" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
+                </div>
 
-                  <div class="buttons">
-                  <button type="submit" class="btn btn-raised btn-success send-text">Enviar</button>
-                  </div>
+                <div class="form-group bmd-form-group">
+                <label class="bmd-label-floating">Condição de tempo:</label>
+                <textarea class="form-control input-blue" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
+                </div>
 
-                </form>
-                <p class="sucesso-msg"></p>
-              </td>
-              <?PHP endfor;?>
-            </tr>
-            <tr>
-              <?PHP for($i = 2; $i <=3; $i++):?>
-              <td>
-                <p class="input-table-time"><?PHP echo $horario[$i]['hora'];?></p>
-                <form class="reg-form form-txt" type="POST" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                  <div class="form-group">
-                    <label for="categoria" class="text-center">Meteorologista:</label>
-                    <select name="meteoro_nome_<?PHP echo $horario[$i]['hora'];?>" class="custom-select" data-cargo="meteoro" data-hora="<?PHP echo $horario[$i]['hora'];?>">
-                      <?PHP
-                        foreach($mets as $met):
-                      ?>
-                      <option value="<?PHP echo $met['id'];?>"><?PHP echo $met['nome'];?>
-                      </option>
+                <div class="buttons">
+                <button type="submit" class="btn btn-raised btn-success send-text">Enviar</button>
+                </div>
 
-                      <?PHP
-                        endforeach;
-                      ?>
-                    </select>
-                  </div>
-
-                  <div class="form-group bmd-form-group">
-                  <label class="bmd-label-floating">Superfície:</label>
-                  <textarea class="form-control input-blue" data-categoria="superficie" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
-                  </div>
-
-                  <div class="form-group bmd-form-group">
-                  <label class="bmd-label-floating">Níveis médios e altos:</label>
-                  <textarea class="form-control input-blue" data-categoria="medios_altos" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea><br>
-                  </div>
-
-                  <div class="form-group bmd-form-group">
-                  <label class="bmd-label-floating">Condição de tempo:</label>
-                  <textarea class="form-control input-blue" data-categoria="condicao_tempo" data-hora="<?PHP echo $horario[$i]['hora'];?>"></textarea>
-                  </div>
-
-                  <div class="buttons">
-                  <button type="submit" class="btn btn-raised btn-success send-text">Enviar</button>
-                  </div>
-                </form>
-                <p class="sucesso-msg"></p>
-              </td>
-              <?PHP endfor;?>
-            </tr>
-          </tbody>
-        </table>
+              </form>
+              <p class="sucesso-msg"></p>
+            </div>
+            <?PHP endfor;?>
+          </div>
+        </div>
       </div>
 
       <div id="dados_observados" class="menu-input-form">
