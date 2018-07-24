@@ -6,12 +6,12 @@
     <meta name="author" content="Erikson Oliveira">
 
     <!-- bootstrap CSS -->
-    <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/bootstrap-material-design.min.css"/>
+    <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/vendor/css/bootstrap-material-design.min.css"/>
     <!-- Material UI framework -->
     <link href="//cdn.muicss.com/mui-0.9.39-rc1/css/mui.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- jQueryUI CSS -->
-    <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/css/jquery-ui.css"/>
+    <link type="text/css" rel="stylesheet" href="<?PHP echo BASE_URL;?>assets/vendor/css/jquery-ui.min.css"/>
     <!-- font-awesome icons -->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Font -->
@@ -59,18 +59,17 @@
     <?PHP endif; ?>
     
     <!-- jQuery library -->
-    <script src="<?PHP echo BASE_URL;?>assets/js/jquery-3.2.1.min.js"></script>
-    <script src="<?PHP echo BASE_URL;?>assets/js/jquery-ui.js"></script>
+    <script src="<?PHP echo BASE_URL;?>assets/vendor/js/jquery-3.2.1.min.js"></script>
+    <script src="<?PHP echo BASE_URL;?>assets/vendor/js/jquery-ui.js"></script>
     <script type="text/javascript" src="//cdn.rawgit.com/icons8/bower-webicon/v0.10.7/jquery-webicon.min.js"></script>
 
     <!-- moment.js and Chart.js -->
-    <script src="<?PHP echo BASE_URL;?>assets/js/moment.min.js"></script>
-    <script src="<?PHP echo BASE_URL;?>assets/js/Chart.min.js"></script>
+    <script src="<?PHP echo BASE_URL;?>assets/vendor/js/moment.min.js"></script>
+    <script src="<?PHP echo BASE_URL;?>assets/vendor/js/Chart.min.js"></script>
 
     <!-- bootstrap Javascript and Popper.js-->
-<!--    <script src="<?PHP //echo BASE_URL;?>assets/js/bootstrap.min.js"></script>-->
-    <script src="<?PHP echo BASE_URL;?>assets/js/popper.min.js"></script>
-    <script src="<?PHP echo BASE_URL;?>assets/js/bootstrap-material-design.min.js"></script>
+    <script src="<?PHP echo BASE_URL;?>assets/vendor/js/popper.min.js"></script>
+    <script src="<?PHP echo BASE_URL;?>assets/vendor/js/bootstrap-material-design.min.js"></script>
 
     <!--   Material UI framework   -->
     <script src="//cdn.muicss.com/mui-0.9.39-rc1/js/mui.min.js"></script>

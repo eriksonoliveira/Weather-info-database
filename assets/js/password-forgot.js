@@ -1,6 +1,8 @@
-$(document).ready(function() {
+"use strict";
 
-  $(".pass-forg-form").on("submit", function(e) {
+$(document).ready(function () {
+
+  $(".pass-forg-form").on("submit", function (e) {
     e.preventDefault();
 
     var data = new FormData();
@@ -10,16 +12,14 @@ $(document).ready(function() {
 
     $.ajax({
       type: 'POST',
-      url: baseUrl+'ajax/pass_forgot',
+      url: baseUrl + 'ajax/pass_forgot',
       data: data,
       dataType: 'json',
       contentType: false,
       processData: false,
-      success: function(json) {
+      success: function success(json) {
         $("#pass-forg-content").html(json.confirmation);
       }
     });
-
   });
-
 });

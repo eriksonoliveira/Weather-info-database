@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   //If no date was passed, use the date of the current day
   if(date === false) {
-    let separator = "dash";
+    var separator = "dash";
     date = dateFormated(separator);
   }
 
@@ -16,7 +16,6 @@ $(document).ready(function() {
   $(".send-img").on("click", function(e) {
     let btn = $(this);
     sendImage(e, btn, date);
-  console.log(date);
   });
 
   //SEND TEXT

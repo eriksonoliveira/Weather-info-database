@@ -67,7 +67,7 @@ function receiveDayImages(json) {
 
       if(json[h][c].fileName) {
 
-        var imgURL = "http://localhost/projetoy/Monitoramento/assets/images/" + categoria + "/" + json[h][c].fileName,
+        var imgURL = baseUrl+"assets/images/" + categoria + "/" + json[h][c].fileName,
             imgID = json[h][c].id,
             imgWrap = ".img-wrap[data-categoria="+categoria+"][data-hora="+hora+"]",
             imgDelBtn = $(imgWrap).find(".img-del"),

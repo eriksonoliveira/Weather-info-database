@@ -1,6 +1,8 @@
-$(document).ready(function() {
+"use strict";
 
-  $(".pass-recov-form").on("submit", function(e) {
+$(document).ready(function () {
+
+  $(".pass-recov-form").on("submit", function (e) {
     e.preventDefault();
 
     var data = new FormData(),
@@ -8,7 +10,7 @@ $(document).ready(function() {
         pass2 = $(this).find("input[name=password2]").val(),
         userID = $(this).find("input[name=password1]").attr("data-id");
 
-    if(pass1 == pass2) {
+    if (pass1 == pass2) {
 
       data.append("newPass", pass1);
       data.append("userID", userID);
@@ -20,12 +22,10 @@ $(document).ready(function() {
         dataType: 'json',
         contentType: false,
         processData: false,
-        success: function(json) {
+        success: function success(json) {
           $("#pass-recov-content").html(json.confirmation);
         }
       });
     }
-
   });
-
 });

@@ -19,20 +19,20 @@ class Registros extends model {
         $filter = array();
 
         foreach($systems as $k => $v) {
-          $filter[] = 'id_sistema = :sistema_'.$v['key'];
+          $filter[] = 'sistemas.id_sistema = :sistema_'.$v['key'];
         }
 
         //Get total pages
-        $sql1 = $this->db->prepare('
+        $sql1 = $this->db->prepare("
         SELECT DISTINCT date
         FROM sistemas
-        WHERE date BETWEEN :date1 AND :date2 AND date IN (
+        WHERE sistemas.date BETWEEN :date1 AND :date2 AND sistemas.date IN (
           SELECT date
           FROM sistemas
-          WHERE '.implode(' OR ', $filter).'
+          WHERE ".implode(" OR ", $filter)."
           GROUP BY date
           HAVING COUNT(*) >= $len )
-        ');
+        ");
         $sql1->bindValue(':date1', $start);
         $sql1->bindValue(':date2', $end);
         foreach($systems as $k => $v) {
@@ -45,16 +45,16 @@ class Registros extends model {
         $start_item = $p->getStart($page, $items_per_page);
 
         //Get the data limited by $items_per_page
-        $sql2 = $this->db->prepare('
+        $sql2 = $this->db->prepare("
         SELECT DISTINCT date
         FROM sistemas
-        WHERE date BETWEEN :date1 AND :date2 AND date IN (
+        WHERE sistemas.date BETWEEN :date1 AND :date2 AND sistemas.date IN (
           SELECT date
           FROM sistemas
-          WHERE '.implode(' OR ', $filter).'
+          WHERE ".implode(" OR ", $filter)."
           GROUP BY date
           HAVING COUNT(*) >= $len )
-          ORDER BY sistemas.date LIMIT '.$start_item.', '.$items_per_page
+          ORDER BY sistemas.date LIMIT ".$start_item.", ".$items_per_page
         );
         $sql2->bindValue(':date1', $start);
         $sql2->bindValue(':date2', $end);
@@ -63,6 +63,7 @@ class Registros extends model {
         }
         $sql2->execute();
 
+
         //Insert results into $array
         if($sql2->rowCount() > 0) {
           $array['data'] = $sql2->fetchAll(PDO::FETCH_ASSOC);
@@ -70,18 +71,18 @@ class Registros extends model {
         }
 
         //Get total of dates
-        $sql3 = $this->db->prepare('
-        SELECT DATE_FORMAT(sistemas.date, "%Y-%m") as month, COUNT(DISTINCT sistemas.date) AS count
+        $sql3 = $this->db->prepare("
+        SELECT DATE_FORMAT(sistemas.date, '%Y-%m') as month, COUNT(DISTINCT sistemas.date) AS count
         FROM sistemas
         WHERE sistemas.date BETWEEN :date1 AND :date2
         AND sistemas.date IN (
           SELECT date
           FROM sistemas
-          WHERE '.implode(' OR ', $filter).'
+          WHERE ".implode(" OR ", $filter)."
           GROUP BY date
           HAVING COUNT(*) >= $len )
-        GROUP BY DATE_FORMAT(sistemas.date, "%Y-%m")
-        ');
+        GROUP BY DATE_FORMAT(sistemas.date, '%Y-%m')
+        ");
         $sql3->bindValue(':date1', $start);
         $sql3->bindValue(':date2', $end);
         foreach($systems as $k => $v) {

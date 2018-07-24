@@ -10,11 +10,11 @@ if(ENVIRONMENT == 'development') {
   $config['dbuser'] = 'root';
   $config['dbpass'] = 'alagoas6e';
 } else {
-  define('BASE_URL', 'https://eriksonoliveira.com/');
-  $config['dbname'] = 'classificados';
+  define('BASE_URL', 'https://eriksonoliveira.com/weather_database/');
+  $config['dbname'] = 'id1128313_monitoramento';
   $config['dbhost'] = 'localhost';
-  $config['dbuser'] = 'root';
-  $config['dbpass'] = 'alagoas6e';
+  $config['dbuser'] = 'id1128313_root';
+  $config['dbpass'] = 'Tempo10';
 }
 
 global $db;

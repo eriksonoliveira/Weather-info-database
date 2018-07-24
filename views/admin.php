@@ -7,6 +7,6 @@
   <div class="users-table-pagination"><ul></ul></div>
 </div>
 
-<script src="<?PHP echo BASE_URL;?>assets/js/jquery.twbsPagination.min.js"></script>
+<script src="<?PHP echo BASE_URL;?>assets/js/vendor/jquery.twbsPagination.min.js"></script>
 <script type="text/javascript">var baseUrl = "<?php echo BASE_URL; ?>";</script>
 <script src="<?php echo BASE_URL;?>assets/js/admin-page.js"></script>

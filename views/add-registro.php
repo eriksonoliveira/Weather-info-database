@@ -493,9 +493,9 @@
 <script type="text/javascript">
   var date = "<?PHP echo $day;?>";
 </script>
-<script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/create-registry.js"></script>
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/delete-registry.js"></script>
+<script src="<?PHP echo BASE_URL;?>assets/js/registries/read-one-registry.js"></script>
 <script src="<?PHP echo BASE_URL;?>assets/js/registries/update-registry.js"></script>
 
 <!-- load add-menu js -->
