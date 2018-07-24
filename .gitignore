@@ -1,5 +1,15 @@
 /assets/images/
 
+<<<<<<< HEAD
 /assets/js/node_modules/
 /assets/js/.babelrc
 /assets/js/gulpfile.js
+=======
+node_modules/
+tmp/
+dist/
+
+package-lock.json
+gulpfile.js
+.babelrc
+>>>>>>> minify
