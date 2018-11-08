@@ -9,11 +9,6 @@ class homeController extends controller {
       exit;
     }
 
-    //***Only for demo***//
-//    $_SESSION['cLogin'] = 9;
-//    $_SESSION['nome-usuario'] = 'user';
-//    $_SESSION['permission'] = '';
-
     $data = array(
       'title' => 'Home'
     );
